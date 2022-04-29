@@ -29,11 +29,11 @@
 	}
 
 	.Sidebar-Nav-Item {
-		@apply h-8 flex items-center justify-center border-2 border-base-content rounded-lg cursor-pointer;
+		@apply h-8 flex items-center justify-center cursor-pointer rounded-md;
 	}
 
 	.Active {
-		@apply bg-accent-focus text-white border-0;
+		@apply bg-accent text-white border-0;
 	}
 }
 
