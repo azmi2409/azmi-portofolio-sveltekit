@@ -36,8 +36,8 @@
 		<Icon icon="gg:format-separator" height="64" width="64" rotate="180deg" />
 	</div>
 	<div class="tabs">
-		<a class="tab tab-active">Tab 1</a>
-		<a class="tab">Tab 2</a>
-		<a class="tab">Tab 3</a>
+		<a class="tab tab-active">Experience</a>
+		<a class="tab">Education</a>
+		<a class="tab">Skills</a>
 	</div>
 </section>
