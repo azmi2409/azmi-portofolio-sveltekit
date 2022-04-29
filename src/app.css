@@ -1,0 +1,45 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+	.Container {
+		@apply drawer drawer-mobile min-h-screen w-screen bg-base-100 text-base-content relative;
+	}
+
+	.Sidebar {
+		@apply bg-base-200 h-screen flex flex-col relative px-5 py-10 w-80 md:w-96;
+	}
+
+	.Sidebar-Wrapper {
+		@apply mt-5 flex-col items-center content-center justify-center text-center uppercase;
+	}
+
+	.Sidebar-Title {
+		@apply text-2xl md:text-3xl font-bold underline cursor-pointer items-center justify-center flex;
+	}
+
+	.Sidebar-Nav {
+		@apply mt-2 px-8;
+	}
+
+	.Sidebar-Nav-Menus {
+		@apply flex gap-5 flex-col text-lg font-bold text-base-content;
+	}
+
+	.Sidebar-Nav-Item {
+		@apply h-8 flex items-center justify-center border-2 border-base-content rounded-lg cursor-pointer;
+	}
+
+	.Active {
+		@apply bg-accent-focus text-white border-0;
+	}
+}
+
+@layer base {
+	html {
+		font-family: 'Poppins', sans-serif;
+		scroll-behavior: smooth;
+	}
+}
