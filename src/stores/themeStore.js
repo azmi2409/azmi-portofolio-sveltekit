@@ -33,7 +33,8 @@ const themeList = [
 ];
 
 export function randomThemes() {
-    return themeList[Math.floor(Math.random() * themeList.length)];
+    const theme = themeList[Math.floor(Math.random() * themeList.length)];
+	themes.set(theme);
 }
 
 
