@@ -2,7 +2,7 @@
 	import { education } from '$lib/education';
 </script>
 
-<div class="grid md:grid-cols-2 gap-2 md:gap-5">
+<div class="grid md:grid-cols-2 gap-2 md:gap-5 max-w-full">
 	{#each education as edu}
 		<div class="card bg-base-100 w-96 shadow-lg text-justify">
 			<div class="card-body">

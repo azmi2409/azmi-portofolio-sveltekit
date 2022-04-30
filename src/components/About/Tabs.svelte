@@ -1,10 +1,10 @@
 <script>
 	import { tabs } from '$lib/tabs';
-	export let active = 1;
+	export let active = 3;
 	export let content = tabs[active - 1].content;
 </script>
 
-<div>
+<div class="p-2">
 	<ul class="tabs tabs-boxed">
 		{#each tabs as tab}
 			<li
@@ -19,6 +19,6 @@
 		{/each}
 	</ul>
 </div>
-<div>
+<div class="mt-5 p-5">
 	<svelte:component this={content} />
 </div>
