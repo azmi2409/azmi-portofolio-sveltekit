@@ -1,10 +1,9 @@
 <script>
-	import { handleDrawerChecked,scrollTo } from '$lib/helper';
+	import { handleDrawerChecked, scrollTo } from '$lib/helper';
 	import NavLine from './NavLine.svelte';
 	import Icon from '@iconify/svelte';
 	import Logo from './Logo.svelte';
 	import { menus } from '$lib/menus';
-	
 </script>
 
 <label on:click={() => handleDrawerChecked(false)} for="drawer" class="drawer-overlay" />
@@ -18,8 +17,11 @@
 		<div class="Sidebar-Nav">
 			<ul class="Sidebar-Nav-Menus">
 				{#each $menus as menu}
-					<li on:click={() => scrollTo(menu.id)} class="Sidebar-Nav-Item {menu.intersecting ? 'Active' : ''}">
-							<span>{menu.name}</span>
+					<li
+						on:click={() => scrollTo(menu.id)}
+						class="Sidebar-Nav-Item {menu.intersecting ? 'Active' : ''}"
+					>
+						<span>{menu.name}</span>
 					</li>
 				{/each}
 			</ul>

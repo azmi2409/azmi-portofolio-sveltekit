@@ -9,7 +9,7 @@
 	}
 
 	.Sidebar {
-		@apply bg-base-200 h-screen flex flex-col relative px-5 py-10 w-80 md:w-96;
+		@apply bg-base-200 h-screen flex-col relative px-5 py-10 w-80 md:w-96 drawer-side;
 	}
 
 	.Sidebar-Wrapper {
@@ -29,11 +29,11 @@
 	}
 
 	.Sidebar-Nav-Item {
-		@apply h-8 flex items-center justify-center cursor-pointer rounded-md;
+		@apply h-8 flex items-center justify-center cursor-pointer rounded-md hover:text-accent-focus;
 	}
 
 	.Active {
-		@apply bg-accent text-white border-0;
+		@apply bg-accent border-0 text-current hover:text-current;
 	}
 }
 

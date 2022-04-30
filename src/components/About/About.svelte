@@ -1,6 +1,7 @@
 <script>
 	import Stats from './Stats.svelte';
 	import Icon from '@iconify/svelte';
+	import Tabs from './Tabs.svelte';
 </script>
 
 <section class="w-full text-center flex justify-center items-center flex-col py-20 gap-5">
@@ -35,9 +36,5 @@
 		</div>
 		<Icon icon="gg:format-separator" height="64" width="64" rotate="180deg" />
 	</div>
-	<div class="tabs">
-		<a class="tab tab-active">Experience</a>
-		<a class="tab">Education</a>
-		<a class="tab">Skills</a>
-	</div>
+	<Tabs />
 </section>

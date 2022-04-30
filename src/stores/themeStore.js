@@ -33,9 +33,9 @@ const themeList = [
 ];
 
 export function randomThemes() {
-    const theme = themeList[Math.floor(Math.random() * themeList.length)];
+	const theme = themeList[Math.floor(Math.random() * themeList.length)];
 	themes.set(theme);
+	localStorage.setItem('theme', theme);
 }
-
 
 export let themes = writable('business');

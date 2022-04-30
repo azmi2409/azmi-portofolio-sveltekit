@@ -13,7 +13,16 @@
 		}
 		return 0;
 	};
+	export let title = 'Azmi Muwahid Website';
 </script>
+
+<svelte:head>
+	<meta
+		name="description"
+		content="Azmi Muwahid Front End Developer My Personal Website & Portofolio HomePage"
+	/>
+	<title>{title}</title>
+</svelte:head>
 
 <Grid>
 	{#each $menus as section (section.id)}
@@ -24,9 +33,9 @@
 				const target = e.detail.target;
 				setTimeout(() => {
 					target.classList.add('animate__animated', 'animate__fadeInRight', 'animate__faster');
-				}, 100);
+				}, 200);
 			}}
-			threshold={0.35}
+			threshold={0.2}
 		>
 			<section
 				bind:this={section.element}
