@@ -7,11 +7,17 @@
 	import { themes } from '../stores/themeStore';
 	import Content from '../components/Layout/Content.svelte';
 	import ThemeToggle from '../components/Layout/ThemeToggle.svelte';
+	import { isTouchDevice } from '$lib/helper';
+	import { browser } from '$app/env';
+	let touchDevice = false;
+	$: if (browser) touchDevice = isTouchDevice();
 </script>
 
 <main class="Container" data-theme={$themes}>
 	<ThemeToggle />
-	<Pointer />
+	{#if !touchDevice}
+		<Pointer />
+	{/if}
 	<Content>
 		<slot />
 	</Content>
