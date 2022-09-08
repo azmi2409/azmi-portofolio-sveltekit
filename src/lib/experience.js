@@ -1,5 +1,12 @@
 export const experience = [
 	{
+		id: 0,
+		title: 'Fullstack Developer',
+		company: 'Embreo Pte. Ltd.',
+		location: 'Singapore',
+		date: '2022 - Present',
+	},
+	{
 		id: 1,
 		title: 'Founder & CEO',
 		company: 'Beeleaf',
@@ -15,7 +22,7 @@ export const experience = [
 	},
 	{
 		id: 3,
-		title: 'Junior Web Developer',
+		title: 'IT & DevOps',
 		company: 'PT. Maxima Citra Prima',
 		location: 'Bogor, Indonesia',
 		date: '2018 - 2020'
@@ -23,7 +30,7 @@ export const experience = [
 	{
 		id: 4,
 		title: 'Founder & Developer',
-		company: 'Revohost Indonesia',
+		company: 'Revohost Hosting & VPS',
 		location: 'Jakarta, Indonesia',
 		date: '2013 - 2015'
 	},

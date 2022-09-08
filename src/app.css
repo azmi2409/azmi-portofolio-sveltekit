@@ -38,7 +38,7 @@
 }
 
 @layer base {
-	html {
+	:root {
 		font-family: 'Poppins', sans-serif;
 		scroll-behavior: smooth;
 	}
