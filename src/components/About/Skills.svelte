@@ -1,17 +1,24 @@
 <script>
-	import { skills } from '$lib/skills';
+	import { skillSets } from '$lib/skills';
 	import Icon from '@iconify/svelte';
 </script>
 
-<div class="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-5">
-	{#each skills as skill}
-		<div class="card bg-base-100 shadow-lg text-justify">
-			<div class="card-body">
-				<div class="flex">
-					<Icon icon={skill.icon} width="2rem" height="2rem" />
+<div class="grid md:grid-cols-2 gap-2 md:gap-5 max-w-full">
+	{#each skillSets as set}
+		<div class="card bg-base-100 shadow-lg w-96 h-64 p-5 group">
+			<div class="card-title px-5 text-2xl">{set.title}</div>
+			<div class="card-body px-5">
+				<div class={`flex ${set.skills.length > 2 ? 'group-hover:animate-move' : ''}`}>
+					{#each set.skills as skill, index}
+						<div
+							id={`${set.title}-${index}`}
+							class="flex flex-col justify-center items-center ml-5 gap-2"
+						>
+							<Icon icon={skill.icon} class="w-20 h-20" />
+							<span class="ml-2">{skill.name}</span>
+						</div>
+					{/each}
 				</div>
-				<div class="card-title text-2xl my-2">{skill.name}</div>
-				<div class="text-md">{skill.level}</div>
 			</div>
 		</div>
 	{/each}

@@ -1,35 +1,35 @@
 {
-  "name": "azmi-portofolio",
-  "version": "0.0.1",
-  "scripts": {
-    "dev": "svelte-kit dev",
-    "build": "svelte-kit build",
-    "package": "svelte-kit package",
-    "preview": "svelte-kit preview",
-    "prepare": "svelte-kit sync",
-    "lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
-    "format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
-  },
-  "devDependencies": {
-    "@iconify/svelte": "^2.2.1",
-    "@sveltejs/adapter-auto": "next",
-    "@sveltejs/kit": "next",
-    "autoprefixer": "^10.4.5",
-    "eslint": "^7.32.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-svelte3": "^3.2.1",
-    "postcss": "^8.4.12",
-    "prettier": "^2.5.1",
-    "prettier-plugin-svelte": "^2.5.0",
-    "svelte": "^3.44.0",
-    "svelte-intersection-observer": "^0.10.0",
-    "tailwindcss": "^3.0.24"
-  },
-  "type": "module",
-  "dependencies": {
+	"name": "azmi-portofolio",
+	"version": "0.0.1",
+	"scripts": {
+		"dev": "svelte-kit dev",
+		"build": "svelte-kit build",
+		"package": "svelte-kit package",
+		"preview": "svelte-kit preview",
+		"prepare": "svelte-kit sync",
+		"lint": "prettier --ignore-path .gitignore --check --plugin-search-dir=. . && eslint --ignore-path .gitignore .",
+		"format": "prettier --ignore-path .gitignore --write --plugin-search-dir=. ."
+	},
+	"devDependencies": {
+		"@iconify/svelte": "^2.2.1",
+		"@sveltejs/adapter-auto": "next",
+		"@sveltejs/kit": "next",
+		"autoprefixer": "^10.4.5",
+		"eslint": "^7.32.0",
+		"eslint-config-prettier": "^8.3.0",
+		"eslint-plugin-svelte3": "^3.2.1",
+		"postcss": "^8.4.12",
+		"prettier": "^2.5.1",
+		"prettier-plugin-svelte": "^2.5.0",
+		"svelte": "^3.44.0",
+		"svelte-intersection-observer": "^0.10.0",
+		"tailwindcss": "^3.1.8"
+	},
+	"type": "module",
+	"dependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.46",
-    "@tailwindcss/typography": "^0.5.2",
-    "animate.css": "^4.1.1",
-    "daisyui": "^2.14.2"
-  }
+		"@tailwindcss/typography": "^0.5.2",
+		"animate.css": "^4.1.1",
+		"daisyui": "^2.25.0"
+	}
 }

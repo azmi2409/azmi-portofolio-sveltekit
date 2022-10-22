@@ -14,7 +14,7 @@
 </script>
 
 <input id="drawer" type="checkbox" class="drawer-toggle" />
-<div class="drawer-content relative">
+<div class="drawer-content relative w-full overflow-x-hidden">
 	<label
 		on:click={() => handleDrawerChecked(true)}
 		for="drawer"

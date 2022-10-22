@@ -1,98 +1,128 @@
-export const skills = [
+const skillSets = [
 	{
-		id: 1,
-		name: 'HTML',
-		level: 'Advanced',
-		icon: 'typcn:html5'
+		title: "Frontend Stacks",
+		skills: [
+			{
+				name: 'React',
+				level: 'Advanced',
+				icon: 'ion:logo-react'
+			},
+			{
+				name: 'Svelte',
+				level: 'Advanced',
+				icon: 'cib:svelte'
+			},
+			{
+				name: 'Next.js',
+				level: 'Intermediate',
+				icon: 'akar-icons:nextjs-fill'
+			},
+			{
+				name: 'RedwoodJS',
+				level: 'Intermediate',
+				icon: 'simple-icons:redwoodjs'
+			},
+			{
+				name: 'Redux',
+				level: 'Intermediate',
+				icon: 'cib:redux'
+			},
+			{
+				name: 'GraphQL',
+				level: 'Beginner',
+				icon: 'akar-icons:graphql-fill'
+			},
+			{
+				name: 'Tailwind',
+				level: 'Advanced',
+				icon: 'bxl:tailwind-css'
+			},
+			{
+				name: 'JavaScript',
+				level: 'Advanced',
+				icon: 'ion:logo-javascript'
+			},
+			{
+				name: 'TypeScript',
+				level: 'Intermediate',
+				icon: 'cib:typescript'
+			},
+		]
 	},
 	{
-		id: 2,
-		name: 'CSS',
-		level: 'Advanced',
-		icon: 'typcn:css3'
+		title: "Backend Stacks",
+		skills: [
+			{
+				name: 'Node.js',
+				level: 'Intermediate',
+				icon: 'fontisto:nodejs'
+			},
+			{
+				name: 'Fastify',
+				level: 'Intermediate',
+				icon: 'simple-icons:fastify'
+			},
+			{
+				name: 'GO',
+				level: 'Beginner',
+				icon: 'fa6-brands:golang'
+			},
+			{
+				name: 'SQL',
+				level: 'Intermediate',
+				icon: 'carbon:sql'
+			},
+			{
+				name: 'MongoDB',
+				level: 'Intermediate',
+				icon: 'cib:mongodb'
+			}
+
+		]
 	},
 	{
-		id: 3,
-		name: 'JavaScript',
-		level: 'Advanced',
-		icon: 'ion:logo-javascript'
+		title: "DevOps",
+		skills: [
+			{
+				name: 'AWS',
+				level: 'Intermediate',
+				icon: 'bxl:aws'
+			},
+			{
+				name: 'Docker',
+				level: 'Intermediate',
+				icon: 'cib:docker'
+			},
+			{
+
+				name: 'Linux',
+				level: 'Intermediate',
+				icon: 'fontisto:linux'
+			},
+			{
+				name: 'GitLab CI',
+				level: 'Intermediate',
+				icon: 'jam:gitlab-circle'
+			},
+			{
+				name: 'Jenkins',
+				level: 'Intermediate',
+				icon: 'cib:jenkins'
+			}
+		]
 	},
 	{
-		id: 4,
-		name: 'React',
-		level: 'Advanced',
-		icon: 'ion:logo-react'
-	},
-	{
-		id: 5,
-		name: 'Svelte',
-		level: 'Advanced',
-		icon: 'cib:svelte'
-	},
-	{
-		id: 6,
-		name: 'Node.js',
-		level: 'Intermediate',
-		icon: 'fontisto:nodejs'
-	},
-	{
-		id: 7,
-		name: 'Redux',
-		level: 'Advanced',
-		icon: 'akar-icons:redux-fill'
-	},
-	{
-		id: 8,
-		name: 'PHP',
-		level: 'Intermediate',
-		icon: 'fontisto:php'
-	},
-	{
-		id: 9,
-		name: 'GO',
-		level: 'Beginner',
-		icon: 'fa6-brands:golang'
-	},
-	{
-		id: 10,
-		name: 'Linux',
-		level: 'Intermediate',
-		icon: 'fontisto:linux'
-	},
-	{
-		id: 11,
-		name: 'Git',
-		level: 'Intermediate',
-		icon: 'fontisto:git'
-	},
-	{
-		id: 12,
-		name: 'Next.js',
-		level: 'Intermediate',
-		icon: 'akar-icons:nextjs-fill'
-	},
-	{
-		id: 13,
-		name: 'GraphQL',
-		level: 'Beginner',
-		icon: 'akar-icons:graphql-fill'
-	},
-	{
-		id: 14,
-		name: 'Tailwind',
-		level: 'Advanced',
-		icon: 'bxl:tailwind-css'
-	},
-	{
-		id: 15,
-		name: 'Bootstrap',
-		level: 'Advanced',
-		icon: 'bxl:bootstrap'
-	},
-	{
-		id: 16,
-		name: 'TypeScript',
-		level: 'Intermediate',
-		icon: 'cib:typescript'
+		title: "Other",
+		skills: [
+			{
+				name: 'Git',
+				level: 'Intermediate',
+				icon: 'fontisto:git'
+			},
+		]
 	}
-];
+]
+
+export {
+	skillSets
+}
