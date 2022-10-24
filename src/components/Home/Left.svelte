@@ -11,21 +11,13 @@
 			class="relative p-5 z-50 border-8 left-0 top-0 border-black h-full w-full box-border rounded-lg"
 			style={`transform: translate3d(${x / 30}px,${y / 30}px,0);`}
 		>
-			<img
-				src="bg.jpeg"
-				class="opacity-0 max-w-full"
-				alt="image1"
-			/>
+			<img src="bg.jpeg" class="opacity-0 max-w-full" alt="image1" preload />
 		</div>
 		<div
 			class="absolute left-0 top-0 z-10 p-7 w-full box-border align-middle"
 			style={`transform: translate3d(${x / 35}px,${y / 35}px,0);`}
 		>
-			<img
-				src="bg.jpeg"
-				class="opacity-0 max-w-full"
-				alt="image1"
-			/>
+			<img src="bg.jpeg" class="opacity-0 max-w-full" alt="image1" />
 			<div
 				style={`background-image: url("profile.webp");background-position: 50%;`}
 				class="absolute bg-cover bg-no-repeat inset-5 rounded-lg"
