@@ -9,12 +9,14 @@
 	import ThemeToggle from '../components/Layout/ThemeToggle.svelte';
 	import { isTouchDevice } from '$lib/helper';
 	import { browser } from '$app/env';
+	import ComingSoon from '../components/ComingSoon/index.svelte';
 	let touchDevice = false;
 	$: if (browser) touchDevice = isTouchDevice();
 </script>
 
 <main class="Container" data-theme={$themes}>
-	<ThemeToggle />
+	<ComingSoon />
+	<!-- <ThemeToggle />
 	{#if !touchDevice}
 		<Pointer />
 	{/if}
@@ -23,5 +25,5 @@
 	</Content>
 	{#if $drawerChecked}
 		<Sidebar />
-	{/if}
+	{/if} -->
 </main>
