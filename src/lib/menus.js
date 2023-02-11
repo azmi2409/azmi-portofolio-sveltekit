@@ -23,30 +23,30 @@ const data = [
         intersecting: false,
         element: ''
     },
-    {
-        name: 'Portofolio',
-        path: '/#portofolio',
-        component: Portofolio,
-        id: 'portofolio',
-        intersecting: false,
-        element: ''
-    },
-    {
-        name: 'Contact Me',
-        path: '/#contact',
-        component: Contact,
-        id: 'contact',
-        intersecting: false,
-        element: ''
-    },
-    {
-        name: 'Blog',
-        path: '/#blog',
-        component: Blog,
-        id: 'blog',
-        intersecting: false,
-        element: ''
-    },
+    // {
+    //     name: 'Portofolio',
+    //     path: '/#portofolio',
+    //     component: Portofolio,
+    //     id: 'portofolio',
+    //     intersecting: false,
+    //     element: ''
+    // },
+    // {
+    //     name: 'Contact Me',
+    //     path: '/#contact',
+    //     component: Contact,
+    //     id: 'contact',
+    //     intersecting: false,
+    //     element: ''
+    // },
+    // {
+    //     name: 'Blog',
+    //     path: '/#blog',
+    //     component: Blog,
+    //     id: 'blog',
+    //     intersecting: false,
+    //     element: ''
+    // },
 ];
 
 export const menus = writable(data);
