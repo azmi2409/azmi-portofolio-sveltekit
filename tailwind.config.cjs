@@ -1,3 +1,4 @@
+/** @type {import('tailwindcss').Config} */
 module.exports = {
 	content: ['./src/**/*.{html,js,svelte,ts}'],
 	theme: {
@@ -24,4 +25,4 @@ module.exports = {
 		darkTheme: 'forest',
 		themes: true,
 	}
-};
+}
