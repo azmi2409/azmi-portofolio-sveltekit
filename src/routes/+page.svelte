@@ -7,7 +7,10 @@
 
 <svelte:head>
 	<title>AZMI - Full Stack Developer & Digital Creator</title>
-	<meta name="description" content="Professional portfolio of AZMI - Full Stack Developer specializing in modern web technologies. Creating exceptional digital experiences." />
+	<meta
+		name="description"
+		content="Professional portfolio of AZMI - Full Stack Developer specializing in modern web technologies. Creating exceptional digital experiences."
+	/>
 </svelte:head>
 
 <main class="overflow-x-hidden">

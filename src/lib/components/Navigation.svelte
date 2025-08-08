@@ -17,11 +17,11 @@
 	onMount(() => {
 		const handleScroll = () => {
 			isScrolled = window.scrollY > 50;
-			
+
 			// Update active section based on scroll position
-			const sections = navItems.map(item => document.getElementById(item.id)).filter(Boolean);
+			const sections = navItems.map((item) => document.getElementById(item.id)).filter(Boolean);
 			const scrollPosition = window.scrollY + 100;
-			
+
 			for (let i = sections.length - 1; i >= 0; i--) {
 				const section = sections[i];
 				if (section && section.offsetTop <= scrollPosition) {
@@ -49,33 +49,36 @@
 	};
 </script>
 
-<nav class="fixed top-0 left-0 right-0 z-50 transition-all duration-300 {
-	isScrolled 
-		? 'bg-background/80 backdrop-blur-md border-b border-border shadow-lg' 
-		: 'bg-transparent'
-}">
-	<div class="max-w-6xl mx-auto px-6">
-		<div class="flex items-center justify-between h-16">
+<nav
+	class="fixed top-0 right-0 left-0 z-50 transition-all duration-300 {isScrolled
+		? 'border-b border-border bg-background/80 shadow-lg backdrop-blur-md'
+		: 'bg-transparent'}"
+>
+	<div class="mx-auto max-w-6xl px-6">
+		<div class="flex h-16 items-center justify-between">
 			<!-- Logo -->
-			<a href="#hero" on:click|preventDefault={() => scrollToSection('#hero')} class="text-2xl font-bold text-primary hover:text-primary/80 transition-colors">
-				AZMI
+			<a
+				href="#hero"
+				on:click|preventDefault={() => scrollToSection('#hero')}
+				class="text-2xl font-bold text-primary transition-colors hover:text-primary/80"
+			>
+				Azmi
 			</a>
 
 			<!-- Desktop Navigation -->
-			<div class="hidden md:flex items-center space-x-8">
+			<div class="hidden items-center space-x-8 md:flex">
 				{#each navItems as item}
-					<a 
+					<a
 						href={item.href}
 						on:click|preventDefault={() => scrollToSection(item.href)}
-						class="relative px-3 py-2 text-sm font-medium transition-all duration-300 {
-							activeSection === item.id 
-								? 'text-primary' 
-								: 'text-muted-foreground hover:text-foreground'
-						}"
+						class="relative px-3 py-2 text-sm font-medium transition-all duration-300 {activeSection ===
+						item.id
+							? 'text-primary'
+							: 'text-muted-foreground hover:text-foreground'}"
 					>
 						{item.name}
 						{#if activeSection === item.id}
-							<div class="absolute bottom-0 left-0 right-0 h-0.5 bg-primary rounded-full"></div>
+							<div class="absolute right-0 bottom-0 left-0 h-0.5 rounded-full bg-primary"></div>
 						{/if}
 					</a>
 				{/each}
@@ -87,17 +90,17 @@
 			</div>
 
 			<!-- Mobile controls -->
-			<div class="md:hidden flex items-center space-x-2">
+			<div class="flex items-center space-x-2 md:hidden">
 				<ThemeToggle />
-				<button 
+				<button
 					on:click={toggleMobileMenu}
-					class="p-2 rounded-lg bg-muted hover:bg-muted/80 transition-colors"
+					class="rounded-lg bg-muted p-2 transition-colors hover:bg-muted/80"
 					aria-label="Toggle mobile menu"
 				>
 					{#if isMobileMenuOpen}
-						<X class="w-6 h-6" />
+						<X class="h-6 w-6" />
 					{:else}
-						<Menu class="w-6 h-6" />
+						<Menu class="h-6 w-6" />
 					{/if}
 				</button>
 			</div>
@@ -105,17 +108,16 @@
 
 		<!-- Mobile Navigation -->
 		{#if isMobileMenuOpen}
-			<div class="md:hidden border-t border-border bg-background/95 backdrop-blur-md">
-				<div class="px-2 pt-2 pb-3 space-y-1">
+			<div class="border-t border-border bg-background/95 backdrop-blur-md md:hidden">
+				<div class="space-y-1 px-2 pt-2 pb-3">
 					{#each navItems as item}
-						<a 
+						<a
 							href={item.href}
 							on:click|preventDefault={() => scrollToSection(item.href)}
-							class="block px-3 py-2 rounded-md text-base font-medium transition-all duration-300 {
-								activeSection === item.id 
-									? 'text-primary bg-primary/10' 
-									: 'text-muted-foreground hover:text-foreground hover:bg-muted'
-							}"
+							class="block rounded-md px-3 py-2 text-base font-medium transition-all duration-300 {activeSection ===
+							item.id
+								? 'bg-primary/10 text-primary'
+								: 'text-muted-foreground hover:bg-muted hover:text-foreground'}"
 						>
 							{item.name}
 						</a>
