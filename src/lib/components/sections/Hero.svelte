@@ -162,13 +162,13 @@
 				<Motion let:motion variants={itemVariants}>
 					<div use:motion class="mt-12 flex justify-center space-x-6">
 						<a
-							href="https://github.com"
+							href="https://github.com/azmi2409"
 							class="rounded-full bg-muted p-3 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
 						>
 							<Github class="h-6 w-6" />
 						</a>
 						<a
-							href="https://linkedin.com"
+							href="https://linkedin.com/in/azmimuwahid"
 							class="rounded-full bg-muted p-3 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
 						>
 							<Linkedin class="h-6 w-6" />
