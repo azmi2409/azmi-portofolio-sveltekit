@@ -1,1 +1,0 @@
-<div class="absolute top-0 bottom-0 right-5 after:rounded-3xl after:top-16 after:left-0 after:right-0 after:bottom-0 after:content-[''] after:absolute after:bg-black box-border w-1 overflow-hidden cursor-e-resize"></div>
