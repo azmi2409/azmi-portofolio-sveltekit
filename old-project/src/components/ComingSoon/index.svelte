@@ -14,7 +14,7 @@
 		>
 			Under Maintenance
 		</h1>
-		<p class="font-light text-gray-500 md:text-lg xl:text-xl dark:text-gray-400">
+		<p class="font-light text-gray-800 md:text-lg xl:text-xl dark:text-gray-400">
 			Our Enterprise administrators are performing scheduled maintenance.
 		</p>
 	</div>

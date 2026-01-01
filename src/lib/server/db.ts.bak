@@ -1,0 +1,134 @@
+import { readFileSync, writeFileSync, existsSync, mkdirSync, readdirSync } from 'fs';
+import { join } from 'path';
+import type { BlogPost, BlogPostInput, BlogPostFilter } from '$lib/types/blog';
+import slugify from 'slugify';
+
+const DATA_DIR = join(process.cwd(), 'data', 'posts');
+
+// Ensure data directory exists
+if (!existsSync(DATA_DIR)) {
+    mkdirSync(DATA_DIR, { recursive: true });
+}
+
+function generateId(): string {
+    return Date.now().toString(36) + Math.random().toString(36).substr(2);
+}
+
+function generateSlug(title: string): string {
+    return slugify(title, { lower: true, strict: true });
+}
+
+function getPostPath(id: string): string {
+    return join(DATA_DIR, `${id}.json`);
+}
+
+export function getAllPosts(filter?: BlogPostFilter): BlogPost[] {
+    if (!existsSync(DATA_DIR)) {
+        return [];
+    }
+
+    const files = readdirSync(DATA_DIR).filter((file) => file.endsWith('.json'));
+    let posts: BlogPost[] = files.map((file) => {
+        const content = readFileSync(join(DATA_DIR, file), 'utf-8');
+        return JSON.parse(content) as BlogPost;
+    });
+
+    // Apply filters
+    if (filter?.status) {
+        posts = posts.filter((post) => post.status === filter.status);
+    }
+
+    if (filter?.category) {
+        posts = posts.filter((post) => post.categories.includes(filter.category!));
+    }
+
+    if (filter?.tag) {
+        posts = posts.filter((post) => post.tags.includes(filter.tag!));
+    }
+
+    if (filter?.search) {
+        const searchLower = filter.search.toLowerCase();
+        posts = posts.filter(
+            (post) =>
+                post.title.toLowerCase().includes(searchLower) ||
+                post.excerpt.toLowerCase().includes(searchLower) ||
+                post.content.toLowerCase().includes(searchLower)
+        );
+    }
+
+    // Sort by date (newest first)
+    posts.sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime());
+
+    return posts;
+}
+
+export function getPostBySlug(slug: string): BlogPost | null {
+    const posts = getAllPosts();
+    return posts.find((post) => post.slug === slug) || null;
+}
+
+export function getPostById(id: string): BlogPost | null {
+    const postPath = getPostPath(id);
+    if (!existsSync(postPath)) {
+        return null;
+    }
+
+    const content = readFileSync(postPath, 'utf-8');
+    return JSON.parse(content) as BlogPost;
+}
+
+export function createPost(input: BlogPostInput): BlogPost {
+    const id = generateId();
+    const slug = generateSlug(input.title);
+    const now = new Date().toISOString();
+
+    const post: BlogPost = {
+        id,
+        slug,
+        ...input,
+        createdAt: now,
+        updatedAt: now,
+        publishedAt: input.status === 'published' ? now : undefined
+    };
+
+    const postPath = getPostPath(id);
+    writeFileSync(postPath, JSON.stringify(post, null, 2), 'utf-8');
+
+    return post;
+}
+
+export function updatePost(id: string, input: Partial<BlogPostInput>): BlogPost | null {
+    const post = getPostById(id);
+    if (!post) {
+        return null;
+    }
+
+    const now = new Date().toISOString();
+    const wasPublished = post.status === 'published';
+    const isNowPublished = input.status === 'published';
+
+    const updatedPost: BlogPost = {
+        ...post,
+        ...input,
+        updatedAt: now,
+        // Update slug if title changed
+        slug: input.title ? generateSlug(input.title) : post.slug,
+        // Set publishedAt if transitioning from draft to published
+        publishedAt:
+            !wasPublished && isNowPublished ? now : wasPublished && isNowPublished ? post.publishedAt : undefined
+    };
+
+    const postPath = getPostPath(id);
+    writeFileSync(postPath, JSON.stringify(updatedPost, null, 2), 'utf-8');
+
+    return updatedPost;
+}
+
+export function deletePost(id: string): boolean {
+    const postPath = getPostPath(id);
+    if (!existsSync(postPath)) {
+        return false;
+    }
+
+    return true;
+}

@@ -8,10 +8,11 @@
 	let activeSection = 'hero';
 
 	const navItems = [
-		{ name: 'Home', href: '#hero', id: 'hero' },
-		{ name: 'About', href: '#about', id: 'about' },
-		{ name: 'Portfolio', href: '#portfolio', id: 'portfolio' },
-		{ name: 'Contact', href: '#contact', id: 'contact' }
+		{ name: 'Home', href: '/#hero', id: 'hero' },
+		{ name: 'About', href: '/#about', id: 'about' },
+		{ name: 'Portfolio', href: '/#portfolio', id: 'portfolio' },
+		{ name: 'Blog', href: '/blog', id: 'blog' },
+		{ name: 'Contact', href: '/#contact', id: 'contact' }
 	];
 
 	onMount(() => {
@@ -36,6 +37,13 @@
 	});
 
 	const scrollToSection = (href: string) => {
+		// Handle external links
+		if (!href.startsWith('#')) {
+			window.location.href = href;
+			isMobileMenuOpen = false;
+			return;
+		}
+
 		const targetId = href.replace('#', '');
 		const element = document.getElementById(targetId);
 		if (element) {
