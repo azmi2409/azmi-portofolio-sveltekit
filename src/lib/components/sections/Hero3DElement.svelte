@@ -49,9 +49,12 @@
 		const width = canvas.clientWidth;
 		const height = canvas.clientHeight;
 
-		// Read theme colors
-		const primaryColor = getThemeColor('--primary', '#7c7c7c');
-		const accentColor = getThemeColor('--accent', '#5e5e5e');
+		// Detect if we're in light mode to adjust blending and opacity
+		const isDark = document.documentElement.classList.contains('dark');
+
+		// Read theme colors — use foreground-based colors in light mode for visibility
+		const primaryColor = getThemeColor('--primary', isDark ? '#7c7c7c' : '#4a4a4a');
+		const accentColor = getThemeColor(isDark ? '--accent' : '--muted-foreground', isDark ? '#5e5e5e' : '#666666');
 		const chartColor = getThemeColor('--chart-2', '#4a8a8a');
 
 		// --- Renderer ---
@@ -78,7 +81,7 @@
 			color: primaryColor,
 			wireframe: true,
 			transparent: true,
-			opacity: 0.25
+			opacity: isDark ? 0.25 : 0.4
 		});
 		const icosahedron = new THREE.Mesh(icoGeometry, wireframeMaterial);
 		scene.add(icosahedron);
@@ -89,7 +92,7 @@
 			color: chartColor,
 			wireframe: true,
 			transparent: true,
-			opacity: 0.08
+			opacity: isDark ? 0.08 : 0.15
 		});
 		const innerMesh = new THREE.Mesh(innerGeometry, innerMaterial);
 		scene.add(innerMesh);
@@ -119,11 +122,11 @@
 
 		const particleMaterial = new THREE.PointsMaterial({
 			color: accentColor,
-			size: 0.03,
+			size: isDark ? 0.03 : 0.04,
 			transparent: true,
-			opacity: 0.5,
+			opacity: isDark ? 0.5 : 0.7,
 			sizeAttenuation: true,
-			blending: THREE.AdditiveBlending,
+			blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
 			depthWrite: false
 		});
 
@@ -146,11 +149,11 @@
 
 		const ringMaterial = new THREE.PointsMaterial({
 			color: primaryColor,
-			size: 0.02,
+			size: isDark ? 0.02 : 0.03,
 			transparent: true,
-			opacity: 0.6,
+			opacity: isDark ? 0.6 : 0.8,
 			sizeAttenuation: true,
-			blending: THREE.AdditiveBlending,
+			blending: isDark ? THREE.AdditiveBlending : THREE.NormalBlending,
 			depthWrite: false
 		});
 
