@@ -1,21 +1,17 @@
 <script lang="ts">
-	import Hero from '$lib/components/sections/Hero.svelte';
-	import About from '$lib/components/sections/About.svelte';
-	import Portfolio from '$lib/components/sections/Portfolio.svelte';
-	import Contact from '$lib/components/sections/Contact.svelte';
+	import HeroSection from '$lib/components/sections/HeroSection.svelte';
+	import TechStackSection from '$lib/components/sections/TechStackSection.svelte';
+	import GitHubStatsSection from '$lib/components/sections/GitHubStatsSection.svelte';
+	import ProjectsSection from '$lib/components/sections/ProjectsSection.svelte';
+	import ContactSection from '$lib/components/sections/ContactSection.svelte';
+	import Footer from '$lib/components/sections/Footer.svelte';
+
+	let { data } = $props();
 </script>
 
-<svelte:head>
-	<title>AZMI - Full Stack Developer & Digital Creator</title>
-	<meta
-		name="description"
-		content="Professional portfolio of AZMI - Full Stack Developer specializing in modern web technologies. Creating exceptional digital experiences."
-	/>
-</svelte:head>
-
-<main class="overflow-x-hidden">
-	<Hero />
-	<About />
-	<Portfolio />
-	<Contact />
-</main>
+<HeroSection />
+<TechStackSection />
+<GitHubStatsSection stats={data.githubStats} />
+<ProjectsSection />
+<ContactSection />
+<Footer />

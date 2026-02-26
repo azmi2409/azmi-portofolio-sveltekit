@@ -140,7 +140,7 @@
 			<label class="mb-2 block text-sm font-medium text-foreground"> Featured Image </label>
 			{#if featuredImage}
 				<div class="mb-4">
-					<img src={featuredImage} alt="Featured" class="h-48 w-full rounded-lg object-cover" />
+					<img src={featuredImage} alt="Featured" width="640" height="192" loading="lazy" class="h-48 w-full rounded-lg object-cover" />
 					<button
 						type="button"
 						onclick={() => (featuredImage = '')}

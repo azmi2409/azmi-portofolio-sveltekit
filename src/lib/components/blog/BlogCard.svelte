@@ -18,6 +18,9 @@
 			<img
 				src={post.featuredImage}
 				alt={post.title}
+				width="640"
+				height="360"
+				loading="lazy"
 				class="h-full w-full object-cover transition duration-300 group-hover:scale-105"
 			/>
 		</div>

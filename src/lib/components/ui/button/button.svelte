@@ -37,6 +37,8 @@
 		disabled?: boolean;
 		type?: 'button' | 'submit' | 'reset';
 		href?: string;
+		onclick?: (e: MouseEvent) => void;
+		[key: string]: unknown;
 	}
 
 	let {

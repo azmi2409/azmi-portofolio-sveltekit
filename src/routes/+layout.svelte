@@ -2,26 +2,36 @@
 	import '../app.css';
 	import favicon from '$lib/assets/favicon.svg';
 	import Navigation from '$lib/components/Navigation.svelte';
-	import { theme } from '$lib/stores/theme';
+	import GtmScript from '$lib/components/GtmScript.svelte';
+	import { initTheme } from '$lib/stores/theme';
 	import { onMount } from 'svelte';
-	import { browser } from '$app/environment';
 
 	let { children } = $props();
 
-	// Initialize theme on mount
+	// Initialize tri-state theme system on mount
 	onMount(() => {
-		if (browser) {
-			// Apply saved theme or default
-			const savedTheme = localStorage.getItem('theme') || 'dark';
-			theme.set(savedTheme as 'light' | 'dark');
-			document.documentElement.classList.toggle('dark', savedTheme === 'dark');
-		}
+		const cleanup = initTheme();
+		return cleanup;
 	});
 </script>
 
 <svelte:head>
 	<link rel="icon" href={favicon} />
+	<title>Azmi Muwahid — Senior Full Stack Engineer</title>
+	<meta
+		name="description"
+		content="Portfolio of Azmi Muwahid, Senior Full Stack Engineer specializing in AI-powered EdTech solutions. Building scalable web applications with TypeScript, SvelteKit, React, and AWS."
+	/>
+	<meta property="og:title" content="Azmi Muwahid — Senior Full Stack Engineer" />
+	<meta
+		property="og:description"
+		content="Portfolio of Azmi Muwahid, Senior Full Stack Engineer specializing in AI-powered EdTech solutions. Building scalable web applications with TypeScript, SvelteKit, React, and AWS."
+	/>
+	<meta property="og:url" content="https://azmi.web.id" />
 </svelte:head>
 
+<GtmScript />
 <Navigation />
-{@render children?.()}
+<main class="overflow-x-hidden">
+	{@render children?.()}
+</main>

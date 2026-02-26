@@ -73,6 +73,9 @@
 				<img
 					src={post.featuredImage}
 					alt={post.title}
+					width="960"
+					height="500"
+					loading="lazy"
 					class="h-auto w-full object-cover"
 					style="max-height: 500px;"
 				/>
