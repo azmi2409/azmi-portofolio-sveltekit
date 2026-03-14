@@ -4,17 +4,17 @@
 -->
 
 <script lang="ts">
-	import { Code, Layout, Server, Cloud, Database, Brain } from '@lucide/svelte';
+	import { Code, Layout, Server, Cloud, Database, Brain, Zap } from '@lucide/svelte';
 	import type { InviewOptions } from '$lib/actions/inview';
 	import { onMount } from 'svelte';
 
 	const TECH_CATEGORIES = [
-		{ name: 'Languages', icon: Code, skills: ['TypeScript', 'JavaScript', 'Ruby', 'Go', 'Python'] },
-		{ name: 'Frontend', icon: Layout, skills: ['React', 'Next.js', 'Vue.js', 'SvelteKit', 'Tailwind'] },
-		{ name: 'Backend', icon: Server, skills: ['Node.js', 'Express', 'Ruby on Rails', 'Gofiber'] },
-		{ name: 'Cloud & DevOps', icon: Cloud, skills: ['AWS', 'Docker', 'Terraform', 'GitHub Actions'] },
-		{ name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch'] },
-		{ name: 'AI/ML Integration', icon: Brain, skills: ['OpenAI API', 'LangChain', 'Vector DBs'] }
+		{ name: 'The AI Edge', icon: Brain, skills: ['Agentic Workflows', 'RAG', 'Tool Calling', 'Vector Databases', 'LLM Orchestration'] },
+		{ name: 'The Real-Time Layer', icon: Zap, skills: ['Binary Audio Streaming', 'WebSockets', 'Whisper (Transcription)', 'Live State Management'] },
+		{ name: 'The Core Stack', icon: Code, skills: ['TypeScript 5', 'Ruby on Rails', 'Next.js 15 (App Router)', 'tRPC', 'SvelteKit'] },
+		{ name: 'The Infra', icon: Cloud, skills: ['AWS (ECS/Lambda/S3)', 'Google Cloud', 'Terraform', 'Docker'] },
+		{ name: 'Languages', icon: Layout, skills: ['TypeScript', 'Ruby', 'Python', 'Go'] },
+		{ name: 'Databases', icon: Database, skills: ['PostgreSQL', 'Redis', 'Pinecone', 'Elasticsearch'] }
 	];
 
 	// Marquee items
@@ -47,8 +47,8 @@
 
 <section id="tech-stack" class="relative py-24 sm:py-32 overflow-hidden">
 	<!-- Background glow accents -->
-	<div class="pointer-events-none absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-green-500/10 opacity-50 blur-[120px]"></div>
-	<div class="pointer-events-none absolute -right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-blue-500/10 opacity-50 blur-[120px]"></div>
+	<div class="pointer-events-none absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-zinc-500/10 opacity-50 blur-[120px]"></div>
+	<div class="pointer-events-none absolute -right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-zinc-600/10 opacity-50 blur-[120px]"></div>
 
 	<div class="mx-auto max-w-6xl px-6">
 		<!-- Section Header -->
@@ -84,7 +84,7 @@
 			<div class="animate-marquee flex w-max items-center gap-8 pl-8 sm:gap-16 sm:pl-16">
 				{#each MARQUEE_ITEMS as item}
 					<div
-						class="flex items-center justify-center whitespace-nowrap text-xl font-bold tracking-tight text-slate-500 transition-colors hover:text-green-400 sm:text-3xl"
+						class="flex items-center justify-center whitespace-nowrap text-xl font-bold tracking-tight text-slate-500 transition-colors hover:text-zinc-300 sm:text-3xl"
 						style="font-family: var(--font-heading);"
 					>
 						{item}
@@ -111,8 +111,8 @@
 						class="glass-card group flex h-full flex-col rounded-2xl p-6 transition-all duration-300"
 						onmouseenter={(e) => {
 							const el = e.currentTarget as HTMLElement;
-							el.style.borderColor = 'rgba(34,197,94,0.3)';
-							el.style.boxShadow = '0 8px 32px -8px rgba(34,197,94,0.15)';
+							el.style.borderColor = 'rgba(255,255,255,0.3)';
+							el.style.boxShadow = '0 8px 32px -8px rgba(255,255,255,0.15)';
 							el.style.transform = 'translateY(-4px)';
 						}}
 						onmouseleave={(e) => {
@@ -125,7 +125,7 @@
 						<div class="mb-5 flex items-center gap-4">
 							<div
 								class="flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
-								style="background: rgba(34,197,94,0.1); color: #22c55e;"
+								style="background: rgba(255,255,255,0.1); color: #fafafa;"
 							>
 								<Icon class="h-6 w-6" />
 							</div>
@@ -141,9 +141,9 @@
 									style="background: rgba(255,255,255,0.04); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05);"
 									onmouseenter={(e) => {
 										const el = e.currentTarget as HTMLElement;
-										el.style.background = 'rgba(34,197,94,0.1)';
-										el.style.color = '#22c55e';
-										el.style.borderColor = 'rgba(34,197,94,0.2)';
+										el.style.background = 'rgba(255,255,255,0.1)';
+										el.style.color = '#fafafa';
+										el.style.borderColor = 'rgba(255,255,255,0.2)';
 									}}
 									onmouseleave={(e) => {
 										const el = e.currentTarget as HTMLElement;

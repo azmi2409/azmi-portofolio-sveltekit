@@ -16,10 +16,10 @@
 	let typewriterDone = $state(false);
 
 	const roles = [
-		'Senior Fullstack Engineer',
-		'AI Builder & Architect',
-		'EdTech Craftsman',
-		'Open Source Contributor'
+		'Building Agentic AI',
+		'Senior Full Stack Engineer',
+		'RAG Architect',
+		'Low-latency Streaming Expert'
 	];
 	let roleIndex = 0;
 	let charIndex = 0;
@@ -51,7 +51,7 @@
 		typeTimer = setTimeout(typewriter, isDeleting ? 52 : 80);
 	}
 
-	onMount(async () => {
+	onMount(() => {
 		mounted = true;
 
 		// Start typewriter
@@ -60,12 +60,13 @@
 		// Load 3D component
 		const capabilities = detectCapabilities();
 		if (capabilities.webglAvailable && !capabilities.isLowEnd) {
-			try {
-				const module = await import('./Hero3DElement.svelte');
-				Hero3DComponent = module.default;
-			} catch {
-				Hero3DComponent = null;
-			}
+			import('./Hero3DElement.svelte')
+				.then((module) => {
+					Hero3DComponent = module.default;
+				})
+				.catch(() => {
+					Hero3DComponent = null;
+				});
 		}
 
 		return () => clearTimeout(typeTimer);
@@ -158,9 +159,11 @@
 					-webkit-background-clip: text;
 					-webkit-text-fill-color: transparent;
 					background-clip: text;
+					line-height: 1.1;
+					display: block;
 				"
 			>
-				Azmi Muwahid
+				Building the next generation of Agentic AI.
 			</span>
 		</h1>
 
@@ -182,7 +185,7 @@
 
 		<!-- Tagline -->
 		<p
-			class="mx-auto mb-8 max-w-2xl text-base leading-relaxed sm:text-lg"
+			class="mx-auto mb-8 max-w-3xl text-base leading-relaxed sm:text-lg"
 			style="
 				color: #94a3b8;
 				opacity: {mounted ? 1 : 0};
@@ -190,9 +193,7 @@
 				transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
 			"
 		>
-			Crafting AI-powered EdTech solutions at
-			<span style="color: #f8fafc; font-weight: 600;">FutureLab.my</span>
-			— turning complex ideas into elegant, scalable products that reach thousands of learners.
+			I’m a <span style="color: #f8fafc; font-weight: 600;">Senior Full Stack Engineer</span> with a 6-year track record of shipping scalable web apps. These days, I’m obsessed with moving beyond simple chat interfaces. I specialize in building <span style="color: #f8fafc; font-weight: 600;">Agentic Workflows, RAG architectures</span>, and low-latency <span style="color: #f8fafc; font-weight: 600;">AI Audio streaming</span>—essentially, making AI systems that don't just talk, but actually act and reason in real-time.
 		</p>
 
 		<!-- Achievement chips -->

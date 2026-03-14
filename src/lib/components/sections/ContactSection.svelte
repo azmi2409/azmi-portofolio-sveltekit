@@ -62,7 +62,7 @@
 			<!-- Left Column: Copy & Info -->
 			<div class="flex flex-col justify-center">
 				<div
-					class="mb-6 inline-flex items-center gap-2 rounded-full border border-green-500/30 bg-green-500/10 px-4 py-1.5 text-sm font-medium text-green-400 w-fit"
+					class="mb-6 inline-flex items-center gap-2 rounded-full border border-zinc-50/20 bg-zinc-50/10 px-4 py-1.5 text-sm font-medium text-zinc-200 w-fit"
 				>
 					<Sparkles class="h-4 w-4" />
 					<span>Available for hire</span>
@@ -73,20 +73,20 @@
 					style="font-family: var(--font-heading);"
 				>
 					Let's build<br />
-					something <span class="gradient-text">great.</span>
+					something <span class="gradient-text">intelligent.</span>
 				</h2>
 				
 				<p class="mb-10 max-w-md text-lg leading-relaxed text-slate-400">
-					Whether you have a specific project in mind, need technical leadership, or just want to explore possibilities—my inbox is always open.
+					Whether you want to talk about tool_calls, the future of RAG, or why Ruby on Rails is still a powerhouse for AI backends—reach out.
 				</p>
 
 				<div class="flex flex-col gap-6">
 					<!-- Email -->
 					<a
 						href="mailto:azmimuwahid@gmail.com"
-						class="group flex items-center gap-4 text-slate-300 transition-colors hover:text-green-400 w-fit"
+						class="group flex items-center gap-4 text-slate-300 transition-colors hover:text-zinc-300 w-fit"
 					>
-						<div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 border border-slate-700 transition-transform group-hover:scale-110 group-hover:border-green-500/50 group-hover:bg-green-500/10">
+						<div class="flex h-12 w-12 items-center justify-center rounded-full bg-slate-800 border border-slate-700 transition-transform group-hover:scale-110 group-hover:border-zinc-50/50 group-hover:bg-zinc-50/10">
 							<Mail class="h-5 w-5" />
 						</div>
 						<div class="flex flex-col">
@@ -133,12 +133,12 @@
 			<!-- Right Column: Form -->
 			<div class="relative">
 				<!-- Decorative backdrop -->
-				<div class="absolute -inset-1 rounded-3xl bg-gradient-to-br from-green-500/20 to-blue-500/20 blur-xl"></div>
+				<div class="absolute -inset-1 rounded-3xl bg-gradient-to-br from-zinc-500/20 to-zinc-700/20 blur-xl"></div>
 				
 				<div class="glass-card relative rounded-3xl p-8 sm:p-10">
 					{#if isSuccess}
 						<div class="flex h-full min-h-[400px] flex-col items-center justify-center text-center animate-fade-slide-up">
-							<div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-green-500/20 text-green-500">
+							<div class="mb-6 flex h-16 w-16 items-center justify-center rounded-full bg-zinc-50/20 text-zinc-100">
 								<Send class="h-8 w-8" />
 							</div>
 							<h3 class="mb-2 text-2xl font-bold text-white" style="font-family: var(--font-heading);">Message Sent!</h3>
@@ -155,7 +155,7 @@
 										name="name"
 										required
 										placeholder="John Doe"
-										class="rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+										class="rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 									>
 								</div>
 								<div class="flex flex-col gap-2">
@@ -166,7 +166,7 @@
 										name="email"
 										required
 										placeholder="john@example.com"
-										class="rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+										class="rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 									>
 								</div>
 							</div>
@@ -179,7 +179,7 @@
 									name="subject"
 									required
 									placeholder="Project Inquiry"
-									class="rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+									class="rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 								>
 							</div>
 							
@@ -191,15 +191,15 @@
 									required
 									rows="5"
 									placeholder="Tell me about your project, goals, and timeline..."
-									class="min-h-[120px] resize-y rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-green-500 focus:outline-none focus:ring-1 focus:ring-green-500"
+									class="min-h-[120px] resize-y rounded-xl border border-slate-700 bg-slate-900/50 px-4 py-3 text-white placeholder-slate-500 transition-colors focus:border-zinc-400 focus:outline-none focus:ring-1 focus:ring-zinc-400"
 								></textarea>
 							</div>
 							
 							<button
 								type="submit"
 								disabled={isSubmitting}
-								class="group flex w-full items-center justify-center gap-2 rounded-xl bg-green-500 px-6 py-4 text-base font-bold text-slate-900 transition-all hover:bg-green-400 disabled:cursor-not-allowed disabled:opacity-70"
-								style="box-shadow: 0 0 20px rgba(34,197,94,0.2);"
+								class="group flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-50 px-6 py-4 text-base font-bold text-zinc-900 transition-all hover:bg-zinc-200 disabled:cursor-not-allowed disabled:opacity-70"
+								style="box-shadow: 0 0 20px rgba(255,255,255,0.1);"
 							>
 								{#if isSubmitting}
 									<div class="h-5 w-5 animate-spin rounded-full border-2 border-slate-900 border-t-transparent"></div>

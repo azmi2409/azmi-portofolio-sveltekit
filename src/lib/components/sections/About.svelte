@@ -73,21 +73,10 @@
 				<div class="prose prose-lg max-w-none">
 					<h3 class="mb-6 text-2xl font-semibold text-foreground">My Journey</h3>
 					<p class="mb-6 leading-relaxed text-muted-foreground">
-						Started as a curious developer exploring the endless possibilities of the web. Today,
-						I'm the founder of <a
-							href="https://www.beeleaf.id"
-							target="_blank"
-							class="font-semibold text-primary hover:underline">Beeleaf.id</a
-						>, a digital agency focused on creating exceptional user experiences.
-					</p>
-					<p class="mb-6 leading-relaxed text-muted-foreground">
-						Based in Jakarta, Indonesia, I specialize in full-stack development with a keen eye for
-						design. I believe in writing clean, maintainable code and creating interfaces that users
-						love to interact with.
+						I’m a <span class="font-semibold text-foreground">Senior Full Stack Engineer</span> with a 6-year track record of shipping scalable web apps. These days, I’m obsessed with moving beyond simple chat interfaces. I specialize in building <span class="font-semibold text-foreground">Agentic Workflows, RAG architectures</span>, and low-latency <span class="font-semibold text-foreground">AI Audio streaming</span>—essentially, making AI systems that don't just talk, but actually act and reason in real-time.
 					</p>
 					<p class="leading-relaxed text-muted-foreground">
-						When I'm not coding, you'll find me exploring new technologies, contributing to open
-						source, or sharing knowledge with the developer community.
+						<span class="italic text-zinc-400">Expert Note:</span> I transitioned from systems thinking in marine biology to architecting sustainable tech solutions, bringing a unique perspective on complex ecosystem modeling to my software architecture.
 					</p>
 				</div>
 
@@ -109,26 +98,40 @@
 
 			<!-- Right column - Skills -->
 			<div class="{isVisible ? 'animate-fade-in-right' : 'opacity-0'} animation-delay-600">
-				<h3 class="mb-8 text-2xl font-semibold">What I Do Best</h3>
+				<h3 class="mb-8 text-2xl font-semibold">Experience & Education</h3>
 				<div class="space-y-6">
-					{#each skills as skill, index}
-						<div
-							class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg"
-							style="animation-delay: {index * 0.2 + 0.8}s"
-						>
-							<div class="flex items-start space-x-4">
-								<div
-									class="rounded-lg bg-primary/10 p-3 transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
-								>
-									<svelte:component this={skill.icon} class="h-6 w-6" />
-								</div>
-								<div class="flex-1">
-									<h4 class="mb-2 text-lg font-semibold">{skill.name}</h4>
-									<p class="text-muted-foreground">{skill.description}</p>
-								</div>
-							</div>
+					<!-- Exp 1 -->
+					<div class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50">
+						<div class="flex flex-col">
+							<span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Feb 2023 – Present</span>
+							<h4 class="mt-1 text-lg font-bold">Senior Fullstack Engineer</h4>
+							<p class="text-sm font-medium text-zinc-400">FutureLab.my (Remote)</p>
 						</div>
-					{/each}
+					</div>
+					<!-- Exp 2 -->
+					<div class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50">
+						<div class="flex flex-col">
+							<span class="text-xs font-bold uppercase tracking-widest text-zinc-500">July 2022 – Feb 2023</span>
+							<h4 class="mt-1 text-lg font-bold">Frontend Developer</h4>
+							<p class="text-sm font-medium text-zinc-400">Automa8e (Remote)</p>
+						</div>
+					</div>
+					<!-- Exp 3 -->
+					<div class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50">
+						<div class="flex flex-col">
+							<span class="text-xs font-bold uppercase tracking-widest text-zinc-500">June 2021 – Feb 2023</span>
+							<h4 class="mt-1 text-lg font-bold">Full Stack Developer</h4>
+							<p class="text-sm font-medium text-zinc-400">Embreo Pte Ltd (Remote)</p>
+						</div>
+					</div>
+					<!-- Edu -->
+					<div class="group rounded-xl border border-border bg-card p-6 transition-all duration-300 hover:border-primary/50">
+						<div class="flex flex-col">
+							<span class="text-xs font-bold uppercase tracking-widest text-zinc-500">Bachelor of Fisheries</span>
+							<h4 class="mt-1 text-lg font-bold">IPB University</h4>
+							<p class="text-sm font-medium text-zinc-400">Minor in Information Systems</p>
+						</div>
+					</div>
 				</div>
 			</div>
 		</div>

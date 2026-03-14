@@ -20,26 +20,25 @@
 
 	const PROJECTS: Project[] = [
 		{
-			title: 'FutureLab AI Mentorship',
-			description: 'Intelligent mentorship matching and tracking system serving 10,000+ users. Features AI-driven mentor-mentee pairing, progress tracking, and automated feedback loops. Increased successful matches by 200%.',
-			techTags: ['Ruby on Rails', 'React', 'OpenAI', 'PostgreSQL', 'AWS'],
-			liveUrl: 'https://futurelab.my',
+			title: 'Codexia Live',
+			description: 'Lead Engineer & Architect. Engineered a custom Agentic Coaching Engine that monitors user anxiety (typing pauses/silence signals) and intervenes with progressive hints. Built on a Google Cloud Run stack using WebSockets for binary audio streaming.',
+			techTags: ['Agentic AI', 'WebSockets', 'Google Cloud Run', 'TypeScript', 'Binary Audio'],
 			featured: true,
-			imageColor: 'from-green-500/20 to-blue-500/20'
+			imageColor: 'from-zinc-500/20 to-zinc-700/20'
+		},
+		{
+			title: 'FutureLab.my',
+			description: 'Senior Fullstack Engineer. Architected an AI transcription and summarization pipeline using GPT-4 and RSpec-tested Rails services. Boosted B2B sales by 30% and slashed monthly cloud spend by 50% via aggressive AWS optimization.',
+			techTags: ['Ruby on Rails', 'GPT-4', 'AWS', 'RSpec', 'PostgreSQL'],
+			featured: true,
+			imageColor: 'from-slate-500/20 to-zinc-800/20'
 		},
 		{
 			title: 'Scalable LMS Platform',
 			description: 'High-performance Learning Management System processing 50k+ daily events. Reduced AWS costs by 40% through infrastructure optimization and query tuning.',
 			techTags: ['SvelteKit', 'TypeScript', 'Docker', 'Terraform'],
 			featured: false,
-			imageColor: 'from-purple-500/20 to-pink-500/20'
-		},
-		{
-			title: 'B2B Sales Intelligence',
-			description: 'Predictive analytics dashboard providing real-time sales insights. Implemented complex data aggregation pipelines that reduced report generation time from hours to seconds.',
-			techTags: ['Next.js', 'Python', 'Redis', 'AWS'],
-			featured: false,
-			imageColor: 'from-orange-500/20 to-red-500/20'
+			imageColor: 'from-zinc-400/10 to-zinc-600/10'
 		}
 	];
 
@@ -66,7 +65,7 @@
 
 <section id="projects" class="relative py-24 sm:py-32">
 	<!-- Background decoration -->
-	<div class="pointer-events-none absolute right-0 top-1/2 h-[800px] w-[800px] -translate-y-1/2 translate-x-1/3 rounded-full bg-green-500/5 blur-[120px]"></div>
+	<div class="pointer-events-none absolute right-0 top-1/2 h-[800px] w-[800px] -translate-y-1/2 translate-x-1/3 rounded-full bg-zinc-500/5 blur-[120px]"></div>
 
 	<div class="mx-auto max-w-6xl px-6 relative z-10">
 		<!-- Section Header -->
@@ -80,10 +79,10 @@
 					class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl"
 					style="font-family: var(--font-heading); color: #f8fafc;"
 				>
-					Selected <span class="gradient-text">Works</span>
+					Featured <span class="gradient-text">Case Studies</span>
 				</h2>
 				<p class="text-lg text-slate-400">
-					A curated selection of production-grade applications built for scale, performance, and exceptional user experience.
+					A deep dive into technical challenges and high-impact solutions engineered for complexity and scale.
 				</p>
 			</div>
 			
@@ -96,9 +95,9 @@
 					style="border-color: rgba(255,255,255,0.1); color: #f8fafc;"
 					onmouseenter={(e) => {
 						const el = e.currentTarget as HTMLElement;
-						el.style.borderColor = '#22c55e';
-						el.style.background = 'rgba(34,197,94,0.1)';
-						el.style.color = '#22c55e';
+						el.style.borderColor = '#fafafa';
+						el.style.background = 'rgba(255,255,255,0.1)';
+						el.style.color = '#fafafa';
 					}}
 					onmouseleave={(e) => {
 						const el = e.currentTarget as HTMLElement;
@@ -134,8 +133,8 @@
 						style="background: rgba(15,23,42,0.4);"
 						onmouseenter={(e) => {
 							const el = e.currentTarget as HTMLElement;
-							el.style.borderColor = 'rgba(34,197,94,0.3)';
-							el.style.boxShadow = '0 12px 40px -12px rgba(34,197,94,0.2)';
+							el.style.borderColor = 'rgba(255,255,255,0.3)';
+							el.style.boxShadow = '0 12px 40px -12px rgba(255,255,255,0.15)';
 							el.style.transform = 'translateY(-4px) scale(1.01)';
 						}}
 						onmouseleave={(e) => {
@@ -156,7 +155,7 @@
 										href={project.liveUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										class="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-slate-900 transition-transform hover:scale-110"
+										class="flex h-12 w-12 items-center justify-center rounded-full bg-zinc-200 text-zinc-900 transition-transform hover:scale-110"
 										aria-label="View Live Project"
 									>
 										<ExternalLink class="h-5 w-5" />
@@ -176,7 +175,7 @@
 							</div>
 							
 							{#if isFeatured}
-								<div class="absolute left-4 top-4 rounded-full bg-green-500/20 px-3 py-1 text-xs font-bold text-green-400 backdrop-blur-md border border-green-500/30">
+								<div class="absolute left-4 top-4 rounded-full bg-zinc-100/20 px-3 py-1 text-xs font-bold text-zinc-100 backdrop-blur-md border border-zinc-100/30">
 									FEATURED
 								</div>
 							{/if}
@@ -185,7 +184,7 @@
 						<!-- Content -->
 						<div class="flex flex-1 flex-col p-6 sm:p-8">
 							<h3
-								class="mb-3 text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-green-400 sm:text-3xl"
+								class="mb-3 text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-zinc-300 sm:text-3xl"
 								style="font-family: var(--font-heading);"
 							>
 								{project.title}

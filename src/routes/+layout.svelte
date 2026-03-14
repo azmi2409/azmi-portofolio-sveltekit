@@ -1,6 +1,5 @@
 <script lang="ts">
 	import '../app.css';
-	import favicon from '$lib/assets/favicon.svg';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import GtmScript from '$lib/components/GtmScript.svelte';
 	import { initTheme } from '$lib/stores/theme';
@@ -16,7 +15,7 @@
 </script>
 
 <svelte:head>
-	<link rel="icon" href={favicon} />
+	<link rel="icon" href="/favicon.ico" />
 	<title>Azmi Muwahid — Senior Full Stack Engineer</title>
 	<meta
 		name="description"

@@ -55,11 +55,11 @@
 
 <!-- Floating nav pill -->
 <header
-	class="fixed top-4 left-1/2 z-50 -translate-x-1/2 transition-all duration-500"
+	class="fixed top-4 left-1/2 z-50 transition-all duration-500"
 	style="
 		width: min(calc(100vw - 2rem), 880px);
 		opacity: {mounted ? 1 : 0};
-		transform: translateX(-50%) translateY({mounted ? 0 : -12}px);
+		transform: translate(-50%, {mounted ? '0' : '-12px'});
 	"
 >
 	<nav
@@ -73,33 +73,35 @@
 		"
 		aria-label="Main navigation"
 	>
-		<div class="flex items-center justify-between">
-			<!-- Logo -->
-			<a
-				href="#hero"
-				onclick={(e) => { e.preventDefault(); scrollToSection('hero'); }}
-				class="group flex items-center gap-2.5 cursor-pointer"
-				aria-label="Go to top"
-			>
-				<div
-					class="flex h-9 w-9 items-center justify-center rounded-xl text-sm font-black transition-all duration-200 group-hover:scale-105"
-					style="background: #fafafa; color: #09090b; font-family: var(--font-heading); box-shadow: 0 0 12px rgba(255,255,255,0.25);"
+		<div class="flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]">
+			<!-- Logo: Left -->
+			<div class="flex items-center">
+				<a
+					href="#hero"
+					onclick={(e) => { e.preventDefault(); scrollToSection('hero'); }}
+					class="group flex items-center gap-2.5 cursor-pointer"
+					aria-label="Go to top"
 				>
-					A
-				</div>
-				<div class="flex flex-col leading-tight">
-					<span
-						class="text-[15px] font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-zinc-300"
-						style="font-family: var(--font-heading);"
-					>Azmi</span>
-					<span class="text-[10px] font-medium tracking-[0.14em] uppercase" style="color: #a1a1aa;">
-						engineer
-					</span>
-				</div>
-			</a>
+					<img
+						src="/logo.png"
+						alt="Logo"
+						class="h-9 w-9 rounded-xl object-contain transition-all duration-200 group-hover:scale-105"
+						style="box-shadow: 0 0 12px rgba(255,255,255,0.25);"
+					/>
+					<div class="flex flex-col leading-tight">
+						<span
+							class="text-[15px] font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-zinc-300"
+							style="font-family: var(--font-heading);"
+						>Azmi</span>
+						<span class="text-[10px] font-medium tracking-[0.14em] uppercase" style="color: #a1a1aa;">
+							engineer
+						</span>
+					</div>
+				</a>
+			</div>
 
-			<!-- Desktop nav -->
-			<div class="hidden items-center gap-1 md:flex">
+			<!-- Desktop nav: Center -->
+			<div class="hidden items-center justify-center gap-1 md:flex">
 				{#each NAV_ITEMS as item}
 					<a
 						href={item.href}
@@ -133,40 +135,43 @@
 				{/each}
 			</div>
 
-			<!-- Desktop CTA -->
-			<div class="hidden md:block">
-				<a
-					href="#contact"
-					onclick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
-					class="cursor-pointer rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200"
-					style="background: #fafafa; color: #09090b;"
-					onmouseenter={(e) => {
-						(e.currentTarget as HTMLElement).style.boxShadow = '0 0 16px rgba(255,255,255,0.2)';
-						(e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
-					}}
-					onmouseleave={(e) => {
-						(e.currentTarget as HTMLElement).style.boxShadow = 'none';
-						(e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-					}}
-				>
-					Hire Me
-				</a>
-			</div>
+			<!-- Right Section: Desktop CTA & Mobile Hamburger -->
+			<div class="flex items-center justify-end gap-3">
+				<!-- Desktop CTA -->
+				<div class="hidden md:block">
+					<a
+						href="#contact"
+						onclick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
+						class="cursor-pointer rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200"
+						style="background: #fafafa; color: #09090b;"
+						onmouseenter={(e) => {
+							(e.currentTarget as HTMLElement).style.boxShadow = '0 0 16px rgba(255,255,255,0.2)';
+							(e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
+						}}
+						onmouseleave={(e) => {
+							(e.currentTarget as HTMLElement).style.boxShadow = 'none';
+							(e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
+						}}
+					>
+						Hire Me
+					</a>
+				</div>
 
-			<!-- Mobile hamburger -->
-			<button
-				class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl transition-all duration-200 md:hidden"
-				style="background: rgba(255,255,255,0.05); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.1);"
-				onclick={() => (mobileOpen = !mobileOpen)}
-				aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-				aria-expanded={mobileOpen}
-			>
-				{#if mobileOpen}
-					<X class="h-5 w-5" />
-				{:else}
-					<Menu class="h-5 w-5" />
-				{/if}
-			</button>
+				<!-- Mobile hamburger -->
+				<button
+					class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl transition-all duration-200 md:hidden"
+					style="background: rgba(255,255,255,0.05); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.1);"
+					onclick={() => (mobileOpen = !mobileOpen)}
+					aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+					aria-expanded={mobileOpen}
+				>
+					{#if mobileOpen}
+						<X class="h-5 w-5" />
+					{:else}
+						<Menu class="h-5 w-5" />
+					{/if}
+				</button>
+			</div>
 		</div>
 
 		<!-- Mobile dropdown -->

@@ -26,11 +26,11 @@
 	});
 
 	const statItems = $derived([
-		{ label: 'Repositories', icon: FolderGit, value: displayStats.publicRepos, color: '#22c55e' },
-		{ label: 'Followers', icon: Users, value: displayStats.followers, color: '#3b82f6' },
-		{ label: 'Following', icon: UserPlus, value: displayStats.following, color: '#a855f7' },
-		{ label: 'Total Commits', icon: GitCommit, value: 4892, color: '#f59e0b' },
-		{ label: 'Stars Earned', icon: Star, value: 328, color: '#eab308' }
+		{ label: 'Repositories', icon: FolderGit, value: displayStats.publicRepos, color: '#fafafa' },
+		{ label: 'Followers', icon: Users, value: displayStats.followers, color: '#e4e4e7' },
+		{ label: 'Following', icon: UserPlus, value: displayStats.following, color: '#d4d4d8' },
+		{ label: 'Total Commits', icon: GitCommit, value: 4892, color: '#a1a1aa' },
+		{ label: 'Stars Earned', icon: Star, value: 328, color: '#71717a' }
 	]);
 
 	let headerVisible = $state(false);
@@ -103,7 +103,7 @@
 					<div class="pulse-ring absolute inset-0 rounded-full"></div>
 					<div
 						class="relative h-32 w-32 overflow-hidden rounded-full border-4"
-						style="border-color: #22c55e; box-shadow: 0 0 30px rgba(34,197,94,0.3);"
+						style="border-color: #fafafa; box-shadow: 0 0 30px rgba(255,255,255,0.3);"
 					>
 						<img
 							src={displayStats.avatarUrl}
@@ -151,7 +151,7 @@
 							class="glass-card group flex flex-col justify-between rounded-2xl p-6 transition-all duration-300 h-full"
 							onmouseenter={(e) => {
 								const el = e.currentTarget as HTMLElement;
-								el.style.borderColor = `rgba(${stat.color === '#22c55e' ? '34,197,94' : '255,255,255'}, 0.2)`;
+								el.style.borderColor = `rgba(255,255,255, 0.2)`;
 								el.style.transform = 'translateY(-2px)';
 							}}
 							onmouseleave={(e) => {
