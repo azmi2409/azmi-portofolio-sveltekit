@@ -1,181 +1,324 @@
 <!--
   HeroSection.svelte
-  Top-of-page hero section displaying name, title, tagline, achievements, CTAs, and social links.
-  Lazy-loads Hero3DElement when WebGL is available and device is capable; shows HeroFallback otherwise.
-  Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 11.4, 11.5, 11.6, 13.4
+  Award-winning fullscreen hero with typewriter role text, Three.js 3D animation,
+  staggered fade-in content, CTA buttons, social links, and scroll indicator.
 -->
 
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Badge } from '$lib/components/ui/badge';
-	import Button from '$lib/components/ui/button/button.svelte';
-	import { Linkedin, Github, Mail, ArrowRight, Sparkles } from '@lucide/svelte';
+	import { Github, Linkedin, Mail, ArrowDown, ArrowRight, ExternalLink } from '@lucide/svelte';
 	import { detectCapabilities } from '$lib/utils/device';
 	import HeroFallback from './HeroFallback.svelte';
 
 	let Hero3DComponent: any = $state(null);
 	let mounted = $state(false);
+	let typedText = $state('');
+	let typewriterDone = $state(false);
 
-	const achievements = [
-		{ label: '200% B2B Sales Increase', variant: 'secondary' as const },
-		{ label: '40% AWS Cost Reduction', variant: 'secondary' as const },
-		{ label: 'AI Mentorship Program', variant: 'secondary' as const }
+	const roles = [
+		'Senior Fullstack Engineer',
+		'AI Builder & Architect',
+		'EdTech Craftsman',
+		'Open Source Contributor'
 	];
+	let roleIndex = 0;
+	let charIndex = 0;
+	let isDeleting = false;
+	let typeTimer: ReturnType<typeof setTimeout>;
+
+	function typewriter() {
+		const current = roles[roleIndex];
+
+		if (!isDeleting) {
+			typedText = current.slice(0, charIndex + 1);
+			charIndex++;
+			if (charIndex === current.length) {
+				isDeleting = true;
+				typeTimer = setTimeout(typewriter, 2200);
+				return;
+			}
+		} else {
+			typedText = current.slice(0, charIndex - 1);
+			charIndex--;
+			if (charIndex === 0) {
+				isDeleting = false;
+				roleIndex = (roleIndex + 1) % roles.length;
+				typeTimer = setTimeout(typewriter, 400);
+				return;
+			}
+		}
+
+		typeTimer = setTimeout(typewriter, isDeleting ? 52 : 80);
+	}
 
 	onMount(async () => {
 		mounted = true;
 
-		const capabilities = detectCapabilities();
+		// Start typewriter
+		typeTimer = setTimeout(typewriter, 900);
 
+		// Load 3D component
+		const capabilities = detectCapabilities();
 		if (capabilities.webglAvailable && !capabilities.isLowEnd) {
 			try {
 				const module = await import('./Hero3DElement.svelte');
 				Hero3DComponent = module.default;
 			} catch {
-				// Dynamic import failed — keep fallback
 				Hero3DComponent = null;
 			}
 		}
+
+		return () => clearTimeout(typeTimer);
 	});
 
 	function scrollTo(id: string) {
-		const el = document.getElementById(id);
-		el?.scrollIntoView({ behavior: 'smooth' });
+		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
 	}
+
+	const socialLinks = [
+		{
+			label: 'GitHub',
+			href: 'https://github.com/azmimuwahid',
+			icon: Github
+		},
+		{
+			label: 'LinkedIn',
+			href: 'https://linkedin.com/in/azmimuwahid',
+			icon: Linkedin
+		},
+		{
+			label: 'Email',
+			href: 'mailto:azmimuwahid@gmail.com',
+			icon: Mail
+		}
+	];
+
+	const achievements = [
+		'200% B2B Growth',
+		'40% AWS Cost Reduction',
+		'AI-Powered EdTech'
+	];
 </script>
 
 <section
 	id="hero"
-	class="relative flex min-h-[calc(100vh-4rem)] items-center justify-center overflow-hidden"
+	class="relative flex min-h-screen items-center justify-center overflow-hidden"
+	style="background: var(--gradient-hero);"
 >
-	<!-- Background: 3D element or fallback -->
-	{#if Hero3DComponent}
-		<Hero3DComponent />
-	{:else}
-		<HeroFallback />
-	{/if}
+	<!-- Radial gradient overlay for depth -->
+	<div
+		class="pointer-events-none absolute inset-0 hidden"
+	></div>
 
-	<!-- Content overlay -->
-	<div class="relative z-10 mx-auto max-w-4xl px-6 py-20 text-center">
-		<!-- Greeting chip -->
+	<!-- CSS/SVG geometric background -->
+	<div class="absolute inset-0">
+		{#if Hero3DComponent}
+			<Hero3DComponent />
+		{:else}
+			<HeroFallback />
+		{/if}
+	</div>
+
+	<!-- ── Content ── -->
+	<div class="relative z-10 mx-auto max-w-5xl px-6 py-24 text-center">
+
+		<!-- Availability badge -->
 		<div
-			class="mb-6 inline-flex items-center gap-2 rounded-full border border-border/50 bg-muted/60 px-4 py-1.5 text-sm text-muted-foreground backdrop-blur-sm transition-opacity duration-700"
-			class:opacity-0={!mounted}
-			class:opacity-100={mounted}
+			class="mb-8 inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-700"
+			style="
+				border-color: rgba(255,255,255,0.2);
+				background: rgba(255,255,255,0.08);
+				color: #fafafa;
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : -8}px);
+				backdrop-filter: blur(8px);
+				transition-delay: 0ms;
+			"
 		>
-			<Sparkles class="h-3.5 w-3.5" />
-			<span>Building the future of EdTech</span>
+			<span
+				class="inline-block h-2 w-2 rounded-full"
+				style="background: #fafafa; box-shadow: 0 0 6px rgba(255,255,255,0.5);"
+			></span>
+			Open to new opportunities
 		</div>
 
 		<!-- Name -->
 		<h1
-			class="mb-4 text-4xl font-extrabold tracking-tight text-foreground transition-all duration-700 sm:text-5xl md:text-6xl lg:text-7xl"
-			class:translate-y-4={!mounted}
-			class:opacity-0={!mounted}
-			class:translate-y-0={mounted}
-			class:opacity-100={mounted}
+			class="mb-4 text-5xl font-black leading-none tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
+			style="
+				font-family: var(--font-heading);
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : 28}px);
+				transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
+			"
 		>
-			Azmi Muwahid
+			<span
+				style="
+					background: linear-gradient(135deg, #ffffff 0%, #ffffff 65%, #a1a1aa 100%);
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					background-clip: text;
+				"
+			>
+				Azmi Muwahid
+			</span>
 		</h1>
 
-		<!-- Title -->
-		<p
-			class="mb-4 text-xl font-medium text-primary transition-all delay-100 duration-700 sm:text-2xl"
-			class:translate-y-4={!mounted}
-			class:opacity-0={!mounted}
-			class:translate-y-0={mounted}
-			class:opacity-100={mounted}
+		<!-- Role typewriter -->
+		<div
+			class="mb-6 flex h-10 items-center justify-center gap-1 text-xl font-semibold sm:text-2xl"
+			style="
+				color: #f4f4f5;
+				font-family: var(--font-heading);
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : 20}px);
+				transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
+			"
+			aria-live="polite"
 		>
-			Senior Full Stack Engineer
-		</p>
+			<span>{typedText}</span>
+			<span class="cursor-blink ml-0.5 text-current" style="opacity: 0.8;">|</span>
+		</div>
 
 		<!-- Tagline -->
 		<p
-			class="mx-auto mb-8 max-w-2xl text-base leading-relaxed text-muted-foreground transition-all delay-200 duration-700 sm:text-lg"
-			class:translate-y-4={!mounted}
-			class:opacity-0={!mounted}
-			class:translate-y-0={mounted}
-			class:opacity-100={mounted}
+			class="mx-auto mb-8 max-w-2xl text-base leading-relaxed sm:text-lg"
+			style="
+				color: #94a3b8;
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : 16}px);
+				transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
+			"
 		>
 			Crafting AI-powered EdTech solutions at
-			<span class="font-semibold text-foreground">FutureLab.my</span>
-			— turning complex ideas into elegant, scalable products.
+			<span style="color: #f8fafc; font-weight: 600;">FutureLab.my</span>
+			— turning complex ideas into elegant, scalable products that reach thousands of learners.
 		</p>
 
-		<!-- Achievement badges -->
+		<!-- Achievement chips -->
 		<div
-			class="mb-10 flex flex-wrap items-center justify-center gap-2 transition-all delay-300 duration-700"
-			class:translate-y-4={!mounted}
-			class:opacity-0={!mounted}
-			class:translate-y-0={mounted}
-			class:opacity-100={mounted}
+			class="mb-10 flex flex-wrap items-center justify-center gap-2"
+			style="
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : 12}px);
+				transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
+			"
 		>
-			{#each achievements as achievement}
-				<Badge variant={achievement.variant} class="px-3 py-1 text-xs sm:text-sm">
-					{achievement.label}
-				</Badge>
+			{#each achievements as chip}
+				<span
+					class="rounded-full px-3 py-1 text-xs font-medium"
+					style="
+						background: rgba(255,255,255,0.05);
+						border: 1px solid rgba(255,255,255,0.1);
+						color: #cbd5e1;
+					"
+				>
+					{chip}
+				</span>
 			{/each}
 		</div>
 
 		<!-- CTA buttons -->
 		<div
-			class="mb-12 flex flex-col items-center justify-center gap-3 transition-all delay-[400ms] duration-700 sm:flex-row sm:gap-4"
-			class:translate-y-4={!mounted}
-			class:opacity-0={!mounted}
-			class:translate-y-0={mounted}
-			class:opacity-100={mounted}
+			class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
+			style="
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : 12}px);
+				transition: opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s;
+			"
 		>
-			<Button
-				size="lg"
-				class="min-h-[44px] min-w-[44px] gap-2 rounded-full px-8 text-base font-semibold shadow-md transition-transform hover:scale-[1.03]"
+			<button
 				onclick={() => scrollTo('projects')}
+				class="group inline-flex cursor-pointer items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-bold transition-all duration-200"
+				style="
+					background: #fafafa;
+					color: #09090b;
+					box-shadow: 0 0 20px rgba(255,255,255,0.15);
+					min-width: 160px;
+					justify-content: center;
+				"
+				onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 32px rgba(255,255,255,0.3)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
+				onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 20px rgba(255,255,255,0.15)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
 			>
-				View Projects
-				<ArrowRight class="h-4 w-4" />
-			</Button>
-			<Button
-				variant="outline"
-				size="lg"
-				class="min-h-[44px] min-w-[44px] rounded-full px-8 text-base font-semibold transition-transform hover:scale-[1.03]"
+				View My Work
+				<ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
+			</button>
+
+			<button
 				onclick={() => scrollTo('contact')}
+				class="group inline-flex cursor-pointer items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-bold transition-all duration-200"
+				style="
+					background: transparent;
+					color: #f8fafc;
+					border: 1px solid rgba(255,255,255,0.15);
+					backdrop-filter: blur(8px);
+					min-width: 160px;
+					justify-content: center;
+				"
+				onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.5)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}
+				onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)'; (e.currentTarget as HTMLElement).style.color = '#f8fafc'; }}
 			>
 				Get in Touch
-			</Button>
+				<ExternalLink class="h-4 w-4" />
+			</button>
 		</div>
 
 		<!-- Social links -->
 		<div
-			class="flex items-center justify-center gap-4 transition-all delay-500 duration-700"
-			class:translate-y-4={!mounted}
-			class:opacity-0={!mounted}
-			class:translate-y-0={mounted}
-			class:opacity-100={mounted}
+			class="flex items-center justify-center gap-4"
+			style="
+				opacity: {mounted ? 1 : 0};
+				transform: translateY({mounted ? 0 : 8}px);
+				transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s;
+			"
 		>
-			<a
-				href="https://linkedin.com/in/azmimuwahid"
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="LinkedIn profile"
-				class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background/60 text-muted-foreground backdrop-blur-sm transition-all hover:scale-110 hover:border-primary/50 hover:text-primary"
-			>
-				<Linkedin class="h-5 w-5" />
-			</a>
-			<a
-				href="https://github.com/azmimuwahid"
-				target="_blank"
-				rel="noopener noreferrer"
-				aria-label="GitHub profile"
-				class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background/60 text-muted-foreground backdrop-blur-sm transition-all hover:scale-110 hover:border-primary/50 hover:text-primary"
-			>
-				<Github class="h-5 w-5" />
-			</a>
-			<a
-				href="mailto:azmimuwahid@gmail.com"
-				aria-label="Send email"
-				class="inline-flex h-11 w-11 items-center justify-center rounded-full border border-border/50 bg-background/60 text-muted-foreground backdrop-blur-sm transition-all hover:scale-110 hover:border-primary/50 hover:text-primary"
-			>
-				<Mail class="h-5 w-5" />
-			</a>
+			{#each socialLinks as { label, href, icon: Icon }}
+				<a
+					{href}
+					target={href.startsWith('http') ? '_blank' : undefined}
+					rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
+					aria-label={label}
+					class="group flex h-11 w-11 cursor-pointer items-center justify-center rounded-full transition-all duration-200"
+					style="
+						background: rgba(255,255,255,0.05);
+						border: 1px solid rgba(255,255,255,0.1);
+						color: #94a3b8;
+					"
+					onmouseenter={(e) => {
+						const el = e.currentTarget as HTMLElement;
+						el.style.borderColor = 'rgba(255,255,255,0.3)';
+						el.style.color = '#fafafa';
+						el.style.boxShadow = '0 0 12px rgba(255,255,255,0.15)';
+						el.style.transform = 'translateY(-2px)';
+					}}
+					onmouseleave={(e) => {
+						const el = e.currentTarget as HTMLElement;
+						el.style.borderColor = 'rgba(255,255,255,0.1)';
+						el.style.color = '#94a3b8';
+						el.style.boxShadow = 'none';
+						el.style.transform = 'translateY(0)';
+					}}
+				>
+					<Icon class="h-5 w-5" />
+				</a>
+			{/each}
 		</div>
 	</div>
+
+	<!-- Scroll indicator -->
+	{#if mounted}
+		<button
+			onclick={() => scrollTo('tech-stack')}
+			class="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-all duration-200"
+			style="opacity: 0.5; color: #94a3b8;"
+			aria-label="Scroll to tech stack"
+			onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1'; (e.currentTarget as HTMLElement).style.color = '#fafafa'; }}
+			onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.5'; (e.currentTarget as HTMLElement).style.color = '#94a3b8'; }}
+		>
+			<div class="flex flex-col items-center gap-1.5">
+				<span class="text-xs font-medium tracking-widest uppercase">Scroll</span>
+				<ArrowDown class="h-4 w-4 animate-bounce" />
+			</div>
+		</button>
+	{/if}
 </section>

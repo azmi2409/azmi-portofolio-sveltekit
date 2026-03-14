@@ -1,140 +1,163 @@
 <!--
   TechStackSection.svelte
-  Displays categorized technical skills using shadcn Card + Badge components.
-  Uses inview action for scroll-triggered entrance animations.
-  Requirements: 4.1, 4.2, 4.3
+  Horizontal marquee for tech logos and bento-grid for categories.
 -->
 
 <script lang="ts">
 	import { Code, Layout, Server, Cloud, Database, Brain } from '@lucide/svelte';
-	import * as Card from '$lib/components/ui/card';
-	import { Badge } from '$lib/components/ui/badge';
-	import { Separator } from '$lib/components/ui/separator';
 	import type { InviewOptions } from '$lib/actions/inview';
+	import { onMount } from 'svelte';
 
 	const TECH_CATEGORIES = [
-		{ name: 'Languages', icon: Code, skills: ['TypeScript', 'JavaScript', 'Ruby', 'Go'] },
-		{
-			name: 'Frontend',
-			icon: Layout,
-			skills: ['React', 'Next.js', 'Vue.js', 'Redux', 'Tailwind', 'Svelte']
-		},
-		{ name: 'Backend', icon: Server, skills: ['Rails', 'Node.js', 'Express'] },
-		{
-			name: 'Cloud & DevOps',
-			icon: Cloud,
-			skills: ['AWS', 'Docker', 'Terraform', 'GitHub Actions']
-		},
-		{ name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis'] },
-		{ name: 'AI/ML', icon: Brain, skills: ['OpenAI'] }
+		{ name: 'Languages', icon: Code, skills: ['TypeScript', 'JavaScript', 'Ruby', 'Go', 'Python'] },
+		{ name: 'Frontend', icon: Layout, skills: ['React', 'Next.js', 'Vue.js', 'SvelteKit', 'Tailwind'] },
+		{ name: 'Backend', icon: Server, skills: ['Node.js', 'Express', 'Ruby on Rails', 'Gofiber'] },
+		{ name: 'Cloud & DevOps', icon: Cloud, skills: ['AWS', 'Docker', 'Terraform', 'GitHub Actions'] },
+		{ name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis', 'Elasticsearch'] },
+		{ name: 'AI/ML Integration', icon: Brain, skills: ['OpenAI API', 'LangChain', 'Vector DBs'] }
+	];
+
+	// Marquee items
+	const MARQUEE_ITEMS = [
+		'TypeScript', 'React', 'SvelteKit', 'Node.js', 'Ruby on Rails',
+		'PostgreSQL', 'AWS', 'Docker', 'Tailwind CSS', 'OpenAI',
+		'TypeScript', 'React', 'SvelteKit', 'Node.js', 'Ruby on Rails' // Duplicated for seamless loop
 	];
 
 	let headerVisible = $state(false);
 	let visibleCards = $state(new Set<number>());
 
-	/**
-	 * Svelte action that wraps IntersectionObserver for scroll-triggered visibility.
-	 * Calls the provided callback when the element enters the viewport.
-	 */
 	function inviewTrigger(
 		node: HTMLElement,
 		opts: { options?: InviewOptions; onEnter: () => void }
 	) {
 		const { threshold = 0.15, rootMargin = '0px', once = true } = opts.options ?? {};
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						opts.onEnter();
-						if (once) {
-							observer.disconnect();
-						}
-					}
+		const observer = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					opts.onEnter();
+					if (once) observer.disconnect();
 				}
-			},
-			{ threshold, rootMargin }
-		);
-
-		observer.observe(node);
-
-		return {
-			destroy() {
-				observer.disconnect();
 			}
-		};
+		}, { threshold, rootMargin });
+		observer.observe(node);
+		return { destroy() { observer.disconnect(); } };
 	}
 </script>
 
-<section id="tech-stack" class="py-20">
+<section id="tech-stack" class="relative py-24 sm:py-32 overflow-hidden">
+	<!-- Background glow accents -->
+	<div class="pointer-events-none absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-green-500/10 opacity-50 blur-[120px]"></div>
+	<div class="pointer-events-none absolute -right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-blue-500/10 opacity-50 blur-[120px]"></div>
+
 	<div class="mx-auto max-w-6xl px-6">
-		<!-- Section header -->
+		<!-- Section Header -->
 		<div
-			class="mb-16 text-center transition-all duration-700"
+			class="mb-16 text-center transition-all duration-700 sm:mb-20"
 			use:inviewTrigger={{
 				options: { threshold: 0.2 },
 				onEnter: () => (headerVisible = true)
 			}}
-			class:opacity-0={!headerVisible}
-			class:translate-y-6={!headerVisible}
-			class:opacity-100={headerVisible}
-			class:translate-y-0={headerVisible}
+			style="
+				opacity: {headerVisible ? 1 : 0};
+				transform: translateY({headerVisible ? 0 : 24}px);
+			"
 		>
-			<h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-				Tech <span class="text-primary">Stack</span>
+			<h2
+				class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl"
+				style="font-family: var(--font-heading); color: #f8fafc;"
+			>
+				My <span class="gradient-text">Arsenal</span>
 			</h2>
-			<p class="mx-auto max-w-2xl text-lg text-muted-foreground">
-				Tools and technologies I use to build scalable, AI-powered solutions.
+			<p class="mx-auto max-w-2xl text-lg text-slate-400">
+				The tools I use to build robust, scalable, and award-winning products.
 			</p>
 		</div>
 
-		<!-- Category grid -->
-		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+		<!-- Infinite Marquee -->
+		<div class="marquee-wrapper relative mb-24 flex overflow-hidden py-4">
+			<!-- Fade edges -->
+			<div class="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-24 bg-gradient-to-r from-[#0f172a] to-transparent sm:w-40"></div>
+			<div class="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-24 bg-gradient-to-l from-[#0f172a] to-transparent sm:w-40"></div>
+
+			<!-- Marquee track -->
+			<div class="animate-marquee flex w-max items-center gap-8 pl-8 sm:gap-16 sm:pl-16">
+				{#each MARQUEE_ITEMS as item}
+					<div
+						class="flex items-center justify-center whitespace-nowrap text-xl font-bold tracking-tight text-slate-500 transition-colors hover:text-green-400 sm:text-3xl"
+						style="font-family: var(--font-heading);"
+					>
+						{item}
+					</div>
+				{/each}
+			</div>
+		</div>
+
+		<!-- Category Grid (Bento style) -->
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{#each TECH_CATEGORIES as category, index}
 				{@const isVisible = visibleCards.has(index)}
+				{@const Icon = category.icon}
 				<div
-					use:inviewTrigger={{
-						onEnter: () => {
-							visibleCards = new Set([...visibleCards, index]);
-						}
-					}}
+					use:inviewTrigger={{ onEnter: () => { visibleCards = new Set([...visibleCards, index]); } }}
 					class="transition-all duration-500"
-					style="transition-delay: {index * 80}ms"
-					class:opacity-0={!isVisible}
-					class:translate-y-8={!isVisible}
-					class:scale-95={!isVisible}
-					class:opacity-100={isVisible}
-					class:translate-y-0={isVisible}
-					class:scale-100={isVisible}
+					style="
+						transition-delay: {index * 100}ms;
+						opacity: {isVisible ? 1 : 0};
+						transform: translateY({isVisible ? 0 : 24}px);
+					"
 				>
-					<Card.Root
-						class="h-full transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg"
+					<div
+						class="glass-card group flex h-full flex-col rounded-2xl p-6 transition-all duration-300"
+						onmouseenter={(e) => {
+							const el = e.currentTarget as HTMLElement;
+							el.style.borderColor = 'rgba(34,197,94,0.3)';
+							el.style.boxShadow = '0 8px 32px -8px rgba(34,197,94,0.15)';
+							el.style.transform = 'translateY(-4px)';
+						}}
+						onmouseleave={(e) => {
+							const el = e.currentTarget as HTMLElement;
+							el.style.borderColor = 'rgba(255,255,255,0.07)';
+							el.style.boxShadow = 'none';
+							el.style.transform = 'translateY(0)';
+						}}
 					>
-						<Card.Header>
-							{@const Icon = category.icon}
-							<Card.Title class="flex items-center gap-3 text-lg">
-								<div class="rounded-lg bg-primary/10 p-2 text-primary">
-									<Icon class="h-5 w-5" />
-								</div>
-								{category.name}
-							</Card.Title>
-						</Card.Header>
-						<Card.Content>
-							<div class="flex flex-wrap gap-2">
-								{#each category.skills as skill}
-									<Badge variant="secondary" class="text-sm">{skill}</Badge>
-								{/each}
+						<div class="mb-5 flex items-center gap-4">
+							<div
+								class="flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
+								style="background: rgba(34,197,94,0.1); color: #22c55e;"
+							>
+								<Icon class="h-6 w-6" />
 							</div>
-						</Card.Content>
-					</Card.Root>
-				</div>
+							<h3 class="text-xl font-bold text-white" style="font-family: var(--font-heading);">
+								{category.name}
+							</h3>
+						</div>
 
-				<!-- Separator between rows on mobile (after every card except last) -->
-				{#if index < TECH_CATEGORIES.length - 1}
-					<div class="col-span-full sm:hidden">
-						<Separator />
+						<div class="flex flex-wrap gap-2">
+							{#each category.skills as skill}
+								<span
+									class="rounded-lg px-3 py-1.5 text-sm font-medium transition-colors duration-200"
+									style="background: rgba(255,255,255,0.04); color: #94a3b8; border: 1px solid rgba(255,255,255,0.05);"
+									onmouseenter={(e) => {
+										const el = e.currentTarget as HTMLElement;
+										el.style.background = 'rgba(34,197,94,0.1)';
+										el.style.color = '#22c55e';
+										el.style.borderColor = 'rgba(34,197,94,0.2)';
+									}}
+									onmouseleave={(e) => {
+										const el = e.currentTarget as HTMLElement;
+										el.style.background = 'rgba(255,255,255,0.04)';
+										el.style.color = '#94a3b8';
+										el.style.borderColor = 'rgba(255,255,255,0.05)';
+									}}
+								>
+									{skill}
+								</span>
+							{/each}
+						</div>
 					</div>
-				{/if}
+				</div>
 			{/each}
 		</div>
 	</div>

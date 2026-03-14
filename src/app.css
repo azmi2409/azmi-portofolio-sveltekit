@@ -1,18 +1,20 @@
 @import 'tailwindcss';
-
 @import 'tw-animate-css';
+
+/* Google Fonts — Archivo (headings) + Space Grotesk (body) + Fira Code (mono)
+   (Imported in app.html to avoid PostCSS sorting errors) */
 
 /* Font-face declarations with font-display: swap to prevent FOIT */
 @font-face {
-	font-family: 'Montserrat';
+	font-family: 'Archivo';
 	font-display: swap;
-	src: local('Montserrat');
+	src: local('Archivo');
 }
 
 @font-face {
-	font-family: 'Inter';
+	font-family: 'Space Grotesk';
 	font-display: swap;
-	src: local('Inter');
+	src: local('Space Grotesk');
 }
 
 @font-face {
@@ -28,130 +30,91 @@ html {
 
 /* Custom scrollbar */
 ::-webkit-scrollbar {
-	width: 8px;
+	width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-	background: hsl(var(--muted));
+	background: #09090b; /* zinc-950 */
 }
 
 ::-webkit-scrollbar-thumb {
-	background: hsl(var(--primary));
-	border-radius: 4px;
+	background: #52525b; /* zinc-600 */
+	border-radius: 3px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-	background: hsl(var(--primary) / 0.8);
+	background: #71717a; /* zinc-500 */
 }
 
 /* Selection styling */
 ::selection {
-	background: hsl(var(--primary) / 0.2);
-	color: hsl(var(--primary-foreground));
+	background: rgba(255, 255, 255, 0.2);
+	color: #fafafa;
 }
 
 /* Focus styles */
 :focus-visible {
-	outline: 2px solid hsl(var(--primary));
+	outline: 2px solid #fafafa;
 	outline-offset: 2px;
 }
 
 @custom-variant dark (&:is(.dark *));
 
+/* ============================================================
+   DEFAULT THEME — Dark (portfolio is always dark-first)
+   ============================================================ */
 :root {
-	--background: oklch(0.9551 0 0);
-	--foreground: oklch(0.3211 0 0);
-	--card: oklch(0.9702 0 0);
-	--card-foreground: oklch(0.3211 0 0);
-	--popover: oklch(0.9702 0 0);
-	--popover-foreground: oklch(0.3211 0 0);
-	--primary: oklch(0.4891 0 0);
-	--primary-foreground: oklch(1 0 0);
-	--secondary: oklch(0.9067 0 0);
-	--secondary-foreground: oklch(0.3211 0 0);
-	--muted: oklch(0.8853 0 0);
-	--muted-foreground: oklch(0.4800 0 0);
-	--accent: oklch(0.8078 0 0);
-	--accent-foreground: oklch(0.3211 0 0);
-	--destructive: oklch(0.5594 0.19 25.8625);
-	--destructive-foreground: oklch(1 0 0);
-	--border: oklch(0.8576 0 0);
-	--input: oklch(0.9067 0 0);
-	--ring: oklch(0.4891 0 0);
-	--chart-1: oklch(0.4891 0 0);
-	--chart-2: oklch(0.4863 0.0361 196.0278);
-	--chart-3: oklch(0.6534 0 0);
-	--chart-4: oklch(0.7316 0 0);
-	--chart-5: oklch(0.8078 0 0);
-	--sidebar: oklch(0.937 0 0);
-	--sidebar-foreground: oklch(0.3211 0 0);
-	--sidebar-primary: oklch(0.4891 0 0);
-	--sidebar-primary-foreground: oklch(1 0 0);
-	--sidebar-accent: oklch(0.8078 0 0);
-	--sidebar-accent-foreground: oklch(0.3211 0 0);
-	--sidebar-border: oklch(0.8576 0 0);
-	--sidebar-ring: oklch(0.4891 0 0);
-	--font-sans: Montserrat, sans-serif;
+	--background: oklch(0.141 0.005 285.823);   /* #09090B — zinc-950 */
+	--foreground: oklch(0.985 0 0);             /* #FAFAFA — zinc-50 */
+	--card: oklch(0.205 0.007 285.823);         /* #18181B — zinc-900 */
+	--card-foreground: oklch(0.985 0 0);
+	--popover: oklch(0.205 0.007 285.823);
+	--popover-foreground: oklch(0.985 0 0);
+	--primary: oklch(0.985 0 0);                /* #FAFAFA */
+	--primary-foreground: oklch(0.141 0.005 285.823);
+	--secondary: oklch(0.269 0.006 285.823);    /* #27272A — zinc-800 */
+	--secondary-foreground: oklch(0.985 0 0);
+	--muted: oklch(0.269 0.006 285.823);
+	--muted-foreground: oklch(0.705 0.015 286.067); /* #A1A1AA — zinc-400 */
+	--accent: oklch(0.269 0.006 285.823);
+	--accent-foreground: oklch(0.985 0 0);
+	--border: oklch(0.269 0.006 285.823);
+	--input: oklch(0.269 0.006 285.823);
+	--ring: oklch(0.985 0 0);
+	
+	--font-sans: 'Space Grotesk', sans-serif;
+	--font-heading: 'Archivo', sans-serif;
 	--font-serif: Georgia, serif;
-	--font-mono: Fira Code, monospace;
-	--radius: 0.35rem;
-	--shadow-2xs: 0px 2px 0px 0px hsl(0 0% 20% / 0.07);
-	--shadow-xs: 0px 2px 0px 0px hsl(0 0% 20% / 0.07);
-	--shadow-sm: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 1px 2px -1px hsl(0 0% 20% / 0.15);
-	--shadow: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 1px 2px -1px hsl(0 0% 20% / 0.15);
-	--shadow-md: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 2px 4px -1px hsl(0 0% 20% / 0.15);
-	--shadow-lg: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 4px 6px -1px hsl(0 0% 20% / 0.15);
-	--shadow-xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 8px 10px -1px hsl(0 0% 20% / 0.15);
-	--shadow-2xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.38);
-	--tracking-normal: 0em;
-	--spacing: 0.25rem;
+	--font-mono: 'Fira Code', monospace;
+	--radius: 0.75rem;
+
+	/* Portfolio custom tokens */
+	--glow-primary: 0 0 20px rgba(255, 255, 255, 0.15), 0 0 60px rgba(255, 255, 255, 0.05);
+	--glow-primary-sm: 0 0 10px rgba(255, 255, 255, 0.1);
+	--gradient-hero: linear-gradient(135deg, #09090b 0%, #18181b 100%);
+	--gradient-primary: linear-gradient(135deg, #fafafa, #a1a1aa);
+	--gradient-text: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
 }
 
-.dark {
-	--background: oklch(0.2178 0 0);
-	--foreground: oklch(0.8853 0 0);
-	--card: oklch(0.2435 0 0);
-	--card-foreground: oklch(0.8853 0 0);
-	--popover: oklch(0.2435 0 0);
-	--popover-foreground: oklch(0.8853 0 0);
-	--primary: oklch(0.7058 0 0);
-	--primary-foreground: oklch(0.2178 0 0);
-	--secondary: oklch(0.3092 0 0);
-	--secondary-foreground: oklch(0.8853 0 0);
-	--muted: oklch(0.285 0 0);
-	--muted-foreground: oklch(0.6600 0 0);
-	--accent: oklch(0.3715 0 0);
-	--accent-foreground: oklch(0.8853 0 0);
-	--destructive: oklch(0.6591 0.153 22.1703);
-	--destructive-foreground: oklch(1 0 0);
-	--border: oklch(0.329 0 0);
-	--input: oklch(0.3092 0 0);
-	--ring: oklch(0.7058 0 0);
-	--chart-1: oklch(0.7058 0 0);
-	--chart-2: oklch(0.6714 0.0339 206.3482);
-	--chart-3: oklch(0.5452 0 0);
-	--chart-4: oklch(0.4604 0 0);
-	--chart-5: oklch(0.3715 0 0);
-	--sidebar: oklch(0.2393 0 0);
-	--sidebar-foreground: oklch(0.8853 0 0);
-	--sidebar-primary: oklch(0.7058 0 0);
-	--sidebar-primary-foreground: oklch(0.2178 0 0);
-	--sidebar-accent: oklch(0.3715 0 0);
-	--sidebar-accent-foreground: oklch(0.8853 0 0);
-	--sidebar-border: oklch(0.329 0 0);
-	--sidebar-ring: oklch(0.7058 0 0);
-	--font-sans: Inter, sans-serif;
-	--font-serif: Georgia, serif;
-	--font-mono: Fira Code, monospace;
-	--radius: 0.35rem;
-	--shadow-2xs: 0px 2px 0px 0px hsl(0 0% 20% / 0.07);
-	--shadow-xs: 0px 2px 0px 0px hsl(0 0% 20% / 0.07);
-	--shadow-sm: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 1px 2px -1px hsl(0 0% 20% / 0.15);
-	--shadow: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 1px 2px -1px hsl(0 0% 20% / 0.15);
-	--shadow-md: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 2px 4px -1px hsl(0 0% 20% / 0.15);
-	--shadow-lg: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 4px 6px -1px hsl(0 0% 20% / 0.15);
-	--shadow-xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.15), 0px 8px 10px -1px hsl(0 0% 20% / 0.15);
-	--shadow-2xl: 0px 2px 0px 0px hsl(0 0% 20% / 0.38);
+/* Light mode override (secondary) */
+.light {
+	--background: oklch(0.985 0 0);             /* #FAFAFA */
+	--foreground: oklch(0.141 0.005 285.823);   /* #09090B */
+	--card: oklch(1 0 0);                       /* #FFFFFF */
+	--card-foreground: oklch(0.141 0.005 285.823);
+	--popover: oklch(1 0 0);
+	--popover-foreground: oklch(0.141 0.005 285.823);
+	--primary: oklch(0.141 0.005 285.823);      /* #09090B */
+	--primary-foreground: oklch(0.985 0 0);
+	--secondary: oklch(0.967 0.001 286.375);    /* #F4F4F5 — zinc-100 */
+	--secondary-foreground: oklch(0.141 0.005 285.823);
+	--muted: oklch(0.967 0.001 286.375);
+	--muted-foreground: oklch(0.551 0.027 285.938); /* #52525B — zinc-600 */
+	--accent: oklch(0.967 0.001 286.375);
+	--accent-foreground: oklch(0.141 0.005 285.823);
+	--border: oklch(0.920 0.004 286.320);       /* #E4E4E7 — zinc-200 */
+	--input: oklch(0.967 0.001 286.375);
+	--ring: oklch(0.141 0.005 285.823);
 }
 
 @theme inline {
@@ -213,5 +176,97 @@ html {
 	}
 	body {
 		@apply bg-background text-foreground;
+		font-family: var(--font-sans);
+	}
+	h1, h2, h3, h4, h5, h6 {
+		font-family: var(--font-heading);
+		letter-spacing: -0.02em;
+	}
+}
+
+/* ============================================
+   PORTFOLIO UTILITIES
+   ============================================ */
+
+/* Glow helper */
+.glow-primary {
+	box-shadow: var(--glow-primary);
+}
+.glow-primary-sm {
+	box-shadow: var(--glow-primary-sm);
+}
+
+/* Gradient text */
+.gradient-text {
+	background: var(--gradient-text);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	background-clip: text;
+}
+
+/* Glassmorphism card */
+.glass-card {
+	background: rgba(24, 24, 27, 0.6); /* zinc-900 with opacity */
+	backdrop-filter: blur(16px);
+	-webkit-backdrop-filter: blur(16px);
+	border: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+/* Marquee animation */
+@keyframes marquee {
+	from { transform: translateX(0); }
+	to   { transform: translateX(-50%); }
+}
+.animate-marquee {
+	animation: marquee 28s linear infinite;
+}
+.marquee-wrapper:hover .animate-marquee {
+	animation-play-state: paused;
+}
+
+/* Count-up number animation */
+@keyframes countUp {
+	from { opacity: 0; transform: translateY(8px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Pulse ring for avatar */
+@keyframes pulseRing {
+	0%   { box-shadow: 0 0 0 0 rgba(255,255,255,0.2); }
+	70%  { box-shadow: 0 0 0 10px rgba(255,255,255,0); }
+	100% { box-shadow: 0 0 0 0 rgba(255,255,255,0); }
+}
+.pulse-ring {
+	animation: pulseRing 2.5s ease-out infinite;
+}
+
+/* Fade + slide up entrance */
+@keyframes fadeSlideUp {
+	from { opacity: 0; transform: translateY(24px); }
+	to   { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-slide-up {
+	animation: fadeSlideUp 0.7s ease forwards;
+}
+
+/* Typewriter cursor blink */
+@keyframes blink {
+	0%, 100% { opacity: 1; }
+	50% { opacity: 0; }
+}
+.cursor-blink {
+	animation: blink 1s step-end infinite;
+}
+
+/* Reduced-motion overrides */
+@media (prefers-reduced-motion: reduce) {
+	.animate-marquee,
+	.pulse-ring,
+	.animate-fade-slide-up,
+	.cursor-blink {
+		animation: none;
+	}
+	* {
+		transition-duration: 0.01ms !important;
 	}
 }

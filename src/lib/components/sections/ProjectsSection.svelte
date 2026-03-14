@@ -1,17 +1,12 @@
 <!--
   ProjectsSection.svelte
-  Displays featured project cards with tech badges and optional links.
-  Uses shadcn Card, Badge, and Button components.
-  Uses inview action pattern for scroll-triggered entrance animations.
-  Requirements: 6.1, 6.2, 6.3, 6.4
+  Bento-grid project layout with glassmorphism cards and hover overlays.
 -->
 
 <script lang="ts">
-	import { ExternalLink, Github } from '@lucide/svelte';
-	import * as Card from '$lib/components/ui/card';
-	import { Badge } from '$lib/components/ui/badge';
-	import Button from '$lib/components/ui/button/button.svelte';
+	import { ExternalLink, Github, ArrowUpRight } from '@lucide/svelte';
 	import type { InviewOptions } from '$lib/actions/inview';
+	import { onMount } from 'svelte';
 
 	interface Project {
 		title: string;
@@ -20,171 +15,211 @@
 		liveUrl?: string;
 		sourceUrl?: string;
 		featured: boolean;
+		imageColor: string;
 	}
 
 	const PROJECTS: Project[] = [
 		{
-			title: 'AI-Powered Mentorship Platform',
-			description:
-				'Intelligent mentorship matching and tracking system built for FutureLab.my. Features AI-driven mentor-mentee pairing, progress tracking, and automated feedback loops.',
+			title: 'FutureLab AI Mentorship',
+			description: 'Intelligent mentorship matching and tracking system serving 10,000+ users. Features AI-driven mentor-mentee pairing, progress tracking, and automated feedback loops. Increased successful matches by 200%.',
 			techTags: ['Ruby on Rails', 'React', 'OpenAI', 'PostgreSQL', 'AWS'],
 			liveUrl: 'https://futurelab.my',
-			featured: true
+			featured: true,
+			imageColor: 'from-green-500/20 to-blue-500/20'
 		},
 		{
-			title: 'EdTech Learning Management System',
-			description:
-				'Scalable LMS platform serving thousands of students across Southeast Asia. Reduced AWS costs by 50% through architecture optimization.',
-			techTags: ['SvelteKit', 'TypeScript', 'PostgreSQL', 'Docker', 'Terraform'],
-			featured: false
+			title: 'Scalable LMS Platform',
+			description: 'High-performance Learning Management System processing 50k+ daily events. Reduced AWS costs by 40% through infrastructure optimization and query tuning.',
+			techTags: ['SvelteKit', 'TypeScript', 'Docker', 'Terraform'],
+			featured: false,
+			imageColor: 'from-purple-500/20 to-pink-500/20'
 		},
 		{
-			title: 'B2B Sales Intelligence Dashboard',
-			description:
-				'AI-powered analytics dashboard that increased B2B sales by 30%. Real-time data visualization with predictive insights.',
-			techTags: ['Next.js', 'TypeScript', 'OpenAI', 'Redis', 'AWS'],
-			featured: false
+			title: 'B2B Sales Intelligence',
+			description: 'Predictive analytics dashboard providing real-time sales insights. Implemented complex data aggregation pipelines that reduced report generation time from hours to seconds.',
+			techTags: ['Next.js', 'Python', 'Redis', 'AWS'],
+			featured: false,
+			imageColor: 'from-orange-500/20 to-red-500/20'
 		}
 	];
 
 	let headerVisible = $state(false);
 	let visibleCards = $state(new Set<number>());
 
-	/**
-	 * Svelte action that wraps IntersectionObserver for scroll-triggered visibility.
-	 * Calls the provided callback when the element enters the viewport.
-	 */
 	function inviewTrigger(
 		node: HTMLElement,
 		opts: { options?: InviewOptions; onEnter: () => void }
 	) {
 		const { threshold = 0.15, rootMargin = '0px', once = true } = opts.options ?? {};
-
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						opts.onEnter();
-						if (once) {
-							observer.disconnect();
-						}
-					}
+		const observer = new IntersectionObserver((entries) => {
+			for (const entry of entries) {
+				if (entry.isIntersecting) {
+					opts.onEnter();
+					if (once) observer.disconnect();
 				}
-			},
-			{ threshold, rootMargin }
-		);
-
-		observer.observe(node);
-
-		return {
-			destroy() {
-				observer.disconnect();
 			}
-		};
+		}, { threshold, rootMargin });
+		observer.observe(node);
+		return { destroy() { observer.disconnect(); } };
 	}
 </script>
 
-<section id="projects" class="py-20">
-	<div class="mx-auto max-w-6xl px-6">
-		<!-- Section header -->
+<section id="projects" class="relative py-24 sm:py-32">
+	<!-- Background decoration -->
+	<div class="pointer-events-none absolute right-0 top-1/2 h-[800px] w-[800px] -translate-y-1/2 translate-x-1/3 rounded-full bg-green-500/5 blur-[120px]"></div>
+
+	<div class="mx-auto max-w-6xl px-6 relative z-10">
+		<!-- Section Header -->
 		<div
-			class="mb-16 text-center transition-all duration-700"
-			use:inviewTrigger={{
-				options: { threshold: 0.2 },
-				onEnter: () => (headerVisible = true)
-			}}
-			class:opacity-0={!headerVisible}
-			class:translate-y-6={!headerVisible}
-			class:opacity-100={headerVisible}
-			class:translate-y-0={headerVisible}
+			class="mb-16 flex flex-col items-start justify-between gap-6 md:flex-row md:items-end transition-all duration-700"
+			use:inviewTrigger={{ options: { threshold: 0.2 }, onEnter: () => (headerVisible = true) }}
+			style="opacity: {headerVisible ? 1 : 0}; transform: translateY({headerVisible ? 0 : 24}px);"
 		>
-			<h2 class="mb-4 text-3xl font-bold tracking-tight sm:text-4xl md:text-5xl">
-				Featured <span class="text-primary">Projects</span>
-			</h2>
-			<p class="mx-auto max-w-2xl text-lg text-muted-foreground">
-				A selection of projects showcasing AI-powered solutions and scalable architectures.
-			</p>
+			<div class="max-w-2xl">
+				<h2
+					class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl"
+					style="font-family: var(--font-heading); color: #f8fafc;"
+				>
+					Selected <span class="gradient-text">Works</span>
+				</h2>
+				<p class="text-lg text-slate-400">
+					A curated selection of production-grade applications built for scale, performance, and exceptional user experience.
+				</p>
+			</div>
+			
+			<div class="hidden md:block">
+				<a
+					href="https://github.com/azmimuwahid"
+					target="_blank"
+					rel="noopener noreferrer"
+					class="group flex items-center gap-2 rounded-full border px-5 py-2.5 text-sm font-semibold transition-all duration-300"
+					style="border-color: rgba(255,255,255,0.1); color: #f8fafc;"
+					onmouseenter={(e) => {
+						const el = e.currentTarget as HTMLElement;
+						el.style.borderColor = '#22c55e';
+						el.style.background = 'rgba(34,197,94,0.1)';
+						el.style.color = '#22c55e';
+					}}
+					onmouseleave={(e) => {
+						const el = e.currentTarget as HTMLElement;
+						el.style.borderColor = 'rgba(255,255,255,0.1)';
+						el.style.background = 'transparent';
+						el.style.color = '#f8fafc';
+					}}
+				>
+					<Github class="h-4 w-4" />
+					View all on GitHub
+					<ArrowUpRight class="h-4 w-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5" />
+				</a>
+			</div>
 		</div>
 
-		<!-- Project cards grid -->
-		<div class="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+		<!-- Bento Grid -->
+		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
 			{#each PROJECTS as project, index}
 				{@const isVisible = visibleCards.has(index)}
+				{@const isFeatured = project.featured}
 				<div
-					use:inviewTrigger={{
-						onEnter: () => {
-							visibleCards = new Set([...visibleCards, index]);
-						}
-					}}
-					class="transition-all duration-500"
-					style="transition-delay: {index * 100}ms"
-					class:opacity-0={!isVisible}
-					class:translate-y-8={!isVisible}
-					class:scale-95={!isVisible}
-					class:opacity-100={isVisible}
-					class:translate-y-0={isVisible}
-					class:scale-100={isVisible}
+					use:inviewTrigger={{ onEnter: () => { visibleCards = new Set([...visibleCards, index]); } }}
+					class="group relative overflow-hidden transition-all duration-500 {isFeatured ? 'md:col-span-2 lg:col-span-2' : ''}"
+					style="
+						transition-delay: {index * 100}ms;
+						opacity: {isVisible ? 1 : 0};
+						transform: translateY({isVisible ? 0 : 24}px);
+					"
 				>
-					<Card.Root
-						class="flex h-full flex-col transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-lg {project.featured
-							? 'border-primary/30 shadow-md'
-							: ''}"
+					<!-- Card Container -->
+					<div
+						class="glass-card flex h-full flex-col rounded-3xl p-1 transition-all duration-500"
+						style="background: rgba(15,23,42,0.4);"
+						onmouseenter={(e) => {
+							const el = e.currentTarget as HTMLElement;
+							el.style.borderColor = 'rgba(34,197,94,0.3)';
+							el.style.boxShadow = '0 12px 40px -12px rgba(34,197,94,0.2)';
+							el.style.transform = 'translateY(-4px) scale(1.01)';
+						}}
+						onmouseleave={(e) => {
+							const el = e.currentTarget as HTMLElement;
+							el.style.borderColor = 'rgba(255,255,255,0.07)';
+							el.style.boxShadow = 'none';
+							el.style.transform = 'translateY(0) scale(1)';
+						}}
 					>
-						<Card.Header>
-							<div class="flex items-center gap-2">
-								{#if project.featured}
-									<Badge variant="default" class="text-xs">Featured</Badge>
-								{/if}
-							</div>
-							<Card.Title class="text-xl">{project.title}</Card.Title>
-							<Card.Description class="text-sm leading-relaxed">
-								{project.description}
-							</Card.Description>
-						</Card.Header>
-
-						<Card.Content class="flex-1">
-							<div class="flex flex-wrap gap-2">
-								{#each project.techTags as tag}
-									<Badge variant="secondary" class="text-xs">{tag}</Badge>
-								{/each}
-							</div>
-						</Card.Content>
-
-						{#if project.liveUrl || project.sourceUrl}
-							<Card.Footer class="gap-3">
+						<!-- Abstract Image Placeholder -->
+						<div class="relative h-48 w-full overflow-hidden rounded-[20px] bg-gradient-to-br {project.imageColor} sm:h-64">
+							<div class="absolute inset-0 bg-[url('https://grainy-gradients.vercel.app/noise.svg')] opacity-20 mix-blend-overlay"></div>
+							
+							<!-- Interactive Overlay -->
+							<div class="absolute inset-0 flex items-center justify-center gap-4 bg-slate-900/80 opacity-0 backdrop-blur-sm transition-all duration-300 group-hover:opacity-100">
 								{#if project.liveUrl}
-									<Button
-										variant="default"
-										size="sm"
+									<a
 										href={project.liveUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										aria-label="View live demo of {project.title}"
-										class="min-h-[44px] min-w-[44px]"
+										class="flex h-12 w-12 items-center justify-center rounded-full bg-green-500 text-slate-900 transition-transform hover:scale-110"
+										aria-label="View Live Project"
 									>
-										<ExternalLink class="h-4 w-4" />
-										Live Demo
-									</Button>
+										<ExternalLink class="h-5 w-5" />
+									</a>
 								{/if}
 								{#if project.sourceUrl}
-									<Button
-										variant="outline"
-										size="sm"
+									<a
 										href={project.sourceUrl}
 										target="_blank"
 										rel="noopener noreferrer"
-										aria-label="View source code of {project.title}"
-										class="min-h-[44px] min-w-[44px]"
+										class="flex h-12 w-12 items-center justify-center rounded-full bg-white text-slate-900 transition-transform hover:scale-110"
+										aria-label="View Source Code"
 									>
-										<Github class="h-4 w-4" />
-										Source
-									</Button>
+										<Github class="h-5 w-5" />
+									</a>
 								{/if}
-							</Card.Footer>
-						{/if}
-					</Card.Root>
+							</div>
+							
+							{#if isFeatured}
+								<div class="absolute left-4 top-4 rounded-full bg-green-500/20 px-3 py-1 text-xs font-bold text-green-400 backdrop-blur-md border border-green-500/30">
+									FEATURED
+								</div>
+							{/if}
+						</div>
+
+						<!-- Content -->
+						<div class="flex flex-1 flex-col p-6 sm:p-8">
+							<h3
+								class="mb-3 text-2xl font-bold tracking-tight text-white transition-colors group-hover:text-green-400 sm:text-3xl"
+								style="font-family: var(--font-heading);"
+							>
+								{project.title}
+							</h3>
+							
+							<p class="mb-8 flex-1 text-base leading-relaxed text-slate-400">
+								{project.description}
+							</p>
+							
+							<div class="flex flex-wrap gap-2">
+								{#each project.techTags as tag}
+									<span class="rounded-md bg-slate-800/50 px-2.5 py-1 text-xs font-medium text-slate-300 border border-slate-700/50">
+										{tag}
+									</span>
+								{/each}
+							</div>
+						</div>
+					</div>
 				</div>
 			{/each}
+		</div>
+
+		<!-- Mobile GitHub Link -->
+		<div class="mt-8 flex justify-center md:hidden">
+			<a
+				href="https://github.com/azmimuwahid"
+				target="_blank"
+				rel="noopener noreferrer"
+				class="flex items-center gap-2 rounded-full border border-slate-700 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-slate-800"
+			>
+				<Github class="h-4 w-4" />
+				View all on GitHub
+				<ArrowUpRight class="h-4 w-4" />
+			</a>
 		</div>
 	</div>
 </section>
