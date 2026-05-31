@@ -40,7 +40,7 @@
 				<a href="/about" class="transition-colors hover:text-zinc-300">About</a>
 				<a href="/lab" class="transition-colors hover:text-zinc-300">Lab</a>
 				<a href="/contact" class="transition-colors hover:text-zinc-300">Contact</a>
-				<a href="/blog" class="transition-colors hover:text-zinc-300">Notes</a>
+				<a href="/blog" class="transition-colors hover:text-zinc-300">Blog</a>
 			</nav>
 
 			<div

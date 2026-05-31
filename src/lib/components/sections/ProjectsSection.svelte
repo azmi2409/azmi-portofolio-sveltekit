@@ -39,8 +39,15 @@
 					<a href="/projects/{project.slug}" class="block">
 						{#if project.cover}
 							<div class="relative overflow-hidden">
-								<img src={project.cover} alt="" loading="lazy" class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105" />
-								<div class="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent"></div>
+								<img
+									src={project.cover}
+									alt=""
+									loading="lazy"
+									class="h-56 w-full object-cover transition-transform duration-500 group-hover:scale-105"
+								/>
+								<div
+									class="absolute inset-0 bg-gradient-to-t from-zinc-950/40 to-transparent"
+								></div>
 							</div>
 						{:else}
 							<div class="project-placeholder flex h-56 items-end p-6">

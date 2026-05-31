@@ -7,6 +7,7 @@
 		{ name: 'Projects', href: '/projects' },
 		{ name: 'About', href: '/about' },
 		{ name: 'Lab', href: '/lab' },
+		{ name: 'Blog', href: '/blog' },
 		{ name: 'Contact', href: '/contact' }
 	];
 
