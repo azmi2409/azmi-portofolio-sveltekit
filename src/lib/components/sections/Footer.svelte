@@ -42,6 +42,7 @@
 				<a href="#hero" class="transition-colors hover:text-zinc-300">Home</a>
 				<a href="#tech-stack" class="transition-colors hover:text-zinc-300">Stack</a>
 				<a href="#projects" class="transition-colors hover:text-zinc-300">Projects</a>
+				<a href="/blog" class="transition-colors hover:text-zinc-300">Blog</a>
 				<a href="#contact" class="transition-colors hover:text-zinc-300">Contact</a>
 			</nav>
 

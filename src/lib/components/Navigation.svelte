@@ -4,12 +4,15 @@
 
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { goto } from '$app/navigation';
+	import { page } from '$app/state';
 	import { Menu, X } from '@lucide/svelte';
 
 	interface NavItem {
 		name: string;
 		href: string;
 		sectionId: string;
+		isPage?: boolean; // true = navigate to a page route, false = scroll to section
 	}
 
 	const NAV_ITEMS: NavItem[] = [
@@ -17,6 +20,7 @@
 		{ name: 'Stack', href: '#tech-stack', sectionId: 'tech-stack' },
 		{ name: 'GitHub', href: '#github-stats', sectionId: 'github-stats' },
 		{ name: 'Projects', href: '#projects', sectionId: 'projects' },
+		{ name: 'Blog', href: '/blog', sectionId: 'blog', isPage: true },
 		{ name: 'Contact', href: '#contact', sectionId: 'contact' }
 	];
 
@@ -32,8 +36,21 @@
 
 	function handleNavClick(e: MouseEvent | KeyboardEvent, item: NavItem) {
 		e.preventDefault();
-		scrollToSection(item.sectionId);
+		if (item.isPage) {
+			goto(item.href);
+			mobileOpen = false;
+		} else {
+			// If we're on /blog, first go home then scroll
+			if (page.url.pathname !== '/') {
+				goto('/' + item.href);
+			} else {
+				scrollToSection(item.sectionId);
+			}
+		}
 	}
+
+	// Determine if the Blog nav item is active
+	const isBlogActive = $derived(page.url.pathname.startsWith('/blog'));
 
 	onMount(() => {
 		mounted = true;
@@ -108,8 +125,8 @@
 						onclick={(e) => handleNavClick(e, item)}
 						class="relative cursor-pointer rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200"
 						style="
-							color: {activeSection === item.sectionId ? '#fafafa' : '#a1a1aa'};
-							background: {activeSection === item.sectionId ? 'rgba(255,255,255,0.08)' : 'transparent'};
+							color: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? '#fafafa' : '#a1a1aa'};
+							background: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? 'rgba(255,255,255,0.08)' : 'transparent'};
 						"
 						onmouseenter={(e) => {
 							if (activeSection !== item.sectionId) {
@@ -125,7 +142,7 @@
 						}}
 					>
 						{item.name}
-						{#if activeSection === item.sectionId}
+						{#if item.isPage ? isBlogActive : activeSection === item.sectionId}
 							<span
 								class="absolute bottom-1 left-1/2 h-0.5 w-3 -translate-x-1/2 rounded-full"
 								style="background: #fafafa;"
@@ -186,8 +203,8 @@
 						onclick={(e) => handleNavClick(e, item)}
 						class="cursor-pointer rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200"
 						style="
-							color: {activeSection === item.sectionId ? '#fafafa' : '#a1a1aa'};
-							background: {activeSection === item.sectionId ? 'rgba(255,255,255,0.08)' : 'transparent'};
+							color: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? '#fafafa' : '#a1a1aa'};
+							background: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? 'rgba(255,255,255,0.08)' : 'transparent'};
 						"
 					>
 						{item.name}

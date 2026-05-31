@@ -270,3 +270,77 @@ html {
 		transition-duration: 0.01ms !important;
 	}
 }
+
+/* ============================================
+   BLOG CONTENT TYPOGRAPHY
+   ============================================ */
+
+.notion-article {
+	color: #d4d4d8; /* zinc-300 for body text */
+	font-size: 1.0625rem;
+	line-height: 1.75;
+}
+
+/* Smooth anchor underlines within blog content */
+.notion-article a {
+	color: #a1a1aa;
+	text-decoration: underline;
+	text-decoration-color: rgba(161, 161, 170, 0.35);
+	text-underline-offset: 3px;
+	transition: color 200ms, text-decoration-color 200ms;
+}
+.notion-article a:hover {
+	color: #fafafa;
+	text-decoration-color: rgba(250, 250, 250, 0.5);
+}
+
+/* Headings */
+.notion-article h2,
+.notion-article h3,
+.notion-article h4 {
+	font-family: var(--font-heading);
+	letter-spacing: -0.02em;
+	color: #f4f4f5;
+}
+
+/* Code blocks — complement hljs github-dark */
+.notion-article pre {
+	border-radius: 0.75rem;
+	font-family: var(--font-mono);
+	font-size: 0.875rem;
+	line-height: 1.7;
+}
+
+/* Inline code */
+.notion-article .inline-code {
+	font-family: var(--font-mono);
+	font-size: 0.85em;
+	background: rgba(255, 255, 255, 0.06);
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	border-radius: 4px;
+	padding: 0.1em 0.4em;
+	color: #e2e8f0;
+}
+
+/* Blockquote */
+.notion-article blockquote {
+	border-left-color: #52525b;
+	padding-left: 1.25rem;
+	color: #a1a1aa;
+}
+
+/* Images */
+.notion-article img {
+	border-radius: 0.75rem;
+	border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+/* Table */
+.notion-article table {
+	font-size: 0.9rem;
+}
+
+/* Details/toggle chevron animation */
+.notion-article details[open] .details-chevron {
+	transform: rotate(90deg);
+}
