@@ -173,7 +173,9 @@
 			// Toggle
 			case 'toggle': {
 				const summary = richTextToHtml(blockData?.rich_text ?? []);
-				const inner = block.children ? `<div class="mt-2 ml-4">${renderBlocks(block.children)}</div>` : '';
+				const inner = block.children
+					? `<div class="mt-2 ml-4">${renderBlocks(block.children)}</div>`
+					: '';
 				return `<details class="my-4 rounded-xl border border-white/[0.06] bg-zinc-900/40">
 					<summary class="cursor-pointer px-4 py-3 font-medium text-zinc-200 hover:text-white transition-colors duration-200 select-none list-none flex items-center gap-2">
 						<svg class="h-4 w-4 flex-shrink-0 text-zinc-500 transition-transform duration-200 details-chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
@@ -190,9 +192,7 @@
 			// Image
 			case 'image': {
 				const url =
-					blockData?.type === 'external'
-						? blockData?.external?.url
-						: blockData?.file?.url;
+					blockData?.type === 'external' ? blockData?.external?.url : blockData?.file?.url;
 				const caption = richTextToHtml(blockData?.caption ?? []);
 				if (!url) return '';
 				return `<figure class="my-8">
@@ -340,7 +340,9 @@
 		text-decoration: underline;
 		text-decoration-color: rgba(161, 161, 170, 0.4);
 		text-underline-offset: 3px;
-		transition: color 200ms, text-decoration-color 200ms;
+		transition:
+			color 200ms,
+			text-decoration-color 200ms;
 	}
 	.notion-content :global(.notion-link:hover) {
 		color: #fafafa;

@@ -87,7 +87,7 @@
 				</label>
 				<span class="text-muted-foreground"> or drag and drop</span>
 			</div>
-			<p class="text-xs text-muted-foreground ">PNG, JPG, GIF up to 10MB</p>
+			<p class="text-xs text-muted-foreground">PNG, JPG, GIF up to 10MB</p>
 		</div>
 		<input
 			id="file-upload"

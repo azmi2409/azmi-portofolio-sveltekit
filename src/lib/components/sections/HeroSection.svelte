@@ -1,325 +1,100 @@
-<!--
-  HeroSection.svelte
-  Award-winning fullscreen hero with typewriter role text, Three.js 3D animation,
-  staggered fade-in content, CTA buttons, social links, and scroll indicator.
--->
-
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { Github, Linkedin, Mail, ArrowDown, ArrowRight, ExternalLink } from '@lucide/svelte';
-	import { detectCapabilities } from '$lib/utils/device';
-	import HeroFallback from './HeroFallback.svelte';
+	import { ArrowRight, Github, Linkedin, Mail } from '@lucide/svelte';
+	import type { SiteMetric } from '$lib/types/portfolio';
 
-	let Hero3DComponent: any = $state(null);
-	let mounted = $state(false);
-	let typedText = $state('');
-	let typewriterDone = $state(false);
-
-	const roles = [
-		'Building Agentic AI',
-		'Senior Full Stack Engineer',
-		'RAG Architect',
-		'Low-latency Streaming Expert'
-	];
-	let roleIndex = 0;
-	let charIndex = 0;
-	let isDeleting = false;
-	let typeTimer: ReturnType<typeof setTimeout>;
-
-	function typewriter() {
-		const current = roles[roleIndex];
-
-		if (!isDeleting) {
-			typedText = current.slice(0, charIndex + 1);
-			charIndex++;
-			if (charIndex === current.length) {
-				isDeleting = true;
-				typeTimer = setTimeout(typewriter, 2200);
-				return;
-			}
-		} else {
-			typedText = current.slice(0, charIndex - 1);
-			charIndex--;
-			if (charIndex === 0) {
-				isDeleting = false;
-				roleIndex = (roleIndex + 1) % roles.length;
-				typeTimer = setTimeout(typewriter, 400);
-				return;
-			}
-		}
-
-		typeTimer = setTimeout(typewriter, isDeleting ? 52 : 80);
-	}
-
-	onMount(() => {
-		mounted = true;
-
-		// Start typewriter
-		typeTimer = setTimeout(typewriter, 900);
-
-		// Load 3D component
-		const capabilities = detectCapabilities();
-		if (capabilities.webglAvailable && !capabilities.isLowEnd) {
-			import('./Hero3DElement.svelte')
-				.then((module) => {
-					Hero3DComponent = module.default;
-				})
-				.catch(() => {
-					Hero3DComponent = null;
-				});
-		}
-
-		return () => clearTimeout(typeTimer);
-	});
-
-	function scrollTo(id: string) {
-		document.getElementById(id)?.scrollIntoView({ behavior: 'smooth' });
-	}
-
-	const socialLinks = [
-		{
-			label: 'GitHub',
-			href: 'https://github.com/azmimuwahid',
-			icon: Github
-		},
-		{
-			label: 'LinkedIn',
-			href: 'https://linkedin.com/in/azmimuwahid',
-			icon: Linkedin
-		},
-		{
-			label: 'Email',
-			href: 'mailto:azmimuwahid@gmail.com',
-			icon: Mail
-		}
-	];
-
-	const achievements = [
-		'200% B2B Growth',
-		'40% AWS Cost Reduction',
-		'AI-Powered EdTech'
-	];
+	let { metrics = [] }: { metrics?: SiteMetric[] } = $props();
 </script>
 
-<section
-	id="hero"
-	class="relative flex min-h-screen items-center justify-center overflow-hidden"
-	style="background: var(--gradient-hero);"
->
-	<!-- Radial gradient overlay for depth -->
+<section id="hero" class="relative overflow-hidden px-6 pb-20 pt-28 sm:pb-28 sm:pt-36">
+	<div class="pointer-events-none absolute inset-0 editorial-grid opacity-60"></div>
 	<div
-		class="pointer-events-none absolute inset-0 hidden"
+		class="pointer-events-none absolute left-1/2 top-0 h-[32rem] w-[32rem] -translate-x-1/2 rounded-full bg-white/[0.035] blur-3xl"
 	></div>
 
-	<!-- CSS/SVG geometric background -->
-	<div class="absolute inset-0">
-		{#if Hero3DComponent}
-			<Hero3DComponent />
-		{:else}
-			<HeroFallback />
-		{/if}
-	</div>
-
-	<!-- ── Content ── -->
-	<div class="relative z-10 mx-auto max-w-5xl px-6 py-24 text-center">
-
-		<!-- Availability badge -->
-		<div
-			class="mb-8 inline-flex items-center gap-2.5 rounded-full border px-4 py-1.5 text-sm font-medium transition-all duration-700"
-			style="
-				border-color: rgba(255,255,255,0.2);
-				background: rgba(255,255,255,0.08);
-				color: #fafafa;
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : -8}px);
-				backdrop-filter: blur(8px);
-				transition-delay: 0ms;
-			"
-		>
-			<span
-				class="inline-block h-2 w-2 rounded-full"
-				style="background: #fafafa; box-shadow: 0 0 6px rgba(255,255,255,0.5);"
-			></span>
-			Open to new opportunities
-		</div>
-
-		<!-- Name -->
-		<h1
-			class="mb-4 text-5xl font-black leading-none tracking-tight sm:text-6xl md:text-7xl lg:text-8xl"
-			style="
-				font-family: var(--font-heading);
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : 28}px);
-				transition: opacity 0.7s ease 0.1s, transform 0.7s ease 0.1s;
-			"
-		>
-			<span
-				style="
-					background: linear-gradient(135deg, #ffffff 0%, #ffffff 65%, #a1a1aa 100%);
-					-webkit-background-clip: text;
-					-webkit-text-fill-color: transparent;
-					background-clip: text;
-					line-height: 1.1;
-					display: block;
-				"
+	<div class="relative mx-auto grid max-w-6xl gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:items-end">
+		<div>
+			<p
+				class="mb-6 inline-flex rounded-full border border-white/10 bg-white/[0.04] px-4 py-2 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-400"
 			>
-				Building the next generation of Agentic AI.
-			</span>
-		</h1>
-
-		<!-- Role typewriter -->
-		<div
-			class="mb-6 flex h-10 items-center justify-center gap-1 text-xl font-semibold sm:text-2xl"
-			style="
-				color: #f4f4f5;
-				font-family: var(--font-heading);
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : 20}px);
-				transition: opacity 0.7s ease 0.2s, transform 0.7s ease 0.2s;
-			"
-			aria-live="polite"
-		>
-			<span>{typedText}</span>
-			<span class="cursor-blink ml-0.5 text-current" style="opacity: 0.8;">|</span>
-		</div>
-
-		<!-- Tagline -->
-		<p
-			class="mx-auto mb-8 max-w-3xl text-base leading-relaxed sm:text-lg"
-			style="
-				color: #94a3b8;
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : 16}px);
-				transition: opacity 0.7s ease 0.3s, transform 0.7s ease 0.3s;
-			"
-		>
-			I’m a <span style="color: #f8fafc; font-weight: 600;">Senior Full Stack Engineer</span> with a 6-year track record of shipping scalable web apps. These days, I’m obsessed with moving beyond simple chat interfaces. I specialize in building <span style="color: #f8fafc; font-weight: 600;">Agentic Workflows, RAG architectures</span>, and low-latency <span style="color: #f8fafc; font-weight: 600;">AI Audio streaming</span>—essentially, making AI systems that don't just talk, but actually act and reason in real-time.
-		</p>
-
-		<!-- Achievement chips -->
-		<div
-			class="mb-10 flex flex-wrap items-center justify-center gap-2"
-			style="
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : 12}px);
-				transition: opacity 0.7s ease 0.4s, transform 0.7s ease 0.4s;
-			"
-		>
-			{#each achievements as chip}
-				<span
-					class="rounded-full px-3 py-1 text-xs font-medium"
-					style="
-						background: rgba(255,255,255,0.05);
-						border: 1px solid rgba(255,255,255,0.1);
-						color: #cbd5e1;
-					"
-				>
-					{chip}
-				</span>
-			{/each}
-		</div>
-
-		<!-- CTA buttons -->
-		<div
-			class="mb-12 flex flex-col items-center justify-center gap-4 sm:flex-row"
-			style="
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : 12}px);
-				transition: opacity 0.7s ease 0.5s, transform 0.7s ease 0.5s;
-			"
-		>
-			<button
-				onclick={() => scrollTo('projects')}
-				class="group inline-flex cursor-pointer items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-bold transition-all duration-200"
-				style="
-					background: #fafafa;
-					color: #09090b;
-					box-shadow: 0 0 20px rgba(255,255,255,0.15);
-					min-width: 160px;
-					justify-content: center;
-				"
-				onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 32px rgba(255,255,255,0.3)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(-2px)'; }}
-				onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.boxShadow = '0 0 20px rgba(255,255,255,0.15)'; (e.currentTarget as HTMLElement).style.transform = 'translateY(0)'; }}
+				AI systems engineer / full stack product builder
+			</p>
+			<h1
+				class="max-w-4xl text-5xl font-black leading-[0.92] tracking-[-0.06em] text-zinc-50 sm:text-7xl lg:text-8xl"
 			>
-				View My Work
-				<ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" />
-			</button>
+				I build AI workflows that survive real product constraints.
+			</h1>
+			<p class="mt-8 max-w-2xl text-lg leading-8 text-zinc-400 sm:text-xl">
+				I’m Azmi Muwahid, a senior full stack engineer focused on agentic workflows, RAG, tool
+				calling, and real-time interfaces. My work sits where product UX, backend reliability, and
+				model behavior have to line up.
+			</p>
 
-			<button
-				onclick={() => scrollTo('contact')}
-				class="group inline-flex cursor-pointer items-center gap-2.5 rounded-full px-8 py-3.5 text-base font-bold transition-all duration-200"
-				style="
-					background: transparent;
-					color: #f8fafc;
-					border: 1px solid rgba(255,255,255,0.15);
-					backdrop-filter: blur(8px);
-					min-width: 160px;
-					justify-content: center;
-				"
-				onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.5)'; (e.currentTarget as HTMLElement).style.color = '#ffffff'; }}
-				onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.borderColor = 'rgba(255,255,255,0.15)'; (e.currentTarget as HTMLElement).style.color = '#f8fafc'; }}
-			>
-				Get in Touch
-				<ExternalLink class="h-4 w-4" />
-			</button>
-		</div>
-
-		<!-- Social links -->
-		<div
-			class="flex items-center justify-center gap-4"
-			style="
-				opacity: {mounted ? 1 : 0};
-				transform: translateY({mounted ? 0 : 8}px);
-				transition: opacity 0.7s ease 0.6s, transform 0.7s ease 0.6s;
-			"
-		>
-			{#each socialLinks as { label, href, icon: Icon }}
+			<div class="mt-10 flex flex-col gap-3 sm:flex-row">
 				<a
-					{href}
-					target={href.startsWith('http') ? '_blank' : undefined}
-					rel={href.startsWith('http') ? 'noopener noreferrer' : undefined}
-					aria-label={label}
-					class="group flex h-11 w-11 cursor-pointer items-center justify-center rounded-full transition-all duration-200"
-					style="
-						background: rgba(255,255,255,0.05);
-						border: 1px solid rgba(255,255,255,0.1);
-						color: #94a3b8;
-					"
-					onmouseenter={(e) => {
-						const el = e.currentTarget as HTMLElement;
-						el.style.borderColor = 'rgba(255,255,255,0.3)';
-						el.style.color = '#fafafa';
-						el.style.boxShadow = '0 0 12px rgba(255,255,255,0.15)';
-						el.style.transform = 'translateY(-2px)';
-					}}
-					onmouseleave={(e) => {
-						const el = e.currentTarget as HTMLElement;
-						el.style.borderColor = 'rgba(255,255,255,0.1)';
-						el.style.color = '#94a3b8';
-						el.style.boxShadow = 'none';
-						el.style.transform = 'translateY(0)';
-					}}
+					class="inline-flex items-center justify-center gap-2 rounded-full bg-zinc-50 px-6 py-3 text-sm font-bold text-zinc-950 shadow-[0_0_20px_rgba(255,255,255,0.15)] transition-all hover:bg-white hover:shadow-[0_0_30px_rgba(255,255,255,0.25)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-white"
+					href="/projects"
 				>
-					<Icon class="h-5 w-5" />
+					View case studies
+					<ArrowRight class="h-4 w-4" />
 				</a>
-			{/each}
+				<a
+					class="inline-flex items-center justify-center gap-2 rounded-full border border-white/10 px-6 py-3 text-sm font-bold text-zinc-200 transition hover:border-white/25 hover:bg-white/[0.04]"
+					href="/contact"
+				>
+					Start a conversation
+				</a>
+			</div>
+
+			<div class="mt-10 flex items-center gap-4 text-zinc-500">
+				<a
+					href="https://github.com/azmimuwahid"
+					target="_blank"
+					rel="noreferrer"
+					aria-label="GitHub"
+					class="rounded-full p-2 transition hover:bg-white/[0.06] hover:text-zinc-200"
+					><Github class="h-5 w-5" /></a
+				>
+				<a
+					href="https://linkedin.com/in/azmimuwahid"
+					target="_blank"
+					rel="noreferrer"
+					aria-label="LinkedIn"
+					class="rounded-full p-2 transition hover:bg-white/[0.06] hover:text-zinc-200"
+					><Linkedin class="h-5 w-5" /></a
+				>
+				<a
+					href="mailto:azmimuwahid@gmail.com"
+					aria-label="Email"
+					class="rounded-full p-2 transition hover:bg-white/[0.06] hover:text-zinc-200"
+					><Mail class="h-5 w-5" /></a
+				>
+			</div>
+		</div>
+
+		<div
+			class="rounded-[2rem] border border-white/[0.08] bg-zinc-950/60 p-5 shadow-2xl shadow-black/40 backdrop-blur"
+		>
+			<div class="mb-5 flex items-center justify-between border-b border-white/[0.06] pb-4">
+				<p class="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-500">
+					Proof, not hype
+				</p>
+				<span class="relative flex h-2 w-2">
+					<span class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-75"></span>
+					<span class="relative inline-flex h-2 w-2 rounded-full bg-emerald-400"></span>
+				</span>
+			</div>
+			<div class="space-y-4">
+				{#each metrics as metric, i}
+					<article
+						class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4 transition-all duration-300 hover:border-white/[0.12] hover:bg-white/[0.05] hover:-translate-y-0.5"
+						style="animation: fadeSlideUp 0.5s ease {i * 100 + 200}ms both;"
+					>
+						<p class="text-2xl font-black tracking-tight text-zinc-50">{metric.value}</p>
+						<h2 class="mt-1 text-sm font-semibold text-zinc-300">{metric.label}</h2>
+						<p class="mt-2 text-sm leading-6 text-zinc-500">{metric.detail}</p>
+					</article>
+				{/each}
+			</div>
 		</div>
 	</div>
-
-	<!-- Scroll indicator -->
-	{#if mounted}
-		<button
-			onclick={() => scrollTo('tech-stack')}
-			class="absolute bottom-8 left-1/2 -translate-x-1/2 cursor-pointer transition-all duration-200"
-			style="opacity: 0.5; color: #94a3b8;"
-			aria-label="Scroll to tech stack"
-			onmouseenter={(e) => { (e.currentTarget as HTMLElement).style.opacity = '1'; (e.currentTarget as HTMLElement).style.color = '#fafafa'; }}
-			onmouseleave={(e) => { (e.currentTarget as HTMLElement).style.opacity = '0.5'; (e.currentTarget as HTMLElement).style.color = '#94a3b8'; }}
-		>
-			<div class="flex flex-col items-center gap-1.5">
-				<span class="text-xs font-medium tracking-widest uppercase">Scroll</span>
-				<ArrowDown class="h-4 w-4 animate-bounce" />
-			</div>
-		</button>
-	{/if}
 </section>

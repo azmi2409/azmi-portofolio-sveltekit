@@ -7,6 +7,7 @@ This design covers the complete revamp of the portfolio at azmi.web.id from a ge
 The revamp replaces the existing sections (Hero, About, Portfolio, Contact) with new purpose-built sections: Hero (with 3D element), Tech Stack, GitHub Stats, Projects, and Contact. A sticky navigation with smooth scrolling, a tri-state theme toggle (auto/light/dark) persisted in localStorage, Google Tag Manager integration, and responsive mobile-first layout tie everything together.
 
 Key design decisions:
+
 - **shadcn-svelte everywhere**: All UI primitives (Button, Card, Badge, Sheet, Separator, Toggle, Tooltip) come from shadcn-svelte. No manual component building.
 - **GitHub REST API at build/load time**: Stats fetched server-side via `+page.server.ts` load function, with client-side session caching and graceful fallback.
 - **Intersection Observer animations**: Scroll-triggered entrance animations using a reusable Svelte action, replacing the current per-component observer boilerplate.
@@ -138,18 +139,19 @@ sequenceDiagram
 ### Page-Level Components
 
 #### `+page.server.ts` (new)
+
 Server-side load function that fetches GitHub stats.
 
 ```typescript
 interface GitHubStats {
-  publicRepos: number;
-  followers: number;
-  following: number;
-  avatarUrl: string;
+	publicRepos: number;
+	followers: number;
+	following: number;
+	avatarUrl: string;
 }
 
 interface PageData {
-  githubStats: GitHubStats | null;
+	githubStats: GitHubStats | null;
 }
 
 // load() fetches from https://api.github.com/users/azmimuwahid
@@ -157,6 +159,7 @@ interface PageData {
 ```
 
 #### `+page.svelte` (modified)
+
 Replaces current sections with new ones. Receives `data` from server load.
 
 ```svelte
@@ -170,11 +173,13 @@ Replaces current sections with new ones. Receives `data` from server load.
 ```
 
 #### `+layout.svelte` (modified)
+
 Adds SEO meta tags, Open Graph tags. Initializes theme store (auto mode default). Conditionally loads GTM script based on `PUBLIC_GTM_ID` env var.
 
 ### Section Components (all in `src/lib/components/sections/`)
 
 #### `HeroSection.svelte` (replaces Hero.svelte)
+
 - Uses shadcn `Button` for CTAs ("View Projects" → #projects, "Get in Touch" → #contact)
 - Uses shadcn `Badge` for achievement highlights
 - Social links (LinkedIn, GitHub, Email) with `aria-label` on each icon link
@@ -184,6 +189,7 @@ Adds SEO meta tags, Open Graph tags. Initializes theme store (auto mode default)
 - Falls back to `HeroFallback.svelte` (static gradient/SVG visual) when WebGL unavailable or low-end device
 
 #### `Hero3DElement.svelte` (new, lazy-loaded)
+
 - Loaded only via `import('$lib/components/sections/Hero3DElement.svelte')`
 - Uses `@threlte/core` (`Canvas`, `T`) with Three.js for 3D particle/geometric scene
 - Responds to mouse position via `mousemove` event listener
@@ -192,11 +198,13 @@ Adds SEO meta tags, Open Graph tags. Initializes theme store (auto mode default)
 - Cleans up Three.js resources on component destroy
 
 #### `HeroFallback.svelte` (new)
+
 - Static visual fallback: CSS gradient, SVG pattern, or static image
 - Displayed when WebGL is unavailable or device is low-end
 - Lightweight, no JavaScript dependencies
 
 #### `TechStackSection.svelte` (replaces About.svelte)
+
 - Uses shadcn `Card` + `Badge` for each skill category
 - Categories: Languages, Frontend, Backend, Cloud & DevOps, Database, AI/ML
 - Each category is a Card with Badge items for individual skills
@@ -204,12 +212,14 @@ Adds SEO meta tags, Open Graph tags. Initializes theme store (auto mode default)
 - Uses shadcn `Separator` between category groups
 
 #### `GitHubStatsSection.svelte` (new)
+
 - Receives `stats: GitHubStats | null` as prop
 - Uses shadcn `Card` for each stat (repos, followers, following)
 - Fallback UI when stats is null: shows placeholder values + "Data unavailable" message
 - Session-level caching handled by SvelteKit's load function (runs once per navigation)
 
 #### `ProjectsSection.svelte` (replaces Portfolio.svelte)
+
 - Uses shadcn `Card` for project cards
 - Uses shadcn `Badge` for technology tags
 - Uses shadcn `Button` for demo/source links (open in new tab with `target="_blank"` + `rel="noopener noreferrer"`)
@@ -217,6 +227,7 @@ Adds SEO meta tags, Open Graph tags. Initializes theme store (auto mode default)
 - Each card: title, description, tech badges, optional live/source links
 
 #### `ContactSection.svelte` (replaces Contact.svelte)
+
 - Uses shadcn `Card` for the contact info container
 - Uses shadcn `Button` for social link buttons
 - Uses shadcn `Badge` for current interests
@@ -226,6 +237,7 @@ Adds SEO meta tags, Open Graph tags. Initializes theme store (auto mode default)
 - Removes the contact form (not in requirements)
 
 #### `Footer.svelte` (extracted from Contact.svelte)
+
 - Simple footer with copyright and quick links
 - Uses shadcn `Separator` for visual divider
 
@@ -268,13 +280,14 @@ const gtmEnabled = !!PUBLIC_GTM_ID && PUBLIC_GTM_ID.trim().length > 0;
 ### Shared Utilities
 
 #### `src/lib/actions/inview.ts` (new)
+
 Reusable Svelte action for IntersectionObserver-based scroll animations.
 
 ```typescript
 interface InviewOptions {
-  threshold?: number;
-  rootMargin?: string;
-  once?: boolean;
+	threshold?: number;
+	rootMargin?: string;
+	once?: boolean;
 }
 
 // Usage: <div use:inview={{ threshold: 0.2 }} on:inview={handleInview}>
@@ -282,14 +295,15 @@ interface InviewOptions {
 ```
 
 #### `src/lib/utils/device.ts` (new)
+
 Device capability detection for 3D rendering decisions.
 
 ```typescript
 interface DeviceCapabilities {
-  webglAvailable: boolean;
-  isLowEnd: boolean;
-  hardwareConcurrency: number;
-  deviceMemory: number | undefined;
+	webglAvailable: boolean;
+	isLowEnd: boolean;
+	hardwareConcurrency: number;
+	deviceMemory: number | undefined;
 }
 
 function detectCapabilities(): DeviceCapabilities;
@@ -301,6 +315,7 @@ function isLowEndDevice(): boolean;
 ### shadcn-svelte Components Required
 
 Components to install via `npx shadcn-svelte@latest add`:
+
 - `button` (already installed)
 - `card`
 - `badge`
@@ -309,7 +324,6 @@ Components to install via `npx shadcn-svelte@latest add`:
 - `toggle`
 - `tooltip` (for social link hover labels)
 
-
 ## Data Models
 
 ### GitHub Stats
@@ -317,27 +331,27 @@ Components to install via `npx shadcn-svelte@latest add`:
 ```typescript
 // Fetched from GitHub REST API: GET /users/azmimuwahid
 interface GitHubUserResponse {
-  login: string;
-  avatar_url: string;
-  public_repos: number;
-  followers: number;
-  following: number;
+	login: string;
+	avatar_url: string;
+	public_repos: number;
+	followers: number;
+	following: number;
 }
 
 // Transformed for component consumption
 interface GitHubStats {
-  publicRepos: number;
-  followers: number;
-  following: number;
-  avatarUrl: string;
+	publicRepos: number;
+	followers: number;
+	following: number;
+	avatarUrl: string;
 }
 
 // Fallback values when API fails
 const FALLBACK_STATS: GitHubStats = {
-  publicRepos: 0,
-  followers: 0,
-  following: 0,
-  avatarUrl: ''
+	publicRepos: 0,
+	followers: 0,
+	following: 0,
+	avatarUrl: ''
 };
 ```
 
@@ -345,19 +359,23 @@ const FALLBACK_STATS: GitHubStats = {
 
 ```typescript
 interface SkillCategory {
-  name: string;        // e.g. "Languages", "Frontend"
-  icon: ComponentType; // Lucide icon component
-  skills: string[];    // e.g. ["TypeScript", "JavaScript", "Ruby", "Go"]
+	name: string; // e.g. "Languages", "Frontend"
+	icon: ComponentType; // Lucide icon component
+	skills: string[]; // e.g. ["TypeScript", "JavaScript", "Ruby", "Go"]
 }
 
 // Static data, defined inline in TechStackSection.svelte
 const TECH_CATEGORIES: SkillCategory[] = [
-  { name: 'Languages', icon: Code, skills: ['TypeScript', 'JavaScript', 'Ruby', 'Go'] },
-  { name: 'Frontend', icon: Layout, skills: ['React', 'Next.js', 'Vue.js', 'Redux', 'Tailwind', 'Svelte'] },
-  { name: 'Backend', icon: Server, skills: ['Rails', 'Node.js', 'Express'] },
-  { name: 'Cloud & DevOps', icon: Cloud, skills: ['AWS', 'Docker', 'Terraform', 'GitHub Actions'] },
-  { name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis'] },
-  { name: 'AI/ML', icon: Brain, skills: ['OpenAI'] }
+	{ name: 'Languages', icon: Code, skills: ['TypeScript', 'JavaScript', 'Ruby', 'Go'] },
+	{
+		name: 'Frontend',
+		icon: Layout,
+		skills: ['React', 'Next.js', 'Vue.js', 'Redux', 'Tailwind', 'Svelte']
+	},
+	{ name: 'Backend', icon: Server, skills: ['Rails', 'Node.js', 'Express'] },
+	{ name: 'Cloud & DevOps', icon: Cloud, skills: ['AWS', 'Docker', 'Terraform', 'GitHub Actions'] },
+	{ name: 'Database', icon: Database, skills: ['PostgreSQL', 'MongoDB', 'Redis'] },
+	{ name: 'AI/ML', icon: Brain, skills: ['OpenAI'] }
 ];
 ```
 
@@ -365,24 +383,24 @@ const TECH_CATEGORIES: SkillCategory[] = [
 
 ```typescript
 interface Project {
-  title: string;
-  description: string;
-  techTags: string[];
-  liveUrl?: string;
-  sourceUrl?: string;
-  featured: boolean;
+	title: string;
+	description: string;
+	techTags: string[];
+	liveUrl?: string;
+	sourceUrl?: string;
+	featured: boolean;
 }
 
 // Static data, defined inline in ProjectsSection.svelte
 const PROJECTS: Project[] = [
-  {
-    title: 'AI-Powered Mentorship Platform',
-    description: 'Intelligent mentorship matching and tracking system at FutureLab.my...',
-    techTags: ['SvelteKit', 'OpenAI', 'PostgreSQL', 'AWS'],
-    liveUrl: 'https://futurelab.my',
-    featured: true
-  },
-  // ... additional projects
+	{
+		title: 'AI-Powered Mentorship Platform',
+		description: 'Intelligent mentorship matching and tracking system at FutureLab.my...',
+		techTags: ['SvelteKit', 'OpenAI', 'PostgreSQL', 'AWS'],
+		liveUrl: 'https://futurelab.my',
+		featured: true
+	}
+	// ... additional projects
 ];
 ```
 
@@ -390,17 +408,17 @@ const PROJECTS: Project[] = [
 
 ```typescript
 interface NavItem {
-  name: string;
-  href: string;
-  sectionId: string;
+	name: string;
+	href: string;
+	sectionId: string;
 }
 
 const NAV_ITEMS: NavItem[] = [
-  { name: 'Home', href: '#hero', sectionId: 'hero' },
-  { name: 'Tech Stack', href: '#tech-stack', sectionId: 'tech-stack' },
-  { name: 'GitHub', href: '#github-stats', sectionId: 'github-stats' },
-  { name: 'Projects', href: '#projects', sectionId: 'projects' },
-  { name: 'Contact', href: '#contact', sectionId: 'contact' }
+	{ name: 'Home', href: '#hero', sectionId: 'hero' },
+	{ name: 'Tech Stack', href: '#tech-stack', sectionId: 'tech-stack' },
+	{ name: 'GitHub', href: '#github-stats', sectionId: 'github-stats' },
+	{ name: 'Projects', href: '#projects', sectionId: 'projects' },
+	{ name: 'Contact', href: '#contact', sectionId: 'contact' }
 ];
 ```
 
@@ -412,8 +430,8 @@ type ThemeMode = 'auto' | 'light' | 'dark';
 type ResolvedTheme = 'light' | 'dark';
 
 interface ThemeState {
-  mode: ThemeMode;           // User-selected mode
-  resolvedTheme: ResolvedTheme; // Actual applied theme (auto resolves via OS)
+	mode: ThemeMode; // User-selected mode
+	resolvedTheme: ResolvedTheme; // Actual applied theme (auto resolves via OS)
 }
 
 // Store: writable<ThemeState>
@@ -430,10 +448,10 @@ interface ThemeState {
 
 ```typescript
 interface DeviceCapabilities {
-  webglAvailable: boolean;
-  isLowEnd: boolean;
-  hardwareConcurrency: number;
-  deviceMemory: number | undefined; // navigator.deviceMemory (Chrome only)
+	webglAvailable: boolean;
+	isLowEnd: boolean;
+	hardwareConcurrency: number;
+	deviceMemory: number | undefined; // navigator.deviceMemory (Chrome only)
 }
 
 // Low-end thresholds:
@@ -452,82 +470,81 @@ interface DeviceCapabilities {
 
 ```typescript
 interface SEOMeta {
-  title: string;       // "Azmi Muwahid — Senior Full Stack Engineer"
-  description: string; // "Portfolio of Azmi Muwahid, Senior Full Stack Engineer..."
-  ogTitle: string;
-  ogDescription: string;
-  ogUrl: string;       // "https://azmi.web.id"
+	title: string; // "Azmi Muwahid — Senior Full Stack Engineer"
+	description: string; // "Portfolio of Azmi Muwahid, Senior Full Stack Engineer..."
+	ogTitle: string;
+	ogDescription: string;
+	ogUrl: string; // "https://azmi.web.id"
 }
 ```
 
-
 ## Correctness Properties
 
-*A property is a characteristic or behavior that should hold true across all valid executions of a system — essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees.*
+_A property is a characteristic or behavior that should hold true across all valid executions of a system — essentially, a formal statement about what the system should do. Properties serve as the bridge between human-readable specifications and machine-verifiable correctness guarantees._
 
 ### Property 1: Theme mode cycle is deterministic
 
-*For any* starting theme mode in {auto, light, dark} and any number of toggle activations N, the resulting mode should equal the mode at position `(startIndex + N) % 3` in the cycle [auto, light, dark]. Specifically, toggling 3 times from any starting mode should return to that same mode (periodicity).
+_For any_ starting theme mode in {auto, light, dark} and any number of toggle activations N, the resulting mode should equal the mode at position `(startIndex + N) % 3` in the cycle [auto, light, dark]. Specifically, toggling 3 times from any starting mode should return to that same mode (periodicity).
 
 **Validates: Requirements 3.1, 3.2**
 
 ### Property 2: Theme mode persistence round-trip
 
-*For any* theme mode value in {auto, light, dark}, persisting it to localStorage and then initializing a new theme store from that localStorage value should produce the same mode. This is a serialization round-trip: `load(persist(mode)) === mode`.
+_For any_ theme mode value in {auto, light, dark}, persisting it to localStorage and then initializing a new theme store from that localStorage value should produce the same mode. This is a serialization round-trip: `load(persist(mode)) === mode`.
 
 **Validates: Requirements 3.5, 3.6**
 
 ### Property 3: Auto mode resolves to OS preference
 
-*For any* OS color scheme preference (light or dark), when the theme mode is set to `auto`, the resolved theme should equal the OS preference. That is, `resolveTheme('auto', osPreference) === osPreference` for all `osPreference ∈ {light, dark}`.
+_For any_ OS color scheme preference (light or dark), when the theme mode is set to `auto`, the resolved theme should equal the OS preference. That is, `resolveTheme('auto', osPreference) === osPreference` for all `osPreference ∈ {light, dark}`.
 
 **Validates: Requirements 3.3**
 
 ### Property 4: Theme icon matches mode
 
-*For any* theme mode in {auto, light, dark}, the rendered ThemeToggle should display exactly the icon designated for that mode: Sun for light, Moon for dark, Monitor for auto. No two modes should share the same icon.
+_For any_ theme mode in {auto, light, dark}, the rendered ThemeToggle should display exactly the icon designated for that mode: Sun for light, Moon for dark, Monitor for auto. No two modes should share the same icon.
 
 **Validates: Requirements 3.8**
 
 ### Property 5: GitHub stats display completeness
 
-*For any* valid GitHubStats object with arbitrary non-negative integer values for publicRepos, followers, and following, the rendered GitHubStatsSection should contain string representations of all three numeric values.
+_For any_ valid GitHubStats object with arbitrary non-negative integer values for publicRepos, followers, and following, the rendered GitHubStatsSection should contain string representations of all three numeric values.
 
 **Validates: Requirements 5.2**
 
 ### Property 6: Project card rendering completeness
 
-*For any* valid Project object, the rendered project card should contain the project title, description, and every technology tag. If the project has a liveUrl or sourceUrl, the corresponding link element should be present with `target="_blank"` and `rel="noopener noreferrer"` attributes.
+_For any_ valid Project object, the rendered project card should contain the project title, description, and every technology tag. If the project has a liveUrl or sourceUrl, the corresponding link element should be present with `target="_blank"` and `rel="noopener noreferrer"` attributes.
 
 **Validates: Requirements 6.2, 6.4**
 
 ### Property 7: Icon-only interactive elements have accessible labels
 
-*For any* rendered interactive element (button or anchor) that contains only an icon (no visible text content), that element should have a non-empty `aria-label` attribute.
+_For any_ rendered interactive element (button or anchor) that contains only an icon (no visible text content), that element should have a non-empty `aria-label` attribute.
 
 **Validates: Requirements 10.1**
 
 ### Property 8: Theme color contrast compliance
 
-*For any* text/background color pair defined in the theme CSS custom properties (both light and dark variants), the WCAG contrast ratio should be at least 4.5:1 for normal text.
+_For any_ text/background color pair defined in the theme CSS custom properties (both light and dark variants), the WCAG contrast ratio should be at least 4.5:1 for normal text.
 
 **Validates: Requirements 10.3**
 
 ### Property 9: Low-end device detection
 
-*For any* combination of `hardwareConcurrency` (0–32) and `deviceMemory` (undefined, 0.25–8), the `isLowEndDevice()` function should return `true` if and only if `hardwareConcurrency <= 2` OR `deviceMemory <= 2`. The function should never throw regardless of input values.
+_For any_ combination of `hardwareConcurrency` (0–32) and `deviceMemory` (undefined, 0.25–8), the `isLowEndDevice()` function should return `true` if and only if `hardwareConcurrency <= 2` OR `deviceMemory <= 2`. The function should never throw regardless of input values.
 
 **Validates: Requirements 11.6**
 
 ### Property 10: GTM script omitted when ID is empty
 
-*For any* falsy or whitespace-only `PUBLIC_GTM_ID` value (empty string, undefined, null, whitespace), the GTM component should render no `<script>` tags and no `<noscript>` iframes. The page should load without errors.
+_For any_ falsy or whitespace-only `PUBLIC_GTM_ID` value (empty string, undefined, null, whitespace), the GTM component should render no `<script>` tags and no `<noscript>` iframes. The page should load without errors.
 
 **Validates: Requirements 12.5**
 
 ### Property 11: Image elements have optimization attributes
 
-*For any* `<img>` element rendered in the Portfolio_App, it should have explicit `width` and `height` attributes (to prevent CLS) and a `loading="lazy"` attribute (except for above-the-fold hero images which may use `loading="eager"`).
+_For any_ `<img>` element rendered in the Portfolio_App, it should have explicit `width` and `height` attributes (to prevent CLS) and a `loading="lazy"` attribute (except for above-the-fold hero images which may use `loading="eager"`).
 
 **Validates: Requirements 13.5**
 
@@ -587,21 +604,22 @@ interface SEOMeta {
 
 Each correctness property maps to a single property-based test using `fast-check`. Minimum 100 iterations per test.
 
-| Property | Test Description | Generator Strategy |
-|----------|-----------------|-------------------|
-| Property 1: Theme mode cycle | Generate random starting modes and toggle counts, verify cycle position | `fc.constantFrom('auto', 'light', 'dark')` + `fc.nat({ max: 100 })` for toggle count |
-| Property 2: Theme persistence round-trip | Generate random modes, persist then load, verify equality | `fc.constantFrom('auto', 'light', 'dark')` |
-| Property 3: Auto mode resolves OS preference | Generate random OS preferences, verify auto resolves correctly | `fc.constantFrom('light', 'dark')` for OS preference |
-| Property 4: Theme icon matches mode | Generate random modes, verify correct icon rendered | `fc.constantFrom('auto', 'light', 'dark')` |
-| Property 5: GitHub stats display | Generate random non-negative integers for stats, verify all appear in output | `fc.record({ publicRepos: fc.nat(), followers: fc.nat(), following: fc.nat() })` |
-| Property 6: Project card rendering | Generate random Project objects, verify content completeness | `fc.record({ title: fc.string({minLength:1}), description: fc.string({minLength:1}), techTags: fc.array(fc.string({minLength:1})), ... })` |
-| Property 7: Accessible icon labels | Render components, query all icon-only interactive elements, verify aria-label | Component rendering + DOM query |
-| Property 8: Color contrast | Extract color pairs from CSS variables, compute WCAG contrast ratio | `fc.constantFrom(...colorPairs)` + contrast ratio calculation |
-| Property 9: Low-end device detection | Generate random hardwareConcurrency and deviceMemory values, verify detection logic | `fc.record({ cores: fc.integer({min:0, max:32}), memory: fc.oneof(fc.constant(undefined), fc.double({min:0.25, max:8})) })` |
-| Property 10: GTM skip on empty ID | Generate falsy/whitespace GTM IDs, verify no script rendered | `fc.oneof(fc.constant(''), fc.constant(undefined), fc.stringOf(fc.constant(' ')))` |
-| Property 11: Image optimization attributes | Render page, query all img elements, verify width/height/loading attributes | DOM query over rendered images |
+| Property                                     | Test Description                                                                    | Generator Strategy                                                                                                                         |
+| -------------------------------------------- | ----------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Property 1: Theme mode cycle                 | Generate random starting modes and toggle counts, verify cycle position             | `fc.constantFrom('auto', 'light', 'dark')` + `fc.nat({ max: 100 })` for toggle count                                                       |
+| Property 2: Theme persistence round-trip     | Generate random modes, persist then load, verify equality                           | `fc.constantFrom('auto', 'light', 'dark')`                                                                                                 |
+| Property 3: Auto mode resolves OS preference | Generate random OS preferences, verify auto resolves correctly                      | `fc.constantFrom('light', 'dark')` for OS preference                                                                                       |
+| Property 4: Theme icon matches mode          | Generate random modes, verify correct icon rendered                                 | `fc.constantFrom('auto', 'light', 'dark')`                                                                                                 |
+| Property 5: GitHub stats display             | Generate random non-negative integers for stats, verify all appear in output        | `fc.record({ publicRepos: fc.nat(), followers: fc.nat(), following: fc.nat() })`                                                           |
+| Property 6: Project card rendering           | Generate random Project objects, verify content completeness                        | `fc.record({ title: fc.string({minLength:1}), description: fc.string({minLength:1}), techTags: fc.array(fc.string({minLength:1})), ... })` |
+| Property 7: Accessible icon labels           | Render components, query all icon-only interactive elements, verify aria-label      | Component rendering + DOM query                                                                                                            |
+| Property 8: Color contrast                   | Extract color pairs from CSS variables, compute WCAG contrast ratio                 | `fc.constantFrom(...colorPairs)` + contrast ratio calculation                                                                              |
+| Property 9: Low-end device detection         | Generate random hardwareConcurrency and deviceMemory values, verify detection logic | `fc.record({ cores: fc.integer({min:0, max:32}), memory: fc.oneof(fc.constant(undefined), fc.double({min:0.25, max:8})) })`                |
+| Property 10: GTM skip on empty ID            | Generate falsy/whitespace GTM IDs, verify no script rendered                        | `fc.oneof(fc.constant(''), fc.constant(undefined), fc.stringOf(fc.constant(' ')))`                                                         |
+| Property 11: Image optimization attributes   | Render page, query all img elements, verify width/height/loading attributes         | DOM query over rendered images                                                                                                             |
 
 Each test must be tagged with a comment:
+
 ```typescript
 // Feature: portfolio-revamp, Property 1: Theme mode cycle is deterministic
 ```
@@ -641,6 +659,7 @@ Unit tests cover specific examples and edge cases that complement the property t
 ### What's NOT Tested via Automated Tests
 
 These requirements are validated through manual testing, Lighthouse audits, or E2E tests:
+
 - Smooth scrolling behavior (Requirement 2.3)
 - Mobile hamburger menu responsive breakpoint (Requirement 2.5)
 - Scroll-triggered animations (Requirement 4.3)

@@ -35,10 +35,9 @@
 		colors = new Float32Array(PARTICLE_COUNT * 3);
 		sizes = new Float32Array(PARTICLE_COUNT);
 
-
 		for (let i = 0; i < PARTICLE_COUNT; i++) {
 			const i3 = i * 3;
-			
+
 			// Position with dither pattern - closer to camera
 			positions[i3] = (Math.random() - 0.5) * 10;
 			positions[i3 + 1] = (Math.random() - 0.5) * 10;
@@ -47,7 +46,7 @@
 			// Enhanced color variation with multiple hue ranges
 			let hue;
 			const colorType = Math.random();
-			
+
 			if (colorType < 0.4) {
 				// Blue-cyan range
 				hue = Math.random() * 0.2 + 0.5; // 0.5-0.7 (blue to cyan)
@@ -58,10 +57,10 @@
 				// Orange-red range
 				hue = Math.random() * 0.1 + 0.05; // 0.05-0.15 (orange to red)
 			}
-			
+
 			const saturation = Math.random() * 0.3 + 0.7; // 0.7-1.0 for vibrant colors
 			const lightness = Math.random() * 0.3 + 0.4; // 0.4-0.7 for good visibility
-			
+
 			const color = new THREE.Color().setHSL(hue, saturation, lightness);
 			colors[i3] = color.r;
 			colors[i3 + 1] = color.g;
@@ -70,7 +69,6 @@
 			// Random sizes for dither effect - larger for visibility
 			sizes[i] = Math.random() * GLYPH_SIZE + 2.0;
 		}
-
 	}
 
 	// Animation loop
@@ -81,7 +79,6 @@
 			requestAnimationFrame(animate);
 		}
 		animate();
-
 	}
 
 	// Event handlers
@@ -102,7 +99,12 @@
 	$: uniforms = {
 		uTime: { value: time },
 		uMouse: { value: new THREE.Vector2(mouseX, mouseY) },
-		uResolution: { value: new THREE.Vector2(typeof window !== 'undefined' ? window.innerWidth : 1920, typeof window !== 'undefined' ? window.innerHeight : 1080) },
+		uResolution: {
+			value: new THREE.Vector2(
+				typeof window !== 'undefined' ? window.innerWidth : 1920,
+				typeof window !== 'undefined' ? window.innerHeight : 1080
+			)
+		},
 		uColorShift: { value: 0.1 }, // Controls color shifting intensity
 		uColorSpeed: { value: 0.5 }, // Controls color animation speed
 		uSaturationBoost: { value: 1.2 } // Enhances color saturation
@@ -222,26 +224,24 @@
 </script>
 
 {#if mounted && positions}
-	<div class="absolute inset-0 w-full h-full pointer-events-none" style="z-index: 1; opacity: 0.7; mix-blend-mode: screen;">
+	<div
+		class="absolute inset-0 w-full h-full pointer-events-none"
+		style="z-index: 1; opacity: 0.7; mix-blend-mode: screen;"
+	>
 		<Canvas>
 			<T.PerspectiveCamera makeDefault position={[0, 0, 5]} fov={75} />
-			<T.Points
-				rotation.x={Math.sin(time * 0.3) * 0.1}
-				rotation.y={time * 0.1}
-				rotation.z={0}
-			>
+			<T.Points rotation.x={Math.sin(time * 0.3) * 0.1} rotation.y={time * 0.1} rotation.z={0}>
 				<T.BufferGeometry
 					on:create={({ ref: geometry }) => {
 						geometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
 						geometry.setAttribute('color', new THREE.BufferAttribute(colors, 3));
 						geometry.setAttribute('size', new THREE.BufferAttribute(sizes, 1));
-	
 					}}
 				/>
 				<T.ShaderMaterial
-					uniforms={uniforms}
-					vertexShader={vertexShader}
-					fragmentShader={fragmentShader}
+					{uniforms}
+					{vertexShader}
+					{fragmentShader}
 					transparent={true}
 					blending={THREE.AdditiveBlending}
 					vertexColors={true}

@@ -150,7 +150,6 @@ Complete redesign of the portfolio website at azmi.web.id using the existing Sve
 3. THE Portfolio_App SHALL maintain a color contrast ratio of at least 4.5:1 for normal text against its background in both light and dark themes
 4. THE Theme_Toggle SHALL announce the current theme state to screen readers when activated
 
-
 ### Requirement 11: Hero 3D Element
 
 **User Story:** As a visitor, I want to see an eye-catching 3D visual element in the hero section, so that the portfolio feels modern and visually impressive like award-winning websites.

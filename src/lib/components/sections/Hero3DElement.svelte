@@ -32,23 +32,26 @@
 	aria-hidden="true"
 >
 	<!-- Base radial gradient to break flatness -->
-	<div class="absolute inset-0 bg-[radial-gradient(circle_at_center,#18181b_0%,#09090b_100%)] opacity-80"></div>
+	<div
+		class="absolute inset-0 bg-[radial-gradient(circle_at_center,#18181b_0%,#09090b_100%)] opacity-80"
+	></div>
 
 	<!-- Dynamic blurred orbs -->
-	<div 
+	<div
 		class="absolute top-1/4 -left-1/4 w-[600px] h-[600px] bg-zinc-800/30 rounded-full blur-[120px] mix-blend-screen transition-transform duration-700 ease-out"
 		style="transform: translate({mouseX * -1}px, {mouseY * -1}px);"
 	></div>
-	
-	<div 
+
+	<div
 		class="absolute -bottom-1/4 -right-1/4 w-[800px] h-[800px] bg-zinc-700/20 rounded-full blur-[150px] mix-blend-screen transition-transform duration-700 ease-out"
 		style="transform: translate({mouseX}px, {mouseY}px);"
 	></div>
 
 	<!-- Minimal CSS Grid Pattern overlay -->
-	<div 
+	<div
 		class="absolute inset-0 opacity-[0.03] transition-transform duration-500 ease-out"
-		style="background-image: linear-gradient(#fafafa 1px, transparent 1px), linear-gradient(90deg, #fafafa 1px, transparent 1px); background-size: 50px 50px; background-position: center; transform: translate({mouseX * 0.5}px, {mouseY * 0.5}px);"
+		style="background-image: linear-gradient(#fafafa 1px, transparent 1px), linear-gradient(90deg, #fafafa 1px, transparent 1px); background-size: 50px 50px; background-position: center; transform: translate({mouseX *
+			0.5}px, {mouseY * 0.5}px);"
 	></div>
 
 	<!-- Vignette to focus center -->

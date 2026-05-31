@@ -15,9 +15,7 @@
 	let activeCategory = $state('All');
 
 	const filteredPosts = $derived(
-		activeCategory === 'All'
-			? posts
-			: posts.filter((p) => p.categories.includes(activeCategory))
+		activeCategory === 'All' ? posts : posts.filter((p) => p.categories.includes(activeCategory))
 	);
 </script>
 
@@ -51,11 +49,11 @@
 
 	<!-- JSON-LD: BreadcrumbList -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "BreadcrumbList",
-		"itemListElement": [
-			{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://azmi.web.id" },
-			{ "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://azmi.web.id/blog" }
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
+			{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://azmi.web.id/blog' }
 		]
 	})}</script>`}
 </svelte:head>
@@ -67,9 +65,7 @@
 		class="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
 		aria-hidden="true"
 	>
-		<div
-			class="h-80 w-80 rounded-full bg-white/[0.03] blur-[96px]"
-		></div>
+		<div class="h-80 w-80 rounded-full bg-white/[0.03] blur-[96px]"></div>
 	</div>
 
 	<div class="relative mx-auto max-w-6xl px-6">
@@ -93,8 +89,8 @@
 
 			<!-- Subtitle -->
 			<p class="max-w-xl text-base leading-relaxed text-zinc-500">
-				Deep dives into full stack engineering, AI, SvelteKit, TypeScript, and the craft
-				of building scalable products.
+				Deep dives into full stack engineering, AI, SvelteKit, TypeScript, and the craft of building
+				scalable products.
 			</p>
 		</div>
 	</div>
@@ -104,7 +100,6 @@
 
 <!-- ── Filter + Grid ──────────────────────────────────────────────────────── -->
 <section class="mx-auto max-w-6xl px-6 py-12">
-
 	<!-- Category filter pills -->
 	{#if allCategories.length > 1}
 		<div class="mb-10 flex flex-wrap items-center gap-2">

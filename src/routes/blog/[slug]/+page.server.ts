@@ -1,5 +1,6 @@
 import type { PageServerLoad } from './$types';
-import { getPostBySlug, getPageBlocks, CACHE_MAX_AGE_S } from '$lib/server/notion';
+import { getPostBySlug, CACHE_MAX_AGE_S } from '$lib/server/notion/blog';
+import { getPageBlocks } from '$lib/server/notion/blocks';
 import { error } from '@sveltejs/kit';
 
 export const load: PageServerLoad = async ({ params, setHeaders }) => {

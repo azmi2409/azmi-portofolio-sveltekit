@@ -10,17 +10,28 @@
 	<div class="hero-fallback__gradient"></div>
 
 	<!-- SVG geometric grid pattern overlay -->
-	<svg
-		class="hero-fallback__pattern"
-		xmlns="http://www.w3.org/2000/svg"
-		width="100%"
-		height="100%"
-	>
+	<svg class="hero-fallback__pattern" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
 		<defs>
 			<pattern id="hero-grid" x="0" y="0" width="60" height="60" patternUnits="userSpaceOnUse">
 				<circle cx="30" cy="30" r="1.5" fill="currentColor" opacity="0.15" />
-				<line x1="0" y1="30" x2="60" y2="30" stroke="currentColor" stroke-width="0.3" opacity="0.06" />
-				<line x1="30" y1="0" x2="30" y2="60" stroke="currentColor" stroke-width="0.3" opacity="0.06" />
+				<line
+					x1="0"
+					y1="30"
+					x2="60"
+					y2="30"
+					stroke="currentColor"
+					stroke-width="0.3"
+					opacity="0.06"
+				/>
+				<line
+					x1="30"
+					y1="0"
+					x2="30"
+					y2="60"
+					stroke="currentColor"
+					stroke-width="0.3"
+					opacity="0.06"
+				/>
 			</pattern>
 			<radialGradient id="hero-vignette" cx="50%" cy="50%" r="70%">
 				<stop offset="0%" stop-color="transparent" />
@@ -117,7 +128,8 @@
 	}
 
 	@keyframes hero-orb-float-1 {
-		0%, 100% {
+		0%,
+		100% {
 			transform: translate(0, 0) scale(1);
 		}
 		33% {
@@ -129,7 +141,8 @@
 	}
 
 	@keyframes hero-orb-float-2 {
-		0%, 100% {
+		0%,
+		100% {
 			transform: translate(0, 0) scale(1);
 		}
 		33% {
@@ -141,7 +154,8 @@
 	}
 
 	@keyframes hero-orb-float-3 {
-		0%, 100% {
+		0%,
+		100% {
 			transform: translate(0, 0) scale(1);
 		}
 		50% {

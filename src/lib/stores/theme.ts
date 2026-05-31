@@ -57,9 +57,7 @@ function getOsPrefersDark(): boolean {
 export const mode = writable<ThemeMode>(loadMode());
 
 /** The resolved theme that is actually applied (light | dark). */
-export const resolvedTheme = writable<ResolvedTheme>(
-	resolveTheme(loadMode(), getOsPrefersDark())
-);
+export const resolvedTheme = writable<ResolvedTheme>(resolveTheme(loadMode(), getOsPrefersDark()));
 
 // ── matchMedia listener management ──────────────────────────────────
 

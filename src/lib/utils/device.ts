@@ -22,9 +22,7 @@ export function isWebGLAvailable(): boolean {
 
 	try {
 		const canvas = document.createElement('canvas');
-		const gl =
-			canvas.getContext('webgl2') ||
-			canvas.getContext('webgl');
+		const gl = canvas.getContext('webgl2') || canvas.getContext('webgl');
 		return gl !== null;
 	} catch {
 		return false;
@@ -54,7 +52,7 @@ export function isLowEndDevice(): boolean {
  */
 export function detectCapabilities(): DeviceCapabilities {
 	const hardwareConcurrency =
-		typeof navigator !== 'undefined' ? navigator.hardwareConcurrency ?? 0 : 0;
+		typeof navigator !== 'undefined' ? (navigator.hardwareConcurrency ?? 0) : 0;
 	const deviceMemory =
 		typeof navigator !== 'undefined'
 			? (navigator as Navigator & { deviceMemory?: number }).deviceMemory

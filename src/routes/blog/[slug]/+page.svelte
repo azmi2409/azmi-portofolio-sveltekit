@@ -65,35 +65,40 @@
 
 	<!-- JSON-LD: BlogPosting -->
 	{@html `<script type="application/ld+json">${JSON.stringify({
-		"@context": "https://schema.org",
-		"@type": "BlogPosting",
-		"headline": post.title,
-		"description": post.excerpt ?? "",
-		"url": `https://azmi.web.id/blog/${post.slug}`,
-		"datePublished": post.publishedAt ?? post.createdAt,
-		"dateModified": post.updatedAt ?? post.publishedAt ?? post.createdAt,
-		"image": post.featuredImage ?? null,
-		"keywords": [...post.categories, ...post.tags].join(", "),
-		"author": {
-			"@type": "Person",
-			"name": "Azmi Muwahid",
-			"url": "https://azmi.web.id"
+		'@context': 'https://schema.org',
+		'@type': 'BlogPosting',
+		headline: post.title,
+		description: post.excerpt ?? '',
+		url: `https://azmi.web.id/blog/${post.slug}`,
+		datePublished: post.publishedAt ?? post.createdAt,
+		dateModified: post.updatedAt ?? post.publishedAt ?? post.createdAt,
+		image: post.featuredImage ?? null,
+		keywords: [...post.categories, ...post.tags].join(', '),
+		author: {
+			'@type': 'Person',
+			name: 'Azmi Muwahid',
+			url: 'https://azmi.web.id'
 		},
-		"publisher": {
-			"@type": "Person",
-			"name": "Azmi Muwahid",
-			"url": "https://azmi.web.id"
+		publisher: {
+			'@type': 'Person',
+			name: 'Azmi Muwahid',
+			url: 'https://azmi.web.id'
 		},
-		"mainEntityOfPage": {
-			"@type": "WebPage",
-			"@id": `https://azmi.web.id/blog/${post.slug}`
+		mainEntityOfPage: {
+			'@type': 'WebPage',
+			'@id': `https://azmi.web.id/blog/${post.slug}`
 		},
-		"breadcrumb": {
-			"@type": "BreadcrumbList",
-			"itemListElement": [
-				{ "@type": "ListItem", "position": 1, "name": "Home", "item": "https://azmi.web.id" },
-				{ "@type": "ListItem", "position": 2, "name": "Blog", "item": "https://azmi.web.id/blog" },
-				{ "@type": "ListItem", "position": 3, "name": post.title, "item": `https://azmi.web.id/blog/${post.slug}` }
+		breadcrumb: {
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
+				{ '@type': 'ListItem', position: 2, name: 'Blog', item: 'https://azmi.web.id/blog' },
+				{
+					'@type': 'ListItem',
+					position: 3,
+					name: post.title,
+					item: `https://azmi.web.id/blog/${post.slug}`
+				}
 			]
 		}
 	})}</script>`}
@@ -102,11 +107,7 @@
 <!-- ── Cover ─────────────────────────────────────────────────────────────── -->
 {#if post.featuredImage}
 	<div class="relative h-72 w-full overflow-hidden md:h-96">
-		<img
-			src={post.featuredImage}
-			alt={post.title}
-			class="h-full w-full object-cover"
-		/>
+		<img src={post.featuredImage} alt={post.title} class="h-full w-full object-cover" />
 		<!-- Dark gradient overlay -->
 		<div
 			class="absolute inset-0 bg-gradient-to-t from-[#09090b] via-[#09090b]/60 to-transparent"
@@ -119,7 +120,6 @@
 
 <!-- ── Article ────────────────────────────────────────────────────────────── -->
 <article class="mx-auto max-w-3xl px-6 pb-24">
-
 	<!-- Back link -->
 	<div class="mb-8 pt-8">
 		<Button

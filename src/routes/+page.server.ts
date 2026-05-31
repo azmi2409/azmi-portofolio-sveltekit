@@ -1,31 +1,17 @@
 import type { PageServerLoad } from './$types';
+import { proofMetrics } from '$lib/data/fallback';
+import { getExperiments } from '$lib/server/notion/experiments';
+import { getFeaturedProjects } from '$lib/server/notion/projects';
 
-interface GitHubStats {
-	publicRepos: number;
-	followers: number;
-	following: number;
-	avatarUrl: string;
-}
+export const load: PageServerLoad = async () => {
+	const [featuredProjects, experiments] = await Promise.all([
+		getFeaturedProjects(),
+		getExperiments()
+	]);
 
-export const load: PageServerLoad = async ({ fetch }) => {
-	try {
-		const response = await fetch('https://api.github.com/users/azmimuwahid');
-
-		if (!response.ok) {
-			return { githubStats: null };
-		}
-
-		const data = await response.json();
-
-		const githubStats: GitHubStats = {
-			publicRepos: data.public_repos,
-			followers: data.followers,
-			following: data.following,
-			avatarUrl: data.avatar_url
-		};
-
-		return { githubStats };
-	} catch {
-		return { githubStats: null };
-	}
+	return {
+		featuredProjects,
+		experiments: experiments.slice(0, 2),
+		proofMetrics
+	};
 };

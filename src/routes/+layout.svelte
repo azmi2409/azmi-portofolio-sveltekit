@@ -2,6 +2,7 @@
 	import '../app.css';
 	import Navigation from '$lib/components/Navigation.svelte';
 	import GtmScript from '$lib/components/GtmScript.svelte';
+	import Footer from '$lib/components/sections/Footer.svelte';
 	import { initTheme } from '$lib/stores/theme';
 	import { onMount } from 'svelte';
 
@@ -27,6 +28,16 @@
 		content="Portfolio of Azmi Muwahid, Senior Full Stack Engineer specializing in AI-powered EdTech solutions. Building scalable web applications with TypeScript, SvelteKit, React, and AWS."
 	/>
 	<meta property="og:url" content="https://azmi.web.id" />
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'Person',
+		name: 'Azmi Muwahid',
+		url: 'https://azmi.web.id',
+		jobTitle: 'AI Systems Engineer',
+		sameAs: ['https://github.com/azmimuwahid', 'https://linkedin.com/in/azmimuwahid']
+	})}</script>`}
 </svelte:head>
 
 <GtmScript />
@@ -34,3 +45,4 @@
 <main class="overflow-x-hidden">
 	{@render children?.()}
 </main>
+<Footer />

@@ -52,7 +52,7 @@
 				<a
 					href={item.href}
 					onclick={() => (mobileMenuOpen = false)}
-					class="flex items-center gap-3 rounded-lg px-4 py-3 text-muted-foreground transition  {isActive(
+					class="flex items-center gap-3 rounded-lg px-4 py-3 text-muted-foreground transition {isActive(
 						item.href
 					)
 						? 'bg-primary/5 text-primary bg-primary/10 dark:text-primary'
@@ -67,7 +67,7 @@
 
 			<a
 				href="/"
-				class="flex items-center gap-3 rounded-lg px-4 py-3 text-muted-foreground transition hover:bg-muted  hover:bg-muted"
+				class="flex items-center gap-3 rounded-lg px-4 py-3 text-muted-foreground transition hover:bg-muted hover:bg-muted"
 			>
 				<Home class="h-5 w-5" />
 				<span class="font-medium">View Site</span>

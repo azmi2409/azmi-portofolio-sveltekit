@@ -23,7 +23,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Handle undefined `deviceMemory` (Chrome-only API) gracefully
     - _Requirements: 11.5, 11.6_
 
-  - [ ]* 1.4 Write property test for low-end device detection
+  - [ ]\* 1.4 Write property test for low-end device detection
     - **Property 9: Low-end device detection**
     - Generate random `hardwareConcurrency` (0–32) and `deviceMemory` (undefined, 0.25–8) values
     - Verify `isLowEndDevice()` returns true iff `hardwareConcurrency <= 2` OR `deviceMemory <= 2`
@@ -42,18 +42,18 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Apply resolved theme via `document.documentElement.classList.toggle('dark', ...)`
     - _Requirements: 3.1, 3.2, 3.3, 3.4, 3.5, 3.6, 3.7_
 
-  - [ ]* 2.2 Write property test for theme mode cycle determinism
+  - [ ]\* 2.2 Write property test for theme mode cycle determinism
     - **Property 1: Theme mode cycle is deterministic**
     - For any starting mode and N toggles, result equals `cycle[(startIndex + N) % 3]`
     - Toggling 3 times returns to the same mode
     - **Validates: Requirements 3.1, 3.2**
 
-  - [ ]* 2.3 Write property test for theme persistence round-trip
+  - [ ]\* 2.3 Write property test for theme persistence round-trip
     - **Property 2: Theme mode persistence round-trip**
     - For any mode, `load(persist(mode)) === mode`
     - **Validates: Requirements 3.5, 3.6**
 
-  - [ ]* 2.4 Write property test for auto mode OS preference resolution
+  - [ ]\* 2.4 Write property test for auto mode OS preference resolution
     - **Property 3: Auto mode resolves to OS preference**
     - For any OS preference (light|dark), `resolveTheme('auto', osPreference) === osPreference`
     - **Validates: Requirements 3.3**
@@ -65,7 +65,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Add `aria-label` describing current mode on the toggle button
     - _Requirements: 3.8, 10.1, 10.4_
 
-  - [ ]* 2.6 Write property test for theme icon matching mode
+  - [ ]\* 2.6 Write property test for theme icon matching mode
     - **Property 4: Theme icon matches mode**
     - For any mode, verify the correct icon is rendered; no two modes share the same icon
     - **Validates: Requirements 3.8**
@@ -87,7 +87,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Include `GtmScript` in `+layout.svelte`
     - _Requirements: 12.1, 12.2, 12.3, 12.4, 12.5_
 
-  - [ ]* 3.3 Write property test for GTM script omission on empty ID
+  - [ ]\* 3.3 Write property test for GTM script omission on empty ID
     - **Property 10: GTM script omitted when ID is empty**
     - For any falsy/whitespace-only GTM ID, verify no `<script>` or `<noscript>` tags are rendered
     - **Validates: Requirements 12.5**
@@ -104,7 +104,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Never let GitHub API failures prevent page rendering
     - _Requirements: 5.1, 5.3, 5.4_
 
-  - [ ]* 5.2 Write property test for GitHub stats display completeness
+  - [ ]\* 5.2 Write property test for GitHub stats display completeness
     - **Property 5: GitHub stats display completeness**
     - For any valid `GitHubStats` with arbitrary non-negative integers, verify all three values appear in rendered output
     - **Validates: Requirements 5.2**
@@ -150,7 +150,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Show `HeroFallback.svelte` otherwise; also show fallback if dynamic import fails (try-catch)
     - _Requirements: 1.1, 1.2, 1.3, 1.4, 1.5, 11.4, 11.5, 11.6, 13.4_
 
-  - [ ]* 7.4 Write property test for accessible icon labels
+  - [ ]\* 7.4 Write property test for accessible icon labels
     - **Property 7: Icon-only interactive elements have accessible labels**
     - Render HeroSection, query all icon-only interactive elements (buttons/anchors with only icon children)
     - Verify each has a non-empty `aria-label`
@@ -182,7 +182,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Apply `inview` action for scroll animation
     - _Requirements: 6.1, 6.2, 6.3, 6.4_
 
-  - [ ]* 8.4 Write property test for project card rendering completeness
+  - [ ]\* 8.4 Write property test for project card rendering completeness
     - **Property 6: Project card rendering completeness**
     - For any valid Project object, verify title, description, and all tech tags appear
     - If liveUrl/sourceUrl present, verify link has `target="_blank"` and `rel="noopener noreferrer"`
@@ -233,7 +233,7 @@ Replace the existing portfolio sections (Hero, About, Portfolio, Contact) with n
     - Serve images in WebP/AVIF formats where applicable
     - _Requirements: 13.1, 13.2, 13.3, 13.4, 13.5, 13.6, 13.7_
 
-  - [ ]* 11.3 Write property test for image optimization attributes
+  - [ ]\* 11.3 Write property test for image optimization attributes
     - **Property 11: Image elements have optimization attributes**
     - Query all `<img>` elements in rendered output
     - Verify each has `width`, `height`, and `loading` attributes

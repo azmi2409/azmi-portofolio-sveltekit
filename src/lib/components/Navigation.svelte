@@ -1,227 +1,84 @@
-<!--
-  Navigation.svelte — Floating glass pill navbar
--->
-
 <script lang="ts">
-	import { onMount } from 'svelte';
-	import { goto } from '$app/navigation';
 	import { page } from '$app/state';
 	import { Menu, X } from '@lucide/svelte';
 
-	interface NavItem {
-		name: string;
-		href: string;
-		sectionId: string;
-		isPage?: boolean; // true = navigate to a page route, false = scroll to section
-	}
-
-	const NAV_ITEMS: NavItem[] = [
-		{ name: 'Home', href: '#hero', sectionId: 'hero' },
-		{ name: 'Stack', href: '#tech-stack', sectionId: 'tech-stack' },
-		{ name: 'GitHub', href: '#github-stats', sectionId: 'github-stats' },
-		{ name: 'Projects', href: '#projects', sectionId: 'projects' },
-		{ name: 'Blog', href: '/blog', sectionId: 'blog', isPage: true },
-		{ name: 'Contact', href: '#contact', sectionId: 'contact' }
+	const navItems = [
+		{ name: 'Home', href: '/' },
+		{ name: 'Projects', href: '/projects' },
+		{ name: 'About', href: '/about' },
+		{ name: 'Lab', href: '/lab' },
+		{ name: 'Contact', href: '/contact' }
 	];
 
-	let isScrolled = $state(false);
-	let activeSection = $state('hero');
 	let mobileOpen = $state(false);
-	let mounted = $state(false);
+	const pathname = $derived(page.url.pathname);
 
-	function scrollToSection(sectionId: string) {
-		document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' });
-		mobileOpen = false;
+	function isActive(href: string) {
+		if (href === '/') return pathname === '/';
+		return pathname === href || pathname.startsWith(`${href}/`);
 	}
-
-	function handleNavClick(e: MouseEvent | KeyboardEvent, item: NavItem) {
-		e.preventDefault();
-		if (item.isPage) {
-			goto(item.href);
-			mobileOpen = false;
-		} else {
-			// If we're on /blog, first go home then scroll
-			if (page.url.pathname !== '/') {
-				goto('/' + item.href);
-			} else {
-				scrollToSection(item.sectionId);
-			}
-		}
-	}
-
-	// Determine if the Blog nav item is active
-	const isBlogActive = $derived(page.url.pathname.startsWith('/blog'));
-
-	onMount(() => {
-		mounted = true;
-		const handleScroll = () => {
-			isScrolled = window.scrollY > 60;
-			const scrollPos = window.scrollY + 120;
-			for (let i = NAV_ITEMS.length - 1; i >= 0; i--) {
-				const el = document.getElementById(NAV_ITEMS[i].sectionId);
-				if (el && el.offsetTop <= scrollPos) {
-					activeSection = NAV_ITEMS[i].sectionId;
-					break;
-				}
-			}
-		};
-		window.addEventListener('scroll', handleScroll, { passive: true });
-		return () => window.removeEventListener('scroll', handleScroll);
-	});
 </script>
 
-<!-- Floating nav pill -->
 <header
-	class="fixed top-4 left-1/2 z-50 transition-all duration-500"
-	style="
-		width: min(calc(100vw - 2rem), 880px);
-		opacity: {mounted ? 1 : 0};
-		transform: translate(-50%, {mounted ? '0' : '-12px'});
-	"
+	class="fixed left-1/2 top-4 z-50 -translate-x-1/2 px-4"
+	style="width: min(calc(100vw - 2rem), 900px);"
 >
 	<nav
-		class="rounded-2xl px-4 py-2.5 transition-all duration-300"
-		style="
-			background: {isScrolled ? 'rgba(15,23,42,0.85)' : 'rgba(15,23,42,0.6)'};
-			backdrop-filter: blur(20px);
-			-webkit-backdrop-filter: blur(20px);
-			border: 1px solid rgba(255,255,255,{isScrolled ? '0.1' : '0.06'});
-			box-shadow: {isScrolled ? '0 8px 32px rgba(0,0,0,0.4)' : '0 4px 16px rgba(0,0,0,0.2)'};
-		"
+		class="rounded-2xl border border-white/[0.08] bg-zinc-950/80 px-4 py-3 shadow-2xl shadow-black/40 backdrop-blur-2xl"
 		aria-label="Main navigation"
 	>
-		<div class="flex items-center justify-between md:grid md:grid-cols-[1fr_auto_1fr]">
-			<!-- Logo: Left -->
-			<div class="flex items-center">
-				<a
-					href="#hero"
-					onclick={(e) => { e.preventDefault(); scrollToSection('hero'); }}
-					class="group flex items-center gap-2.5 cursor-pointer"
-					aria-label="Go to top"
+		<div class="flex items-center justify-between gap-4">
+			<a href="/" class="flex items-center gap-3" aria-label="Azmi Muwahid home">
+				<img src="/logo.png" alt="" class="h-9 w-9 rounded-xl" />
+				<span class="hidden text-sm font-black tracking-tight text-white sm:inline"
+					>Azmi Muwahid</span
 				>
-					<img
-						src="/logo.png"
-						alt="Logo"
-						class="h-9 w-9 rounded-xl object-contain transition-all duration-200 group-hover:scale-105"
-						style="box-shadow: 0 0 12px rgba(255,255,255,0.25);"
-					/>
-					<div class="flex flex-col leading-tight">
-						<span
-							class="text-[15px] font-bold tracking-tight text-white transition-colors duration-200 group-hover:text-zinc-300"
-							style="font-family: var(--font-heading);"
-						>Azmi</span>
-						<span class="text-[10px] font-medium tracking-[0.14em] uppercase" style="color: #a1a1aa;">
-							engineer
-						</span>
-					</div>
-				</a>
-			</div>
+			</a>
 
-			<!-- Desktop nav: Center -->
-			<div class="hidden items-center justify-center gap-1 md:flex">
-				{#each NAV_ITEMS as item}
+			<div class="hidden items-center gap-1 md:flex">
+				{#each navItems as item}
 					<a
 						href={item.href}
-						onclick={(e) => handleNavClick(e, item)}
-						class="relative cursor-pointer rounded-lg px-3.5 py-2 text-sm font-medium transition-all duration-200"
-						style="
-							color: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? '#fafafa' : '#a1a1aa'};
-							background: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? 'rgba(255,255,255,0.08)' : 'transparent'};
-						"
-						onmouseenter={(e) => {
-							if (activeSection !== item.sectionId) {
-								(e.currentTarget as HTMLElement).style.color = '#f4f4f5';
-								(e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.05)';
-							}
-						}}
-						onmouseleave={(e) => {
-							if (activeSection !== item.sectionId) {
-								(e.currentTarget as HTMLElement).style.color = '#a1a1aa';
-								(e.currentTarget as HTMLElement).style.background = 'transparent';
-							}
-						}}
+						class="rounded-xl px-3.5 py-2 text-sm font-semibold transition {isActive(item.href)
+							? 'bg-white/[0.08] text-white'
+							: 'text-zinc-500 hover:bg-white/[0.04] hover:text-zinc-200'}"
 					>
 						{item.name}
-						{#if item.isPage ? isBlogActive : activeSection === item.sectionId}
-							<span
-								class="absolute bottom-1 left-1/2 h-0.5 w-3 -translate-x-1/2 rounded-full"
-								style="background: #fafafa;"
-							></span>
-						{/if}
 					</a>
 				{/each}
 			</div>
 
-			<!-- Right Section: Desktop CTA & Mobile Hamburger -->
-			<div class="flex items-center justify-end gap-3">
-				<!-- Desktop CTA -->
-				<div class="hidden md:block">
-					<a
-						href="#contact"
-						onclick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
-						class="cursor-pointer rounded-xl px-4 py-2 text-sm font-bold transition-all duration-200"
-						style="background: #fafafa; color: #09090b;"
-						onmouseenter={(e) => {
-							(e.currentTarget as HTMLElement).style.boxShadow = '0 0 16px rgba(255,255,255,0.2)';
-							(e.currentTarget as HTMLElement).style.transform = 'translateY(-1px)';
-						}}
-						onmouseleave={(e) => {
-							(e.currentTarget as HTMLElement).style.boxShadow = 'none';
-							(e.currentTarget as HTMLElement).style.transform = 'translateY(0)';
-						}}
-					>
-						Hire Me
-					</a>
-				</div>
+			<a
+				href="mailto:azmimuwahid@gmail.com"
+				class="hidden rounded-xl bg-white px-4 py-2 text-sm font-bold text-zinc-950 transition hover:bg-zinc-200 md:inline-flex"
+			>
+				Hire me
+			</a>
 
-				<!-- Mobile hamburger -->
-				<button
-					class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-xl transition-all duration-200 md:hidden"
-					style="background: rgba(255,255,255,0.05); color: #e2e8f0; border: 1px solid rgba(255,255,255,0.1);"
-					onclick={() => (mobileOpen = !mobileOpen)}
-					aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-					aria-expanded={mobileOpen}
-				>
-					{#if mobileOpen}
-						<X class="h-5 w-5" />
-					{:else}
-						<Menu class="h-5 w-5" />
-					{/if}
-				</button>
-			</div>
+			<button
+				class="rounded-xl border border-white/[0.08] p-2 text-zinc-200 md:hidden"
+				onclick={() => (mobileOpen = !mobileOpen)}
+				aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+				aria-expanded={mobileOpen}
+			>
+				{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
+			</button>
 		</div>
 
-		<!-- Mobile dropdown -->
 		{#if mobileOpen}
-			<div
-				class="mt-2 flex flex-col gap-1 border-t pt-2 md:hidden"
-				style="border-color: rgba(255,255,255,0.07);"
-			>
-				{#each NAV_ITEMS as item}
+			<div class="mt-3 border-t border-white/[0.06] pt-3 md:hidden">
+				{#each navItems as item}
 					<a
 						href={item.href}
-						onclick={(e) => handleNavClick(e, item)}
-						class="cursor-pointer rounded-xl px-4 py-3 text-sm font-medium transition-all duration-200"
-						style="
-							color: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? '#fafafa' : '#a1a1aa'};
-							background: {(item.isPage ? isBlogActive : activeSection === item.sectionId) ? 'rgba(255,255,255,0.08)' : 'transparent'};
-						"
+						onclick={() => (mobileOpen = false)}
+						class="block rounded-xl px-3 py-3 text-sm font-semibold {isActive(item.href)
+							? 'bg-white/[0.08] text-white'
+							: 'text-zinc-400'}"
 					>
 						{item.name}
 					</a>
 				{/each}
-				<a
-					href="#contact"
-					onclick={(e) => { e.preventDefault(); scrollToSection('contact'); }}
-					class="mt-1 cursor-pointer rounded-xl px-4 py-3 text-center text-sm font-bold transition-all duration-200"
-					style="background: #fafafa; color: #09090b;"
-				>
-					Hire Me
-				</a>
 			</div>
 		{/if}
 	</nav>
 </header>
-
-<!-- Spacer for the floating header height -->
-<div class="h-20"></div>

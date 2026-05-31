@@ -7,22 +7,16 @@
 	const currentYear = new Date().getFullYear();
 </script>
 
-<footer class="relative mt-auto overflow-hidden bg-[#0a0f1d] py-16">
+<footer class="relative mt-auto overflow-hidden bg-zinc-950 py-16">
 	<!-- Subtle top border glow -->
-	<div class="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent"></div>
+	<div
+		class="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-zinc-500/20 to-transparent"
+	></div>
 
 	<div class="mx-auto max-w-6xl px-6 relative z-10">
 		<div class="flex flex-col items-center gap-8 text-center sm:gap-10">
-			
 			<!-- Logo -->
-			<a
-				href="#hero"
-				onclick={(e) => { 
-					e.preventDefault(); 
-					document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }); 
-				}}
-				class="group flex flex-col items-center gap-2 cursor-pointer"
-			>
+			<a href="/" class="group flex flex-col items-center gap-2 cursor-pointer">
 				<div
 					class="flex h-12 w-12 items-center justify-center rounded-2xl text-xl font-black transition-all duration-300 group-hover:-translate-y-1"
 					style="background: #fafafa; color: #09090b; font-family: var(--font-heading); box-shadow: 0 0 20px rgba(255,255,255,0.2);"
@@ -38,24 +32,29 @@
 			</a>
 
 			<!-- Navigation Links -->
-			<nav class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm font-medium text-slate-400">
-				<a href="#hero" class="transition-colors hover:text-zinc-300">Home</a>
-				<a href="#tech-stack" class="transition-colors hover:text-zinc-300">Stack</a>
-				<a href="#projects" class="transition-colors hover:text-zinc-300">Projects</a>
-				<a href="/blog" class="transition-colors hover:text-zinc-300">Blog</a>
-				<a href="#contact" class="transition-colors hover:text-zinc-300">Contact</a>
+			<nav
+				class="flex flex-wrap items-center justify-center gap-x-8 gap-y-4 text-sm font-medium text-zinc-400"
+			>
+				<a href="/" class="transition-colors hover:text-zinc-300">Home</a>
+				<a href="/projects" class="transition-colors hover:text-zinc-300">Projects</a>
+				<a href="/about" class="transition-colors hover:text-zinc-300">About</a>
+				<a href="/lab" class="transition-colors hover:text-zinc-300">Lab</a>
+				<a href="/contact" class="transition-colors hover:text-zinc-300">Contact</a>
+				<a href="/blog" class="transition-colors hover:text-zinc-300">Notes</a>
 			</nav>
 
-			<div class="h-px w-full max-w-md bg-gradient-to-r from-transparent via-slate-800 to-transparent"></div>
+			<div
+				class="h-px w-full max-w-md bg-gradient-to-r from-transparent via-zinc-800 to-transparent"
+			></div>
 
 			<!-- Copyright -->
-			<div class="flex flex-col items-center gap-2 text-sm text-slate-500">
+			<div class="flex flex-col items-center gap-2 text-sm text-zinc-500">
 				<p>© {currentYear} Azmi Muwahid. All rights reserved.</p>
 				<p class="text-xs">
-					Designed & Built with <span class="text-zinc-300">SvelteKit</span> + <span class="text-zinc-400">Tailwind CSS</span>
+					Designed & Built with <span class="text-zinc-300">SvelteKit</span> +
+					<span class="text-zinc-400">Tailwind CSS</span>
 				</p>
 			</div>
-			
 		</div>
 	</div>
 </footer>

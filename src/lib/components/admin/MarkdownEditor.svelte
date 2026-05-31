@@ -73,7 +73,7 @@
 <div class="space-y-4">
 	<!-- Toolbar -->
 	<div
-		class="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card p-2  bg-muted"
+		class="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-card p-2 bg-muted"
 	>
 		<button
 			type="button"
@@ -175,15 +175,13 @@
 				bind:this={textarea}
 				bind:value={content}
 				placeholder="Write your content in Markdown..."
-				class="min-h-[500px] w-full rounded-lg border border-border bg-card p-4 font-mono text-sm text-foreground transition focus:border-primary focus:ring-2 focus:ring-ring/20 focus:outline-none  bg-muted text-foreground"
+				class="min-h-[500px] w-full rounded-lg border border-border bg-card p-4 font-mono text-sm text-foreground transition focus:border-primary focus:ring-2 focus:ring-ring/20 focus:outline-none bg-muted text-foreground"
 			></textarea>
 		</div>
 
 		<!-- Preview -->
 		{#if showPreview}
-			<div
-				class="rounded-lg border border-border bg-card p-4  bg-muted"
-			>
+			<div class="rounded-lg border border-border bg-card p-4 bg-muted">
 				<div class="mb-2 text-sm font-semibold text-muted-foreground">Preview</div>
 				<div class="prose prose-sm dark:prose-invert max-w-none">
 					<MarkdownRenderer {content} />
