@@ -49,6 +49,7 @@
 		<!-- Navigation -->
 		<nav class="flex-1 space-y-1 p-4">
 			{#each navItems as item}
+				{@const Icon = item.icon}
 				<a
 					href={item.href}
 					onclick={() => (mobileMenuOpen = false)}
@@ -58,7 +59,7 @@
 						? 'bg-primary/5 text-primary bg-primary/10 dark:text-primary'
 						: 'hover:bg-muted'}"
 				>
-					<svelte:component this={item.icon} class="h-5 w-5" />
+					<Icon class="h-5 w-5" />
 					<span class="font-medium">{item.label}</span>
 				</a>
 			{/each}

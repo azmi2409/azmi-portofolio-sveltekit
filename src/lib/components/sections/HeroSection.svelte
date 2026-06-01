@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { ArrowRight, Github, Linkedin, Mail } from '@lucide/svelte';
+	import { ArrowRight, Mail } from '@lucide/svelte';
+	import { socialLinks, emailLink } from '$lib/config/socialLinks';
 	import type { SiteMetric } from '$lib/types/portfolio';
 
 	let { metrics = [] }: { metrics?: SiteMetric[] } = $props();
@@ -24,7 +25,7 @@
 				I build AI workflows that survive real product constraints.
 			</h1>
 			<p class="mt-8 max-w-2xl text-lg leading-8 text-zinc-400 sm:text-xl">
-				I’m Azmi Muwahid, a senior full stack engineer focused on agentic workflows, RAG, tool
+				I'm Azmi Muwahid, a senior full stack engineer focused on agentic workflows, RAG, tool
 				calling, and real-time interfaces. My work sits where product UX, backend reliability, and
 				model behavior have to line up.
 			</p>
@@ -45,29 +46,26 @@
 				</a>
 			</div>
 
-			<div class="mt-10 flex items-center gap-4 text-zinc-500">
+			<div class="mt-10 flex flex-wrap items-center gap-3 text-zinc-500">
+				{#each socialLinks as social}
+					{@const Icon = social.icon}
+					<a
+						href={social.href}
+						target="_blank"
+						rel="noopener noreferrer"
+						aria-label={social.label}
+						class="rounded-full p-2 transition-all duration-200 hover:bg-white/[0.06] hover:text-zinc-200 hover:scale-110"
+					>
+						<Icon class="h-5 w-5" />
+					</a>
+				{/each}
 				<a
-					href="https://github.com/azmimuwahid"
-					target="_blank"
-					rel="noreferrer"
-					aria-label="GitHub"
-					class="rounded-full p-2 transition hover:bg-white/[0.06] hover:text-zinc-200"
-					><Github class="h-5 w-5" /></a
+					href={emailLink.href}
+					aria-label={emailLink.label}
+					class="rounded-full p-2 transition-all duration-200 hover:bg-white/[0.06] hover:text-zinc-200 hover:scale-110"
 				>
-				<a
-					href="https://linkedin.com/in/azmimuwahid"
-					target="_blank"
-					rel="noreferrer"
-					aria-label="LinkedIn"
-					class="rounded-full p-2 transition hover:bg-white/[0.06] hover:text-zinc-200"
-					><Linkedin class="h-5 w-5" /></a
-				>
-				<a
-					href="mailto:azmimuwahid@gmail.com"
-					aria-label="Email"
-					class="rounded-full p-2 transition hover:bg-white/[0.06] hover:text-zinc-200"
-					><Mail class="h-5 w-5" /></a
-				>
+					<Mail class="h-5 w-5" />
+				</a>
 			</div>
 		</div>
 

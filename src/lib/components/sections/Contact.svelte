@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Mail, Phone, MapPin, Send, Github, Linkedin, Twitter } from '@lucide/svelte';
+	import { Mail, Phone, MapPin, Send } from '@lucide/svelte';
+	import { socialLinks } from '$lib/config/socialLinks';
 	import Button from '$lib/components/ui/button/button.svelte';
 
 	let sectionElement: HTMLElement;
@@ -72,27 +73,6 @@
 			href: '#'
 		}
 	];
-
-	const socialLinks = [
-		{
-			icon: Github,
-			label: 'GitHub',
-			href: 'https://github.com/azmi',
-			color: 'hover:text-gray-900 dark:hover:text-gray-100'
-		},
-		{
-			icon: Linkedin,
-			label: 'LinkedIn',
-			href: 'https://linkedin.com/in/azmi',
-			color: 'hover:text-blue-600'
-		},
-		{
-			icon: Twitter,
-			label: 'Twitter',
-			href: 'https://twitter.com/azmi',
-			color: 'hover:text-blue-400'
-		}
-	];
 </script>
 
 <section id="contact" bind:this={sectionElement} class="bg-muted/30 py-20">
@@ -126,6 +106,7 @@
 					<!-- Contact Info Cards -->
 					<div class="space-y-4">
 						{#each contactInfo as info, index}
+							{@const Icon = info.icon}
 							<a
 								href={info.href}
 								class="group flex items-center rounded-xl border border-border bg-card p-4 transition-all duration-300 hover:-translate-y-1 hover:border-primary/50 hover:shadow-lg"
@@ -134,7 +115,7 @@
 								<div
 									class="mr-4 rounded-lg bg-primary/10 p-3 transition-all duration-300 group-hover:bg-primary group-hover:text-primary-foreground"
 								>
-									<svelte:component this={info.icon} class="h-6 w-6" />
+									<Icon class="h-6 w-6" />
 								</div>
 								<div>
 									<div class="text-sm text-muted-foreground">{info.label}</div>
@@ -149,16 +130,17 @@
 					<!-- Social Links -->
 					<div class="{isVisible ? 'animate-fade-in-up' : 'opacity-0'} animation-delay-1000">
 						<h4 class="mb-4 text-lg font-semibold">Follow Me</h4>
-						<div class="flex space-x-4">
+						<div class="flex flex-wrap gap-3">
 							{#each socialLinks as social}
+								{@const Icon = social.icon}
 								<a
 									href={social.href}
 									target="_blank"
 									rel="noopener noreferrer"
-									class="rounded-lg bg-muted p-3 transition-all duration-300 hover:scale-110 {social.color}"
+									class="rounded-lg bg-muted p-3 transition-all duration-300 hover:scale-110 {social.hoverColor}"
 									aria-label={social.label}
 								>
-									<svelte:component this={social.icon} class="h-6 w-6" />
+									<Icon class="h-6 w-6" />
 								</a>
 							{/each}
 						</div>
@@ -312,16 +294,17 @@
 
 			<div>
 				<h4 class="mb-4 font-semibold">Connect</h4>
-				<div class="flex space-x-4">
+				<div class="flex flex-wrap gap-3">
 					{#each socialLinks as social}
+						{@const Icon = social.icon}
 						<a
 							href={social.href}
 							target="_blank"
 							rel="noopener noreferrer"
-							class="rounded-lg bg-muted p-2 transition-all duration-300 hover:scale-110 {social.color}"
+							class="rounded-lg bg-muted p-2 transition-all duration-300 hover:scale-110 {social.hoverColor}"
 							aria-label={social.label}
 						>
-							<svelte:component this={social.icon} class="h-5 w-5" />
+							<Icon class="h-5 w-5" />
 						</a>
 					{/each}
 				</div>

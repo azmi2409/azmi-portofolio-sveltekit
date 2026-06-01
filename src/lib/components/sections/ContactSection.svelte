@@ -4,7 +4,8 @@
 -->
 
 <script lang="ts">
-	import { Mail, Linkedin, Github, Send, ArrowRight, MapPin, Sparkles } from '@lucide/svelte';
+	import { Mail, Send, ArrowRight, MapPin, Sparkles } from '@lucide/svelte';
+	import { socialLinks } from '$lib/config/socialLinks';
 	import type { InviewOptions } from '$lib/actions/inview';
 
 	let headerVisible = $state(false);
@@ -125,25 +126,19 @@
 				</div>
 
 				<!-- Social Links -->
-				<div class="mt-12 flex items-center gap-4">
-					<a
-						href="https://github.com/azmimuwahid"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-all hover:bg-white hover:text-zinc-900"
-						aria-label="GitHub"
-					>
-						<Github class="h-5 w-5" />
-					</a>
-					<a
-						href="https://linkedin.com/in/azmimuwahid"
-						target="_blank"
-						rel="noopener noreferrer"
-						class="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-all hover:bg-[#0A66C2] hover:text-white"
-						aria-label="LinkedIn"
-					>
-						<Linkedin class="h-5 w-5" />
-					</a>
+				<div class="mt-12 flex flex-wrap items-center gap-3">
+					{#each socialLinks as social}
+						{@const Icon = social.icon}
+						<a
+							href={social.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							class="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-all duration-200 {social.hoverColor} hover:scale-110"
+							aria-label={social.label}
+						>
+							<Icon class="h-5 w-5" />
+						</a>
+					{/each}
 				</div>
 			</div>
 

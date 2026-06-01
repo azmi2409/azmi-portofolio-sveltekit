@@ -9,6 +9,13 @@
 		content="Experiments and research notes on agentic AI systems, realtime audio, RAG, and product engineering."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/lab" />
+	<meta property="og:title" content="Lab — Azmi Muwahid" />
+	<meta property="og:description" content="Experiments and research notes on agentic AI systems, realtime audio, RAG, and product engineering." />
+	<meta property="og:url" content="https://azmi.web.id/lab" />
+	<meta property="og:image" content="https://azmi.web.id/logo.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Lab — Azmi Muwahid" />
+	<meta name="twitter:image" content="https://azmi.web.id/logo.png" />
 </svelte:head>
 
 <section class="px-6 py-32">

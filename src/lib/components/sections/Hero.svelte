@@ -4,7 +4,8 @@
 	import { Motion, AnimatePresence } from 'svelte-motion';
 	import Button from '$lib/components/ui/button/button.svelte';
 	import ThreeBackground from '$lib/components/ThreeBackground.svelte';
-	import { ChevronDown, Github, Linkedin, Mail } from '@lucide/svelte';
+	import { ChevronDown, Mail } from '@lucide/svelte';
+	import { socialLinks, emailLink } from '$lib/config/socialLinks';
 
 	let mounted = false;
 	let mouseX = 0;
@@ -159,28 +160,29 @@
 				</Motion>
 
 				<!-- Social links -->
-				<Motion let:motion variants={itemVariants}>
-					<div use:motion class="mt-12 flex justify-center space-x-6">
+			<Motion let:motion variants={itemVariants}>
+				<div use:motion class="mt-12 flex flex-wrap justify-center gap-4">
+					{#each socialLinks as social}
+						{@const Icon = social.icon}
 						<a
-							href="https://github.com/azmi2409"
+							href={social.href}
+							target="_blank"
+							rel="noopener noreferrer"
+							aria-label={social.label}
 							class="rounded-full bg-muted p-3 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
 						>
-							<Github class="h-6 w-6" />
+							<Icon class="h-6 w-6" />
 						</a>
-						<a
-							href="https://linkedin.com/in/azmimuwahid"
-							class="rounded-full bg-muted p-3 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
-						>
-							<Linkedin class="h-6 w-6" />
-						</a>
-						<a
-							href="mailto:hello@azmi.web.id"
-							class="rounded-full bg-muted p-3 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
-						>
-							<Mail class="h-6 w-6" />
-						</a>
-					</div>
-				</Motion>
+					{/each}
+					<a
+						href={emailLink.href}
+						aria-label={emailLink.label}
+						class="rounded-full bg-muted p-3 transition-all duration-300 hover:scale-110 hover:bg-primary hover:text-primary-foreground"
+					>
+						<Mail class="h-6 w-6" />
+					</a>
+				</div>
+			</Motion>
 			</div>
 		</div>
 	</Motion>

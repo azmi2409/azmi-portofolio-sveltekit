@@ -5,6 +5,13 @@
 		content="About Azmi Muwahid, a senior full stack engineer focused on practical AI systems, agentic workflows, RAG, and realtime product interfaces."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/about" />
+	<meta property="og:title" content="About — Azmi Muwahid" />
+	<meta property="og:description" content="About Azmi Muwahid, a senior full stack engineer focused on practical AI systems, agentic workflows, RAG, and realtime product interfaces." />
+	<meta property="og:url" content="https://azmi.web.id/about" />
+	<meta property="og:image" content="https://azmi.web.id/logo.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="About — Azmi Muwahid" />
+	<meta name="twitter:image" content="https://azmi.web.id/logo.png" />
 </svelte:head>
 
 <section class="px-6 py-32">

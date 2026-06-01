@@ -15,6 +15,11 @@
 		property="og:description"
 		content="Deep technical case studies with problem, constraints, architecture, decisions, and outcomes."
 	/>
+	<meta property="og:url" content="https://azmi.web.id/projects" />
+	<meta property="og:image" content="https://azmi.web.id/logo.png" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Projects — Azmi Muwahid" />
+	<meta name="twitter:image" content="https://azmi.web.id/logo.png" />
 	<link rel="canonical" href="https://azmi.web.id/projects" />
 </svelte:head>
 
