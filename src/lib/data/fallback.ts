@@ -20,7 +20,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 1,
+		sortOrder: 2,
 		problem:
 			'Most coding tutors either wait for a prompt or reveal too much. The product needed to detect when a learner was stuck and intervene with the smallest useful hint.',
 		constraints: [
@@ -53,7 +53,7 @@ export const fallbackProjects: Project[] = [
 		name: 'FutureLab AI Workflows',
 		slug: 'futurelab-ai-workflows',
 		published: true,
-		featured: true,
+		featured: false,
 		year: '2023-2025',
 		role: 'Senior Full Stack Engineer',
 		type: 'B2B mentoring and learning platform',
@@ -66,7 +66,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: 'https://futurelab.my',
 		githubUrl: undefined,
-		sortOrder: 2,
+		sortOrder: 5,
 		problem:
 			'Mentoring sessions produced valuable context, but too much of it disappeared into manual notes and follow-up work.',
 		constraints: [
@@ -99,7 +99,7 @@ export const fallbackProjects: Project[] = [
 		name: 'Portfolio Content System',
 		slug: 'portfolio-content-system',
 		published: true,
-		featured: true,
+		featured: false,
 		year: '2026',
 		role: 'Designer / Engineer',
 		type: 'Personal knowledge and case-study CMS',
@@ -112,7 +112,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: 'https://azmi.web.id',
 		githubUrl: 'https://github.com/azmimuwahid',
-		sortOrder: 3,
+		sortOrder: 6,
 		problem:
 			'The previous one-page portfolio looked polished but did not provide enough depth for senior engineering evaluation.',
 		constraints: [
@@ -153,7 +153,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: 'https://kilat.store',
 		githubUrl: undefined,
-		sortOrder: 4,
+		sortOrder: 1,
 		problem:
 			'Indonesian MSMEs lack the technical resources to design and build websites, while generic builders are too complex or expensive.',
 		constraints: [
@@ -186,7 +186,7 @@ export const fallbackProjects: Project[] = [
 		name: 'AI Mentor Matcher',
 		slug: 'ai-mentor-matcher',
 		published: true,
-		featured: true,
+		featured: false,
 		year: '2024',
 		role: 'AI Developer',
 		type: 'Semantic search & matching engine',
@@ -199,7 +199,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 5,
+		sortOrder: 7,
 		problem:
 			'Traditional keyword matching fails when mentors and mentees use different terminology for similar concepts or career aspirations.',
 		constraints: [
@@ -253,7 +253,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 6,
+		sortOrder: 4,
 		problem:
 			'Content creators spend hours manually transcription-cropping videos for vertical formats, struggle with local slang transcriptions, and face high compute bills.',
 		constraints: [
@@ -299,7 +299,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 7,
+		sortOrder: 3,
 		problem:
 			'CRMs require excessive manual data entry, while AI automation lacks transparency, resulting in lost user trust when agents make mistakes.',
 		constraints: [

@@ -4,7 +4,9 @@ import { canUseNotion, getDataSourceId, notion, NOTION_PROJECTS_DATABASE_ID } fr
 import { mapPageToProject } from './mappers';
 
 export async function getProjects(): Promise<Project[]> {
-	if (!canUseNotion(NOTION_PROJECTS_DATABASE_ID) || !notion) return fallbackProjects;
+	if (!canUseNotion(NOTION_PROJECTS_DATABASE_ID) || !notion) {
+		return [...fallbackProjects].sort((a, b) => a.sortOrder - b.sortOrder);
+	}
 
 	try {
 		const dataSourceId = await getDataSourceId(NOTION_PROJECTS_DATABASE_ID);
@@ -21,7 +23,7 @@ export async function getProjects(): Promise<Project[]> {
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
-	return (await getProjects()).filter((project) => project.featured).slice(0, 3);
+	return (await getProjects()).filter((project) => project.featured).slice(0, 4);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {
