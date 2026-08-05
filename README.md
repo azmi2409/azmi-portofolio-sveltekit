@@ -37,7 +37,7 @@ Core framework:
 - Svelte 5 runes
 - TypeScript
 - Vite
-- Netlify adapter
+- Vercel adapter
 
 Styling and UI:
 
@@ -77,7 +77,7 @@ High-level flow:
 
 ```text
 Browser
-	-> Netlify durable CDN cache
+	-> Vercel CDN cache
 	-> cached SvelteKit response (fast path)
 	-> background revalidation after 1 hour
 	-> +page.server.ts
@@ -138,7 +138,7 @@ Do not create `PUBLIC_NOTION_TOKEN`. Any variable prefixed with `PUBLIC_` can be
 4. Create the required Notion databases.
 5. Share each database with the integration using Notion's `Add connections` menu.
 6. Copy each database ID from the database URL.
-7. Add the IDs to `.env` locally and to Netlify environment variables for production.
+7. Add the IDs to `.env` locally and to Vercel environment variables for production.
 
 Database ID example:
 
@@ -299,14 +299,14 @@ This repo currently uses `yarn.lock`. Prefer `yarn install` for dependency insta
 
 ## Deployment
 
-The app uses `@sveltejs/adapter-netlify`.
+The app uses `@sveltejs/adapter-vercel`.
 
-Netlify setup:
+Vercel setup:
 
-1. Connect the GitHub repository to Netlify.
+1. Import the GitHub repository into Vercel.
 2. Set the build command to `npm run build` or `yarn build`.
-3. Set the publish/output directory according to Netlify's SvelteKit adapter defaults.
-4. Add all private env vars in Netlify project settings.
+3. Leave the framework preset as SvelteKit and let Vercel detect the output settings.
+4. Add all private env vars in Vercel project settings.
 5. Deploy.
 
 ### ISR / CDN revalidation
@@ -315,10 +315,10 @@ Notion-backed routes use `src/lib/server/isr.ts` to set shared-cache headers:
 
 - Responses remain fresh at the CDN for 1 hour.
 - A stale response can be served instantly for up to 24 hours while it refreshes in the background.
-- Netlify's `durable` cache shares generated responses across edge locations and reduces repeated function invocations.
+- Vercel shares cached responses across its CDN and reduces repeated function invocations.
 - Browsers always revalidate, so the long-lived policy applies to the shared CDN rather than trapping stale pages in a visitor's local cache.
 
-This keeps the data layer server-side and makes a future Vercel migration small: move to the Vercel adapter and adjust the platform-specific header in the shared ISR helper.
+This keeps the data layer server-side while serving repeat visits from Vercel's CDN.
 
 Required production env vars:
 
@@ -424,7 +424,7 @@ npm run preview
 ## Repository Notes
 
 - Main branch deploys to production.
-- The site is currently Netlify-oriented.
+- The site is configured for Vercel.
 - Keep CMS/API secrets out of client code.
 - Keep content changes in Notion when possible.
 - Keep UI/system changes in Svelte components.

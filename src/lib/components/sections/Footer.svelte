@@ -145,7 +145,7 @@
 			<p class="text-xs text-zinc-700">
 				Built with <span class="text-zinc-500">SvelteKit</span> ·
 				<span class="text-zinc-500">Tailwind CSS</span> ·
-				<span class="text-zinc-500">Deployed on Netlify</span>
+				<span class="text-zinc-500">Deployed on Vercel</span>
 			</p>
 		</div>
 	</div>
