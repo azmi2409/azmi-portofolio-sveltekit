@@ -1,5 +1,5 @@
 <script lang="ts">
-	import { ArrowDownRight, ArrowRight, Mail } from '@lucide/svelte';
+	import { ArrowDownRight, ArrowRight, FileText, Mail } from '@lucide/svelte';
 	import { socialLinks, emailLink } from '$lib/config/socialLinks';
 	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 	import type { SiteMetric } from '$lib/types/portfolio';
@@ -32,12 +32,21 @@
 					interfaces where model behavior, product UX, and backend reliability have to agree.
 				</p>
 
-				<div class="mt-10 flex flex-col gap-3 sm:flex-row">
-					<a class="button-primary group" href="/projects">
-						Explore case studies
+				<div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
+					<a class="button-primary group" href="#projects">
+						View selected work
 						<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
 					</a>
-					<a class="button-secondary" href="/contact"> Start a conversation </a>
+					<a
+						class="button-secondary"
+						href="https://linkedin.com/in/azmimuwahid"
+						target="_blank"
+						rel="noopener noreferrer"
+					>
+						<FileText class="h-4 w-4" />
+						Résumé / LinkedIn
+					</a>
+					<a class="hero-contact-link" href="/contact">Contact</a>
 				</div>
 
 				<div class="mt-9 flex items-center gap-2 text-zinc-500">
@@ -131,6 +140,21 @@
 	.metric-item {
 		padding: 1.2rem 1.4rem;
 		border-right: 1px solid rgba(255, 255, 255, 0.07);
+	}
+
+	.hero-contact-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		padding: 0.75rem 0.9rem;
+		font-size: 0.875rem;
+		font-weight: 700;
+		color: var(--muted-foreground);
+		transition: color 160ms ease;
+	}
+
+	.hero-contact-link:hover {
+		color: var(--foreground);
 	}
 
 	.metric-item:last-child {

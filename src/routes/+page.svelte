@@ -33,7 +33,7 @@
 </svelte:head>
 
 <HeroSection metrics={data.proofMetrics} />
+<ProjectsSection projects={data.featuredProjects} />
 <AgenticWorkflowMap />
 <TechStackSection />
-<ProjectsSection projects={data.featuredProjects} />
 <ContactSection />

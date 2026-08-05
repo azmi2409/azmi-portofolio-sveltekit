@@ -9,12 +9,15 @@ export interface Project {
 	featured: boolean;
 	year: string;
 	role: string;
+	ownership: string[];
 	type: string;
 	status: string;
 	stack: string[];
 	summary: string;
 	outcome: string;
 	cover?: string;
+	coverAlt?: string;
+	coverCaption?: string;
 	liveUrl?: string;
 	githubUrl?: string;
 	sortOrder: number;

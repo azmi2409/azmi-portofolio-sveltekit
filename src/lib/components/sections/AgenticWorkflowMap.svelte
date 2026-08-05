@@ -23,7 +23,7 @@
 	];
 
 	let active = $state(0);
-	let tabButtons: HTMLButtonElement[] = [];
+	let tabButtons = $state<HTMLButtonElement[]>([]);
 
 	function selectWithKeyboard(event: KeyboardEvent, index: number) {
 		let next = index;

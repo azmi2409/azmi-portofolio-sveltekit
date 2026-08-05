@@ -84,17 +84,67 @@
 			</aside>
 		</header>
 
-		{#if project.cover}
-			<img
-				src={project.cover}
-				alt=""
-				class="mt-12 max-h-[34rem] w-full rounded-[2rem] border border-white/[0.08] object-cover"
-			/>
-		{:else}
-			<div
-				class="project-placeholder mt-12 h-[24rem] rounded-[2rem] border border-white/[0.08]"
-			></div>
+		{#if project.ownership.length}
+			<section
+				class="mt-12 grid gap-8 rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8 lg:grid-cols-[18rem_1fr]"
+				aria-labelledby="ownership-heading"
+			>
+				<div>
+					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">My role</p>
+					<p class="mt-3 text-xl font-bold text-zinc-100">{project.role}</p>
+				</div>
+				<div>
+					<h2 id="ownership-heading" class="text-2xl font-black tracking-tight text-zinc-50">
+						What I personally owned
+					</h2>
+					<ul class="mt-5 grid gap-3 sm:grid-cols-2">
+						{#each project.ownership as item}
+							<li class="flex gap-3 text-sm leading-6 text-zinc-400">
+								<span class="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-emerald-300/80"></span>
+								<span>{item}</span>
+							</li>
+						{/each}
+					</ul>
+				</div>
+			</section>
 		{/if}
+
+		<section class="mt-12" aria-labelledby="product-heading">
+			<div class="mb-5 flex flex-wrap items-end justify-between gap-3">
+				<div>
+					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">Product</p>
+					<h2 id="product-heading" class="mt-2 text-3xl font-black tracking-tight text-zinc-50">
+						The interface in context
+					</h2>
+				</div>
+				{#if project.coverCaption}
+					<p class="max-w-xl text-sm leading-6 text-zinc-500">{project.coverCaption}</p>
+				{/if}
+			</div>
+
+			{#if project.cover}
+				<figure class="overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03]">
+					<img
+						src={project.cover}
+						alt={project.coverAlt ?? `${project.name} product interface`}
+						class="block h-auto w-full"
+						decoding="async"
+					/>
+				</figure>
+			{:else}
+				<div
+					class="rounded-[2rem] border border-dashed border-white/[0.1] bg-white/[0.02] px-6 py-16 text-center"
+				>
+					<p class="font-mono text-[0.64rem] tracking-[0.18em] text-zinc-600 uppercase">
+						Private product
+					</p>
+					<p class="mx-auto mt-3 max-w-lg text-sm leading-6 text-zinc-500">
+						The product interface is not public yet. This case study shows the verified scope,
+						constraints, and technical decisions without fabricating a demo.
+					</p>
+				</div>
+			{/if}
+		</section>
 
 		<section class="mt-12 rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8">
 			<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">Outcome</p>

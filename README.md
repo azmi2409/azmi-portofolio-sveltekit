@@ -154,23 +154,26 @@ Create a Notion database for projects and set `NOTION_PROJECTS_DATABASE_ID`.
 
 Required project properties:
 
-| Property     | Notion type    | Notes                                             |
-| ------------ | -------------- | ------------------------------------------------- |
-| `Name`       | Title          | Project title                                     |
-| `Slug`       | Text           | URL slug, for example `futurelab-ai-workflows`    |
-| `Published`  | Checkbox       | Must be checked to appear on the site             |
-| `Featured`   | Checkbox       | Shows on homepage when checked                    |
-| `Year`       | Date or Text   | Displayed on cards and case-study pages           |
-| `Role`       | Text or Select | Your role on the project                          |
-| `Type`       | Text or Select | Product/category label                            |
-| `Status`     | Text or Select | Example: `Production`, `Prototype`, `Shipped MVP` |
-| `Stack`      | Multi-select   | Technologies used                                 |
-| `Summary`    | Text           | Short project description                         |
-| `Outcome`    | Text           | Specific, credible result or learning             |
-| `Cover`      | Files or URL   | Optional cover image                              |
-| `Live URL`   | URL            | Optional production URL                           |
-| `GitHub URL` | URL            | Optional source URL                               |
-| `Sort Order` | Number         | Lower numbers appear first                        |
+| Property        | Notion type    | Notes                                             |
+| --------------- | -------------- | ------------------------------------------------- |
+| `Name`          | Title          | Project title                                     |
+| `Slug`          | Text           | URL slug, for example `futurelab-ai-workflows`    |
+| `Published`     | Checkbox       | Must be checked to appear on the site             |
+| `Featured`      | Checkbox       | Shows on homepage when checked                    |
+| `Year`          | Date or Text   | Displayed on cards and case-study pages           |
+| `Role`          | Text or Select | Your role on the project                          |
+| `Ownership`     | Text           | What you personally owned, one item per line      |
+| `Type`          | Text or Select | Product/category label                            |
+| `Status`        | Text or Select | Example: `Production`, `Prototype`, `Shipped MVP` |
+| `Stack`         | Multi-select   | Technologies used                                 |
+| `Summary`       | Text           | Short project description                         |
+| `Outcome`       | Text           | Specific, credible result or learning             |
+| `Cover`         | Files or URL   | Optional cover image                              |
+| `Cover Alt`     | Text           | Short accessible description of the product image |
+| `Cover Caption` | Text           | Optional context for what the image shows         |
+| `Live URL`      | URL            | Optional production URL                           |
+| `GitHub URL`    | URL            | Optional source URL                               |
+| `Sort Order`    | Number         | Lower numbers appear first                        |
 
 Optional project properties used on case-study pages:
 

@@ -10,6 +10,11 @@ export const fallbackProjects: Project[] = [
 		featured: true,
 		year: '2025',
 		role: 'Lead Engineer / AI Systems Architect',
+		ownership: [
+			'Designed the event-driven coaching loop and WebSocket session flow.',
+			'Built the intervention policy around staged nudges, hints, and explanations.',
+			'Made agent behavior inspectable through a session timeline.'
+		],
 		type: 'Real-time AI coaching platform',
 		status: 'Shipped MVP',
 		stack: ['SvelteKit', 'TypeScript', 'WebSockets', 'Google Cloud Run', 'LLM tool calls'],
@@ -20,7 +25,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 2,
+		sortOrder: 3,
 		problem:
 			'Most coding tutors either wait for a prompt or reveal too much. The product needed to detect when a learner was stuck and intervene with the smallest useful hint.',
 		constraints: [
@@ -53,9 +58,14 @@ export const fallbackProjects: Project[] = [
 		name: 'FutureLab AI Workflows',
 		slug: 'futurelab-ai-workflows',
 		published: true,
-		featured: false,
+		featured: true,
 		year: '2023-2025',
 		role: 'Senior Full Stack Engineer',
+		ownership: [
+			'Built the Rails service boundaries and background jobs for transcription and summarization.',
+			'Integrated review states into existing operations workflows.',
+			'Added test coverage around AI edge cases and failure paths.'
+		],
 		type: 'B2B mentoring and learning platform',
 		status: 'Production',
 		stack: ['Ruby on Rails', 'PostgreSQL', 'AWS', 'OpenAI', 'RSpec'],
@@ -63,10 +73,13 @@ export const fallbackProjects: Project[] = [
 			'AI-assisted transcription, summarization, and workflow automation for mentoring operations and B2B delivery.',
 		outcome:
 			'Helped product and operations teams turn session data into summaries, follow-ups, and delivery visibility.',
-		cover: undefined,
+		cover: '/images/projects/futurelab.png',
+		coverAlt:
+			'FutureLab mentoring platform homepage showing its business mentoring and coaching product.',
+		coverCaption: 'FutureLab’s live mentoring platform for organizations in Southeast Asia.',
 		liveUrl: 'https://futurelab.my',
 		githubUrl: undefined,
-		sortOrder: 5,
+		sortOrder: 2,
 		problem:
 			'Mentoring sessions produced valuable context, but too much of it disappeared into manual notes and follow-up work.',
 		constraints: [
@@ -102,6 +115,11 @@ export const fallbackProjects: Project[] = [
 		featured: false,
 		year: '2026',
 		role: 'Designer / Engineer',
+		ownership: [
+			'Designed and built the portfolio experience end to end.',
+			'Implemented the server-only Notion content layer and local fallback data.',
+			'Configured ISR caching and the Vercel deployment.'
+		],
 		type: 'Personal knowledge and case-study CMS',
 		status: 'Live',
 		stack: ['SvelteKit', 'Notion API', 'Server load functions', 'Tailwind CSS'],
@@ -109,7 +127,10 @@ export const fallbackProjects: Project[] = [
 			'A server-rendered portfolio architecture that keeps project data in Notion while preserving a fast custom frontend.',
 		outcome:
 			'Creates a maintainable publishing workflow for case studies, experiments, and technical notes without exposing Notion credentials.',
-		cover: undefined,
+		cover: '/images/projects/portfolio.png',
+		coverAlt:
+			'Azmi Muwahid portfolio homepage with the AI systems headline and interactive system model.',
+		coverCaption: 'The live portfolio interface and its interactive AI systems model.',
 		liveUrl: 'https://azmi.web.id',
 		githubUrl: 'https://github.com/azmimuwahid',
 		sortOrder: 6,
@@ -143,6 +164,11 @@ export const fallbackProjects: Project[] = [
 		featured: true,
 		year: '2024-2025',
 		role: 'Full Stack Engineer & AI Integrator',
+		ownership: [
+			'Designed the shared block schema used by the editor and AI generation pipeline.',
+			'Built the visual editing flow and the Rails background-generation path.',
+			'Provisioned the Alibaba Cloud delivery infrastructure with Terraform.'
+		],
 		type: 'AI-Powered Website Builder',
 		status: 'Production-ready',
 		stack: [
@@ -196,6 +222,11 @@ export const fallbackProjects: Project[] = [
 		featured: false,
 		year: '2024',
 		role: 'AI Developer',
+		ownership: [
+			'Designed the hybrid semantic and full-text matching strategy.',
+			'Implemented pgvector similarity queries through Prisma.',
+			'Added fallback behavior for API and database limits.'
+		],
 		type: 'Semantic search & matching engine',
 		status: 'Prototype',
 		stack: ['Next.js', 'OpenAI API', 'Prisma', 'PostgreSQL', 'pgvector'],
@@ -242,6 +273,11 @@ export const fallbackProjects: Project[] = [
 		featured: true,
 		year: '2025',
 		role: 'Full Stack Engineer',
+		ownership: [
+			'Designed the Step Functions workflow for extraction, transcription, curation, and rendering.',
+			'Built the Next.js product flow and timestamped subtitle experience.',
+			'Implemented the Lambda, DynamoDB, and FFmpeg processing path.'
+		],
 		type: 'Automated video cropping platform',
 		status: 'Shipped Beta',
 		stack: [
@@ -260,7 +296,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 4,
+		sortOrder: 5,
 		problem:
 			'Content creators spend hours manually transcription-cropping videos for vertical formats, struggle with local slang transcriptions, and face high compute bills.',
 		constraints: [
@@ -295,6 +331,11 @@ export const fallbackProjects: Project[] = [
 		featured: true,
 		year: '2026',
 		role: 'Lead Full Stack & AI Engineer',
+		ownership: [
+			'Built the application foundation across authentication, tRPC, and the data layer.',
+			'Designed the MCP lead-extraction tools and agent workflow.',
+			'Implemented the inbox telemetry that exposes tool activity to operators.'
+		],
 		type: 'Agentic B2B CRM',
 		status: 'Active Beta',
 		stack: [
@@ -312,7 +353,7 @@ export const fallbackProjects: Project[] = [
 		cover: undefined,
 		liveUrl: undefined,
 		githubUrl: undefined,
-		sortOrder: 3,
+		sortOrder: 4,
 		problem:
 			'CRMs require excessive manual data entry, while AI automation lacks transparency, resulting in lost user trust when agents make mistakes.',
 		constraints: [

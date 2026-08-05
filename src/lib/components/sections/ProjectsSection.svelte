@@ -44,14 +44,17 @@
 						{#if project.cover}
 							<img
 								src={project.cover}
-								alt=""
+								alt={project.coverAlt ?? `${project.name} product interface`}
 								loading="lazy"
 								decoding="async"
-								class="h-full w-full object-cover transition-transform duration-700 group-hover:scale-[1.035]"
+								class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.025]"
 							/>
 							<div
 								class="absolute inset-0 bg-gradient-to-t from-[#0b0c0d] via-transparent to-transparent"
 							></div>
+							{#if project.coverCaption}
+								<span class="product-proof-label">Live product</span>
+							{/if}
 						{:else}
 							<div class="project-placeholder relative h-full overflow-hidden">
 								<div class="visual-grid"></div>
@@ -261,5 +264,21 @@
 	.project-action:hover {
 		border-color: rgba(255, 255, 255, 0.18);
 		color: #f4f4f5;
+	}
+
+	.product-proof-label {
+		position: absolute;
+		left: 1rem;
+		top: 1rem;
+		padding: 0.4rem 0.65rem;
+		border: 1px solid rgba(255, 255, 255, 0.14);
+		border-radius: 999px;
+		background: rgba(9, 10, 11, 0.72);
+		backdrop-filter: blur(10px);
+		font-family: var(--font-mono);
+		font-size: 0.55rem;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: #d4d4d8;
 	}
 </style>
