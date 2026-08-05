@@ -28,9 +28,10 @@
 			?.setAttribute('content', resolved === 'dark' ? '#09090b' : '#f7f7f5');
 	}
 
-	function updatePreference() {
-		localStorage.setItem('theme-preference', preference);
-		applyTheme(preference);
+	function setPreference(value: ThemePreference) {
+		preference = value;
+		localStorage.setItem('theme-preference', value);
+		applyTheme(value);
 	}
 
 	onMount(() => {
@@ -47,74 +48,104 @@
 	});
 </script>
 
-<label class="theme-control">
-	<span class="sr-only">Color theme</span>
-	<span class="theme-icon" aria-hidden="true">
-		{#if preference === 'light'}
-			<Sun class="h-3.5 w-3.5" />
-		{:else if preference === 'dark'}
-			<Moon class="h-3.5 w-3.5" />
-		{:else}
-			<Monitor class="h-3.5 w-3.5" />
-		{/if}
-	</span>
-	<select bind:value={preference} onchange={updatePreference} aria-label="Color theme">
-		<option value="system">System</option>
-		<option value="light">Light</option>
-		<option value="dark">Dark</option>
-	</select>
-</label>
+<div class="theme-toggle" role="group" aria-label="Color theme">
+	<button
+		type="button"
+		class:active={preference === 'system'}
+		aria-pressed={preference === 'system'}
+		aria-label="Use system theme"
+		title="System theme"
+		onclick={() => setPreference('system')}
+	>
+		<Monitor class="h-3.5 w-3.5" aria-hidden="true" />
+	</button>
+	<button
+		type="button"
+		class:active={preference === 'light'}
+		aria-pressed={preference === 'light'}
+		aria-label="Use light theme"
+		title="Light theme"
+		onclick={() => setPreference('light')}
+	>
+		<Sun class="h-3.5 w-3.5" aria-hidden="true" />
+	</button>
+	<button
+		type="button"
+		class:active={preference === 'dark'}
+		aria-pressed={preference === 'dark'}
+		aria-label="Use dark theme"
+		title="Dark theme"
+		onclick={() => setPreference('dark')}
+	>
+		<Moon class="h-3.5 w-3.5" aria-hidden="true" />
+	</button>
+</div>
 
 <style>
-	.theme-control {
+	.theme-toggle {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3rem;
+		gap: 0.1rem;
 		min-height: 2.15rem;
 		border: 1px solid rgba(255, 255, 255, 0.09);
 		border-radius: 999px;
 		background: rgba(255, 255, 255, 0.035);
-		padding: 0 0.55rem;
-		color: #d4d4d8;
+		padding: 0.16rem;
 		transition:
 			border-color 160ms ease,
 			background-color 160ms ease;
 	}
 
-	.theme-control:hover {
+	.theme-toggle:hover {
 		border-color: rgba(157, 229, 213, 0.3);
-		background: rgba(255, 255, 255, 0.06);
 	}
 
-	.theme-icon {
+	button {
 		display: grid;
+		width: 1.75rem;
+		height: 1.75rem;
 		place-items: center;
+		border: 0;
+		border-radius: 999px;
+		background: transparent;
+		color: #71717a;
+		cursor: pointer;
+		transition:
+			background-color 160ms ease,
+			color 160ms ease,
+			box-shadow 160ms ease;
+	}
+
+	button:hover {
+		color: #d4d4d8;
+	}
+
+	button.active {
+		background: rgba(157, 229, 213, 0.13);
+		box-shadow: inset 0 0 0 1px rgba(157, 229, 213, 0.16);
 		color: #9be5d5;
 	}
 
-	select {
-		max-width: 5.25rem;
-		appearance: none;
-		border: 0;
-		background: transparent;
-		padding: 0.1rem 0.1rem 0.1rem 0;
-		font: 600 0.7rem/1 var(--font-sans);
-		color: inherit;
-		cursor: pointer;
-	}
-
-	select:focus {
-		outline: none;
-	}
-
-	:global(html.light) .theme-control {
+	:global(html.light) .theme-toggle {
 		border-color: rgba(24, 24, 27, 0.13);
 		background: rgba(24, 24, 27, 0.035);
-		color: #3f3f46;
 	}
 
-	:global(html.light) .theme-control:hover {
+	:global(html.light) .theme-toggle:hover {
 		border-color: rgba(42, 115, 100, 0.38);
-		background: rgba(24, 24, 27, 0.06);
+	}
+
+	:global(html.light) button {
+		color: #71717a;
+	}
+
+	:global(html.light) button:hover {
+		color: #18181b;
+	}
+
+	:global(html.light) button.active {
+		background: rgba(42, 115, 100, 0.11);
+		box-shadow: inset 0 0 0 1px rgba(42, 115, 100, 0.14);
+		color: #2a7364;
 	}
 </style>

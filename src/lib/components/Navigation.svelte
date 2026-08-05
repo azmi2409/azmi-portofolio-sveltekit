@@ -36,8 +36,12 @@
 		: 'w-[min(60rem,calc(100vw-1.5rem))]'}"
 >
 	<nav class="nav-shell" aria-label="Main navigation">
-		<div class="flex items-center justify-between gap-4">
-			<a href="/" class="group flex items-center gap-2.5" aria-label="Azmi Muwahid home">
+		<div class="grid grid-cols-[1fr_auto] items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
+			<a
+				href="/"
+				class="group flex items-center gap-2.5 justify-self-start"
+				aria-label="Azmi Muwahid home"
+			>
 				<span class="brand-mark">AM</span>
 				<span class="hidden text-sm font-bold tracking-[-0.02em] text-zinc-100 sm:inline"
 					>Azmi Muwahid</span
@@ -56,14 +60,14 @@
 				{/each}
 			</div>
 
-			<div class="hidden items-center gap-2 md:flex">
+			<div class="hidden items-center gap-2 justify-self-end md:flex">
 				<ThemeToggle />
 				<a href="mailto:azmimuwahid@gmail.com" class="nav-cta">
 					Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
 				</a>
 			</div>
 
-			<div class="flex items-center gap-2 md:hidden">
+			<div class="flex items-center gap-2 justify-self-end md:hidden">
 				<ThemeToggle />
 				<button
 					class="grid h-9 w-9 place-items-center rounded-full border border-white/[0.09] text-zinc-200"
@@ -170,7 +174,9 @@
 	}
 
 	.nav-cta {
+		display: inline-flex;
 		align-items: center;
+		justify-content: center;
 		gap: 0.35rem;
 		min-height: 2.15rem;
 		border-radius: 999px;
