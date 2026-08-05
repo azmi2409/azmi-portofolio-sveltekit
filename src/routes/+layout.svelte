@@ -3,17 +3,9 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 	import GtmScript from '$lib/components/GtmScript.svelte';
 	import Footer from '$lib/components/sections/Footer.svelte';
-	import { initTheme } from '$lib/stores/theme';
 	import { sameAsUrls } from '$lib/config/socialLinks';
-	import { onMount } from 'svelte';
 
 	let { children } = $props();
-
-	// Initialize tri-state theme system on mount
-	onMount(() => {
-		const cleanup = initTheme();
-		return cleanup;
-	});
 
 	const BASE_URL = 'https://azmi.web.id';
 	const OG_IMAGE = `${BASE_URL}/logo.png`;

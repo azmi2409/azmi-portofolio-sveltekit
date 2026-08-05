@@ -6,7 +6,10 @@
 	/>
 	<link rel="canonical" href="https://azmi.web.id/about" />
 	<meta property="og:title" content="About — Azmi Muwahid" />
-	<meta property="og:description" content="About Azmi Muwahid, a senior full stack engineer focused on practical AI systems, agentic workflows, RAG, and realtime product interfaces." />
+	<meta
+		property="og:description"
+		content="About Azmi Muwahid, a senior full stack engineer focused on practical AI systems, agentic workflows, RAG, and realtime product interfaces."
+	/>
 	<meta property="og:url" content="https://azmi.web.id/about" />
 	<meta property="og:image" content="https://azmi.web.id/logo.png" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -17,7 +20,7 @@
 <section class="px-6 py-32">
 	<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
 		<div>
-			<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">About</p>
+			<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">About</p>
 			<h1 class="text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">
 				I work best at the seam between product and systems.
 			</h1>

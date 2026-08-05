@@ -125,7 +125,7 @@
 		<Button
 			href="/blog"
 			variant="ghost"
-			class="cursor-pointer -ml-2 gap-2 text-zinc-500 hover:bg-white/[0.04] hover:text-zinc-300"
+			class="-ml-2 cursor-pointer gap-2 text-zinc-500 hover:bg-white/[0.04] hover:text-zinc-300"
 		>
 			<ArrowLeft class="h-4 w-4" />
 			All posts
@@ -150,7 +150,7 @@
 
 		<!-- Title -->
 		<h1
-			class="mb-5 text-4xl font-black leading-tight tracking-tight text-zinc-50 md:text-5xl"
+			class="mb-5 text-4xl leading-tight font-black tracking-tight text-zinc-50 md:text-5xl"
 			style="font-family: var(--font-heading); letter-spacing: -0.03em;"
 		>
 			{post.title}
@@ -190,7 +190,7 @@
 	</div>
 
 	<!-- Footer -->
-	<Separator class="mb-10 mt-16 bg-white/[0.04]" />
+	<Separator class="mt-16 mb-10 bg-white/[0.04]" />
 
 	<footer class="flex flex-col items-start gap-6 sm:flex-row sm:items-center sm:justify-between">
 		<div>

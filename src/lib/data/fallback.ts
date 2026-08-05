@@ -145,7 +145,14 @@ export const fallbackProjects: Project[] = [
 		role: 'Full Stack Engineer & AI Integrator',
 		type: 'AI-Powered Website Builder',
 		status: 'Production-ready',
-		stack: ['Next.js 15', 'Puck Editor', 'Astro 4', 'Ruby on Rails 8', 'Terraform', 'Alibaba Cloud'],
+		stack: [
+			'Next.js 15',
+			'Puck Editor',
+			'Astro 4',
+			'Ruby on Rails 8',
+			'Terraform',
+			'Alibaba Cloud'
+		],
 		summary:
 			'An AI-powered website builder allowing Indonesian small-medium businesses (UMKMs) to construct their business landing pages in 60 seconds.',
 		outcome:
@@ -275,8 +282,7 @@ export const fallbackProjects: Project[] = [
 			'Word-level timestamped dynamic subtitles.',
 			'Fully serverless orchestration pipeline.'
 		],
-		result:
-			'Reduced video editing workflow time from 30 minutes to under 2 minutes per clip.',
+		result: 'Reduced video editing workflow time from 30 minutes to under 2 minutes per clip.',
 		lessonsLearned:
 			'Decoupling compute-heavy FFmpeg tasks into independent AWS Step Functions prevents monolithic Lambda timeout errors and allows targeted resource scaling.'
 	},
@@ -291,7 +297,14 @@ export const fallbackProjects: Project[] = [
 		role: 'Lead Full Stack & AI Engineer',
 		type: 'Agentic B2B CRM',
 		status: 'Active Beta',
-		stack: ['Next.js 16', 'tRPC v11', 'Better Auth', 'Drizzle ORM', 'Stitch MCP', 'Hermes AI Agent'],
+		stack: [
+			'Next.js 16',
+			'tRPC v11',
+			'Better Auth',
+			'Drizzle ORM',
+			'Stitch MCP',
+			'Hermes AI Agent'
+		],
 		summary:
 			'An agentic B2B CRM for the mattress and bedding industry that balances autonomous AI customer interactions with transparent telemetry.',
 		outcome:

@@ -23,9 +23,9 @@
 	<link rel="canonical" href="https://azmi.web.id/projects" />
 </svelte:head>
 
-<section class="px-6 pb-4 pt-32">
+<section class="px-6 pt-32 pb-4">
 	<div class="mx-auto max-w-6xl">
-		<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+		<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">
 			Project archive
 		</p>
 		<h1 class="max-w-4xl text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">

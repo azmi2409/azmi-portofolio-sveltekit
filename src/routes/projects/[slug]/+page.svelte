@@ -1,6 +1,7 @@
 <script lang="ts">
 	import NotionBlockRenderer from '$lib/components/blog/NotionBlockRenderer.svelte';
-	import { ArrowLeft, ExternalLink, Github } from '@lucide/svelte';
+	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
+	import { ArrowLeft, ExternalLink } from '@lucide/svelte';
 
 	let { data } = $props();
 	const { project, blocks } = $derived(data);
@@ -27,7 +28,7 @@
 	<link rel="canonical" href={`https://azmi.web.id/projects/${project.slug}`} />
 </svelte:head>
 
-<article class="px-6 pb-24 pt-32">
+<article class="px-6 pt-32 pb-24">
 	<div class="mx-auto max-w-6xl">
 		<a
 			href="/projects"
@@ -37,7 +38,7 @@
 
 		<header class="grid gap-10 lg:grid-cols-[1fr_22rem] lg:items-end">
 			<div>
-				<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">
+				<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">
 					{project.type}
 				</p>
 				<h1 class="text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">{project.name}</h1>
@@ -77,7 +78,7 @@
 							target="_blank"
 							rel="noreferrer"
 							class="inline-flex items-center gap-2 rounded-full border border-white/[0.1] px-4 py-2 text-sm font-bold text-zinc-200"
-							>Code <Github class="h-4 w-4" /></a
+							>Code <SocialIcon name="github" class="h-4 w-4" /></a
 						>{/if}
 				</div>
 			</aside>
@@ -96,13 +97,13 @@
 		{/if}
 
 		<section class="mt-12 rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8">
-			<p class="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-500">Outcome</p>
-			<p class="mt-3 text-2xl font-bold leading-snug text-zinc-100">{project.outcome}</p>
+			<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">Outcome</p>
+			<p class="mt-3 text-2xl leading-snug font-bold text-zinc-100">{project.outcome}</p>
 		</section>
 
 		<div class="mt-14 grid gap-10 lg:grid-cols-[16rem_1fr]">
 			<nav class="hidden lg:block">
-				<p class="sticky top-28 text-xs font-semibold uppercase tracking-[0.24em] text-zinc-600">
+				<p class="sticky top-28 text-xs font-semibold tracking-[0.24em] text-zinc-600 uppercase">
 					Case-study anatomy
 				</p>
 			</nav>

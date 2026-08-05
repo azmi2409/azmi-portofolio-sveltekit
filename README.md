@@ -57,7 +57,6 @@ Content rendering:
 
 - Notion block rendering for rich body content
 - `highlight.js` for code blocks
-- `marked` for legacy markdown preview/admin compatibility
 
 Icons and visuals:
 
@@ -78,12 +77,13 @@ High-level flow:
 
 ```text
 Browser
-  -> SvelteKit route
-  -> +page.server.ts
-  -> src/lib/server/notion/*
-  -> Notion API
-  -> mapped typed data
-  -> local Svelte components
+	-> Netlify durable CDN cache
+	-> cached SvelteKit response (fast path)
+	-> background revalidation after 1 hour
+	-> +page.server.ts
+	-> src/lib/server/notion/*
+	-> Notion API
+	-> mapped typed data + local Svelte components
 ```
 
 Notion credentials are never exposed to the browser. All Notion calls live under `src/lib/server/notion/*` and are called from server load functions only.
@@ -96,9 +96,11 @@ Important files:
 - `src/lib/server/notion/blocks.ts` — recursive Notion page block loading
 - `src/lib/server/notion/mappers.ts` — Notion page-to-app data mappers
 - `src/lib/server/notion/blog.ts` — optional blog queries
+- `src/lib/server/isr.ts` — shared CDN ISR policy for Notion-backed routes
 - `src/lib/types/portfolio.ts` — project, experiment, and metric types
 - `src/lib/types/blog.ts` — blog and Notion block types
 - `src/lib/data/fallback.ts` — local fallback project and experiment content
+- `src/lib/components/sections/HeroSpatialScene.svelte` — lightweight 3D-style hero interaction
 - `src/lib/components/sections/AgenticWorkflowMap.svelte` — signature AI Systems Map interaction
 - `src/lib/components/sections/ProjectsSection.svelte` — case-study cards
 - `src/lib/components/blog/NotionBlockRenderer.svelte` — Notion page body renderer
@@ -211,7 +213,7 @@ Editing a project:
 
 - Edit the Notion database row for card and metadata changes.
 - Edit the Notion page body for long-form case-study content.
-- The site loads content server-side from Notion at request/render time.
+- Changes appear after the CDN refreshes the page; a visitor may briefly receive the previous version while that refresh runs.
 
 ## Experiments Database
 
@@ -307,6 +309,17 @@ Netlify setup:
 4. Add all private env vars in Netlify project settings.
 5. Deploy.
 
+### ISR / CDN revalidation
+
+Notion-backed routes use `src/lib/server/isr.ts` to set shared-cache headers:
+
+- Responses remain fresh at the CDN for 1 hour.
+- A stale response can be served instantly for up to 24 hours while it refreshes in the background.
+- Netlify's `durable` cache shares generated responses across edge locations and reduces repeated function invocations.
+- Browsers always revalidate, so the long-lived policy applies to the shared CDN rather than trapping stale pages in a visitor's local cache.
+
+This keeps the data layer server-side and makes a future Vercel migration small: move to the Vercel adapter and adjust the platform-specific header in the shared ISR helper.
+
 Required production env vars:
 
 ```bash
@@ -326,14 +339,14 @@ PUBLIC_GTM_ID=
 
 The portfolio is designed to stay fast and credible:
 
-- Notion calls run server-side only.
-- Primary interaction uses CSS/SVG/Svelte rather than heavy 3D or animation libraries.
+- Notion calls run server-side only and are protected by CDN ISR with stale-while-revalidate.
+- The spatial hero and primary interactions use GPU-friendly CSS/SVG/Svelte rather than shipping a WebGL or animation runtime.
 - Non-critical images use lazy loading.
+- Below-the-fold homepage sections use `content-visibility` to avoid unnecessary initial rendering work.
+- The social preview image is resized for a substantially smaller transfer.
 - `prefers-reduced-motion` is respected for custom motion.
 - No scroll hijacking.
 - Local fallback content keeps pages functional if Notion is not configured.
-
-Current build output includes some legacy dependencies and components that are still in the repository. Future cleanup can remove unused admin and legacy portfolio components to reduce maintenance surface.
 
 ## Accessibility Notes
 
@@ -345,8 +358,6 @@ Implemented or preserved:
 - Good dark-mode contrast targets
 - Reduced-motion handling for custom motion
 - No hover-only critical content
-
-Known warnings from `svelte-check` are currently in older admin/legacy components, not the primary portfolio routes.
 
 ## SEO Notes
 

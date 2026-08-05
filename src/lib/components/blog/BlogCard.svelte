@@ -19,8 +19,8 @@
 <a href="/blog/{post.slug}" class="group block cursor-pointer" aria-label="Read {post.title}">
 	<Card
 		class="overflow-hidden border-white/[0.06] bg-zinc-900/60 backdrop-blur-sm transition-all duration-300
-			hover:border-white/[0.1] hover:bg-zinc-800/70 hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)]
-			hover:-translate-y-0.5"
+			hover:-translate-y-0.5 hover:border-white/[0.1] hover:bg-zinc-800/70
+			hover:shadow-[0_8px_32px_rgba(0,0,0,0.4)]"
 	>
 		<!-- Cover Image -->
 		{#if post.featuredImage}
@@ -37,7 +37,7 @@
 		{:else}
 			<!-- Gradient placeholder when no cover -->
 			<div
-				class="aspect-video flex items-center justify-center"
+				class="flex aspect-video items-center justify-center"
 				style="background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06), transparent 50%), linear-gradient(135deg, #18181b, #09090b);"
 			>
 				<span
@@ -56,7 +56,7 @@
 					{#each post.categories.slice(0, 3) as category}
 						<Badge
 							variant="secondary"
-							class="rounded-full border-white/[0.06] bg-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-zinc-400 hover:bg-white/[0.1] transition-colors duration-200"
+							class="rounded-full border-white/[0.06] bg-white/[0.06] px-2.5 py-0.5 text-[11px] font-medium text-zinc-400 transition-colors duration-200 hover:bg-white/[0.1]"
 						>
 							{category}
 						</Badge>
@@ -66,7 +66,7 @@
 
 			<!-- Title -->
 			<h3
-				class="mb-2 text-lg font-bold leading-snug text-zinc-100 transition-colors duration-200 group-hover:text-white"
+				class="mb-2 text-lg leading-snug font-bold text-zinc-100 transition-colors duration-200 group-hover:text-white"
 				style="font-family: var(--font-heading); letter-spacing: -0.02em;"
 			>
 				{post.title}

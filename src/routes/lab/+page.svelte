@@ -10,7 +10,10 @@
 	/>
 	<link rel="canonical" href="https://azmi.web.id/lab" />
 	<meta property="og:title" content="Lab — Azmi Muwahid" />
-	<meta property="og:description" content="Experiments and research notes on agentic AI systems, realtime audio, RAG, and product engineering." />
+	<meta
+		property="og:description"
+		content="Experiments and research notes on agentic AI systems, realtime audio, RAG, and product engineering."
+	/>
 	<meta property="og:url" content="https://azmi.web.id/lab" />
 	<meta property="og:image" content="https://azmi.web.id/logo.png" />
 	<meta name="twitter:card" content="summary_large_image" />
@@ -20,14 +23,14 @@
 
 <section class="px-6 py-32">
 	<div class="mx-auto max-w-6xl">
-		<p class="mb-4 text-xs font-semibold uppercase tracking-[0.28em] text-zinc-500">Lab</p>
+		<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">Lab</p>
 		<h1 class="max-w-4xl text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">
 			Small experiments for hard product questions.
 		</h1>
 		<div class="mt-14 grid gap-5 md:grid-cols-2">
 			{#each data.experiments as experiment}
 				<article class="rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-6">
-					<p class="text-xs font-semibold uppercase tracking-[0.24em] text-zinc-600">
+					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-600 uppercase">
 						{experiment.status} / {experiment.year}
 					</p>
 					<h2 class="mt-4 text-2xl font-black text-zinc-50">{experiment.name}</h2>

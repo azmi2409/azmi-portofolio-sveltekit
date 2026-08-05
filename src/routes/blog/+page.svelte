@@ -59,10 +59,10 @@
 </svelte:head>
 
 <!-- ── Hero ──────────────────────────────────────────────────────────────── -->
-<section class="relative overflow-hidden pb-12 pt-16">
+<section class="relative overflow-hidden pt-16 pb-12">
 	<!-- Background glow -->
 	<div
-		class="pointer-events-none absolute left-1/2 top-0 -translate-x-1/2 -translate-y-1/2"
+		class="pointer-events-none absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2"
 		aria-hidden="true"
 	>
 		<div class="h-80 w-80 rounded-full bg-white/[0.03] blur-[96px]"></div>
@@ -75,7 +75,7 @@
 				class="mb-6 flex items-center gap-2 rounded-full border border-white/[0.06] bg-white/[0.03] px-4 py-1.5"
 			>
 				<Rss class="h-3.5 w-3.5 text-zinc-500" />
-				<span class="text-xs font-medium uppercase tracking-widest text-zinc-500">Blog</span>
+				<span class="text-xs font-medium tracking-widest text-zinc-500 uppercase">Blog</span>
 			</div>
 
 			<!-- Title -->

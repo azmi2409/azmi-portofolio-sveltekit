@@ -2,8 +2,6 @@ import type { BlogPost } from '$lib/types/blog';
 import { canUseNotion, getDataSourceId, notion, NOTION_BLOG_DATABASE_ID } from './client';
 import { mapPageToBlogPost } from './mappers';
 
-export const CACHE_MAX_AGE_S = 600;
-
 export async function getPublishedPosts(): Promise<BlogPost[]> {
 	if (!canUseNotion(NOTION_BLOG_DATABASE_ID) || !notion) return [];
 

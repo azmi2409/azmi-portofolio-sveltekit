@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { Menu, X } from '@lucide/svelte';
+	import { ArrowUpRight, Menu, X } from '@lucide/svelte';
+	import { onMount } from 'svelte';
 
 	const navItems = [
 		{ name: 'Home', href: '/' },
@@ -12,7 +13,15 @@
 	];
 
 	let mobileOpen = $state(false);
+	let scrolled = $state(false);
 	const pathname = $derived(page.url.pathname);
+
+	onMount(() => {
+		const update = () => (scrolled = window.scrollY > 24);
+		update();
+		window.addEventListener('scroll', update, { passive: true });
+		return () => window.removeEventListener('scroll', update);
+	});
 
 	function isActive(href: string) {
 		if (href === '/') return pathname === '/';
@@ -21,65 +30,155 @@
 </script>
 
 <header
-	class="fixed left-1/2 top-4 z-50 -translate-x-1/2 px-4"
-	style="width: min(calc(100vw - 2rem), 900px);"
+	class="fixed top-3 left-1/2 z-50 -translate-x-1/2 px-3 transition-[width] duration-300 sm:top-4 {scrolled
+		? 'w-[min(48rem,calc(100vw-1.5rem))]'
+		: 'w-[min(60rem,calc(100vw-1.5rem))]'}"
 >
-	<nav
-		class="rounded-2xl border border-white/[0.08] bg-zinc-950/80 px-4 py-3 shadow-2xl shadow-black/40 backdrop-blur-2xl"
-		aria-label="Main navigation"
-	>
+	<nav class="nav-shell" aria-label="Main navigation">
 		<div class="flex items-center justify-between gap-4">
-			<a href="/" class="flex items-center gap-3" aria-label="Azmi Muwahid home">
-				<img src="/logo.png" alt="" class="h-9 w-9 rounded-xl" />
-				<span class="hidden text-sm font-black tracking-tight text-white sm:inline"
+			<a href="/" class="group flex items-center gap-2.5" aria-label="Azmi Muwahid home">
+				<span class="brand-mark">AM</span>
+				<span class="hidden text-sm font-bold tracking-[-0.02em] text-zinc-100 sm:inline"
 					>Azmi Muwahid</span
 				>
 			</a>
 
-			<div class="hidden items-center gap-1 md:flex">
+			<div class="hidden items-center gap-0.5 md:flex">
 				{#each navItems as item}
 					<a
 						href={item.href}
-						class="rounded-xl px-3.5 py-2 text-sm font-semibold transition {isActive(item.href)
-							? 'bg-white/[0.08] text-white'
-							: 'text-zinc-500 hover:bg-white/[0.04] hover:text-zinc-200'}"
+						aria-current={isActive(item.href) ? 'page' : undefined}
+						class="nav-link {isActive(item.href) ? 'is-active' : ''}"
 					>
 						{item.name}
 					</a>
 				{/each}
 			</div>
 
-			<a
-				href="mailto:azmimuwahid@gmail.com"
-				class="hidden rounded-xl bg-white px-4 py-2 text-sm font-bold text-zinc-950 transition hover:bg-zinc-200 md:inline-flex"
-			>
-				Hire me
+			<a href="mailto:azmimuwahid@gmail.com" class="nav-cta hidden md:inline-flex">
+				Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
 			</a>
 
 			<button
-				class="rounded-xl border border-white/[0.08] p-2 text-zinc-200 md:hidden"
+				class="grid h-9 w-9 place-items-center rounded-full border border-white/[0.09] text-zinc-200 md:hidden"
 				onclick={() => (mobileOpen = !mobileOpen)}
 				aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
 				aria-expanded={mobileOpen}
+				aria-controls="mobile-navigation"
 			>
-				{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
+				{#if mobileOpen}<X class="h-4 w-4" />{:else}<Menu class="h-4 w-4" />{/if}
 			</button>
 		</div>
 
 		{#if mobileOpen}
-			<div class="mt-3 border-t border-white/[0.06] pt-3 md:hidden">
-				{#each navItems as item}
-					<a
-						href={item.href}
-						onclick={() => (mobileOpen = false)}
-						class="block rounded-xl px-3 py-3 text-sm font-semibold {isActive(item.href)
-							? 'bg-white/[0.08] text-white'
-							: 'text-zinc-400'}"
-					>
-						{item.name}
-					</a>
-				{/each}
+			<div id="mobile-navigation" class="mt-3 border-t border-white/[0.07] pt-3 md:hidden">
+				<div class="grid grid-cols-2 gap-1">
+					{#each navItems as item}
+						<a
+							href={item.href}
+							onclick={() => (mobileOpen = false)}
+							aria-current={isActive(item.href) ? 'page' : undefined}
+							class="rounded-xl px-3 py-3 text-sm font-semibold {isActive(item.href)
+								? 'bg-white/[0.08] text-white'
+								: 'text-zinc-400'}"
+						>
+							{item.name}
+						</a>
+					{/each}
+				</div>
+				<a href="mailto:azmimuwahid@gmail.com" class="nav-cta mt-2 flex w-full justify-center">
+					Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
+				</a>
 			</div>
 		{/if}
 	</nav>
 </header>
+
+<style>
+	.nav-shell {
+		padding: 0.55rem;
+		border: 1px solid rgba(255, 255, 255, 0.09);
+		border-radius: 1.15rem;
+		background: rgba(9, 9, 11, 0.76);
+		box-shadow:
+			0 16px 50px -20px rgba(0, 0, 0, 0.85),
+			inset 0 1px rgba(255, 255, 255, 0.03);
+		backdrop-filter: blur(22px) saturate(125%);
+		-webkit-backdrop-filter: blur(22px) saturate(125%);
+	}
+
+	.brand-mark {
+		display: grid;
+		width: 2rem;
+		height: 2rem;
+		place-items: center;
+		border: 1px solid rgba(157, 229, 213, 0.24);
+		border-radius: 0.7rem;
+		background: linear-gradient(145deg, rgba(142, 222, 205, 0.18), rgba(255, 255, 255, 0.035));
+		font-family: var(--font-heading);
+		font-size: 0.6rem;
+		font-weight: 800;
+		letter-spacing: -0.03em;
+		color: #c5f0e7;
+		transition: transform 180ms ease;
+	}
+
+	.group:hover .brand-mark {
+		transform: rotate(-4deg) scale(1.04);
+	}
+
+	.nav-link {
+		position: relative;
+		border-radius: 0.7rem;
+		padding: 0.55rem 0.72rem;
+		font-size: 0.76rem;
+		font-weight: 600;
+		color: #71717a;
+		transition:
+			color 160ms ease,
+			background-color 160ms ease;
+	}
+
+	.nav-link:hover {
+		background: rgba(255, 255, 255, 0.035);
+		color: #d4d4d8;
+	}
+
+	.nav-link.is-active {
+		background: rgba(255, 255, 255, 0.065);
+		color: #fafafa;
+	}
+
+	.nav-link.is-active::after {
+		position: absolute;
+		left: 50%;
+		bottom: 0.22rem;
+		width: 3px;
+		height: 3px;
+		border-radius: 50%;
+		background: #8cdfcc;
+		content: '';
+		transform: translateX(-50%);
+		box-shadow: 0 0 7px #8cdfcc;
+	}
+
+	.nav-cta {
+		align-items: center;
+		gap: 0.35rem;
+		min-height: 2.15rem;
+		border-radius: 999px;
+		background: #f4f4f5;
+		padding: 0.5rem 0.85rem;
+		font-size: 0.72rem;
+		font-weight: 700;
+		color: #09090b;
+		transition:
+			transform 160ms ease,
+			background-color 160ms ease;
+	}
+
+	.nav-cta:hover {
+		transform: translateY(-1px);
+		background: #fff;
+	}
+</style>

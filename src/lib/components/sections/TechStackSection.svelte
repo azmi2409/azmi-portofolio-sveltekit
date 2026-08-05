@@ -4,9 +4,13 @@
 -->
 
 <script lang="ts">
-	import { Code, Layout, Server, Cloud, Database, Brain, Zap } from '@lucide/svelte';
-	import type { InviewOptions } from '$lib/actions/inview';
-	import { onMount } from 'svelte';
+	import { Code, Layout, Cloud, Database, Brain, Zap } from '@lucide/svelte';
+
+	type InviewOptions = {
+		threshold?: number;
+		rootMargin?: string;
+		once?: boolean;
+	};
 
 	const TECH_CATEGORIES = [
 		{
@@ -84,19 +88,19 @@
 	}
 </script>
 
-<section id="tech-stack" class="relative py-24 sm:py-32 overflow-hidden">
+<section id="tech-stack" class="relative overflow-hidden py-24 sm:py-32">
 	<!-- Background glow accents -->
 	<div
-		class="pointer-events-none absolute -left-1/4 top-1/4 h-96 w-96 rounded-full bg-zinc-500/10 opacity-50 blur-[120px]"
+		class="pointer-events-none absolute top-1/4 -left-1/4 h-96 w-96 rounded-full bg-zinc-500/10 opacity-50 blur-[120px]"
 	></div>
 	<div
 		class="pointer-events-none absolute -right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-zinc-600/10 opacity-50 blur-[120px]"
 	></div>
 
-	<div class="mx-auto max-w-6xl px-6">
+	<div class="mx-auto max-w-7xl px-6">
 		<!-- Section Header -->
 		<div
-			class="mb-16 text-center transition-all duration-700 sm:mb-20"
+			class="mb-14 grid gap-6 transition-all duration-700 sm:mb-20 lg:grid-cols-[1fr_0.9fr] lg:items-end"
 			use:inviewTrigger={{
 				options: { threshold: 0.2 },
 				onEnter: () => (headerVisible = true)
@@ -106,33 +110,35 @@
 				transform: translateY({headerVisible ? 0 : 24}px);
 			"
 		>
-			<h2
-				class="mb-4 text-4xl font-extrabold tracking-tight sm:text-5xl md:text-6xl"
-				style="font-family: var(--font-heading); color: #fafafa;"
-			>
-				Systems <span class="gradient-text">Stack</span>
-			</h2>
-			<p class="mx-auto max-w-2xl text-lg text-zinc-400">
+			<div>
+				<div class="eyebrow mb-5">Working stack · 03</div>
+				<h2 class="text-4xl font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
+					Tools follow the system.
+				</h2>
+			</div>
+			<p class="max-w-2xl text-lg leading-8 text-zinc-400 lg:justify-self-end">
 				The tools I use when model behavior, product UX, backend reliability, and cost controls all
 				matter.
 			</p>
 		</div>
 
 		<!-- Infinite Marquee -->
-		<div class="marquee-wrapper relative mb-24 flex overflow-hidden py-4">
+		<div
+			class="marquee-wrapper relative mb-20 flex overflow-hidden border-y border-white/[0.055] py-5"
+		>
 			<!-- Fade edges -->
 			<div
-				class="pointer-events-none absolute bottom-0 left-0 top-0 z-10 w-24 bg-gradient-to-r from-[#09090b] to-transparent sm:w-40"
+				class="pointer-events-none absolute top-0 bottom-0 left-0 z-10 w-24 bg-gradient-to-r from-[#09090b] to-transparent sm:w-40"
 			></div>
 			<div
-				class="pointer-events-none absolute bottom-0 right-0 top-0 z-10 w-24 bg-gradient-to-l from-[#09090b] to-transparent sm:w-40"
+				class="pointer-events-none absolute top-0 right-0 bottom-0 z-10 w-24 bg-gradient-to-l from-[#09090b] to-transparent sm:w-40"
 			></div>
 
 			<!-- Marquee track -->
 			<div class="animate-marquee flex w-max items-center gap-8 pl-8 sm:gap-16 sm:pl-16">
 				{#each [...MARQUEE_ITEMS, ...MARQUEE_ITEMS] as item}
 					<div
-						class="flex items-center justify-center whitespace-nowrap text-xl font-bold tracking-tight text-zinc-600 transition-colors hover:text-zinc-300 sm:text-3xl"
+						class="flex items-center justify-center font-mono text-sm font-medium tracking-[0.12em] whitespace-nowrap text-zinc-600 uppercase transition-colors hover:text-emerald-100/70 sm:text-base"
 						style="font-family: var(--font-heading);"
 					>
 						{item}
@@ -142,7 +148,7 @@
 		</div>
 
 		<!-- Category Grid (Bento style) -->
-		<div class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+		<div class="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
 			{#each TECH_CATEGORIES as category, index}
 				{@const isVisible = visibleCards.has(index)}
 				{@const Icon = category.icon}
@@ -160,12 +166,11 @@
 					"
 				>
 					<div
-						class="glass-card group flex h-full flex-col rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 hover:border-white/30 hover:shadow-[0_8px_32px_-8px_rgba(255,255,255,0.15)]"
+						class="glass-card group flex h-full flex-col rounded-[1.35rem] p-6 transition-all duration-300 hover:-translate-y-1 hover:border-emerald-100/20 hover:shadow-[0_18px_45px_-24px_rgba(86,190,167,0.2)]"
 					>
 						<div class="mb-5 flex items-center gap-4">
 							<div
-								class="flex h-12 w-12 items-center justify-center rounded-xl transition-all duration-300 group-hover:scale-110"
-								style="background: rgba(255,255,255,0.1); color: #fafafa;"
+								class="flex h-11 w-11 items-center justify-center rounded-xl border border-emerald-100/10 bg-emerald-100/[0.055] text-emerald-100/70 transition-all duration-300 group-hover:scale-105 group-hover:text-emerald-100"
 							>
 								<Icon class="h-6 w-6" />
 							</div>

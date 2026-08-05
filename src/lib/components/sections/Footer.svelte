@@ -6,6 +6,7 @@
 <script lang="ts">
 	import { socialLinks, emailLink } from '$lib/config/socialLinks';
 	import { Mail } from '@lucide/svelte';
+	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 
 	const currentYear = new Date().getFullYear();
 
@@ -22,21 +23,20 @@
 <footer class="relative overflow-hidden bg-zinc-950">
 	<!-- Top gradient separator -->
 	<div
-		class="absolute left-0 right-0 top-0 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent"
+		class="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-zinc-700/50 to-transparent"
 	></div>
 
 	<!-- Ambient glow -->
 	<div
-		class="pointer-events-none absolute left-1/2 top-0 h-[20rem] w-[40rem] -translate-x-1/2 rounded-full bg-white/[0.015] blur-3xl"
+		class="pointer-events-none absolute top-0 left-1/2 h-[20rem] w-[40rem] -translate-x-1/2 rounded-full bg-white/[0.015] blur-3xl"
 	></div>
 
 	<div class="relative z-10 mx-auto max-w-6xl px-6">
 		<!-- Main footer grid -->
 		<div class="grid gap-12 py-16 lg:grid-cols-[1.4fr_1fr_1fr] lg:gap-8">
-
 			<!-- Brand column -->
 			<div class="flex flex-col gap-6">
-				<a href="/" class="group flex items-center gap-3 w-fit">
+				<a href="/" class="group flex w-fit items-center gap-3">
 					<div
 						class="flex h-10 w-10 items-center justify-center rounded-xl text-lg font-black transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_24px_rgba(255,255,255,0.3)]"
 						style="background: #fafafa; color: #09090b; font-family: var(--font-heading);"
@@ -57,7 +57,9 @@
 				</p>
 
 				<!-- Availability badge -->
-				<div class="flex items-center gap-2 w-fit rounded-full border border-emerald-500/20 bg-emerald-500/5 px-3 py-1.5">
+				<div
+					class="flex w-fit items-center gap-2 rounded-full border border-emerald-500/20 bg-emerald-500/5 px-3 py-1.5"
+				>
 					<span class="relative flex h-2 w-2">
 						<span
 							class="absolute inline-flex h-full w-full animate-ping rounded-full bg-emerald-400 opacity-60"
@@ -70,7 +72,6 @@
 				<!-- Social icons -->
 				<div class="flex flex-wrap gap-2.5">
 					{#each socialLinks as social}
-						{@const Icon = social.icon}
 						<a
 							href={social.href}
 							target="_blank"
@@ -78,13 +79,13 @@
 							aria-label={social.label}
 							class="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-zinc-500 transition-all duration-200 {social.hoverColor} hover:scale-110 hover:border-transparent"
 						>
-							<Icon class="h-4 w-4" />
+							<SocialIcon name={social.icon} class="h-4 w-4" />
 						</a>
 					{/each}
 					<a
 						href={emailLink.href}
 						aria-label="Email"
-						class="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-zinc-500 transition-all duration-200 hover:bg-zinc-50 hover:text-zinc-900 hover:scale-110 hover:border-transparent"
+						class="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-zinc-500 transition-all duration-200 hover:scale-110 hover:border-transparent hover:bg-zinc-50 hover:text-zinc-900"
 					>
 						<Mail class="h-4 w-4" />
 					</a>
@@ -93,14 +94,14 @@
 
 			<!-- Navigation column -->
 			<div>
-				<h3 class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+				<h3 class="mb-5 text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase">
 					Navigation
 				</h3>
 				<nav class="flex flex-col gap-3">
 					{#each navLinks as link}
 						<a
 							href={link.href}
-							class="text-sm text-zinc-400 transition-colors hover:text-zinc-200 w-fit"
+							class="w-fit text-sm text-zinc-400 transition-colors hover:text-zinc-200"
 						>
 							{link.label}
 						</a>
@@ -110,7 +111,7 @@
 
 			<!-- Contact / CTA column -->
 			<div>
-				<h3 class="mb-5 text-xs font-semibold uppercase tracking-[0.2em] text-zinc-500">
+				<h3 class="mb-5 text-xs font-semibold tracking-[0.2em] text-zinc-500 uppercase">
 					Get in Touch
 				</h3>
 				<div class="flex flex-col gap-4">
