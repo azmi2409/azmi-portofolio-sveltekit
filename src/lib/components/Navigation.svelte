@@ -2,6 +2,7 @@
 	import { page } from '$app/state';
 	import { ArrowUpRight, Menu, X } from '@lucide/svelte';
 	import { onMount } from 'svelte';
+	import ThemeToggle from './ThemeToggle.svelte';
 
 	const navItems = [
 		{ name: 'Home', href: '/' },
@@ -55,19 +56,25 @@
 				{/each}
 			</div>
 
-			<a href="mailto:azmimuwahid@gmail.com" class="nav-cta hidden md:inline-flex">
-				Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
-			</a>
+			<div class="hidden items-center gap-2 md:flex">
+				<ThemeToggle />
+				<a href="mailto:azmimuwahid@gmail.com" class="nav-cta">
+					Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
+				</a>
+			</div>
 
-			<button
-				class="grid h-9 w-9 place-items-center rounded-full border border-white/[0.09] text-zinc-200 md:hidden"
-				onclick={() => (mobileOpen = !mobileOpen)}
-				aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-				aria-expanded={mobileOpen}
-				aria-controls="mobile-navigation"
-			>
-				{#if mobileOpen}<X class="h-4 w-4" />{:else}<Menu class="h-4 w-4" />{/if}
-			</button>
+			<div class="flex items-center gap-2 md:hidden">
+				<ThemeToggle />
+				<button
+					class="grid h-9 w-9 place-items-center rounded-full border border-white/[0.09] text-zinc-200"
+					onclick={() => (mobileOpen = !mobileOpen)}
+					aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+					aria-expanded={mobileOpen}
+					aria-controls="mobile-navigation"
+				>
+					{#if mobileOpen}<X class="h-4 w-4" />{:else}<Menu class="h-4 w-4" />{/if}
+				</button>
+			</div>
 		</div>
 
 		{#if mobileOpen}
@@ -180,5 +187,23 @@
 	.nav-cta:hover {
 		transform: translateY(-1px);
 		background: #fff;
+	}
+
+	:global(html.light) .nav-shell {
+		border-color: rgba(24, 24, 27, 0.12);
+		background: rgba(250, 250, 250, 0.78);
+		box-shadow:
+			0 16px 50px -20px rgba(24, 24, 27, 0.18),
+			inset 0 1px rgba(255, 255, 255, 0.72);
+	}
+
+	:global(html.light) .nav-link {
+		color: #71717a;
+	}
+
+	:global(html.light) .nav-link:hover,
+	:global(html.light) .nav-link.is-active {
+		background: rgba(24, 24, 27, 0.055);
+		color: #18181b;
 	}
 </style>
