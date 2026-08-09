@@ -4,6 +4,10 @@
 	import GtmScript from '$lib/components/GtmScript.svelte';
 	import Footer from '$lib/components/sections/Footer.svelte';
 	import { sameAsUrls } from '$lib/config/socialLinks';
+	import { dev } from '$app/environment';
+	import { injectAnalytics } from '@vercel/analytics/sveltekit';
+
+	injectAnalytics({ mode: dev ? 'development' : 'production' });
 
 	let { children } = $props();
 
