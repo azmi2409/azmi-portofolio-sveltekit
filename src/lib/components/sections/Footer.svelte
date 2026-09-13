@@ -12,10 +12,10 @@
 
 	const navLinks = [
 		{ href: '/', label: 'Home' },
-		{ href: '/projects', label: 'Projects' },
+		{ href: '/projects', label: 'Work' },
 		{ href: '/about', label: 'About' },
 		{ href: '/lab', label: 'Lab' },
-		{ href: '/blog', label: 'Blog' },
+		{ href: '/blog', label: 'Writing' },
 		{ href: '/contact', label: 'Contact' }
 	];
 </script>
@@ -37,12 +37,7 @@
 			<!-- Brand column -->
 			<div class="flex flex-col gap-6">
 				<a href="/" class="group flex w-fit items-center gap-3">
-					<div
-						class="flex h-10 w-10 items-center justify-center rounded-xl text-lg font-black transition-all duration-300 group-hover:-translate-y-0.5 group-hover:shadow-[0_0_24px_rgba(255,255,255,0.3)]"
-						style="background: #fafafa; color: #09090b; font-family: var(--font-heading);"
-					>
-						A
-					</div>
+					<img src="/assets/azmi-logo.webp" alt="" class="h-10 w-10 object-contain" />
 					<span
 						class="text-xl font-bold tracking-tight text-white transition-colors group-hover:text-zinc-300"
 						style="font-family: var(--font-heading);"
@@ -52,8 +47,8 @@
 				</a>
 
 				<p class="max-w-xs text-sm leading-7 text-zinc-500">
-					Senior full stack engineer building agentic workflows, RAG systems, and real-time AI
-					product interfaces. Based in South East Asia, available globally.
+					I help businesses automate repetitive work, control costs, and make life easier for
+					customers. AI and automation consulting, from advice to delivery. Working globally.
 				</p>
 
 				<!-- Availability badge -->

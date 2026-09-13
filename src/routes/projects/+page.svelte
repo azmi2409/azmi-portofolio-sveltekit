@@ -8,18 +8,18 @@
 	<title>Projects — Azmi Muwahid</title>
 	<meta
 		name="description"
-		content="Case studies on agentic AI workflows, realtime interfaces, SvelteKit, Rails, and production product engineering by Azmi Muwahid."
+		content="See how Azmi helps businesses reduce manual work, simplify online sales, and improve customer experiences with AI and practical software."
 	/>
 	<meta property="og:title" content="Projects — Azmi Muwahid" />
 	<meta
 		property="og:description"
-		content="Deep technical case studies with problem, constraints, architecture, decisions, and outcomes."
+		content="Real projects: the business challenge, how I helped, and what changed."
 	/>
 	<meta property="og:url" content="https://azmi.web.id/projects" />
-	<meta property="og:image" content="https://azmi.web.id/logo.png" />
+	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Projects — Azmi Muwahid" />
-	<meta name="twitter:image" content="https://azmi.web.id/logo.png" />
+	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 	<link rel="canonical" href="https://azmi.web.id/projects" />
 </svelte:head>
 
@@ -29,10 +29,11 @@
 			Project archive
 		</p>
 		<h1 class="max-w-4xl text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">
-			Case studies for AI product systems.
+			Less friction. More useful work.
 		</h1>
 		<p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-			A deeper look at shipped work, prototypes, constraints, and decisions.
+			Examples of turning repetitive tasks and difficult customer journeys into practical, usable
+			solutions.
 		</p>
 	</div>
 </section>

@@ -41,7 +41,7 @@ html {
 
 /* Focus styles */
 :focus-visible {
-	outline: 2px solid #fafafa;
+	outline: 2px solid var(--ring);
 	outline-offset: 2px;
 }
 
@@ -68,7 +68,7 @@ html {
 	--border: oklch(0.269 0.006 285.823);
 	--input: oklch(0.269 0.006 285.823);
 	--ring: oklch(0.985 0 0);
-	--signal: oklch(0.82 0.105 174);
+	--signal: #60a5fa;
 	--signal-muted: oklch(0.58 0.08 174);
 
 	--font-sans: 'Space Grotesk', sans-serif;
@@ -88,6 +88,7 @@ html {
 
 /* Light mode override (secondary) */
 .light {
+	--signal: #2563eb;
 	--background: oklch(0.985 0 0); /* #FAFAFA */
 	--foreground: oklch(0.141 0.005 285.823); /* #09090B */
 	--card: oklch(1 0 0); /* #FFFFFF */
@@ -113,6 +114,20 @@ html.light {
 
 html.dark {
 	color-scheme: dark;
+}
+
+section[id] {
+	scroll-margin-top: 6rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+	*,
+	*::before,
+	*::after {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
 }
 
 @theme inline {

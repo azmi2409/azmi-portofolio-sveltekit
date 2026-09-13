@@ -1,214 +1,42 @@
-<!--
-  ContactSection.svelte
-  Two-column layout: Text/Socials on left, Functional Form on right.
--->
-
 <script lang="ts">
-	import { Mail, ArrowRight, MapPin, Sparkles } from '@lucide/svelte';
-	import { socialLinks } from '$lib/config/socialLinks';
-	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
-
-	type InviewOptions = {
-		threshold?: number;
-		rootMargin?: string;
-		once?: boolean;
-	};
-
-	let headerVisible = $state(false);
-
-	function handleSubmit(e: Event) {
-		e.preventDefault();
-		const form = e.currentTarget as HTMLFormElement;
-		const data = new FormData(form);
-		const name = String(data.get('name') ?? '');
-		const email = String(data.get('email') ?? '');
-		const subject = String(data.get('subject') ?? 'Project inquiry');
-		const message = String(data.get('message') ?? '');
-		const body = `${message}\n\nFrom: ${name}\nReply to: ${email}`;
-		window.location.href = `mailto:azmimuwahid@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-	}
-
-	function inviewTrigger(
-		node: HTMLElement,
-		opts: { options?: InviewOptions; onEnter: () => void }
-	) {
-		const { threshold = 0.15, rootMargin = '0px', once = true } = opts.options ?? {};
-		const observer = new IntersectionObserver(
-			(entries) => {
-				for (const entry of entries) {
-					if (entry.isIntersecting) {
-						opts.onEnter();
-						if (once) observer.disconnect();
-					}
-				}
-			},
-			{ threshold, rootMargin }
-		);
-		observer.observe(node);
-		return {
-			destroy() {
-				observer.disconnect();
-			}
-		};
-	}
+	import { ArrowUpRight, Mail } from '@lucide/svelte';
 </script>
 
-<section id="contact" class="relative py-24 sm:py-32">
-	<!-- Background separator line -->
-	<div
-		class="absolute top-0 right-0 left-0 h-px bg-gradient-to-r from-transparent via-zinc-700 to-transparent"
-	></div>
-
-	<div class="mx-auto max-w-6xl px-6">
-		<div
-			class="grid gap-16 transition-all duration-700 lg:grid-cols-2 lg:gap-8"
-			use:inviewTrigger={{ options: { threshold: 0.2 }, onEnter: () => (headerVisible = true) }}
-			style="opacity: {headerVisible ? 1 : 0}; transform: translateY({headerVisible ? 0 : 24}px);"
-		>
-			<!-- Left Column: Copy & Info -->
-			<div class="flex flex-col justify-center">
-				<div
-					class="mb-6 inline-flex w-fit items-center gap-2 rounded-full border border-zinc-50/20 bg-zinc-50/10 px-4 py-1.5 text-sm font-medium text-zinc-200"
+<section id="contact" class="border-t border-border px-6 py-24 sm:py-32">
+	<div class="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[1.4fr_1fr] lg:items-center">
+		<div>
+			<p class="eyebrow mb-5">Let’s talk</p>
+			<h2 class="max-w-3xl text-4xl font-black tracking-tight sm:text-5xl">
+				What is taking more time or money than it should?
+			</h2>
+			<p class="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
+				Tell me what your team does manually, where customers get stuck, or which costs keep
+				growing. We can work out whether AI, automation, or a simpler process would help.
+			</p>
+		</div>
+		<div class="rounded-2xl border border-border bg-card p-6 sm:p-8">
+			<p class="mb-6 leading-7 text-muted-foreground">
+				Available for remote consulting and hands-on delivery. Share your current process, goals,
+				and rough timeline. Based in Southeast Asia, working globally.
+			</p>
+			<a class="button-primary" href="mailto:azmimuwahid@gmail.com"
+				><Mail class="h-4 w-4" /> Email Azmi</a
+			>
+			<p class="mt-4 text-base break-all select-all">azmimuwahid@gmail.com</p>
+			<p class="mt-2 text-sm text-muted-foreground">
+				Opens your email app. You can also copy the address above.
+			</p>
+			<div class="mt-6 flex flex-wrap gap-x-6 text-sm font-semibold">
+				<a
+					class="inline-flex min-h-11 items-center gap-2 hover:underline"
+					href="https://linkedin.com/in/azmimuwahid"
+					target="_blank"
+					rel="noreferrer">LinkedIn <ArrowUpRight class="h-4 w-4" /></a
 				>
-					<Sparkles class="h-4 w-4" />
-					<span>Available for hire</span>
-				</div>
-
-				<h2
-					class="mb-6 text-4xl font-extrabold tracking-tight text-white sm:text-5xl md:text-6xl"
-					style="font-family: var(--font-heading);"
+				<a
+					class="inline-flex min-h-11 items-center hover:underline"
+					href="mailto:azmimuwahid@gmail.com?subject=R%C3%A9sum%C3%A9%20request">Request résumé</a
 				>
-					Let's build<br />
-					something <span class="gradient-text">intelligent.</span>
-				</h2>
-
-				<p class="mb-10 max-w-md text-lg leading-relaxed text-zinc-400">
-					Whether you want to talk about tool_calls, the future of RAG, or why Ruby on Rails is
-					still a powerhouse for AI backends—reach out.
-				</p>
-
-				<div class="flex flex-col gap-6">
-					<!-- Email -->
-					<a
-						href="mailto:azmimuwahid@gmail.com"
-						class="group flex w-fit items-center gap-4 text-zinc-300 transition-colors hover:text-zinc-200"
-					>
-						<div
-							class="flex h-12 w-12 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800 transition-all group-hover:scale-110 group-hover:border-zinc-50/50 group-hover:bg-zinc-50/10"
-						>
-							<Mail class="h-5 w-5" />
-						</div>
-						<div class="flex flex-col">
-							<span class="text-sm font-medium tracking-wider text-zinc-500 uppercase"
-								>Email Me</span
-							>
-							<span class="text-lg font-semibold">azmimuwahid@gmail.com</span>
-						</div>
-					</a>
-
-					<!-- Location -->
-					<div class="flex w-fit items-center gap-4 text-zinc-300">
-						<div
-							class="flex h-12 w-12 items-center justify-center rounded-full border border-zinc-700 bg-zinc-800"
-						>
-							<MapPin class="h-5 w-5" />
-						</div>
-						<div class="flex flex-col">
-							<span class="text-sm font-medium tracking-wider text-zinc-500 uppercase"
-								>Location</span
-							>
-							<span class="text-lg font-semibold">South East Asia (Remote)</span>
-						</div>
-					</div>
-				</div>
-
-				<!-- Social Links -->
-				<div class="mt-12 flex flex-wrap items-center gap-3">
-					{#each socialLinks as social}
-						<a
-							href={social.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							class="flex h-10 w-10 items-center justify-center rounded-full bg-zinc-800 text-zinc-400 transition-all duration-200 {social.hoverColor} hover:scale-110"
-							aria-label={social.label}
-						>
-							<SocialIcon name={social.icon} class="h-5 w-5" />
-						</a>
-					{/each}
-				</div>
-			</div>
-
-			<!-- Right Column: Form -->
-			<div class="relative">
-				<!-- Decorative backdrop -->
-				<div
-					class="absolute -inset-1 rounded-3xl bg-gradient-to-br from-zinc-500/20 to-zinc-700/20 opacity-60 blur-xl"
-				></div>
-
-				<div class="glass-card relative rounded-3xl p-8 sm:p-10">
-					<form onsubmit={handleSubmit} class="flex flex-col gap-6">
-						<div class="grid gap-6 sm:grid-cols-2">
-							<div class="flex flex-col gap-2">
-								<label for="name" class="text-sm font-medium text-zinc-300">Name</label>
-								<input
-									type="text"
-									id="name"
-									name="name"
-									required
-									placeholder="John Doe"
-									class="rounded-xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-white placeholder-zinc-600 transition-all focus:border-zinc-400 focus:shadow-[0_0_12px_rgba(161,161,170,0.15)] focus:ring-1 focus:ring-zinc-400 focus:outline-none"
-								/>
-							</div>
-							<div class="flex flex-col gap-2">
-								<label for="email" class="text-sm font-medium text-zinc-300">Email</label>
-								<input
-									type="email"
-									id="email"
-									name="email"
-									required
-									placeholder="john@example.com"
-									class="rounded-xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-white placeholder-zinc-600 transition-all focus:border-zinc-400 focus:shadow-[0_0_12px_rgba(161,161,170,0.15)] focus:ring-1 focus:ring-zinc-400 focus:outline-none"
-								/>
-							</div>
-						</div>
-
-						<div class="flex flex-col gap-2">
-							<label for="subject" class="text-sm font-medium text-zinc-300">Subject</label>
-							<input
-								type="text"
-								id="subject"
-								name="subject"
-								required
-								placeholder="Project Inquiry"
-								class="rounded-xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-white placeholder-zinc-600 transition-all focus:border-zinc-400 focus:shadow-[0_0_12px_rgba(161,161,170,0.15)] focus:ring-1 focus:ring-zinc-400 focus:outline-none"
-							/>
-						</div>
-
-						<div class="flex flex-col gap-2">
-							<label for="message" class="text-sm font-medium text-zinc-300">Message</label>
-							<textarea
-								id="message"
-								name="message"
-								required
-								rows="5"
-								placeholder="Tell me about your project, goals, and timeline..."
-								class="min-h-[120px] resize-y rounded-xl border border-zinc-700 bg-zinc-900/50 px-4 py-3 text-white placeholder-zinc-600 transition-all focus:border-zinc-400 focus:shadow-[0_0_12px_rgba(161,161,170,0.15)] focus:ring-1 focus:ring-zinc-400 focus:outline-none"
-							></textarea>
-						</div>
-
-						<button
-							type="submit"
-							class="group flex w-full items-center justify-center gap-2 rounded-xl bg-zinc-50 px-6 py-4 text-base font-bold text-zinc-900 transition-all hover:bg-white"
-							style="box-shadow: 0 0 20px rgba(255,255,255,0.1);"
-						>
-							Open email draft
-							<ArrowRight class="h-5 w-5 transition-transform group-hover:translate-x-1" />
-						</button>
-						<p class="text-center text-xs text-zinc-600">
-							Uses your default email app. Nothing is sent automatically.
-						</p>
-					</form>
-				</div>
 			</div>
 		</div>
 	</div>

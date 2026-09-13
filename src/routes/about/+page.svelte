@@ -1,52 +1,135 @@
 <svelte:head>
-	<title>About — Azmi Muwahid</title>
+	<title>About Azmi — AI & Automation Consultant</title>
 	<meta
 		name="description"
-		content="About Azmi Muwahid, a senior full stack engineer focused on practical AI systems, agentic workflows, RAG, and realtime product interfaces."
+		content="Meet Azmi Muwahid: an AI and automation consultant helping businesses replace repetitive work with practical solutions, from advice to hands-on delivery."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/about" />
-	<meta property="og:title" content="About — Azmi Muwahid" />
+	<meta property="og:title" content="About Azmi — AI & Automation Consultant" />
 	<meta
 		property="og:description"
-		content="About Azmi Muwahid, a senior full stack engineer focused on practical AI systems, agentic workflows, RAG, and realtime product interfaces."
+		content="A business-first partner with the experience to build, launch, and improve the solution."
 	/>
 	<meta property="og:url" content="https://azmi.web.id/about" />
-	<meta property="og:image" content="https://azmi.web.id/logo.png" />
+	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="About — Azmi Muwahid" />
-	<meta name="twitter:image" content="https://azmi.web.id/logo.png" />
+	<meta name="twitter:title" content="About Azmi — AI & Automation Consultant" />
+	<meta
+		name="twitter:description"
+		content="A business-first partner with the experience to build, launch, and improve the solution."
+	/>
+	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 </svelte:head>
 
 <section class="px-6 py-32">
 	<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
 		<div>
-			<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">About</p>
-			<h1 class="text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">
-				I work best at the seam between product and systems.
+			<p class="eyebrow mb-4">About Azmi</p>
+			<h1 class="text-5xl font-black tracking-tight sm:text-6xl">
+				Technology should make your work easier.
 			</h1>
+			<figure class="mt-8">
+				<img
+					src="/assets/profile.webp"
+					alt="Azmi Muwahid outside the Amazon Spheres in Seattle"
+					width="819"
+					height="1024"
+					class="w-full rounded-2xl"
+				/>
+				<figcaption class="mt-3 text-sm text-muted-foreground">Seattle, Washington.</figcaption>
+			</figure>
 		</div>
-		<div class="space-y-6 text-lg leading-8 text-zinc-400">
+		<div class="space-y-6 text-lg leading-8 text-muted-foreground">
 			<p>
-				I’m a senior full stack engineer with a background in Rails, TypeScript, SvelteKit, cloud
-				infrastructure, and AI product workflows. I care about the unglamorous parts that make AI
-				features reliable: queues, retries, latency budgets, eval loops, and human review states.
+				I help businesses apply AI and software where it makes a practical difference: less manual
+				admin, clearer customer journeys, and better control over day-to-day costs.
 			</p>
 			<p>
-				My recent work focuses on agentic workflows, RAG-backed interfaces, low-latency audio
-				interactions, and product UI that makes model behavior understandable instead of mysterious.
+				My background is in senior software engineering. That means I can help you choose what to
+				improve and do the hands-on work to make it happen. You get one partner from the first
+				conversation through building, testing, and putting the solution to use.
+			</p>
+			<h2 class="pt-4 text-2xl font-bold text-foreground">Start with your business, not a tool.</h2>
+			<p>
+				We look at how work gets done today, where time or money is lost, and what your team needs.
+				Sometimes AI helps. Sometimes connecting existing tools or simplifying a process is the
+				better answer.
+			</p>
+			<h2 class="pt-4 text-2xl font-bold text-foreground">Make progress you can see.</h2>
+			<p>
+				Before building, we agree on a starting point and what to measure: time spent per task, cost
+				per order, fewer missed follow-ups, or faster customer responses. Then we test a focused
+				improvement before expanding it.
 			</p>
 			<p>
-				Before software, I studied fisheries and ecosystem thinking. That bias still shows up in how
-				I approach systems: map the feedback loops, reduce hidden failure modes, and make the
-				important signals visible.
+				Before software, I studied fisheries. Understanding how changes affect a whole ecosystem
+				shaped how I work today: consider people, processes, and consequences together.
 			</p>
-		</div>
-	</div>
-	<div class="mx-auto mt-16 grid max-w-6xl gap-5 md:grid-cols-3">
-		{#each ['AI workflow architecture', 'Full stack product delivery', 'Readable technical tradeoffs'] as item}
-			<div class="rounded-[1.5rem] border border-white/[0.08] bg-white/[0.03] p-6 text-zinc-200">
-				{item}
+			<p>
+				Based in Bogor, West Java, Indonesia, I have 6+ years of remote experience, as described in
+				my CV, working with companies in Malaysia, Singapore, and beyond.
+			</p>
+			<h2 class="pt-4 text-2xl font-bold text-foreground">Experience behind the advice</h2>
+			<div class="grid grid-cols-3 gap-3" aria-label="Companies I work or have worked with">
+				<a
+					href="https://futurelab.my"
+					target="_blank"
+					rel="noreferrer"
+					class="flex min-h-24 items-center justify-center rounded-xl border border-border bg-white p-4"
+					><img src="/assets/futurelab-logo.webp" alt="FutureLab" class="max-h-10 max-w-full" /></a
+				>
+				<a
+					href="https://www.toptal.com"
+					target="_blank"
+					rel="noreferrer"
+					class="flex min-h-24 items-center justify-center rounded-xl border border-border bg-white p-4"
+					><img src="/assets/toptal-logo.webp" alt="Toptal" class="max-h-10 max-w-full" /></a
+				>
+				<a
+					href="https://automa8e.com/sg"
+					target="_blank"
+					rel="noreferrer"
+					class="flex min-h-24 items-center justify-center rounded-xl border border-border bg-white p-4"
+					><img
+						src="/assets/automa8e-wordmark.webp"
+						alt="Automa8e"
+						class="max-h-10 max-w-full"
+					/></a
+				>
 			</div>
-		{/each}
+			<ul class="space-y-4">
+				<li>
+					<strong class="text-foreground">FutureLab.my · Senior Software Engineer</strong><br
+					/>February 2023–present. Building the mentoring platform, managing its cloud
+					infrastructure, and developing AI-assisted services. My CV reports 50% lower cloud costs
+					and 30% higher B2B conversions from separate improvements.
+				</li>
+				<li>
+					<strong class="text-foreground">Toptal · Full Stack Developer</strong><br />October
+					2025–present.
+				</li>
+				<li>
+					<strong class="text-foreground">Automa8e · React Developer</strong><br />July
+					2022–February 2025. Built the main application interface for a Singapore-based company.
+				</li>
+				<li>
+					<strong class="text-foreground">Embreo · Full Stack Developer</strong><br />June
+					2022–February 2023. Turned client requirements into web applications and managed the
+					testing and release environment.
+				</li>
+				<li>
+					<strong class="text-foreground">Revogamers · Co-Founder</strong><br />January 2011–January
+					2017. Managed a community gaming platform with over 1,000 concurrent users, as reported in
+					my CV.
+				</li>
+			</ul>
+			<h2 class="pt-4 text-2xl font-bold text-foreground">Education & perspective</h2>
+			<p>
+				Studied at Institut Pertanian Bogor (IPB), 2012–2018, and studied Permaculture and Natural
+				Building at Rak Tamachat Permaculture Institute, July 2017–September 2018. My background
+				connects technology with the practical question of how people and resources work together.
+			</p>
+			<a href="/contact" class="button-primary">Tell me what you want to improve</a>
+		</div>
 	</div>
 </section>

@@ -1,105 +1,70 @@
 <script lang="ts">
 	import { page } from '$app/state';
-	import { ArrowUpRight, Menu, X } from '@lucide/svelte';
-	import { onMount } from 'svelte';
+	import { Mail, Menu, X } from '@lucide/svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 
 	const navItems = [
-		{ name: 'Home', href: '/' },
-		{ name: 'Projects', href: '/projects' },
+		{ name: 'Work', href: '/projects' },
 		{ name: 'About', href: '/about' },
 		{ name: 'Lab', href: '/lab' },
-		{ name: 'Blog', href: '/blog' },
+		{ name: 'Writing', href: '/blog' },
 		{ name: 'Contact', href: '/contact' }
 	];
-
 	let mobileOpen = $state(false);
-	let scrolled = $state(false);
 	const pathname = $derived(page.url.pathname);
-
-	onMount(() => {
-		const update = () => (scrolled = window.scrollY > 24);
-		update();
-		window.addEventListener('scroll', update, { passive: true });
-		return () => window.removeEventListener('scroll', update);
-	});
-
 	function isActive(href: string) {
-		if (href === '/') return pathname === '/';
 		return pathname === href || pathname.startsWith(`${href}/`);
 	}
 </script>
 
-<header
-	class="fixed top-3 left-1/2 z-50 -translate-x-1/2 px-3 transition-[width] duration-300 sm:top-4 {scrolled
-		? 'w-[min(48rem,calc(100vw-1.5rem))]'
-		: 'w-[min(60rem,calc(100vw-1.5rem))]'}"
->
-	<nav class="nav-shell" aria-label="Main navigation">
-		<div class="grid grid-cols-[1fr_auto] items-center gap-3 md:grid-cols-[1fr_auto_1fr]">
-			<a
-				href="/"
-				class="group flex items-center gap-2.5 justify-self-start"
-				aria-label="Azmi Muwahid home"
+<header class="fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-6 sm:pt-4">
+	<nav class="nav-shell mx-auto max-w-7xl" aria-label="Main navigation">
+		<a href="/" class="brand" aria-label="Azmi Muwahid home">
+			<span class="brand-icon"><img src="/assets/azmi-logo.webp" alt="" /></span>
+			<span><strong>Azmi Muwahid</strong><small>AI & Automation Consultant</small></span>
+		</a>
+
+		<div class="hidden items-center gap-1 lg:flex">
+			{#each navItems as item}
+				<a
+					href={item.href}
+					aria-current={isActive(item.href) ? 'page' : undefined}
+					class:active={isActive(item.href)}
+					class="nav-link">{item.name}</a
+				>
+			{/each}
+		</div>
+
+		<div class="flex items-center gap-2">
+			<div class="hidden sm:block"><ThemeToggle /></div>
+			<a href="mailto:azmimuwahid@gmail.com" class="nav-cta hidden sm:inline-flex"
+				><Mail class="h-4 w-4" /> Let’s talk</a
 			>
-				<span class="brand-mark">AM</span>
-				<span class="hidden text-sm font-bold tracking-[-0.02em] text-zinc-100 sm:inline"
-					>Azmi Muwahid</span
-				>
-			</a>
-
-			<div class="hidden items-center gap-0.5 md:flex">
-				{#each navItems as item}
-					<a
-						href={item.href}
-						aria-current={isActive(item.href) ? 'page' : undefined}
-						class="nav-link {isActive(item.href) ? 'is-active' : ''}"
-					>
-						{item.name}
-					</a>
-				{/each}
-			</div>
-
-			<div class="hidden items-center gap-2 justify-self-end md:flex">
-				<ThemeToggle />
-				<a href="mailto:azmimuwahid@gmail.com" class="nav-cta">
-					Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
-				</a>
-			</div>
-
-			<div class="flex items-center gap-2 justify-self-end md:hidden">
-				<ThemeToggle />
-				<button
-					class="grid h-9 w-9 place-items-center rounded-full border border-white/[0.09] text-zinc-200"
-					onclick={() => (mobileOpen = !mobileOpen)}
-					aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
-					aria-expanded={mobileOpen}
-					aria-controls="mobile-navigation"
-				>
-					{#if mobileOpen}<X class="h-4 w-4" />{:else}<Menu class="h-4 w-4" />{/if}
-				</button>
-			</div>
+			<button
+				type="button"
+				class="menu-button lg:hidden"
+				onclick={() => (mobileOpen = !mobileOpen)}
+				aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
+				aria-expanded={mobileOpen}
+				aria-controls="mobile-navigation"
+			>
+				{#if mobileOpen}<X class="h-5 w-5" />{:else}<Menu class="h-5 w-5" />{/if}
+			</button>
 		</div>
 
 		{#if mobileOpen}
-			<div id="mobile-navigation" class="mt-3 border-t border-white/[0.07] pt-3 md:hidden">
-				<div class="grid grid-cols-2 gap-1">
-					{#each navItems as item}
-						<a
-							href={item.href}
-							onclick={() => (mobileOpen = false)}
-							aria-current={isActive(item.href) ? 'page' : undefined}
-							class="rounded-xl px-3 py-3 text-sm font-semibold {isActive(item.href)
-								? 'bg-white/[0.08] text-white'
-								: 'text-zinc-400'}"
-						>
-							{item.name}
-						</a>
-					{/each}
+			<div id="mobile-navigation" class="mobile-menu">
+				{#each navItems as item}<a
+						href={item.href}
+						onclick={() => (mobileOpen = false)}
+						aria-current={isActive(item.href) ? 'page' : undefined}
+						class:active={isActive(item.href)}>{item.name}</a
+					>{/each}
+				<div class="mt-2 flex items-center justify-between border-t border-border pt-3 sm:hidden">
+					<ThemeToggle /><a href="mailto:azmimuwahid@gmail.com" class="nav-cta"
+						><Mail class="h-4 w-4" /> Let’s talk</a
+					>
 				</div>
-				<a href="mailto:azmimuwahid@gmail.com" class="nav-cta mt-2 flex w-full justify-center">
-					Let’s talk <ArrowUpRight class="h-3.5 w-3.5" />
-				</a>
 			</div>
 		{/if}
 	</nav>
@@ -107,109 +72,146 @@
 
 <style>
 	.nav-shell {
-		padding: 0.55rem;
-		border: 1px solid rgba(255, 255, 255, 0.09);
-		border-radius: 1.15rem;
-		background: rgba(9, 9, 11, 0.76);
-		box-shadow:
-			0 16px 50px -20px rgba(0, 0, 0, 0.85),
-			inset 0 1px rgba(255, 255, 255, 0.03);
-		backdrop-filter: blur(22px) saturate(125%);
-		-webkit-backdrop-filter: blur(22px) saturate(125%);
-	}
-
-	.brand-mark {
+		position: relative;
 		display: grid;
-		width: 2rem;
-		height: 2rem;
+		grid-template-columns: 1fr auto;
+		align-items: center;
+		gap: 1rem;
+		min-height: 4.25rem;
+		padding: 0.5rem;
+		border: 1px solid var(--border);
+		border-radius: 1rem;
+		background: color-mix(in srgb, var(--background) 88%, transparent);
+		box-shadow: 0 16px 45px -24px rgba(0, 0, 0, 0.45);
+		backdrop-filter: blur(18px);
+	}
+	.brand {
+		display: flex;
+		align-items: center;
+		gap: 0.65rem;
+		min-width: 0;
+		width: fit-content;
+	}
+	.brand-icon {
+		display: grid;
+		width: 3rem;
+		height: 3rem;
+		flex: none;
 		place-items: center;
-		border: 1px solid rgba(157, 229, 213, 0.24);
 		border-radius: 0.7rem;
-		background: linear-gradient(145deg, rgba(142, 222, 205, 0.18), rgba(255, 255, 255, 0.035));
+		background: #111827;
+		color: white;
+	}
+	.brand-icon img {
+		width: 100%;
+		height: 100%;
+		object-fit: contain;
+	}
+	.brand span:last-child {
+		display: grid;
+		line-height: 1.15;
+	}
+	.brand strong {
 		font-family: var(--font-heading);
-		font-size: 0.6rem;
-		font-weight: 800;
-		letter-spacing: -0.03em;
-		color: #c5f0e7;
-		transition: transform 180ms ease;
+		font-size: 0.88rem;
 	}
-
-	.group:hover .brand-mark {
-		transform: rotate(-4deg) scale(1.04);
+	.brand small {
+		margin-top: 0.25rem;
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.56rem;
+		letter-spacing: 0.04em;
 	}
-
 	.nav-link {
 		position: relative;
-		border-radius: 0.7rem;
-		padding: 0.55rem 0.72rem;
-		font-size: 0.76rem;
-		font-weight: 600;
-		color: #71717a;
-		transition:
-			color 160ms ease,
-			background-color 160ms ease;
-	}
-
-	.nav-link:hover {
-		background: rgba(255, 255, 255, 0.035);
-		color: #d4d4d8;
-	}
-
-	.nav-link.is-active {
-		background: rgba(255, 255, 255, 0.065);
-		color: #fafafa;
-	}
-
-	.nav-link.is-active::after {
-		position: absolute;
-		left: 50%;
-		bottom: 0.22rem;
-		width: 3px;
-		height: 3px;
-		border-radius: 50%;
-		background: #8cdfcc;
-		content: '';
-		transform: translateX(-50%);
-		box-shadow: 0 0 7px #8cdfcc;
-	}
-
-	.nav-cta {
+		min-height: 2.75rem;
 		display: inline-flex;
 		align-items: center;
-		justify-content: center;
-		gap: 0.35rem;
-		min-height: 2.15rem;
-		border-radius: 999px;
-		background: #f4f4f5;
-		padding: 0.5rem 0.85rem;
-		font-size: 0.72rem;
-		font-weight: 700;
-		color: #09090b;
+		border-radius: 0.65rem;
+		padding: 0 0.85rem;
+		color: var(--muted-foreground);
+		font-size: 0.8rem;
+		font-weight: 650;
 		transition:
-			transform 160ms ease,
-			background-color 160ms ease;
+			color 180ms,
+			background 180ms;
 	}
-
+	.nav-link:hover,
+	.nav-link.active {
+		background: var(--accent);
+		color: var(--foreground);
+	}
+	.nav-link.active::after {
+		content: '';
+		position: absolute;
+		right: 0.8rem;
+		bottom: 0.35rem;
+		left: 0.8rem;
+		height: 2px;
+		border-radius: 2px;
+		background: var(--signal);
+	}
+	.nav-cta {
+		min-height: 2.75rem;
+		align-items: center;
+		gap: 0.45rem;
+		border-radius: 0.65rem;
+		background: var(--foreground);
+		padding: 0 1rem;
+		color: var(--background);
+		font-size: 0.8rem;
+		font-weight: 700;
+		transition: opacity 180ms;
+	}
 	.nav-cta:hover {
-		transform: translateY(-1px);
-		background: #fff;
+		opacity: 0.82;
 	}
-
-	:global(html.light) .nav-shell {
-		border-color: rgba(24, 24, 27, 0.12);
-		background: rgba(250, 250, 250, 0.78);
-		box-shadow:
-			0 16px 50px -20px rgba(24, 24, 27, 0.18),
-			inset 0 1px rgba(255, 255, 255, 0.72);
+	.menu-button {
+		display: grid;
+		width: 2.75rem;
+		height: 2.75rem;
+		cursor: pointer;
+		place-items: center;
+		border: 1px solid var(--border);
+		border-radius: 0.65rem;
+		color: var(--foreground);
 	}
-
-	:global(html.light) .nav-link {
-		color: #71717a;
+	.mobile-menu {
+		position: absolute;
+		top: calc(100% + 0.5rem);
+		right: 0;
+		left: 0;
+		display: grid;
+		gap: 0.2rem;
+		padding: 0.6rem;
+		border: 1px solid var(--border);
+		border-radius: 1rem;
+		background: var(--background);
+		box-shadow: 0 24px 50px -20px rgba(0, 0, 0, 0.5);
 	}
-
-	:global(html.light) .nav-link:hover,
-	:global(html.light) .nav-link.is-active {
-		background: rgba(24, 24, 27, 0.055);
-		color: #18181b;
+	.mobile-menu > a {
+		min-height: 2.75rem;
+		display: flex;
+		align-items: center;
+		border-radius: 0.65rem;
+		padding: 0 0.8rem;
+		color: var(--muted-foreground);
+		font-weight: 650;
+	}
+	.mobile-menu > a.active {
+		background: var(--accent);
+		color: var(--foreground);
+	}
+	@media (min-width: 1024px) {
+		.menu-button,
+		.mobile-menu {
+			display: none;
+		}
+		.nav-shell {
+			grid-template-columns: 1fr auto 1fr;
+		}
+		.nav-shell > :last-child {
+			justify-self: end;
+		}
 	}
 </style>

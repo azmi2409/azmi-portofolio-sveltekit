@@ -1,193 +1,73 @@
 <script lang="ts">
-	import { ArrowDownRight, ArrowRight, FileText, Mail } from '@lucide/svelte';
-	import { socialLinks, emailLink } from '$lib/config/socialLinks';
-	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
+	import { ArrowRight } from '@lucide/svelte';
 	import type { SiteMetric } from '$lib/types/portfolio';
-	import HeroSpatialScene from './HeroSpatialScene.svelte';
-
 	let { metrics = [] }: { metrics?: SiteMetric[] } = $props();
 </script>
 
-<section id="hero" class="hero-shell relative overflow-hidden px-6 pt-32 pb-20 sm:pt-40 sm:pb-28">
-	<div class="editorial-grid pointer-events-none absolute inset-0 opacity-40"></div>
-	<div class="hero-aurora pointer-events-none absolute inset-x-0 top-0 h-[52rem]"></div>
-
-	<div class="relative mx-auto max-w-7xl">
-		<div class="grid gap-12 lg:grid-cols-[1.04fr_0.96fr] lg:items-center lg:gap-10">
-			<div class="hero-copy">
-				<div class="eyebrow mb-7">
-					<span class="availability-dot"></span>
-					Available for select product work · 2026
-				</div>
-
-				<h1
-					class="max-w-4xl text-[clamp(3.4rem,7.1vw,6.7rem)] leading-[0.9] font-black tracking-[-0.065em] text-zinc-50"
-				>
-					AI systems for the
-					<span class="signal-text">messy middle.</span>
+<section id="hero" class="px-6 pt-32 pb-12 sm:pt-40 sm:pb-16">
+	<div class="mx-auto max-w-7xl">
+		<div class="grid items-center gap-10 lg:grid-cols-[1.35fr_0.8fr] lg:gap-20">
+			<div>
+				<p class="eyebrow mb-6">Azmi Muwahid · AI & Automation Consultant</p>
+				<h1 class="text-[clamp(2.8rem,5.7vw,5.5rem)] leading-[1.02] font-black tracking-[-0.055em]">
+					Less busywork.<br />More room to
+					<span class="text-[var(--signal)]">grow your business.</span>
 				</h1>
-
-				<p class="mt-8 max-w-xl text-lg leading-8 text-zinc-400 sm:text-xl">
-					I’m Azmi Muwahid. I design and ship agentic workflows, RAG systems, and realtime
-					interfaces where model behavior, product UX, and backend reliability have to agree.
+				<p class="mt-6 max-w-xl text-lg leading-8 text-muted-foreground">
+					I help you use AI and practical software to automate repetitive work, reduce operating
+					costs, and serve customers better. From finding the right opportunity to building a
+					solution your team can use every day.
 				</p>
-
-				<div class="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap">
-					<a class="button-primary group" href="#projects">
-						View selected work
-						<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-					</a>
+				<p class="mt-5 flex items-start gap-3 text-sm text-muted-foreground">
+					<span class="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-[var(--signal)]"></span>
+					Available for remote consulting and hands-on delivery.
+				</p>
+				<div class="mt-7 flex flex-wrap gap-3">
+					<a class="button-primary" href="#projects"
+						>See solutions in action <ArrowRight class="h-4 w-4" /></a
+					>
+					<a class="button-secondary" href="#contact">Discuss your business</a>
+				</div>
+				<div class="mt-5 flex flex-wrap gap-x-6 text-sm font-semibold">
 					<a
-						class="button-secondary"
+						class="inline-flex min-h-11 items-center hover:underline"
 						href="https://linkedin.com/in/azmimuwahid"
 						target="_blank"
-						rel="noopener noreferrer"
+						rel="noreferrer">LinkedIn</a
 					>
-						<FileText class="h-4 w-4" />
-						Résumé / LinkedIn
-					</a>
-					<a class="hero-contact-link" href="/contact">Contact</a>
-				</div>
-
-				<div class="mt-9 flex items-center gap-2 text-zinc-500">
-					{#each socialLinks.slice(0, 4) as social}
-						<a
-							href={social.href}
-							target="_blank"
-							rel="noopener noreferrer"
-							aria-label={social.label}
-							class="social-button"
-						>
-							<SocialIcon name={social.icon} class="h-4 w-4" />
-						</a>
-					{/each}
-					<a href={emailLink.href} aria-label={emailLink.label} class="social-button">
-						<Mail class="h-4 w-4" />
-					</a>
-					<span
-						class="ml-2 hidden font-mono text-[0.63rem] tracking-[0.16em] text-zinc-600 uppercase sm:inline"
+					<a
+						class="inline-flex min-h-11 items-center hover:underline"
+						href="https://github.com/azmi2409"
+						target="_blank"
+						rel="noreferrer">GitHub</a
 					>
-						Jakarta · working globally
-					</span>
+					<a
+						class="inline-flex min-h-11 items-center hover:underline"
+						href="mailto:azmimuwahid@gmail.com?subject=R%C3%A9sum%C3%A9%20request">Request résumé</a
+					>
 				</div>
 			</div>
-
-			<div class="hero-scene">
-				<HeroSpatialScene />
-			</div>
+			<figure class="mx-auto w-full max-w-sm lg:max-w-none">
+				<img
+					src="/assets/profile.webp"
+					alt="Azmi Muwahid outside the Amazon Spheres in Seattle"
+					width="819"
+					height="1024"
+					fetchpriority="high"
+					class="aspect-[4/5] w-full rounded-2xl object-cover"
+				/>
+				<figcaption class="mt-4 flex justify-between gap-4 text-xs text-muted-foreground">
+					<span>Business first. Technology with a purpose.</span><span>Seattle, WA</span>
+				</figcaption>
+			</figure>
 		</div>
-
-		<div class="mt-12 grid border-y border-white/[0.07] sm:grid-cols-[auto_1fr] lg:mt-16">
-			<div
-				class="flex items-center gap-3 border-b border-white/[0.07] py-5 pr-8 sm:border-r sm:border-b-0"
-			>
-				<ArrowDownRight class="h-4 w-4 text-emerald-300/70" />
-				<span class="font-mono text-[0.62rem] tracking-[0.2em] text-zinc-500 uppercase"
-					>Proof over promises</span
-				>
-			</div>
-			<div class="grid sm:grid-cols-3">
-				{#each metrics as metric}
-					<article class="metric-item">
-						<p class="text-lg font-bold tracking-tight text-zinc-100">{metric.value}</p>
-						<h2 class="mt-1 text-xs font-semibold text-zinc-400">{metric.label}</h2>
-					</article>
-				{/each}
-			</div>
-		</div>
+		<dl class="mt-12 grid gap-6 border-y border-border py-6 sm:grid-cols-3">
+			{#each metrics as metric}
+				<div>
+					<dt class="text-sm text-muted-foreground">{metric.label}</dt>
+					<dd class="mt-2 font-semibold">{metric.value}</dd>
+				</div>
+			{/each}
+		</dl>
 	</div>
 </section>
-
-<style>
-	.hero-shell {
-		min-height: 100svh;
-	}
-
-	.hero-aurora {
-		background:
-			radial-gradient(circle at 72% 25%, rgba(87, 208, 181, 0.11), transparent 29%),
-			radial-gradient(circle at 28% 8%, rgba(255, 255, 255, 0.055), transparent 25%);
-		mask-image: linear-gradient(to bottom, black 62%, transparent);
-	}
-
-	.hero-copy,
-	.hero-scene {
-		animation: hero-enter 850ms cubic-bezier(0.16, 1, 0.3, 1) both;
-	}
-
-	.hero-scene {
-		animation-delay: 100ms;
-	}
-
-	.signal-text {
-		display: block;
-		background: linear-gradient(100deg, #f4f4f5 5%, #9be5d5 64%, #5ea997);
-		background-clip: text;
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-	}
-
-	.availability-dot {
-		width: 0.45rem;
-		height: 0.45rem;
-		border-radius: 50%;
-		background: #6ee7b7;
-		box-shadow:
-			0 0 0 4px rgba(110, 231, 183, 0.08),
-			0 0 14px rgba(110, 231, 183, 0.45);
-	}
-
-	.metric-item {
-		padding: 1.2rem 1.4rem;
-		border-right: 1px solid rgba(255, 255, 255, 0.07);
-	}
-
-	.hero-contact-link {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		padding: 0.75rem 0.9rem;
-		font-size: 0.875rem;
-		font-weight: 700;
-		color: var(--muted-foreground);
-		transition: color 160ms ease;
-	}
-
-	.hero-contact-link:hover {
-		color: var(--foreground);
-	}
-
-	.metric-item:last-child {
-		border-right: 0;
-	}
-
-	@keyframes hero-enter {
-		from {
-			opacity: 0;
-			transform: translateY(24px);
-		}
-		to {
-			opacity: 1;
-			transform: translateY(0);
-		}
-	}
-
-	@media (max-width: 639px) {
-		.metric-item {
-			border-right: 0;
-			border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-			padding-inline: 0;
-		}
-
-		.metric-item:last-child {
-			border-bottom: 0;
-		}
-	}
-
-	@media (prefers-reduced-motion: reduce) {
-		.hero-copy,
-		.hero-scene {
-			animation: none;
-		}
-	}
-</style>

@@ -2,12 +2,14 @@
 	import { ArrowRight, ExternalLink } from '@lucide/svelte';
 	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 	import type { Project } from '$lib/types/portfolio';
+	import ProjectPreview from '$lib/components/ProjectPreview.svelte';
 
 	let { projects = [] }: { projects?: Project[] } = $props();
 
 	function span(index: number) {
-		if (index % 4 === 0 || index % 4 === 3) return 'lg:col-span-7';
-		return 'lg:col-span-5';
+		return index === 0 || (projects.length % 2 === 0 && index === projects.length - 1)
+			? 'lg:col-span-12'
+			: 'lg:col-span-6';
 	}
 </script>
 
@@ -20,11 +22,11 @@
 			<div class="max-w-3xl">
 				<div class="eyebrow mb-5">Selected work · 01</div>
 				<h2 class="text-4xl leading-[0.98] font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
-					Built systems.<br /><span class="text-zinc-600">Measured tradeoffs.</span>
+					Practical solutions to everyday business problems.
 				</h2>
 				<p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-					Not just final screens. Each case study traces the constraints, architecture, decisions,
-					and operational details behind the outcome.
+					From reducing session admin to helping customers buy online. See the work I delivered, who
+					it helps, and what changed.
 				</p>
 			</div>
 			<a href="/projects" class="button-secondary group w-fit">
@@ -41,31 +43,13 @@
 						class="project-visual"
 						aria-label={`Read ${project.name} case study`}
 					>
-						{#if project.cover}
-							<img
-								src={project.cover}
-								alt={project.coverAlt ?? `${project.name} product interface`}
-								loading="lazy"
-								decoding="async"
-								class="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.025]"
-							/>
-							<div
-								class="absolute inset-0 bg-gradient-to-t from-[#0b0c0d] via-transparent to-transparent"
-							></div>
-							{#if project.coverCaption}
-								<span class="product-proof-label">Live product</span>
-							{/if}
-						{:else}
-							<div class="project-placeholder relative h-full overflow-hidden">
-								<div class="visual-grid"></div>
-								<div class="visual-orbit"></div>
-								<div class="visual-panel">
-									<span>System / {String(index + 1).padStart(2, '0')}</span>
-									<strong>{project.type}</strong>
-									<i></i>
-								</div>
-							</div>
-						{/if}
+						<ProjectPreview
+							slug={project.slug}
+							name={project.name}
+							cover={project.cover}
+							coverAlt={project.coverAlt}
+							liveUrl={project.liveUrl}
+						/>
 					</a>
 
 					<div class="flex flex-1 flex-col p-6 sm:p-7">
@@ -89,11 +73,16 @@
 							<p class="text-sm leading-6 text-zinc-300">{project.outcome}</p>
 						</div>
 
-						<div class="mt-6 flex flex-wrap gap-2">
-							{#each project.stack.slice(0, 4) as item}
-								<span class="stack-pill">{item}</span>
-							{/each}
-						</div>
+						<details class="mt-6">
+							<summary class="cursor-pointer text-sm text-muted-foreground"
+								>Tools behind the solution</summary
+							>
+							<div class="mt-3 flex flex-wrap gap-2">
+								{#each project.stack.slice(0, 3) as item}
+									<span class="stack-pill">{item}</span>
+								{/each}
+							</div>
+						</details>
 
 						<div
 							class="mt-6 flex items-center justify-between gap-3 border-t border-white/[0.06] pt-5"
@@ -168,76 +157,6 @@
 		border-bottom: 1px solid rgba(255, 255, 255, 0.065);
 	}
 
-	.visual-grid {
-		position: absolute;
-		inset: 0;
-		background-image:
-			linear-gradient(rgba(255, 255, 255, 0.045) 1px, transparent 1px),
-			linear-gradient(90deg, rgba(255, 255, 255, 0.045) 1px, transparent 1px);
-		background-size: 32px 32px;
-		mask-image: linear-gradient(90deg, black, transparent 84%);
-	}
-
-	.visual-orbit {
-		position: absolute;
-		right: 7%;
-		top: 50%;
-		width: 10rem;
-		height: 10rem;
-		border: 1px solid rgba(143, 228, 208, 0.18);
-		border-radius: 50%;
-		box-shadow: 0 0 50px rgba(91, 196, 173, 0.08);
-		transform: translateY(-50%) rotateX(65deg);
-		transition: transform 700ms ease;
-	}
-
-	.project-card:hover .visual-orbit {
-		transform: translateY(-50%) rotateX(65deg) rotateZ(18deg) scale(1.05);
-	}
-
-	.visual-panel {
-		position: absolute;
-		left: 1.5rem;
-		bottom: 1.5rem;
-		display: flex;
-		max-width: calc(100% - 3rem);
-		flex-direction: column;
-		gap: 0.25rem;
-		padding: 0.7rem 0.9rem;
-		border: 1px solid rgba(255, 255, 255, 0.09);
-		border-radius: 0.75rem;
-		background: rgba(9, 10, 11, 0.64);
-		backdrop-filter: blur(10px);
-	}
-
-	.visual-panel span {
-		font-family: var(--font-mono);
-		font-size: 0.55rem;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: #71717a;
-	}
-
-	.visual-panel strong {
-		overflow: hidden;
-		font-size: 0.7rem;
-		font-weight: 600;
-		color: #d4d4d8;
-		text-overflow: ellipsis;
-		white-space: nowrap;
-	}
-
-	.visual-panel i {
-		position: absolute;
-		right: 0.75rem;
-		top: 0.75rem;
-		width: 5px;
-		height: 5px;
-		border-radius: 50%;
-		background: #86ddc9;
-		box-shadow: 0 0 8px #86ddc9;
-	}
-
 	.stack-pill {
 		padding: 0.33rem 0.65rem;
 		border: 1px solid rgba(255, 255, 255, 0.07);
@@ -264,21 +183,5 @@
 	.project-action:hover {
 		border-color: rgba(255, 255, 255, 0.18);
 		color: #f4f4f5;
-	}
-
-	.product-proof-label {
-		position: absolute;
-		left: 1rem;
-		top: 1rem;
-		padding: 0.4rem 0.65rem;
-		border: 1px solid rgba(255, 255, 255, 0.14);
-		border-radius: 999px;
-		background: rgba(9, 10, 11, 0.72);
-		backdrop-filter: blur(10px);
-		font-family: var(--font-mono);
-		font-size: 0.55rem;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: #d4d4d8;
 	}
 </style>

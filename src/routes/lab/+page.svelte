@@ -1,4 +1,5 @@
 <script lang="ts">
+	import IndependentWork from '$lib/components/sections/IndependentWork.svelte';
 	let { data } = $props();
 </script>
 
@@ -6,26 +7,26 @@
 	<title>Lab — Azmi Muwahid</title>
 	<meta
 		name="description"
-		content="Experiments and research notes on agentic AI systems, realtime audio, RAG, and product engineering."
+		content="Practical experiments in making everyday work easier: clearer AI assistance, faster feedback, and useful tools."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/lab" />
 	<meta property="og:title" content="Lab — Azmi Muwahid" />
 	<meta
 		property="og:description"
-		content="Experiments and research notes on agentic AI systems, realtime audio, RAG, and product engineering."
+		content="Practical experiments in making everyday work easier: clearer AI assistance, faster feedback, and useful tools."
 	/>
 	<meta property="og:url" content="https://azmi.web.id/lab" />
-	<meta property="og:image" content="https://azmi.web.id/logo.png" />
+	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="Lab — Azmi Muwahid" />
-	<meta name="twitter:image" content="https://azmi.web.id/logo.png" />
+	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 </svelte:head>
 
 <section class="px-6 py-32">
 	<div class="mx-auto max-w-6xl">
 		<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">Lab</p>
 		<h1 class="max-w-4xl text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">
-			Small experiments for hard product questions.
+			Testing better ways to get work done.
 		</h1>
 		<div class="mt-14 grid gap-5 md:grid-cols-2">
 			{#each data.experiments as experiment}
@@ -51,3 +52,4 @@
 		</div>
 	</div>
 </section>
+<IndependentWork />
