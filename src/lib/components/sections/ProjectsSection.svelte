@@ -143,6 +143,21 @@
 			box-shadow 260ms ease;
 	}
 
+	@media (min-width: 1024px) {
+		.project-card.lg\:col-span-12 {
+			display: grid;
+			grid-template-columns: 1.35fr 1fr;
+			align-items: stretch;
+		}
+
+		.project-card.lg\:col-span-12 .project-visual {
+			border-bottom: none;
+			border-right: 1px solid rgba(255, 255, 255, 0.065);
+			height: 100%;
+			aspect-ratio: auto;
+		}
+	}
+
 	.project-card:hover {
 		transform: translateY(-5px);
 		border-color: rgba(153, 229, 212, 0.19);
@@ -152,7 +167,8 @@
 	.project-visual {
 		position: relative;
 		display: block;
-		height: 14rem;
+		width: 100%;
+		aspect-ratio: 16 / 11;
 		overflow: hidden;
 		border-bottom: 1px solid rgba(255, 255, 255, 0.065);
 	}

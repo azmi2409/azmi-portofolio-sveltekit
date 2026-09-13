@@ -41,14 +41,17 @@
 <style>
 	.preview {
 		position: relative;
+		display: flex;
+		flex-direction: column;
+		width: 100%;
 		height: 100%;
-		min-height: 15rem;
 		overflow: hidden;
 		background: #10141b;
 		color: #f8fafc;
 	}
 	.browser-bar {
 		height: 2.25rem;
+		flex-shrink: 0;
 		display: flex;
 		align-items: center;
 		gap: 0.35rem;
@@ -72,8 +75,10 @@
 	}
 	img {
 		width: 100%;
-		height: calc(100% - 2.25rem);
-		min-height: 13rem;
+		height: 100%;
+		flex: 1;
+		display: block;
+		aspect-ratio: 144 / 100;
 		object-fit: cover;
 		object-position: top;
 	}
@@ -90,7 +95,7 @@
 		backdrop-filter: blur(8px);
 	}
 	.unavailable {
-		min-height: 12.75rem;
+		min-height: 16rem;
 		display: flex;
 		flex-direction: column;
 		align-items: center;

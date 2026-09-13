@@ -141,7 +141,7 @@
 				{/if}
 			</div>
 
-			{#if project.slug === 'futurelab-ai-workflows' || !project.cover}
+			{#if project.cover}
 				<div class="overflow-hidden rounded-2xl border border-border">
 					<ProjectPreview
 						slug={project.slug}
@@ -151,15 +151,6 @@
 						liveUrl={project.liveUrl}
 					/>
 				</div>
-			{:else if project.cover}
-				<figure class="overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03]">
-					<img
-						src={project.cover}
-						alt={project.coverAlt ?? `${project.name} product interface`}
-						class="block h-auto w-full"
-						decoding="async"
-					/>
-				</figure>
 			{:else}
 				<div
 					class="rounded-[2rem] border border-dashed border-white/[0.1] bg-white/[0.02] px-6 py-16 text-center"
