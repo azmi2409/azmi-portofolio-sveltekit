@@ -66,11 +66,14 @@
 				shaped how I work today: consider people, processes, and consequences together.
 			</p>
 			<p>
-				Based in Bogor, West Java, Indonesia, I have 6+ years of remote experience, as described in
-				my CV, working with companies in Malaysia, Singapore, and beyond.
+				Based in Bogor, West Java, Indonesia, I have 6+ years of remote experience working with
+				companies in Malaysia, Singapore, and beyond.
 			</p>
 			<h2 class="pt-4 text-2xl font-bold text-foreground">Experience behind the advice</h2>
-			<div class="grid grid-cols-3 gap-3" aria-label="Companies I work or have worked with">
+			<div
+				class="grid grid-cols-2 gap-3 sm:grid-cols-4"
+				aria-label="Companies I work or have worked with"
+			>
 				<a
 					href="https://futurelab.my"
 					target="_blank"
@@ -84,6 +87,13 @@
 					rel="noreferrer"
 					class="flex min-h-24 items-center justify-center rounded-xl border border-border bg-white p-4"
 					><img src="/assets/toptal-logo.webp" alt="Toptal" class="max-h-10 max-w-full" /></a
+				>
+				<a
+					href="https://www.turing.com"
+					target="_blank"
+					rel="noreferrer"
+					class="flex min-h-24 items-center justify-center rounded-xl border border-border bg-white p-4"
+					><img src="/assets/turing-logo.webp" alt="Turing" class="max-h-8 max-w-full" /></a
 				>
 				<a
 					href="https://automa8e.com/sg"
@@ -100,13 +110,18 @@
 			<ul class="space-y-4">
 				<li>
 					<strong class="text-foreground">FutureLab.my · Senior Software Engineer</strong><br
-					/>February 2023–present. Building the mentoring platform, managing its cloud
-					infrastructure, and developing AI-assisted services. My CV reports 50% lower cloud costs
-					and 30% higher B2B conversions from separate improvements.
+					/>February 2023–present. Building the mentoring platform, managing cloud infrastructure on
+					AWS, and developing AI-assisted services. Delivered 50% lower cloud costs and 30% higher
+					B2B conversions.
 				</li>
 				<li>
-					<strong class="text-foreground">Toptal · Full Stack Developer</strong><br />October
-					2025–present.
+					<strong class="text-foreground">Toptal · Freelance Full Stack Developer</strong><br
+					/>October 2025–present. Working with global clients through the Toptal talent network.
+				</li>
+				<li>
+					<strong class="text-foreground">Turing · Freelance Full Stack Developer</strong><br
+					/>2023–present. Delivering full-stack solutions for international clients through the
+					Turing network.
 				</li>
 				<li>
 					<strong class="text-foreground">Automa8e · React Developer</strong><br />July
@@ -119,8 +134,7 @@
 				</li>
 				<li>
 					<strong class="text-foreground">Revogamers · Co-Founder</strong><br />January 2011–January
-					2017. Managed a community gaming platform with over 1,000 concurrent users, as reported in
-					my CV.
+					2017. Managed a community gaming platform with over 1,000 concurrent users.
 				</li>
 			</ul>
 			<h2 class="pt-4 text-2xl font-bold text-foreground">Education & perspective</h2>

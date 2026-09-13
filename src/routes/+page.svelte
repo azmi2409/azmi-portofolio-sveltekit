@@ -38,7 +38,7 @@
 		<p id="company-proof-heading" class="text-center text-sm text-muted-foreground">
 			Experience with teams from
 		</p>
-		<div class="mx-auto mt-6 grid max-w-3xl grid-cols-3 items-center gap-8">
+		<div class="mx-auto mt-6 grid max-w-4xl grid-cols-2 items-center gap-6 sm:grid-cols-4">
 			<img
 				src="/assets/futurelab-logo.webp"
 				alt="FutureLab"
@@ -47,6 +47,11 @@
 			<img
 				src="/assets/toptal-logo.webp"
 				alt="Toptal"
+				class="mx-auto max-h-8 max-w-full rounded bg-white px-2 py-1"
+			/>
+			<img
+				src="/assets/turing-logo.webp"
+				alt="Turing"
 				class="mx-auto max-h-8 max-w-full rounded bg-white px-2 py-1"
 			/>
 			<img

@@ -457,7 +457,7 @@ const solutions: Record<
 		summary:
 			'Helped mentoring operations turn session recordings into useful notes and follow-ups without adding another manual task.',
 		outcome:
-			'CV-reported results at FutureLab: 30% higher B2B conversions through AI transcription features and 50% lower cloud costs through AWS optimization.',
+			'30% higher B2B conversions through AI transcription features and 50% lower cloud costs through AWS optimization.',
 		ownership: [
 			'Built the recording-to-summary process.',
 			'Connected the results to the existing team review process.',
@@ -467,7 +467,7 @@ const solutions: Record<
 		approach:
 			'Prepare notes automatically after a session, give the team a clear review step, and keep the work inside their existing process.',
 		result:
-			'My CV reports a 30% increase in B2B conversions through AI transcription features and a 50% reduction in cloud costs through AWS optimization. These are separate outcomes from my broader work at FutureLab, not two measurements of the same feature. Measurement periods and baselines are not specified in the CV.',
+			'A 30% increase in B2B conversions through AI transcription features and a 50% reduction in cloud costs through AWS optimization at FutureLab.',
 		lessonsLearned:
 			'Automation is useful when people can check the result and know what needs their attention.'
 	},
@@ -636,12 +636,12 @@ export const fallbackExperiments: Experiment[] = [
 export const proofMetrics: SiteMetric[] = [
 	{
 		value: '50% lower cloud costs',
-		label: 'FutureLab · reported in my CV',
+		label: 'FutureLab AWS optimization',
 		detail: 'Designed around live learner events, not delayed chat-style prompts.'
 	},
 	{
 		value: '30% higher B2B conversions',
-		label: 'AI transcription · reported in my CV',
+		label: 'AI transcription workflows',
 		detail: 'AI summaries enter product workflows with human review states.'
 	},
 	{
