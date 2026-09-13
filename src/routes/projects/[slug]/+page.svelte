@@ -2,16 +2,15 @@
 	import NotionBlockRenderer from '$lib/components/blog/NotionBlockRenderer.svelte';
 	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 	import { ArrowLeft, ExternalLink } from '@lucide/svelte';
+	import ProjectPreview from '$lib/components/ProjectPreview.svelte';
 
 	let { data } = $props();
 	const { project, blocks } = $derived(data);
 
 	const sections = $derived(
 		[
-			['Problem', project.problem],
-			['Approach', project.approach],
-			['Architecture', project.architecture],
-			['Result', project.result],
+			['The solution', project.approach],
+			['What changed', project.result],
 			['Lessons learned', project.lessonsLearned]
 		].filter(([, value]) => value)
 	);
@@ -24,7 +23,17 @@
 	<meta property="og:description" content={project.summary} />
 	<meta property="og:type" content="article" />
 	<meta property="og:url" content={`https://azmi.web.id/projects/${project.slug}`} />
-	{#if project.cover}<meta property="og:image" content={project.cover} />{/if}
+	<meta
+		property="og:image"
+		content={new URL(project.cover ?? '/assets/profile.webp', 'https://azmi.web.id').href}
+	/>
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content={`${project.name} — Case Study`} />
+	<meta name="twitter:description" content={project.summary} />
+	<meta
+		name="twitter:image"
+		content={new URL(project.cover ?? '/assets/profile.webp', 'https://azmi.web.id').href}
+	/>
 	<link rel="canonical" href={`https://azmi.web.id/projects/${project.slug}`} />
 </svelte:head>
 
@@ -59,12 +68,15 @@
 						<dd class="mt-1 font-semibold text-zinc-200">{project.status}</dd>
 					</div>
 				</dl>
-				<div class="mt-5 flex flex-wrap gap-2">
-					{#each project.stack as item}<span
-							class="rounded-full border border-white/[0.08] px-3 py-1 text-xs text-zinc-500"
-							>{item}</span
-						>{/each}
-				</div>
+				<details class="mt-5">
+					<summary class="cursor-pointer py-2">Tools used</summary>
+					<div class="mt-3 flex flex-wrap gap-2">
+						{#each project.stack as item}<span
+								class="rounded-full border border-white/[0.08] px-3 py-1 text-xs text-zinc-500"
+								>{item}</span
+							>{/each}
+					</div>
+				</details>
 				<div class="mt-6 flex gap-2">
 					{#if project.liveUrl}<a
 							href={project.liveUrl}
@@ -83,6 +95,13 @@
 				</div>
 			</aside>
 		</header>
+		<section
+			class="mt-10 rounded-2xl border border-border bg-card p-6 sm:p-8"
+			aria-label="Outcome summary"
+		>
+			<p class="eyebrow">Outcome</p>
+			<p class="mt-3 text-2xl leading-snug font-bold">{project.outcome}</p>
+		</section>
 
 		{#if project.ownership.length}
 			<section
@@ -95,7 +114,7 @@
 				</div>
 				<div>
 					<h2 id="ownership-heading" class="text-2xl font-black tracking-tight text-zinc-50">
-						What I personally owned
+						How I helped
 					</h2>
 					<ul class="mt-5 grid gap-3 sm:grid-cols-2">
 						{#each project.ownership as item}
@@ -114,15 +133,25 @@
 				<div>
 					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">Product</p>
 					<h2 id="product-heading" class="mt-2 text-3xl font-black tracking-tight text-zinc-50">
-						The interface in context
+						The workflow in context
 					</h2>
 				</div>
-				{#if project.coverCaption}
+				{#if project.coverCaption && project.slug !== 'futurelab-ai-workflows'}
 					<p class="max-w-xl text-sm leading-6 text-zinc-500">{project.coverCaption}</p>
 				{/if}
 			</div>
 
-			{#if project.cover}
+			{#if project.slug === 'futurelab-ai-workflows' || !project.cover}
+				<div class="overflow-hidden rounded-2xl border border-border">
+					<ProjectPreview
+						slug={project.slug}
+						name={project.name}
+						cover={project.cover}
+						coverAlt={project.coverAlt}
+						liveUrl={project.liveUrl}
+					/>
+				</div>
+			{:else if project.cover}
 				<figure class="overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03]">
 					<img
 						src={project.cover}
@@ -146,15 +175,10 @@
 			{/if}
 		</section>
 
-		<section class="mt-12 rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-6 sm:p-8">
-			<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">Outcome</p>
-			<p class="mt-3 text-2xl leading-snug font-bold text-zinc-100">{project.outcome}</p>
-		</section>
-
 		<div class="mt-14 grid gap-10 lg:grid-cols-[16rem_1fr]">
 			<nav class="hidden lg:block">
 				<p class="sticky top-28 text-xs font-semibold tracking-[0.24em] text-zinc-600 uppercase">
-					Case-study anatomy
+					From challenge to solution
 				</p>
 			</nav>
 			<div class="space-y-12">
@@ -165,41 +189,56 @@
 					</section>
 				{/each}
 
-				{#if project.constraints.length}
-					<section>
-						<h2 class="text-3xl font-black tracking-tight text-zinc-50">Constraints</h2>
-						<ul class="mt-4 space-y-3">
-							{#each project.constraints as item}<li
-									class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4 text-zinc-400"
-								>
-									{item}
-								</li>{/each}
-						</ul>
-					</section>
-				{/if}
-
-				{#if project.technicalDecisions.length || project.keyFeatures.length}
-					<section class="grid gap-5 md:grid-cols-2">
-						<div>
-							<h2 class="text-2xl font-black tracking-tight text-zinc-50">Technical decisions</h2>
+				<details class="border-t border-border pt-6">
+					<summary class="cursor-pointer py-3 font-semibold"
+						>Behind the solution: implementation details</summary
+					>
+					<p class="mt-4 leading-8 text-muted-foreground">{project.problem}</p>
+					<p class="mt-4 leading-8 text-muted-foreground">{project.architecture}</p>
+					{#if project.constraints.length}
+						<section>
+							<h2 class="text-3xl font-black tracking-tight text-zinc-50">Constraints</h2>
 							<ul class="mt-4 space-y-3">
-								{#each project.technicalDecisions as item}<li class="text-zinc-400">
-										• {item}
+								{#each project.constraints as item}<li
+										class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4 text-zinc-400"
+									>
+										{item}
 									</li>{/each}
 							</ul>
-						</div>
-						<div>
-							<h2 class="text-2xl font-black tracking-tight text-zinc-50">Key features</h2>
-							<ul class="mt-4 space-y-3">
-								{#each project.keyFeatures as item}<li class="text-zinc-400">• {item}</li>{/each}
-							</ul>
-						</div>
-					</section>
-				{/if}
+						</section>
+					{/if}
 
-				{#if blocks.length}
-					<section class="notion-article"><NotionBlockRenderer {blocks} /></section>
-				{/if}
+					{#if project.technicalDecisions.length || project.keyFeatures.length}
+						<section class="grid gap-5 md:grid-cols-2">
+							<div>
+								<h2 class="text-2xl font-black tracking-tight text-zinc-50">Technical decisions</h2>
+								<ul class="mt-4 space-y-3">
+									{#each project.technicalDecisions as item}<li class="text-zinc-400">
+											• {item}
+										</li>{/each}
+								</ul>
+							</div>
+							<div>
+								<h2 class="text-2xl font-black tracking-tight text-zinc-50">Key features</h2>
+								<ul class="mt-4 space-y-3">
+									{#each project.keyFeatures as item}<li class="text-zinc-400">• {item}</li>{/each}
+								</ul>
+							</div>
+						</section>
+					{/if}
+
+					{#if blocks.length}
+						<section class="notion-article"><NotionBlockRenderer {blocks} /></section>
+					{/if}
+				</details>
+				<section class="rounded-2xl border border-border bg-card p-6">
+					<h2 class="text-2xl font-bold">Could a similar approach help your business?</h2>
+					<p class="mt-3 leading-7 text-muted-foreground">
+						Tell me where work gets stuck. We can identify a practical first improvement and what
+						success should look like.
+					</p>
+					<a href="/contact" class="button-primary mt-5">Discuss your challenge</a>
+				</section>
 			</div>
 		</div>
 	</div>

@@ -8,13 +8,16 @@ const fallbackBySlug = new Map(fallbackProjects.map((project) => [project.slug, 
 function addLocalEvidence(project: Project): Project {
 	const fallback = fallbackBySlug.get(project.slug);
 	if (!fallback) return project;
-
+	// Reviewed local case studies keep client-facing copy consistent with CMS-backed pages.
 	return {
 		...project,
-		ownership: project.ownership.length ? project.ownership : fallback.ownership,
-		cover: project.cover ?? fallback.cover,
-		coverAlt: project.coverAlt ?? fallback.coverAlt,
-		coverCaption: project.coverCaption ?? fallback.coverCaption
+		...fallback,
+		id: project.id,
+		notionPageId: project.notionPageId,
+		published: project.published,
+		cover: fallback.cover ?? project.cover,
+		coverAlt: fallback.cover ? fallback.coverAlt : project.coverAlt,
+		coverCaption: fallback.cover ? fallback.coverCaption : project.coverCaption
 	};
 }
 
@@ -31,22 +34,27 @@ export async function getProjects(): Promise<Project[]> {
 			sorts: [{ property: 'Sort Order', direction: 'ascending' }]
 		});
 
-		return response.results
+		const projects = response.results
 			.map(mapPageToProject)
 			.map(addLocalEvidence)
 			.filter((project) => project.published);
+		const slugs = new Set(projects.map((project) => project.slug));
+		return [
+			...projects,
+			...fallbackProjects.filter(
+				(project) => project.slug === 'iscylla-store' && !slugs.has(project.slug)
+			)
+		].sort((a, b) => a.sortOrder - b.sortOrder);
 	} catch {
 		return fallbackProjects;
 	}
 }
 
 export async function getFeaturedProjects(): Promise<Project[]> {
-	return (await getProjects())
-		.filter((project) => project.featured)
-		.sort(
-			(a, b) => Number(Boolean(b.cover)) - Number(Boolean(a.cover)) || a.sortOrder - b.sortOrder
-		)
-		.slice(0, 4);
+	const projects = await getProjects();
+	return ['futurelab-ai-workflows', 'kilat-store', 'codexia-live', 'iscylla-store'].flatMap(
+		(slug) => projects.filter((project) => project.slug === slug)
+	);
 }
 
 export async function getProjectBySlug(slug: string): Promise<Project | null> {

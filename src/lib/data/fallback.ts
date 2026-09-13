@@ -1,6 +1,6 @@
 import type { Experiment, Project, SiteMetric } from '$lib/types/portfolio';
 
-export const fallbackProjects: Project[] = [
+const projectRecords: Project[] = [
 	{
 		id: 'codexia-live',
 		notionPageId: 'codexia-live',
@@ -21,8 +21,9 @@ export const fallbackProjects: Project[] = [
 		summary:
 			'A real-time coding coach that watches friction signals and responds with progressive hints instead of handing over answers.',
 		outcome:
-			'Converted an open-ended AI tutor idea into a low-latency coaching loop with measurable intervention points.',
+			'Built an event-driven coaching MVP that detects learner friction and delivers staged hints through a WebSocket session.',
 		cover: undefined,
+		coverAlt: 'No public Codexia Live product image is available.',
 		liveUrl: undefined,
 		githubUrl: undefined,
 		sortOrder: 3,
@@ -59,8 +60,8 @@ export const fallbackProjects: Project[] = [
 		slug: 'futurelab-ai-workflows',
 		published: true,
 		featured: true,
-		year: '2023-2025',
-		role: 'Senior Full Stack Engineer',
+		year: 'February 2023–present',
+		role: 'Senior Software Engineer at FutureLab.my',
 		ownership: [
 			'Built the Rails service boundaries and background jobs for transcription and summarization.',
 			'Integrated review states into existing operations workflows.',
@@ -72,14 +73,14 @@ export const fallbackProjects: Project[] = [
 		summary:
 			'AI-assisted transcription, summarization, and workflow automation for mentoring operations and B2B delivery.',
 		outcome:
-			'Helped product and operations teams turn session data into summaries, follow-ups, and delivery visibility.',
-		cover: '/images/projects/futurelab.png',
+			'Integrated asynchronous transcription and summarization into the existing Rails product, giving operations teams reviewable session insights without blocking mentoring workflows.',
+		cover: '/images/projects/futurelab.webp',
 		coverAlt:
 			'FutureLab mentoring platform homepage showing its business mentoring and coaching product.',
 		coverCaption: 'FutureLab’s live mentoring platform for organizations in Southeast Asia.',
 		liveUrl: 'https://futurelab.my',
 		githubUrl: undefined,
-		sortOrder: 2,
+		sortOrder: 1,
 		problem:
 			'Mentoring sessions produced valuable context, but too much of it disappeared into manual notes and follow-up work.',
 		constraints: [
@@ -127,12 +128,12 @@ export const fallbackProjects: Project[] = [
 			'A server-rendered portfolio architecture that keeps project data in Notion while preserving a fast custom frontend.',
 		outcome:
 			'Creates a maintainable publishing workflow for case studies, experiments, and technical notes without exposing Notion credentials.',
-		cover: '/images/projects/portfolio.png',
+		cover: '/images/projects/portfolio.webp',
 		coverAlt:
 			'Azmi Muwahid portfolio homepage with the AI systems headline and interactive system model.',
 		coverCaption: 'The live portfolio interface and its interactive AI systems model.',
 		liveUrl: 'https://azmi.web.id',
-		githubUrl: 'https://github.com/azmimuwahid',
+		githubUrl: 'https://github.com/azmi2409/azmi-portofolio-sveltekit',
 		sortOrder: 6,
 		problem:
 			'The previous one-page portfolio looked polished but did not provide enough depth for senior engineering evaluation.',
@@ -169,8 +170,8 @@ export const fallbackProjects: Project[] = [
 			'Built the visual editing flow and the Rails background-generation path.',
 			'Provisioned the Alibaba Cloud delivery infrastructure with Terraform.'
 		],
-		type: 'AI-Powered Website Builder',
-		status: 'Production-ready',
+		type: 'AI website builder for Indonesian F&B',
+		status: 'Free MVP',
 		stack: [
 			'Next.js 15',
 			'Puck Editor',
@@ -180,38 +181,96 @@ export const fallbackProjects: Project[] = [
 			'Alibaba Cloud'
 		],
 		summary:
-			'An AI-powered website builder allowing Indonesian small-medium businesses (UMKMs) to construct their business landing pages in 60 seconds.',
+			'An AI website builder for Indonesian cafes, warung, bakeries, restaurants, and local food brands.',
 		outcome:
-			'Successfully built a multi-tenant platform with visual editor capabilities and automated generation pipelines, lowering the digital commerce entry barrier.',
-		cover: undefined,
+			'Built one flow from business brief to an editable, responsive F&B storefront with menu blocks, WhatsApp calls to action, and an instant Kilat subdomain.',
+		cover: '/images/projects/kilat-store.webp',
+		coverAlt: 'Live Kilat.store homepage showing its F&B website generator.',
+		coverCaption: 'Captured from kilat.store in September 2026.',
 		liveUrl: 'https://kilat.store',
 		githubUrl: undefined,
-		sortOrder: 1,
+		sortOrder: 2,
 		problem:
-			'Indonesian MSMEs lack the technical resources to design and build websites, while generic builders are too complex or expensive.',
+			'Indonesian F&B merchants often rely on social media alone, while generic website builders make menu setup, mobile ordering, and publishing harder than necessary.',
 		constraints: [
 			'Must run smoothly on low-end mobile devices.',
-			'Generation and editing flow must feel instantaneous under volatile cellular networks.',
-			'Maintain extremely low hosting costs for client landing pages.'
+			'Generation must still produce an editable starter when AI is slow or unavailable.',
+			'The free MVP must keep publishing and ordering simple without paid-plan complexity.'
 		],
 		approach:
-			'Designed a modular, JSON-based SSoT (Single Source of Truth) block schema shared between the Next.js visual editor and the backend AI generation pipeline.',
+			'Designed a canonical JSON block schema shared by the AI generator, visual editor, and production renderer, then focused generation recipes on F&B menus and WhatsApp ordering.',
 		architecture:
-			'A monorepo comprising an Astro marketing site, Next.js editor UI powered by Puck Editor, Vite admin portal, and Ruby on Rails 8 REST API handling background jobs (Solid Queue/Solid Cache) for DashScope/BytePlus AI pipelines. Wildcard client domains map to static HTML via DCDN.',
+			'A monorepo combines the marketing site, Next.js editor powered by Puck, and a Rails API with background jobs for AI generation. Published storefronts use the same canonical block contracts shown in the editor and receive a shareable kill.lat subdomain.',
 		technicalDecisions: [
-			'Shared blocks.json registry as single source of truth.',
-			'Asynchronous AI generation via Rails Solid Queue to prevent timeouts.',
-			'Utilized Terraform to provision Alibaba Cloud ECI and DCDN for static site delivery.'
+			'Used one canonical block registry across generation, editing, and rendering.',
+			'Moved AI generation to Rails background jobs to avoid request timeouts.',
+			'Added a safe fallback F&B template instead of leaving merchants with a blank screen.'
 		],
 		keyFeatures: [
-			'60-second AI landing page generation.',
-			'Interactive block-based Puck Editor canvas.',
-			'Automatic publishing to *.kilat.my.id subdomains.'
+			'AI drafts grounded in business type, menu, location, audience, and visual style.',
+			'Visual editing for copy, images, colors, and responsive content blocks.',
+			'Menu, reservation, ordering, QR menu, and WhatsApp action blocks.',
+			'Immediate publishing to a Kilat subdomain.'
 		],
 		result:
-			'Enabled seamless generation of high-quality landing pages with microsecond rendering speeds across Indonesia.',
+			'Launched a free MVP with public registration. Merchants can generate one F&B website, edit it visually, publish it to a kill.lat subdomain, and receive customer inquiries through WhatsApp.',
 		lessonsLearned:
 			'Sharing block specifications between the AI prompt templates and editor schema simplifies synchronization when introducing new UI modules.'
+	},
+	{
+		id: 'iscylla-store',
+		notionPageId: 'iscylla-store',
+		name: 'iScylla Shop',
+		slug: 'iscylla-store',
+		published: true,
+		featured: true,
+		year: '2026',
+		role: 'Founder / Full-Stack Engineer',
+		ownership: [
+			'Designed and built the bilingual digital-product storefront and customer account flows.',
+			'Integrated QRIS checkout with tracked payment and order states.',
+			'Built product catalog, inventory visibility, order history, receipts, and order-linked support.'
+		],
+		type: 'Digital commerce platform',
+		status: 'Live',
+		stack: ['Ruby on Rails', 'Tailwind CSS', 'QRIS', 'Cloudflare R2'],
+		summary:
+			'A bilingual Indonesian storefront for selected AI tools, productivity software, subscriptions, and other digital products.',
+		outcome:
+			'Launched a live commerce flow with transparent Rupiah pricing, product-level stock, QRIS payment, tracked orders, receipts, and support tied to each order.',
+		cover: '/images/projects/iscylla-store.webp',
+		coverAlt:
+			'Live iScylla Shop homepage showing its digital product catalog and QRIS buying experience.',
+		coverCaption: 'Captured from iscylla.web.id in September 2026.',
+		liveUrl: 'https://iscylla.web.id',
+		githubUrl: undefined,
+		sortOrder: 4,
+		problem:
+			'Digital-product buyers need clear product terms, delivery methods, warranty information, payment status, and support after checkout instead of an informal chat-only purchase flow.',
+		constraints: [
+			'Keep checkout familiar for Indonesian buyers through QRIS and Rupiah pricing.',
+			'Make stock, delivery method, duration, and warranty visible before purchase.',
+			'Keep receipts, delivered access, and support context available in one customer account.'
+		],
+		approach:
+			'Built the store around explicit product and order states: customers inspect terms, sign in, pay the exact QRIS amount, then follow fulfillment and support from their account.',
+		architecture:
+			'A Ruby on Rails storefront serves localized catalog and account flows. Product media is delivered through Cloudflare R2, while checkout connects QRIS confirmation to persisted order, receipt, delivery, and support records.',
+		technicalDecisions: [
+			'Required customer accounts so orders, receipts, and delivered access remain recoverable.',
+			'Modeled support around an order to preserve purchase context.',
+			'Placed stock, warranty, and delivery details on product pages before checkout.'
+		],
+		keyFeatures: [
+			'Indonesian and English storefronts.',
+			'Category browsing and visible inventory.',
+			'QRIS payment with tracked order status.',
+			'Order history, receipts, warranty information, and linked support.'
+		],
+		result:
+			'Live at iscylla.web.id with a populated catalog and end-to-end customer purchase journey. Sales volume and payment conversion are not published.',
+		lessonsLearned:
+			'Commerce trust comes from explicit states and durable records: what is sold, what was paid, what gets delivered, and where support continues.'
 	},
 	{
 		id: 'openai-embedding',
@@ -233,9 +292,11 @@ export const fallbackProjects: Project[] = [
 		summary:
 			'An intelligent matchmaking platform pairing mentors and mentees based on professional goals, industry experience, and skill profiles.',
 		outcome:
-			'Developed a dual-mode search engine combining traditional keyword searches with high-dimensional vector embeddings for superior semantic relevance.',
-		cover: undefined,
-		liveUrl: undefined,
+			'Built semantic mentor search with a full-text fallback so matching can use career context beyond exact keywords.',
+		cover: '/images/projects/mentor-matcher.webp',
+		coverAlt: 'Live AI Mentor Matcher prototype comparing keyword search with semantic search.',
+		coverCaption: 'Captured from the public prototype in September 2026.',
+		liveUrl: 'https://openai-embedding.vercel.app',
 		githubUrl: undefined,
 		sortOrder: 7,
 		problem:
@@ -260,7 +321,7 @@ export const fallbackProjects: Project[] = [
 			'Full-text keyword fallback match queries.'
 		],
 		result:
-			'Highly accurate mentor matching that surfaces relevant mentors even without exact phrase matches.',
+			'Implemented vector similarity queries and a keyword fallback. A comparative ranking evaluation is not published yet.',
 		lessonsLearned:
 			'Direct vector math on the database layer significantly outperforms in-memory comparisons as the dataset grows.'
 	},
@@ -318,7 +379,8 @@ export const fallbackProjects: Project[] = [
 			'Word-level timestamped dynamic subtitles.',
 			'Fully serverless orchestration pipeline.'
 		],
-		result: 'Reduced video editing workflow time from 30 minutes to under 2 minutes per clip.',
+		result:
+			'Built a beta pipeline for transcription, segment selection, subtitles, and portrait rendering. Processing-time and cost benchmarks are not published.',
 		lessonsLearned:
 			'Decoupling compute-heavy FFmpeg tasks into independent AWS Step Functions prevents monolithic Lambda timeout errors and allows targeted resource scaling.'
 	},
@@ -376,11 +438,167 @@ export const fallbackProjects: Project[] = [
 			'Cognitive Timber interface with low mental friction.'
 		],
 		result:
-			'Improved CRM data logging accuracy by 40% while maintaining operator confidence through visible tool-calling telemetry.',
+			'Built an active beta where operators can inspect lead-extraction tool activity inside the inbox. Accuracy measurements and approval-policy details are not published.',
 		lessonsLearned:
 			'Users trust autonomous agents when they can inspect the tools the agent selected and why. Transparency is a feature, not just a log.'
 	}
 ];
+
+// Client-facing summaries keep the original implementation details available for due diligence.
+const solutions: Record<
+	string,
+	Pick<
+		Project,
+		'type' | 'summary' | 'outcome' | 'ownership' | 'approach' | 'result' | 'lessonsLearned'
+	>
+> = {
+	'futurelab-ai-workflows': {
+		type: 'Less administration after mentoring sessions',
+		summary:
+			'Helped mentoring operations turn session recordings into useful notes and follow-ups without adding another manual task.',
+		outcome:
+			'CV-reported results at FutureLab: 30% higher B2B conversions through AI transcription features and 50% lower cloud costs through AWS optimization.',
+		ownership: [
+			'Built the recording-to-summary process.',
+			'Connected the results to the existing team review process.',
+			'Managed cloud infrastructure and optimized operating costs.',
+			'Led a mentorship program for five junior developers.'
+		],
+		approach:
+			'Prepare notes automatically after a session, give the team a clear review step, and keep the work inside their existing process.',
+		result:
+			'My CV reports a 30% increase in B2B conversions through AI transcription features and a 50% reduction in cloud costs through AWS optimization. These are separate outcomes from my broader work at FutureLab, not two measurements of the same feature. Measurement periods and baselines are not specified in the CV.',
+		lessonsLearned:
+			'Automation is useful when people can check the result and know what needs their attention.'
+	},
+	'kilat-store': {
+		type: 'Help food businesses get online',
+		summary:
+			'Help cafes, restaurants, and local food brands create a website, display their menu, and receive inquiries through WhatsApp.',
+		outcome:
+			'Business owners can describe their business, edit a prepared website, and publish a shareable link without learning to code.',
+		ownership: [
+			'Connected website generation, visual editing, and publishing.',
+			'Built a process that prepares pages without making owners wait on a frozen screen.',
+			'Set up delivery designed to keep website hosting inexpensive.'
+		],
+		approach:
+			'Focus on what a food business needs first: a menu, business details, and a clear way to order. If AI is unavailable, provide an editable starter instead of a blank page.',
+		result:
+			'A free first release is publicly available with one website, visual editing, a kill.lat address, and WhatsApp contact. Custom domains and paid upgrades are planned, not included in the current offer.',
+		lessonsLearned:
+			'A focused service that gets a business online is more useful than a long list of features owners have to figure out.'
+	},
+	'codexia-live': {
+		type: 'Help learners get unstuck',
+		summary:
+			'Built a coding coach that offers small hints when learners struggle, rather than giving away the answer.',
+		outcome:
+			'Delivered an early working product that provides staged guidance and lets the team review when and why help appeared.',
+		ownership: [
+			'Built live communication between the learner and coach.',
+			'Designed guidance that starts small and becomes more detailed when needed.',
+			'Created a readable history of coaching activity.'
+		],
+		approach:
+			'Look for signs that a learner may be stuck, offer a gentle nudge, and let the team inspect the coaching history to improve the experience.',
+		result:
+			'An initial working product demonstrates timely, progressive coaching. Learner impact and response-time benchmarks are not published.',
+		lessonsLearned: 'Good assistance helps people take the next step without taking over the task.'
+	},
+	'iscylla-store': {
+		type: 'A clearer online buying experience',
+		summary:
+			'A digital-product shop that brings browsing, payment, order updates, and after-sales support into one place.',
+		outcome:
+			'Customers can see prices and stock, pay by QRIS, and return to their account for receipts, delivery information, and order-related help.',
+		ownership: [
+			'Built the bilingual storefront and customer accounts.',
+			'Connected payment to order tracking.',
+			'Brought product availability, receipts, and support into the buying journey.'
+		],
+		approach:
+			'Make each step clear before asking customers to pay: what they are buying, how it is delivered, what the warranty covers, and where to get help.',
+		result:
+			'The shop is live with a populated catalog and customer purchase journey. Sales and conversion measurements are not published.',
+		lessonsLearned:
+			'A clear buying process and accessible order records help customers understand what happens next.'
+	},
+	'the-beddo-crm': {
+		type: 'Less manual customer information entry',
+		summary:
+			'Help a bedding business organize customer inquiries with AI assistance that staff can inspect from their inbox.',
+		outcome:
+			'An early trial brings lead information extraction and a visible activity history into the same workspace as customer conversations.',
+		ownership: [
+			'Built the shared customer workspace.',
+			'Connected AI assistance to customer information capture.',
+			'Made assistant activity visible to staff.'
+		],
+		approach:
+			'Help staff collect information from conversations while showing what the assistant did, so people can inspect its work.',
+		result:
+			'An active trial lets operators inspect information-capture activity inside the inbox. Accuracy improvements are not quantified here.',
+		lessonsLearned: 'People need to see what automation did before they can confidently rely on it.'
+	},
+	'ai-clipper-video': {
+		type: 'Repurpose video with less manual editing',
+		summary:
+			'Turn long videos into short vertical clips with suggested moments and subtitles, helping creators prepare content for another format.',
+		outcome:
+			'Delivered an early version that connects transcription, clip selection, subtitles, and vertical video preparation in one process.',
+		ownership: [
+			'Connected the steps from source video to finished clip.',
+			'Built the subtitle and clip preparation experience.',
+			'Split heavy processing into manageable steps.'
+		],
+		approach:
+			'Prepare the transcript, identify candidate moments, and create subtitled vertical clips through a repeatable process.',
+		result:
+			'A working trial automates several video-preparation tasks. Time saved and cost per clip have not been published.',
+		lessonsLearned:
+			'Breaking a long task into separate steps makes problems easier to find and recover from.'
+	},
+	'ai-mentor-matcher': {
+		type: 'Help people find relevant mentors',
+		summary:
+			'Help mentees search by their career goals, even when a mentor describes their experience using different words.',
+		outcome:
+			'Built a search prototype that considers meaning as well as exact keywords and keeps an alternative search path available.',
+		ownership: [
+			'Designed matching around career context.',
+			'Built the mentor search process.',
+			'Added an alternative when the main search service is unavailable.'
+		],
+		approach:
+			'Compare what a mentee needs with the experience mentors describe, rather than relying only on matching words.',
+		result:
+			'A prototype supports context-based mentor search. A comparison of recommendation quality has not been published.',
+		lessonsLearned:
+			'Useful recommendations need to be evaluated against what people actually find helpful.'
+	},
+	'portfolio-content-system': {
+		type: 'Simpler website publishing',
+		summary:
+			'A publishing process that makes case studies and articles easier to maintain without editing the website for every update.',
+		outcome:
+			'Content can be managed separately from the website design, with backup content available if the publishing service cannot be reached.',
+		ownership: [
+			'Designed and built the website.',
+			'Connected content management to published pages.',
+			'Set up hosting and backup content.'
+		],
+		approach:
+			'Separate everyday content updates from website development so publishing does not require rebuilding each page by hand.',
+		result: 'A working publishing process for project stories, experiments, and articles.',
+		lessonsLearned: 'A good website should be easy to keep useful, not just easy to launch.'
+	}
+};
+
+export const fallbackProjects: Project[] = projectRecords.map((project) => ({
+	...project,
+	...solutions[project.slug]
+}));
 
 export const fallbackExperiments: Experiment[] = [
 	{
@@ -417,18 +635,18 @@ export const fallbackExperiments: Experiment[] = [
 
 export const proofMetrics: SiteMetric[] = [
 	{
-		value: 'Sub-second',
-		label: 'Codexia Live coaching loop target',
+		value: '50% lower cloud costs',
+		label: 'FutureLab · reported in my CV',
 		detail: 'Designed around live learner events, not delayed chat-style prompts.'
 	},
 	{
-		value: 'Reviewable',
-		label: 'FutureLab AI outputs',
+		value: '30% higher B2B conversions',
+		label: 'AI transcription · reported in my CV',
 		detail: 'AI summaries enter product workflows with human review states.'
 	},
 	{
-		value: 'Server-only',
-		label: 'Portfolio CMS integration',
+		value: 'Bogor, Indonesia · remote',
+		label: 'Working globally',
 		detail: 'Notion tokens stay inside SvelteKit load functions and server modules.'
 	}
 ];
