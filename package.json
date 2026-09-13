@@ -14,33 +14,33 @@
 		"lint": "prettier --check ."
 	},
 	"devDependencies": {
-		"@internationalized/date": "^3.12.3",
-		"@lucide/svelte": "^1.28.0",
+		"@internationalized/date": "^3.12.4",
+		"@lucide/svelte": "^1.45.0",
 		"@sveltejs/adapter-vercel": "^6.3.4",
-		"@sveltejs/kit": "^2.70.2",
-		"@sveltejs/vite-plugin-svelte": "^7.2.0",
+		"@sveltejs/kit": "^2.70.3",
+		"@sveltejs/vite-plugin-svelte": "^7.3.0",
 		"@tailwindcss/vite": "^4.3.3",
-		"@types/node": "^26.1.2",
-		"bits-ui": "^2.18.1",
+		"@types/node": "^22.20.2",
+		"bits-ui": "^2.19.2",
 		"clsx": "^2.1.1",
 		"prettier": "^3.9.6",
 		"prettier-plugin-svelte": "^4.1.1",
 		"prettier-plugin-tailwindcss": "^0.8.1",
-		"svelte": "^5.56.8",
-		"svelte-check": "^4.7.4",
-		"tailwind-merge": "^3.6.0",
+		"svelte": "^5.57.0",
+		"svelte-check": "^4.7.6",
+		"tailwind-merge": "^3.7.0",
 		"tailwind-variants": "^3.3.1",
 		"tailwindcss": "^4.3.3",
 		"tw-animate-css": "^1.3.6",
-		"typescript": "^6.0.3",
-		"vite": "^8.2.0",
+		"typescript": "6.0.3",
+		"vite": "^8.3.0",
 		"vite-plugin-devtools-json": "^1.1.0"
 	},
 	"dependencies": {
-		"@notionhq/client": "^5.23.3",
+		"@notionhq/client": "^5.26.0",
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",
 		"date-fns": "^4.4.0",
-		"highlight.js": "^11.11.1"
+		"highlight.js": "^11.12.0"
 	}
 }
