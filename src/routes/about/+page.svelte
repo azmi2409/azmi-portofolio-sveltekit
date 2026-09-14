@@ -66,8 +66,8 @@
 				shaped how I work today: consider people, processes, and consequences together.
 			</p>
 			<p>
-				Based in Bogor, West Java, Indonesia, I have 6+ years of remote experience working with
-				companies in Malaysia, Singapore, and beyond.
+				Based in Jakarta, Indonesia, I have 6+ years of remote experience working with companies in
+				Malaysia, Singapore, and beyond.
 			</p>
 			<h2 class="pt-4 text-2xl font-bold text-foreground">Experience behind the advice</h2>
 			<div
