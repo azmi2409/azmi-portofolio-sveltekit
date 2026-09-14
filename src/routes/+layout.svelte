@@ -15,18 +15,50 @@
 		'@type': 'Person',
 		name: 'Azmi Muwahid',
 		url: 'https://azmi.web.id',
-		jobTitle: 'AI & Automation Consultant',
+		image: 'https://azmi.web.id/assets/profile.webp',
+		jobTitle: 'Senior Software Engineer',
 		description:
-			'Helping businesses automate repetitive work, control operating costs, and improve customer service with practical AI and software.',
+			'Senior software engineer and AI consultant based in Indonesia. Builds AI agents, manages cloud infrastructure, and helps businesses automate repetitive work with practical software.',
 		email: 'azmimuwahid@gmail.com',
 		sameAs: sameAsUrls,
+		worksFor: {
+			'@type': 'Organization',
+			name: 'FutureLab',
+			url: 'https://futurelab.my'
+		},
+		address: {
+			'@type': 'PostalAddress',
+			addressLocality: 'Bogor',
+			addressRegion: 'West Java',
+			addressCountry: 'ID'
+		},
+		alumniOf: {
+			'@type': 'EducationalOrganization',
+			name: 'Institut Pertanian Bogor (IPB)'
+		},
 		knowsAbout: [
+			'AI agents',
+			'Cloud infrastructure',
+			'AWS',
 			'Business process automation',
+			'Full-stack development',
+			'Ruby on Rails',
+			'SvelteKit',
+			'TypeScript',
 			'AI consulting',
-			'Customer experience',
-			'Online commerce',
 			'Software delivery'
-		]
+		],
+		knowsLanguage: ['en', 'id']
+	};
+	const websiteSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'WebSite',
+		name: 'Azmi Muwahid',
+		url: 'https://azmi.web.id',
+		description:
+			'Portfolio and case studies by Azmi Muwahid, senior software engineer and AI consultant.',
+		author: { '@type': 'Person', name: 'Azmi Muwahid', url: 'https://azmi.web.id' },
+		inLanguage: 'en'
 	};
 </script>
 
@@ -39,6 +71,7 @@
 	<meta property="og:site_name" content="Azmi Muwahid — AI & Automation Consultant" />
 	<meta property="og:locale" content="en_US" />
 	{@html `<script type="application/ld+json">${JSON.stringify(personSchema)}<\/script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(websiteSchema)}<\/script>`}
 </svelte:head>
 
 <GtmScript />

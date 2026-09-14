@@ -35,6 +35,27 @@
 		content={new URL(project.cover ?? '/assets/profile.webp', 'https://azmi.web.id').href}
 	/>
 	<link rel="canonical" href={`https://azmi.web.id/projects/${project.slug}`} />
+
+	<!-- JSON-LD: CreativeWork + BreadcrumbList -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'CreativeWork',
+		name: project.name,
+		description: project.summary,
+		url: `https://azmi.web.id/projects/${project.slug}`,
+		image: new URL(project.cover ?? '/assets/profile.webp', 'https://azmi.web.id').href,
+		author: { '@type': 'Person', name: 'Azmi Muwahid', url: 'https://azmi.web.id' },
+		dateCreated: project.year,
+		keywords: project.stack.join(', '),
+		breadcrumb: {
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
+				{ '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://azmi.web.id/projects' },
+				{ '@type': 'ListItem', position: 3, name: project.name, item: `https://azmi.web.id/projects/${project.slug}` }
+			]
+		}
+	})}<\/script>`}
 </svelte:head>
 
 <article class="px-6 pt-32 pb-24">
