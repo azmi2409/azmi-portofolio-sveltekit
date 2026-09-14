@@ -11,6 +11,7 @@
 		content="A business-first partner with the experience to build, launch, and improve the solution."
 	/>
 	<meta property="og:url" content="https://azmi.web.id/about" />
+	<meta property="og:type" content="profile" />
 	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="About Azmi — AI & Automation Consultant" />
@@ -19,6 +20,27 @@
 		content="A business-first partner with the experience to build, launch, and improve the solution."
 	/>
 	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
+
+	<!-- JSON-LD: ProfilePage + BreadcrumbList -->
+	{@html `<script type="application/ld+json">${JSON.stringify({
+		'@context': 'https://schema.org',
+		'@type': 'ProfilePage',
+		name: 'About Azmi Muwahid',
+		url: 'https://azmi.web.id/about',
+		description: 'Senior software engineer at FutureLab.my. Builds AI agents, manages cloud infrastructure, and helps businesses automate work.',
+		mainEntity: {
+			'@type': 'Person',
+			name: 'Azmi Muwahid',
+			url: 'https://azmi.web.id'
+		},
+		breadcrumb: {
+			'@type': 'BreadcrumbList',
+			itemListElement: [
+				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
+				{ '@type': 'ListItem', position: 2, name: 'About', item: 'https://azmi.web.id/about' }
+			]
+		}
+	})}<\/script>`}
 </svelte:head>
 
 <section class="px-6 py-32">
@@ -110,9 +132,9 @@
 			<ul class="space-y-4">
 				<li>
 					<strong class="text-foreground">FutureLab.my · Senior Software Engineer</strong><br
-					/>February 2023–present. Building the mentoring platform, managing cloud infrastructure on
-					AWS, and developing AI-assisted services. Delivered 50% lower cloud costs and 30% higher
-					B2B conversions.
+					/>February 2023–present. Own the cloud and deployment pipeline, keep the platform
+					codebase running smoothly, and build AI agents that improve how mentoring sessions
+					are captured, reported, and turned into actionable insights.
 				</li>
 				<li>
 					<strong class="text-foreground">Toptal · Freelance Full Stack Developer</strong><br

@@ -63,17 +63,17 @@ const projectRecords: Project[] = [
 		year: 'February 2023–present',
 		role: 'Senior Software Engineer at FutureLab.my',
 		ownership: [
-			'Built the Rails service boundaries and background jobs for transcription and summarization.',
-			'Integrated review states into existing operations workflows.',
-			'Added test coverage around AI edge cases and failure paths.'
+			'Own the cloud infrastructure and deployment pipeline on AWS.',
+			'Keep the core platform codebase stable and ship ongoing improvements.',
+			'Build AI agents that surface session insights, automate reporting, and strengthen the mentoring experience.'
 		],
 		type: 'B2B mentoring and learning platform',
 		status: 'Production',
 		stack: ['Ruby on Rails', 'PostgreSQL', 'AWS', 'OpenAI', 'RSpec'],
 		summary:
-			'AI-assisted transcription, summarization, and workflow automation for mentoring operations and B2B delivery.',
+			'Running the cloud and deployment side of a mentoring platform while building AI agents that turn session data into useful reporting and insights.',
 		outcome:
-			'Integrated asynchronous transcription and summarization into the existing Rails product, giving operations teams reviewable session insights without blocking mentoring workflows.',
+			'Kept the platform stable at scale, streamlined deployments on AWS, and shipped AI agents that capture mentoring sessions and deliver reporting teams can act on.',
 		cover: '/images/projects/futurelab.webp',
 		coverAlt:
 			'FutureLab mentoring platform homepage showing its business mentoring and coaching product.',
