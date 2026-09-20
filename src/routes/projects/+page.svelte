@@ -11,7 +11,8 @@
 		content="See how Azmi helps businesses reduce manual work, simplify online sales, and improve customer experiences with AI and practical software."
 	/>
 	<meta property="og:title" content="Projects — Azmi Muwahid" />
-	<meta property="og:description"
+	<meta
+		property="og:description"
 		content="Real projects: the business challenge, how I helped, and what changed."
 	/>
 	<meta property="og:type" content="website" />

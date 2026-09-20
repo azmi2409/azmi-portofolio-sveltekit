@@ -1,5 +1,4 @@
 <script lang="ts">
-	import NotionBlockRenderer from '$lib/components/blog/NotionBlockRenderer.svelte';
 	import { Badge } from '$lib/components/ui/badge';
 	import { Button } from '$lib/components/ui/button';
 	import { Separator } from '$lib/components/ui/separator';
@@ -7,14 +6,11 @@
 	import { format } from 'date-fns';
 
 	let { data } = $props();
-	const { post, blocks } = $derived(data);
+	const { post, Content } = $derived(data);
 
 	const formattedDate = $derived(
 		format(new Date(post.publishedAt || post.createdAt), 'MMMM dd, yyyy')
 	);
-
-	// Rough reading time based on block count (avg ~50 words/block)
-	const readingTime = $derived(Math.max(1, Math.ceil((blocks.length * 50) / 200)));
 </script>
 
 <svelte:head>
@@ -171,7 +167,7 @@
 			</div>
 			<div class="flex items-center gap-1.5">
 				<Clock class="h-4 w-4" />
-				<span>~{readingTime} min read</span>
+				<span>~{post.readingTime} min read</span>
 			</div>
 			{#if post.tags.length > 0}
 				<div class="flex items-center gap-1.5">
@@ -184,9 +180,8 @@
 
 	<Separator class="mb-10 bg-white/[0.04]" />
 
-	<!-- Notion content -->
-	<div class="notion-article">
-		<NotionBlockRenderer {blocks} />
+	<div class="blog-article">
+		<Content />
 	</div>
 
 	<!-- Footer -->
@@ -209,8 +204,70 @@
 </article>
 
 <style>
-	.notion-article {
+	.blog-article {
 		/* Constrain reading width for optimal line length (65–75 chars) */
 		max-width: 65ch;
+		font-size: 1.0625rem;
+		line-height: 1.8;
+		color: var(--foreground);
+	}
+	.blog-article :global(:is(h2, h3, h4)) {
+		margin: 2rem 0 1rem;
+		font-weight: 700;
+		line-height: 1.3;
+	}
+	.blog-article :global(h2) {
+		font-size: 1.75rem;
+	}
+	.blog-article :global(h3) {
+		font-size: 1.4rem;
+	}
+	.blog-article :global(h4) {
+		font-size: 1.2rem;
+	}
+	.blog-article :global(:is(p, ul, ol, blockquote, pre, table)) {
+		margin: 1.25rem 0;
+	}
+	.blog-article :global(:is(ul, ol)) {
+		padding-left: 1.5rem;
+	}
+	.blog-article :global(ul) {
+		list-style: disc;
+	}
+	.blog-article :global(ol) {
+		list-style: decimal;
+	}
+	.blog-article :global(a) {
+		color: var(--signal);
+		text-decoration: underline;
+		text-underline-offset: 3px;
+	}
+	.blog-article :global(pre) {
+		overflow-x: auto;
+		padding: 1.25rem;
+		border: 1px solid var(--border);
+		border-radius: 0.75rem;
+		background: var(--muted);
+		font-size: 0.85rem;
+	}
+	.blog-article :global(:not(pre) > code) {
+		background: var(--muted);
+		padding: 0.15rem 0.3rem;
+		border-radius: 0.25rem;
+		font-size: 0.9em;
+		overflow-wrap: anywhere;
+	}
+	.blog-article :global(blockquote) {
+		border-left: 2px solid var(--signal);
+		padding-left: 1.25rem;
+		color: var(--muted-foreground);
+	}
+	.blog-article :global(img) {
+		max-width: 100%;
+		border-radius: 0.75rem;
+	}
+	.blog-article :global(hr) {
+		margin: 2rem 0;
+		border-color: var(--border);
 	}
 </style>

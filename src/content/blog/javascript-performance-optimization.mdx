@@ -1,0 +1,215 @@
+---
+title: JavaScript Performance Optimization Techniques
+excerpt: Practical strategies to improve JavaScript performance, reduce bundle sizes, and create faster web applications.
+status: published
+publishedAt: '2026-04-20'
+categories: [JavaScript, Web Development, Engineering]
+tags: [Tutorial, Technical, Best Practices]
+---
+
+⚡
+
+**Goal:** make your JavaScript apps feel instant by shipping less, doing less work on the main thread, and doing heavy work at the right time.
+
+#### What “performance” really means
+
+Most slow-feeling web apps are bottlenecked by one or more of these:
+
+- **Network cost:** too much JavaScript to download.
+- **Parse and compile:** the browser spends time turning JS into executable code.
+- **Main-thread work:** long tasks block input, scrolling, and rendering.
+- **Memory and garbage collection:** churn causes jank.
+
+A useful mental model is **RPR**:
+
+- **Reduce** what you ship.
+- **Prioritize** what runs first.
+- **Re-schedule** heavy work away from critical moments.
+
+---
+
+#### 1. Measure first (or you will optimize the wrong thing)
+
+Start with a tight loop: _measure → change → measure again_.
+
+**Quick checks**
+
+- Open DevTools → **Performance** and record a real interaction.
+- Look for **Long tasks** 50ms, “Recalculate Style”, “Layout”, and heavy JS.
+- In DevTools → **Network**, sort by **JS** and look for the largest bundles.
+
+**Core Web Vitals context**
+
+- **LCP** is often impacted by render-blocking JS and hydration.
+- **INP** is often impacted by long tasks on the main thread.
+
+---
+
+#### 2. Cut your bundle size aggressively
+
+Shipping less JS is usually the highest ROI change.
+
+**Practical tactics**
+
+- **Remove dependencies** you no longer need, and prefer small utilities over full libraries.
+- **Use ES modules** so your bundler can tree-shake effectively.
+- **Avoid “barrel” exports** that defeat tree-shaking (e.g., `import { x } from 'lib'`).
+- Replace heavy libraries:
+  - Date handling: consider `date-fns` or native `Intl` APIs.
+  - Utility: import from `lodash-es` or use native methods.
+
+**Make bundle cost visible**
+
+- Add a bundle visualizer to CI and fail builds when you exceed a budget.
+
+---
+
+#### 3. Code-split by routes and by interaction
+
+Only load code when it is needed.
+
+**Patterns that work well**
+
+- **Route-level splitting**: each route gets its own chunk.
+- **Component-level splitting**: lazy-load rarely used UI (modals, admin panels).
+- **Interaction-based splitting**: load code on hover or when the button enters the viewport.
+
+```js
+// Lazy-load a heavy feature only when used
+button.addEventListener('click', async () => {
+	const { openEditor } = await import('./editor.js');
+	openEditor();
+});
+```
+
+---
+
+#### 4. Reduce main-thread work
+
+Even small amounts of work, repeated often, can cause jank.
+
+**Find the hot paths**
+
+- Use the Performance tab and identify repeated functions.
+- Add `performance.mark` and `performance.measure` around suspicious code.
+
+```js
+performance.mark('render-start');
+render();
+performance.mark('render-end');
+performance.measure('render', 'render-start', 'render-end');
+```
+
+**Common fixes**
+
+- **Memoize** expensive computations.
+- **Debounce** high-frequency events (scroll, resize, keypress).
+- **Virtualize lists** instead of rendering thousands of rows.
+
+---
+
+#### 5. Schedule work when it will not hurt UX
+
+Not all work must happen immediately.
+
+**Useful primitives**
+
+- `requestAnimationFrame` for visual updates.
+- `requestIdleCallback` for non-urgent work (with a timeout fallback).
+- `setTimeout(0)` as a coarse “yield” when you need to break up a long task.
+
+```js
+// Break a big task into chunks to avoid blocking input
+async function processInChunks(items, chunkSize = 200) {
+	for (let i = 0; i < items.length; i += chunkSize) {
+		process(items.slice(i, i + chunkSize));
+		await new Promise((r) => setTimeout(r, 0));
+	}
+}
+```
+
+---
+
+#### 6. Use Web Workers for heavy computation
+
+If you are parsing, compressing, encrypting, image-processing, or doing large transforms, a worker can protect INP.
+
+**Rule of thumb**
+
+- If it takes more than a few milliseconds and runs during interaction, consider a worker.
+
+---
+
+#### 7. Optimize third-party scripts
+
+Third-party code is often the silent performance killer.
+
+**Checklist**
+
+- Audit: do you need every analytics and marketing script on every route?
+- Prefer **server-side tracking** where possible.
+- Load third-party scripts **after** the main content is interactive.
+- Use `defer` for scripts that do not need to block parsing.
+
+---
+
+#### 8. Make rendering cheaper
+
+JS performance and rendering performance are connected.
+
+**Avoid expensive patterns**
+
+- Repeated DOM reads and writes in a loop (layout thrashing).
+- Re-rendering entire trees for small updates.
+
+**Practical tips**
+
+- Batch DOM updates.
+- Prefer CSS for animations, and animate `transform` and `opacity`.
+
+---
+
+#### 9. Cache smarter
+
+Caching improves repeat visits and route transitions.
+
+**Where to start**
+
+- Set strong cache headers for hashed assets (`app.8c1f3.js`).
+- Use a service worker only if you can own the maintenance and testing.
+
+---
+
+#### A simple optimization plan (30–60 minutes)
+
+- [ ] Record a Performance trace for one slow interaction.
+- [ ] Identify the heaviest JS bundle and add a size budget.
+- [ ] Code-split one rarely used feature.
+- [ ] Remove or replace one heavy dependency.
+- [ ] Break one long task into chunks or move it to a worker.
+
+---
+
+#### Final thoughts
+
+## Introduction
+
+This post covers how to build a modern blog using SvelteKit...
+
+### Why SvelteKit?
+
+SvelteKit is a full-stack framework that...
+
+- Server-side rendering built in
+- File-based routing
+- Great TypeScript support
+
+### Code Example
+
+```ts
+// +page.server.ts
+export const load = async () => {
+	const posts = await getPosts();
+	return { posts };
+};
+```

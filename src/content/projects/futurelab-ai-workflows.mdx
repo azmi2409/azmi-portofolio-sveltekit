@@ -1,0 +1,58 @@
+---
+name: FutureLab AI Workflows
+published: true
+featured: true
+year: February 2023–present
+role: Senior Software Engineer at FutureLab.my
+ownership:
+  - Built the recording-to-summary process.
+  - Connected the results to the existing team review process.
+  - Managed cloud infrastructure and optimized operating costs.
+  - Led a mentorship program for five junior developers.
+type: Less administration after mentoring sessions
+status: Production
+stack: [Ruby on Rails, PostgreSQL, AWS, OpenAI, RSpec]
+summary: Helped mentoring operations turn session recordings into useful notes and follow-ups without adding another manual task.
+outcome: 30% higher B2B conversions through AI transcription features and 50% lower cloud costs through AWS optimization.
+cover: /images/projects/futurelab.webp
+coverAlt: FutureLab mentoring platform homepage showing its business mentoring and coaching product.
+coverCaption: FutureLab’s live mentoring platform for organizations in Southeast Asia.
+liveUrl: https://futurelab.my
+sortOrder: 1
+---
+
+## The solution
+
+Prepare notes automatically after a session, give the team a clear review step, and keep the work inside their existing process.
+
+## What changed
+
+A 30% increase in B2B conversions through AI transcription features and a 50% reduction in cloud costs through AWS optimization at FutureLab.
+
+## Lessons learned
+
+Automation is useful when people can check the result and know what needs their attention.
+
+## Behind the solution
+
+Mentoring sessions produced valuable context, but too much of it disappeared into manual notes and follow-up work.
+
+Rails workers process recordings and session metadata, call model services, persist generated summaries, and expose review states inside existing admin workflows.
+
+### Constraints
+
+- Integrate AI into an existing Rails product without destabilizing core flows.
+- Keep outputs reviewable for operations teams.
+- Control cloud and model costs as usage grows.
+
+### Technical decisions
+
+- Wrapped model calls in tested service boundaries.
+- Used asynchronous jobs for long-running transcription and summarization.
+- Optimized AWS resources and database access patterns alongside feature work.
+
+### Key features
+
+- AI-generated session summaries.
+- Operational review flow for generated content.
+- Cost-conscious background processing.

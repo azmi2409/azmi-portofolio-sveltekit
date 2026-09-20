@@ -1,0 +1,52 @@
+---
+name: AIClipper.video
+published: true
+featured: true
+year: '2026'
+role: Full Stack Engineer
+ownership:
+  - Built the workflow from YouTube source to downloadable clips and captions.
+  - Connected Gemini transcription and clip scoring to background rendering.
+  - Added visual face tracking, podcast layouts, and channel imports.
+type: Repurpose video with less manual editing
+status: MVP
+stack: [Ruby on Rails 8.1, Gemini, Solid Queue, FFmpeg, Tailwind CSS, Active Storage]
+summary: Turn long YouTube videos into captioned clips with AI-assisted moment selection, visual templates, and face-aware framing.
+outcome: A complete preparation and rendering workflow produces downloadable MP4 clips and SRT captions, with repeatable channel imports.
+cover: /images/projects/aiclipper.webp
+coverAlt: Generated product visualization of AIClipper's video workspace with clip previews, timeline, and caption controls.
+coverCaption: Generated product visualization based on the verified AIClipper workflow; the live origin returned Cloudflare 522 during capture.
+liveUrl: https://aiclipper.video
+sortOrder: 5
+---
+
+## The solution
+
+Creators submit a video or connect a channel, choose a template and editorial goal, then let background workers transcribe, score, caption, and render candidate moments.
+
+## What changed
+
+The current Rails MVP connects video download, Gemini-assisted transcription, bounded clip selection, FFmpeg rendering, and downloadable MP4/SRT output. Seven visual formats include Face Track and Speaker Split. Editorial scores describe content potential, not predicted views.
+
+## Behind the solution
+
+Rails 8.1 handles accounts and the creator workspace. Solid Queue runs the processing pipeline; Active Storage holds source media and finished clips. Gemini calls are isolated behind a dedicated client. FFmpeg and yt-dlp handle media processing.
+
+### Technical decisions
+
+- Validate timestamps and model candidates before rendering.
+- Bound source duration and size, scope media to its owner, and limit concurrent jobs.
+- Run face detection locally on reduced-size frames; use FFmpeg to crop the full-resolution video.
+- Deduplicate channel imports by YouTube ID.
+- Keep a real FFmpeg demo flow available without an AI provider.
+
+### Key features
+
+- Goal-weighted clip scoring and seven rendering formats.
+- Burned captions, branding, MP4 downloads, and SRT exports.
+- Face tracking and two-face podcast layouts with one-person fallback.
+- Hourly channel polling with duplicate protection.
+
+## Lessons learned
+
+Validate model output before it reaches media tools, and keep each processing stage observable and recoverable. Visual face tracking is not audio speaker identification; full-frame layouts remain useful for difficult footage.

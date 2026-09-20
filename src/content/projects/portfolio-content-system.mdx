@@ -1,0 +1,41 @@
+---
+name: Portfolio Content System
+published: true
+featured: false
+year: '2026'
+role: Designer / Engineer
+ownership:
+  - Designed and built the website.
+  - Moved articles and case studies into version-controlled MDX.
+  - Set up server rendering, hosting, and accessible motion.
+type: Simpler website publishing
+status: Live
+stack: [SvelteKit, mdsvex, Motion, Tailwind CSS, Vercel]
+summary: A portfolio with case studies and articles maintained as local content alongside the application.
+outcome: Blog and project content can be reviewed in Git and published with the site, without runtime CMS calls.
+cover: /images/projects/portfolio.webp
+coverAlt: Earlier version of the Azmi Muwahid portfolio homepage.
+coverCaption: Earlier portfolio interface before the local MDX migration.
+liveUrl: https://azmi.web.id
+githubUrl: https://github.com/azmi2409/azmi-portofolio-sveltekit
+sortOrder: 9
+---
+
+## The solution
+
+Keep listing metadata in frontmatter and long-form writing in MDX. Shared Svelte layouts provide the presentation, while content files own the case studies and articles.
+
+## What changed
+
+The site now compiles local blog and project files with mdsvex, validates metadata, and loads article components by route. Stable slugs preserve existing links. Project and blog pages have no runtime CMS dependency.
+
+## Technical decisions
+
+- Keep content trusted and version-controlled; compile it during the application build.
+- Use server loaders for metadata and route-split components for article bodies.
+- Use Motion’s small native-animation API for entrances and CSS for portrait depth.
+- Respect reduced-motion preferences and preserve readable server-rendered content without JavaScript.
+
+## Lessons learned
+
+A portfolio should make content easy to keep useful. For a developer-maintained site, local files provide a straightforward review and publishing workflow.

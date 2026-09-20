@@ -1,5 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { getPublishedPosts } from '$lib/server/notion/blog';
+import { getPublishedPosts } from '$lib/server/blog';
 import { setIsrHeaders } from '$lib/server/isr';
 
 export const load: PageServerLoad = async ({ setHeaders }) => {

@@ -1,0 +1,56 @@
+---
+name: Codexia Live
+published: true
+featured: true
+year: '2025'
+role: Lead Engineer / AI Systems Architect
+ownership:
+  - Built live communication between the learner and coach.
+  - Designed guidance that starts small and becomes more detailed when needed.
+  - Created a readable history of coaching activity.
+type: Help learners get unstuck
+status: Shipped MVP
+stack: [SvelteKit, TypeScript, WebSockets, Google Cloud Run, LLM tool calls]
+summary: Built a coding coach that offers small hints when learners struggle, rather than giving away the answer.
+outcome: Delivered an early working product that provides staged guidance and lets the team review when and why help appeared.
+cover: /images/projects/codexia.webp
+coverAlt: Generated product visualization of Codexia Live's coding workspace, progressive hints, and session timeline.
+coverCaption: Generated product visualization based on the documented Codexia Live workflow.
+sortOrder: 3
+---
+
+## The solution
+
+Look for signs that a learner may be stuck, offer a gentle nudge, and let the team inspect the coaching history to improve the experience.
+
+## What changed
+
+An initial working product demonstrates timely, progressive coaching. Learner impact and response-time benchmarks are not published.
+
+## Lessons learned
+
+Good assistance helps people take the next step without taking over the task.
+
+## Behind the solution
+
+Most coding tutors either wait for a prompt or reveal too much. The product needed to detect when a learner was stuck and intervene with the smallest useful hint.
+
+SvelteKit UI streams learner events to a Cloud Run service over WebSockets. The orchestration layer scores friction signals, retrieves relevant exercise context, calls tools when needed, and emits coaching responses back to the UI.
+
+### Constraints
+
+- Keep perceived latency low enough for a live learning session.
+- Handle partial context, silence, and typing pauses without over-triggering.
+- Keep the workflow explainable to product and curriculum teams.
+
+### Technical decisions
+
+- Used WebSockets for bidirectional session state instead of polling.
+- Kept intervention policy outside the UI so product rules could evolve independently.
+- Designed prompts around progressive disclosure to reduce answer leakage.
+
+### Key features
+
+- Friction-signal detection from typing pauses and silence.
+- Progressive hints with escalation paths.
+- Session timeline for debugging agent behavior.

@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { portfolioMotion } from '$lib/motion';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import WorkingPrinciples from '$lib/components/sections/WorkingPrinciples.svelte';
 	import IndependentWork from '$lib/components/sections/IndependentWork.svelte';
@@ -6,6 +8,11 @@
 	import ContactSection from '$lib/components/sections/ContactSection.svelte';
 
 	let { data } = $props();
+
+	onMount(() => {
+		const root = document.getElementById('hero')?.parentElement;
+		if (root) return portfolioMotion(root).destroy;
+	});
 </script>
 
 <svelte:head>

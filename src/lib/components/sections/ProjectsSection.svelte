@@ -129,6 +129,7 @@
 
 <style>
 	.project-card {
+		position: relative;
 		display: flex;
 		min-width: 0;
 		flex-direction: column;
@@ -158,10 +159,35 @@
 		}
 	}
 
-	.project-card:hover {
-		transform: translateY(-5px);
-		border-color: rgba(153, 229, 212, 0.19);
+	.project-card:hover,
+	.project-card:focus-within {
+		border-color: color-mix(in srgb, var(--signal) 40%, var(--border));
 		box-shadow: 0 24px 70px -34px rgba(0, 0, 0, 0.9);
+	}
+
+	.project-card::after {
+		content: '';
+		position: absolute;
+		inset: 0;
+		border-radius: inherit;
+		pointer-events: none;
+		background: radial-gradient(
+			480px circle at var(--pointer-x, 50%) var(--pointer-y, 0%),
+			color-mix(in srgb, var(--signal) 10%, transparent),
+			transparent 70%
+		);
+		opacity: 0;
+		transition: opacity 250ms ease;
+	}
+
+	@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+		.project-card:hover {
+			transform: translateY(-4px);
+		}
+
+		.project-card:hover::after {
+			opacity: 1;
+		}
 	}
 
 	.project-visual {

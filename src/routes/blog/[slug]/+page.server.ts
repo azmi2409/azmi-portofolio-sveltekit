@@ -1,6 +1,5 @@
 import type { PageServerLoad } from './$types';
-import { getPostBySlug } from '$lib/server/notion/blog';
-import { getPageBlocks } from '$lib/server/notion/blocks';
+import { getPostBySlug } from '$lib/server/blog';
 import { setIsrHeaders } from '$lib/server/isr';
 import { error } from '@sveltejs/kit';
 
@@ -12,6 +11,5 @@ export const load: PageServerLoad = async ({ params, setHeaders }) => {
 		throw error(404, { message: 'Post not found' });
 	}
 
-	const blocks = await getPageBlocks(post.notionPageId);
-	return { post, blocks };
+	return { post };
 };

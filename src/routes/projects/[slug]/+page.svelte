@@ -1,19 +1,10 @@
 <script lang="ts">
-	import NotionBlockRenderer from '$lib/components/blog/NotionBlockRenderer.svelte';
 	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 	import { ArrowLeft, ExternalLink } from '@lucide/svelte';
 	import ProjectPreview from '$lib/components/ProjectPreview.svelte';
 
 	let { data } = $props();
-	const { project, blocks } = $derived(data);
-
-	const sections = $derived(
-		[
-			['The solution', project.approach],
-			['What changed', project.result],
-			['Lessons learned', project.lessonsLearned]
-		].filter(([, value]) => value)
-	);
+	const { project, Content } = $derived(data);
 </script>
 
 <svelte:head>
@@ -51,8 +42,18 @@
 			'@type': 'BreadcrumbList',
 			itemListElement: [
 				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
-				{ '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://azmi.web.id/projects' },
-				{ '@type': 'ListItem', position: 3, name: project.name, item: `https://azmi.web.id/projects/${project.slug}` }
+				{
+					'@type': 'ListItem',
+					position: 2,
+					name: 'Projects',
+					item: 'https://azmi.web.id/projects'
+				},
+				{
+					'@type': 'ListItem',
+					position: 3,
+					name: project.name,
+					item: `https://azmi.web.id/projects/${project.slug}`
+				}
 			]
 		}
 	})}<\/script>`}
@@ -177,11 +178,11 @@
 					class="rounded-[2rem] border border-dashed border-white/[0.1] bg-white/[0.02] px-6 py-16 text-center"
 				>
 					<p class="font-mono text-[0.64rem] tracking-[0.18em] text-zinc-600 uppercase">
-						Private product
+						Product overview
 					</p>
 					<p class="mx-auto mt-3 max-w-lg text-sm leading-6 text-zinc-500">
-						The product interface is not public yet. This case study shows the verified scope,
-						constraints, and technical decisions without fabricating a demo.
+						A current product screenshot is not available. Explore the workflow and technical
+						decisions below.
 					</p>
 				</div>
 			{/if}
@@ -194,55 +195,7 @@
 				</p>
 			</nav>
 			<div class="space-y-12">
-				{#each sections as [title, value]}
-					<section>
-						<h2 class="text-3xl font-black tracking-tight text-zinc-50">{title}</h2>
-						<p class="mt-4 text-lg leading-8 text-zinc-400">{value}</p>
-					</section>
-				{/each}
-
-				<details class="border-t border-border pt-6">
-					<summary class="cursor-pointer py-3 font-semibold"
-						>Behind the solution: implementation details</summary
-					>
-					<p class="mt-4 leading-8 text-muted-foreground">{project.problem}</p>
-					<p class="mt-4 leading-8 text-muted-foreground">{project.architecture}</p>
-					{#if project.constraints.length}
-						<section>
-							<h2 class="text-3xl font-black tracking-tight text-zinc-50">Constraints</h2>
-							<ul class="mt-4 space-y-3">
-								{#each project.constraints as item}<li
-										class="rounded-2xl border border-white/[0.06] bg-white/[0.03] p-4 text-zinc-400"
-									>
-										{item}
-									</li>{/each}
-							</ul>
-						</section>
-					{/if}
-
-					{#if project.technicalDecisions.length || project.keyFeatures.length}
-						<section class="grid gap-5 md:grid-cols-2">
-							<div>
-								<h2 class="text-2xl font-black tracking-tight text-zinc-50">Technical decisions</h2>
-								<ul class="mt-4 space-y-3">
-									{#each project.technicalDecisions as item}<li class="text-zinc-400">
-											• {item}
-										</li>{/each}
-								</ul>
-							</div>
-							<div>
-								<h2 class="text-2xl font-black tracking-tight text-zinc-50">Key features</h2>
-								<ul class="mt-4 space-y-3">
-									{#each project.keyFeatures as item}<li class="text-zinc-400">• {item}</li>{/each}
-								</ul>
-							</div>
-						</section>
-					{/if}
-
-					{#if blocks.length}
-						<section class="notion-article"><NotionBlockRenderer {blocks} /></section>
-					{/if}
-				</details>
+				<div class="case-study"><Content /></div>
 				<section class="rounded-2xl border border-border bg-card p-6">
 					<h2 class="text-2xl font-bold">Could a similar approach help your business?</h2>
 					<p class="mt-3 leading-7 text-muted-foreground">
@@ -255,3 +208,60 @@
 		</div>
 	</div>
 </article>
+
+<style>
+	.case-study {
+		color: var(--muted-foreground);
+		font-size: 1.125rem;
+		line-height: 1.8;
+	}
+	.case-study :global(h2) {
+		margin: 2.5rem 0 1rem;
+		font-size: 1.875rem;
+		font-weight: 800;
+		line-height: 1.2;
+		color: var(--foreground);
+	}
+	.case-study :global(h2:first-child) {
+		margin-top: 0;
+	}
+	.case-study :global(h3) {
+		margin: 2rem 0 1rem;
+		font-size: 1.375rem;
+		font-weight: 700;
+		color: var(--foreground);
+	}
+	.case-study :global(:is(p, ul, ol)) {
+		margin: 1rem 0;
+	}
+	.case-study :global(:is(ul, ol)) {
+		padding-left: 1.5rem;
+	}
+	.case-study :global(ul) {
+		list-style: disc;
+	}
+	.case-study :global(ol) {
+		list-style: decimal;
+	}
+	.case-study :global(li) {
+		margin: 0.5rem 0;
+	}
+	.case-study :global(a) {
+		color: var(--signal);
+		text-decoration: underline;
+	}
+	.case-study :global(code) {
+		font-size: 0.9em;
+		overflow-wrap: anywhere;
+	}
+	.case-study :global(pre) {
+		overflow-x: auto;
+		padding: 1rem;
+		background: var(--muted);
+		border-radius: 0.75rem;
+	}
+	.case-study :global(img) {
+		max-width: 100%;
+		border-radius: 0.75rem;
+	}
+</style>

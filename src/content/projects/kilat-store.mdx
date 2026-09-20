@@ -1,0 +1,58 @@
+---
+name: Kilat.store
+published: true
+featured: true
+year: '2024-2025'
+role: Full Stack Engineer & AI Integrator
+ownership:
+  - Connected website generation, visual editing, and publishing.
+  - Built a process that prepares pages without making owners wait on a frozen screen.
+  - Set up delivery designed to keep website hosting inexpensive.
+type: Help food businesses get online
+status: Free MVP
+stack: [Next.js 15, Puck Editor, Astro 4, Ruby on Rails 8, Terraform, Alibaba Cloud]
+summary: Help cafes, restaurants, and local food brands create a website, display their menu, and receive inquiries through WhatsApp.
+outcome: Business owners can describe their business, edit a prepared website, and publish a shareable link without learning to code.
+cover: /images/projects/kilat-store.webp
+coverAlt: Live Kilat.store homepage showing its F&B website generator.
+coverCaption: Captured from kilat.store in September 2026.
+liveUrl: https://kilat.store
+sortOrder: 2
+---
+
+## The solution
+
+Focus on what a food business needs first: a menu, business details, and a clear way to order. If AI is unavailable, provide an editable starter instead of a blank page.
+
+## What changed
+
+A free first release is publicly available with one website, visual editing, a kill.lat address, and WhatsApp contact. Custom domains and paid upgrades are planned, not included in the current offer.
+
+## Lessons learned
+
+A focused service that gets a business online is more useful than a long list of features owners have to figure out.
+
+## Behind the solution
+
+Indonesian F&B merchants often rely on social media alone, while generic website builders make menu setup, mobile ordering, and publishing harder than necessary.
+
+A monorepo combines the marketing site, Next.js editor powered by Puck, and a Rails API with background jobs for AI generation. Published storefronts use the same canonical block contracts shown in the editor and receive a shareable kill.lat subdomain.
+
+### Constraints
+
+- Must run smoothly on low-end mobile devices.
+- Generation must still produce an editable starter when AI is slow or unavailable.
+- The free MVP must keep publishing and ordering simple without paid-plan complexity.
+
+### Technical decisions
+
+- Used one canonical block registry across generation, editing, and rendering.
+- Moved AI generation to Rails background jobs to avoid request timeouts.
+- Added a safe fallback F&B template instead of leaving merchants with a blank screen.
+
+### Key features
+
+- AI drafts grounded in business type, menu, location, audience, and visual style.
+- Visual editing for copy, images, colors, and responsive content blocks.
+- Menu, reservation, ordering, QR menu, and WhatsApp action blocks.
+- Immediate publishing to a Kilat subdomain.

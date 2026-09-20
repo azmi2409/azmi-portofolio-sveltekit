@@ -1,0 +1,57 @@
+---
+name: AI Mentor Matcher
+published: true
+featured: false
+year: '2024'
+role: AI Developer
+ownership:
+  - Designed matching around career context.
+  - Built the mentor search process.
+  - Added an alternative when the main search service is unavailable.
+type: Help people find relevant mentors
+status: Prototype
+stack: [Next.js, OpenAI API, Prisma, PostgreSQL, pgvector]
+summary: Help mentees search by their career goals, even when a mentor describes their experience using different words.
+outcome: Built a search prototype that considers meaning as well as exact keywords and keeps an alternative search path available.
+cover: /images/projects/mentor-matcher.webp
+coverAlt: Live AI Mentor Matcher prototype comparing keyword search with semantic search.
+coverCaption: Captured from the public prototype in September 2026.
+liveUrl: https://openai-embedding.vercel.app
+sortOrder: 10
+---
+
+## The solution
+
+Compare what a mentee needs with the experience mentors describe, rather than relying only on matching words.
+
+## What changed
+
+A prototype supports context-based mentor search. A comparison of recommendation quality has not been published.
+
+## Lessons learned
+
+Useful recommendations need to be evaluated against what people actually find helpful.
+
+## Behind the solution
+
+Traditional keyword matching fails when mentors and mentees use different terminology for similar concepts or career aspirations.
+
+A serverless Next.js App Router project queries PostgreSQL using Prisma. Search queries are mapped to embeddings on the fly and processed in the database via pgvector.
+
+### Constraints
+
+- Keep response latency low for live searches.
+- Support Prisma-compatible vector storage and similarity scoring.
+- Mitigate API cost overhead of generating search query embeddings.
+
+### Technical decisions
+
+- Used text-embedding-ada-002 for vector embeddings.
+- Implemented raw SQL similarity queries through Prisma `$queryRaw`.
+- Added a full-text fallback when database connections or API limits interrupt semantic search.
+
+### Key features
+
+- Vector embedding search.
+- Semantic similarity threshold controls.
+- Full-text keyword fallback queries.

@@ -1,0 +1,57 @@
+---
+name: iScylla Shop
+published: true
+featured: true
+year: '2026'
+role: Founder / Full-Stack Engineer
+ownership:
+  - Built the bilingual storefront and customer accounts.
+  - Connected payment to order tracking.
+  - Brought product availability, receipts, and support into the buying journey.
+type: A clearer online buying experience
+status: Live
+stack: [Ruby on Rails, Tailwind CSS, QRIS, Cloudflare R2]
+summary: A digital-product shop that brings browsing, payment, order updates, and after-sales support into one place.
+outcome: Customers can see prices and stock, pay by QRIS, and return to their account for receipts, delivery information, and order-related help.
+cover: /images/projects/iscylla-store.webp
+coverAlt: iScylla Shop homepage with digital-product search, QRIS payment, warranty, and order-linked support.
+coverCaption: Captured from iscylla.web.id on September 20, 2026.
+liveUrl: https://iscylla.web.id
+sortOrder: 4
+---
+
+## The solution
+
+Make each step clear before asking customers to pay: what they are buying, how it is delivered, what the warranty covers, and where to get help.
+
+## What changed
+
+The shop is live with a populated catalog and customer purchase journey. Sales and conversion measurements are not published.
+
+## Lessons learned
+
+A clear buying process and accessible order records help customers understand what happens next.
+
+## Behind the solution
+
+Digital-product buyers need clear product terms, delivery methods, warranty information, payment status, and support after checkout instead of an informal chat-only purchase flow.
+
+A Ruby on Rails storefront serves localized catalog and account flows. Product media is delivered through Cloudflare R2, while checkout connects QRIS confirmation to persisted order, receipt, delivery, and support records.
+
+### Constraints
+
+- Keep checkout familiar for Indonesian buyers through QRIS and Rupiah pricing.
+- Make stock, delivery method, duration, and warranty visible before purchase.
+- Keep receipts, delivered access, and support context available in one customer account.
+
+### Technical decisions
+
+- Required customer accounts so orders, receipts, and delivered access remain recoverable.
+- Connected payment confirmation to explicit order and fulfillment states.
+- Kept product media separate from application storage with Cloudflare R2.
+
+### Key features
+
+- Bilingual catalog with transparent prices and stock.
+- QRIS checkout with order tracking and receipts.
+- Delivery information and support tied to each order.

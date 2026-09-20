@@ -10,10 +10,6 @@
 	const formattedDate = $derived(
 		format(new Date(post.publishedAt || post.createdAt), 'MMM dd, yyyy')
 	);
-	// Estimate ~200 words/min from excerpt length (blocks not available here)
-	const readingTime = $derived(
-		Math.max(1, Math.ceil(((post.excerpt?.split(' ').length ?? 20) * 6) / 200))
-	);
 </script>
 
 <a href="/blog/{post.slug}" class="group block cursor-pointer" aria-label="Read {post.title}">
@@ -88,7 +84,7 @@
 					</div>
 					<div class="flex items-center gap-1">
 						<Clock class="h-3.5 w-3.5" />
-						<span>{readingTime} min</span>
+						<span>{post.readingTime} min</span>
 					</div>
 				</div>
 				<span

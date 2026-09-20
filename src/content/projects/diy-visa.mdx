@@ -1,0 +1,57 @@
+---
+name: DIY Visa
+published: true
+featured: true
+year: '2026'
+role: Full-Stack Engineer / Product Builder
+ownership:
+  - Built the bilingual DS-160 preparation and review journey.
+  - Connected document review, photo guidance, and text or voice interview practice.
+  - Designed consent, encryption, ownership checks, and retention boundaries.
+type: Clearer, private visa preparation
+status: Hackathon MVP
+stack: [Next.js 15, TypeScript, Supabase, PostgreSQL, Drizzle ORM, Vercel AI SDK, Vercel Blob]
+summary: A privacy-first workspace helping Indonesian travelers prepare truthful U.S. B1/B2 visa answers, check consistency, and practice interviews.
+outcome: An end-to-end bilingual preparation journey combines guided questions, autosaved drafts, review tools, and personalized mock interviews.
+cover: /images/projects/diy-visa.webp
+coverAlt: Live DIY Visa homepage with its bilingual preparation journey and interview practice workflow.
+coverCaption: Captured from the live DIY Visa application on September 20, 2026.
+liveUrl: https://diy-visa-five.vercel.app
+sortOrder: 7
+---
+
+## The solution
+
+DIY Visa grew from firsthand experience with confusing DS-160 questions. Applicants work section by section, review their own answers, catch possible inconsistencies, and practice a short interview in English or Bahasa Indonesia.
+
+## What changed
+
+The hackathon MVP supports multiple private preparation cases, conditional questions, five-second autosave, human-readable review, photo guidance, and three-question text or voice interviews. Supporting tools include consent-based document auditing and optional retained files.
+
+## Behind the solution
+
+Next.js server actions and route handlers call typed capability services. Supabase handles authentication and PostgreSQL storage through Drizzle. The Vercel AI SDK connects to an OpenAI-compatible provider, while private Vercel Blob stores explicitly retained documents.
+
+### Technical decisions
+
+- Encrypt sensitive identity and financial fields before storing them in PostgreSQL.
+- Enforce case ownership and tenant isolation on the server.
+- Require consent for AI processing and confirmation before extracted facts update an application.
+- Keep uploads transient by default and make retained-file deletion explicit.
+- Keep model output schema-validated and expose uncertainty rather than approval predictions.
+
+### Key features
+
+- Guided DS-160 preparation with conditional questions and autosave.
+- Missing-answer, timeline, typo, and consistency review.
+- Photo guidance and document review with traveler confirmation.
+- Bilingual text or voice interview practice.
+- Private document organization and a rolling retention policy.
+
+## Lessons learned
+
+Trust needs to exist in storage rules, permission checks, interface copy, and user control. A focused preparation tool is more useful than trying to automate the entire government process.
+
+## Product boundaries
+
+DIY Visa supports preparation only. It does not submit the DS-160, pay fees, book appointments, provide legal advice, or predict approval. Official applications remain under the traveler’s control on authorized government channels. The product is independent of the U.S. government.

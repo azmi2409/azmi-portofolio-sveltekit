@@ -1,8 +1,5 @@
-import type { NotionBlock } from './blog';
-
 export interface Project {
 	id: string;
-	notionPageId: string;
 	name: string;
 	slug: string;
 	published: boolean;
@@ -21,20 +18,10 @@ export interface Project {
 	liveUrl?: string;
 	githubUrl?: string;
 	sortOrder: number;
-	problem: string;
-	constraints: string[];
-	approach: string;
-	architecture: string;
-	technicalDecisions: string[];
-	keyFeatures: string[];
-	result: string;
-	lessonsLearned: string;
-	blocks?: NotionBlock[];
 }
 
 export interface Experiment {
 	id: string;
-	notionPageId: string;
 	name: string;
 	slug: string;
 	published: boolean;
@@ -44,6 +31,9 @@ export interface Experiment {
 	summary: string;
 	outcome: string;
 	cover?: string;
+	coverAlt?: string;
+	liveUrl?: string;
+	githubUrl?: string;
 	sortOrder: number;
 }
 

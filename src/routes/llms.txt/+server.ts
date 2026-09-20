@@ -1,5 +1,5 @@
-import { getProjects } from '$lib/server/notion/projects';
-import { getPublishedPosts } from '$lib/server/notion/blog';
+import { getProjects } from '$lib/server/projects';
+import { getPublishedPosts } from '$lib/server/blog';
 import { isrHeaders } from '$lib/server/isr';
 
 export async function GET() {

@@ -45,22 +45,43 @@
 		</h1>
 		<div class="mt-14 grid gap-5 md:grid-cols-2">
 			{#each data.experiments as experiment}
-				<article class="rounded-[2rem] border border-white/[0.08] bg-white/[0.03] p-6">
-					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-600 uppercase">
-						{experiment.status} / {experiment.year}
-					</p>
-					<h2 class="mt-4 text-2xl font-black text-zinc-50">{experiment.name}</h2>
-					<p class="mt-4 leading-7 text-zinc-400">{experiment.summary}</p>
-					<p
-						class="mt-5 rounded-2xl border border-white/[0.06] p-4 text-sm leading-6 text-zinc-300"
-					>
-						{experiment.outcome}
-					</p>
-					<div class="mt-5 flex flex-wrap gap-2">
-						{#each experiment.stack as item}<span
-								class="rounded-full border border-white/[0.08] px-3 py-1 text-xs text-zinc-500"
-								>{item}</span
-							>{/each}
+				<article class="overflow-hidden rounded-[2rem] border border-white/[0.08] bg-white/[0.03]">
+					{#if experiment.cover}
+						<div
+							class="flex aspect-[16/8] items-center justify-center border-b border-border bg-zinc-950 p-8"
+						>
+							<img
+								src={experiment.cover}
+								alt={experiment.coverAlt ?? ''}
+								class="h-full w-full object-contain"
+							/>
+						</div>
+					{/if}
+					<div class="p-6">
+						<p class="text-xs font-semibold tracking-[0.24em] text-zinc-600 uppercase">
+							{experiment.status} / {experiment.year}
+						</p>
+						<h2 class="mt-4 text-2xl font-black text-zinc-50">{experiment.name}</h2>
+						<p class="mt-4 leading-7 text-zinc-400">{experiment.summary}</p>
+						<p
+							class="mt-5 rounded-2xl border border-white/[0.06] p-4 text-sm leading-6 text-zinc-300"
+						>
+							{experiment.outcome}
+						</p>
+						<div class="mt-5 flex flex-wrap gap-2">
+							{#each experiment.stack as item}<span
+									class="rounded-full border border-white/[0.08] px-3 py-1 text-xs text-zinc-500"
+									>{item}</span
+								>{/each}
+						</div>
+						{#if experiment.githubUrl}
+							<a
+								href={experiment.githubUrl}
+								target="_blank"
+								rel="noreferrer"
+								class="button-secondary mt-6">View open source ↗</a
+							>
+						{/if}
 					</div>
 				</article>
 			{/each}
