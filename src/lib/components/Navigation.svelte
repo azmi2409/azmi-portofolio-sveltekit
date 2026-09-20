@@ -152,8 +152,12 @@
 		background: var(--signal);
 	}
 	.nav-cta {
-		min-height: 2.75rem;
+		display: inline-flex;
 		align-items: center;
+		justify-content: center;
+		white-space: nowrap;
+		flex-shrink: 0;
+		min-height: 2.75rem;
 		gap: 0.45rem;
 		border-radius: 0.65rem;
 		background: var(--foreground);
@@ -162,6 +166,14 @@
 		font-size: 0.8rem;
 		font-weight: 700;
 		transition: opacity 180ms;
+	}
+	.nav-cta.hidden {
+		display: none;
+	}
+	@media (min-width: 640px) {
+		.nav-cta.sm\:inline-flex {
+			display: inline-flex;
+		}
 	}
 	.nav-cta:hover {
 		opacity: 0.82;
