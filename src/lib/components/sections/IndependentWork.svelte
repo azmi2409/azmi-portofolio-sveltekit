@@ -1,6 +1,17 @@
 <script lang="ts">
 	const projects = [
 		{
+			name: 'Rails AI Gateway',
+			kind: 'Open-source gem · AI infrastructure',
+			href: 'https://github.com/azmi2409/rails-ai-gateway',
+			cover: '/images/projects/rails-ai-gateway.webp',
+			coverAlt:
+				'Generated visualization of Rails AI Gateway showing model routes, fallbacks, and token metrics.',
+			description:
+				'Mount one OpenAI-compatible endpoint inside Rails with ordered model fallbacks, encrypted provider keys, streaming, and built-in usage tracking.',
+			link: 'Explore repository'
+		},
+		{
 			name: 'Rails Mailer Sandbox',
 			kind: 'Free tool · Email testing',
 			href: 'https://github.com/azmi2409/rails-mailer-sandbox',
@@ -31,7 +42,7 @@
 		<h2 id="independent-work-heading" class="text-4xl font-black tracking-tight">
 			Useful tools I share with other teams.
 		</h2>
-		<div class="mt-8 grid gap-5 md:grid-cols-2">
+		<div class="mt-8 grid gap-5 md:grid-cols-2 lg:grid-cols-3">
 			{#each projects as project}
 				<article class="flex flex-col overflow-hidden rounded-2xl border border-border bg-card">
 					<div class="aspect-[16/9] overflow-hidden border-b border-border bg-zinc-950">
