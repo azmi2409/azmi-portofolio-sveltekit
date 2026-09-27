@@ -59,7 +59,7 @@
 					/>
 				</div>
 				<figcaption class="mt-4 flex justify-between gap-4 text-xs text-muted-foreground">
-					<span>Business first. Technology with a purpose.</span><span>Seattle, WA</span>
+					<span>Business first. Technology with a purpose.</span><span>Photo: visiting Seattle</span>
 				</figcaption>
 			</figure>
 		</div>
