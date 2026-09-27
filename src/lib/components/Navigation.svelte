@@ -6,9 +6,8 @@
 	import ThemeToggle from './ThemeToggle.svelte';
 
 	const navItems = [
-		{ name: 'Work', href: '/projects' },
+		{ name: 'Projects', href: '/projects' },
 		{ name: 'About', href: '/about' },
-		{ name: 'Lab', href: '/lab' },
 		{ name: 'Contact', href: '/contact' }
 	];
 	let mobileOpen = $state(false);

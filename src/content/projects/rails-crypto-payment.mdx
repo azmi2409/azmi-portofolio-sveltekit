@@ -1,0 +1,40 @@
+---
+name: Rails Crypto Payment
+published: true
+featured: true
+year: '2026'
+role: Open-Source Developer
+category: OS Library
+ownership:
+  - Built exact USDT amount reservation helpers and deposit retrieval clients.
+type: Framework-independent crypto payment library
+status: Open source
+stack: [Ruby, BigDecimal, EVM JSON-RPC, ERC-20, Binance API, Bybit API]
+summary: A standalone Ruby library for exact USDT payment amounts and deposit retrieval, without Rails or database dependencies.
+outcome: Supports six-decimal payment amounts, EVM transfer verification, and signed Binance and Bybit deposit requests while leaving settlement under host application control.
+cover: /images/projects/rails-crypto-payment.webp
+coverAlt: Generated illustration of Rails Crypto Payment with a ruby gem, exact USDT amounts, EVM transfers, and exchange deposits.
+coverCaption: Concept illustration generated with 9Router ag/gemini-3.1-flash-image; not a product screenshot.
+githubUrl: https://github.com/azmi2409/rails-crypto-payment
+sortOrder: 14
+---
+
+## The solution
+
+Convert Rupiah prices into exact USDT amounts with BigDecimal, reserve unique six-decimal amounts, and retrieve deposits from EVM chains or exchange internal transfers.
+
+## Implementation
+
+EVM JSON-RPC filters ERC-20 Transfer logs by token and recipient, verifies successful transaction receipts, and converts amounts using token decimals. Oversized RPC block ranges split on range errors. Binance and Bybit clients sign requests with host-provided credentials; Bybit deposit retrieval paginates results.
+
+## Payment boundaries
+
+The host application owns credentials, wallets, payment records, polling cursors, expiration, settlement, transaction locking, and jobs. Database uniqueness must protect reservations atomically. Deposit status, coin, amount, recipient, and timestamps must match before transactional settlement.
+
+## AI system implementation
+
+No AI runtime is involved. BigDecimal arithmetic, validated RPC responses, and signed exchange requests keep payment matching deterministic. Model output never determines amounts or settlement.
+
+## Source
+
+[Explore repository](https://github.com/azmi2409/rails-crypto-payment).

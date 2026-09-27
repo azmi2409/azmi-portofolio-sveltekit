@@ -9,6 +9,7 @@ ownership:
   - Connected document review, photo guidance, and text or voice interview practice.
   - Designed consent, encryption, ownership checks, and retention boundaries.
 type: Clearer, private visa preparation
+category: Web App
 status: Hackathon MVP
 stack: [Next.js 15, TypeScript, Supabase, PostgreSQL, Drizzle ORM, Vercel AI SDK, Vercel Blob]
 summary: A privacy-first workspace helping Indonesian travelers prepare truthful U.S. B1/B2 visa answers, check consistency, and practice interviews.
@@ -55,3 +56,7 @@ Trust needs to exist in storage rules, permission checks, interface copy, and us
 ## Product boundaries
 
 DIY Visa supports preparation only. It does not submit the DS-160, pay fees, book appointments, provide legal advice, or predict approval. Official applications remain under the traveler’s control on authorized government channels. The product is independent of the U.S. government.
+
+## AI system implementation
+
+Typed server-side capability services use the Vercel AI SDK with an OpenAI-compatible provider for answer review, consent-based document auditing, and bilingual interview practice. Model output is schema-validated; extracted facts require traveler confirmation before updating a case. Ownership checks and encrypted sensitive fields protect stored case data. AI supports preparation, not submission, legal advice, or approval prediction.

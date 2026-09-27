@@ -1,0 +1,38 @@
+---
+name: GoPay Merchant QRIS Gateway
+published: true
+featured: true
+year: '2026'
+role: Open-Source Developer
+category: API / Gateway
+ownership:
+  - Built and published the open-source project.
+type: Payment API and administration
+status: Open source
+stack: [TypeScript, Node.js, SvelteKit, Tailwind CSS, SQLite, LibSQL, Docker]
+summary: Connect QRIS payment requests, payment matching, and order updates. Unofficial and not affiliated with or endorsed by GoPay.
+outcome: Combines dynamic QRIS payments, transaction matching, signed webhooks, and a separate administration service.
+cover: /images/projects/qris-gateway.webp
+coverAlt: Generated visualization of a QRIS payment, transaction matching, and order status dashboard.
+coverCaption: Generated product visualization, not a live screenshot.
+githubUrl: https://github.com/azmi2409/gopay-merchant-qris-gateway
+sortOrder: 13
+---
+
+## The solution
+
+Connect QRIS payment requests, payment matching, and order updates. Unofficial and not affiliated with or endorsed by GoPay.
+
+## What changed
+
+Combines dynamic QRIS payments, transaction matching, signed webhooks, and a separate administration service.
+
+## Source
+
+[Explore repository](https://github.com/azmi2409/gopay-merchant-qris-gateway).
+
+This project uses unofficial private APIs. Accounts risk suspension; use official payment providers for critical production workloads.
+
+## AI system implementation
+
+No AI model participates in payment creation or settlement. TypeScript code generates QRIS payloads, matches transactions, and signs webhooks; SQLite tracks state and prevents duplicate claims. The SvelteKit admin service stays separate from the gateway. Payment decisions rely on validated amounts and transaction records, not probabilistic model output.

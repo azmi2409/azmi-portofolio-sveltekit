@@ -45,7 +45,6 @@ ${projectList || 'No projects published yet.'}
 - [Home](${base})
 - [Projects](${base}/projects)
 - [About](${base}/about)
-- [Lab](${base}/lab)
 - [Contact](${base}/contact)
 `;
 

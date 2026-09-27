@@ -9,13 +9,14 @@ ownership:
   - Connected Gemini transcription and clip scoring to background rendering.
   - Added visual face tracking, podcast layouts, and channel imports.
 type: Repurpose video with less manual editing
+category: Web App
 status: MVP
 stack: [Ruby on Rails 8.1, Gemini, Solid Queue, FFmpeg, Tailwind CSS, Active Storage]
-summary: Turn long YouTube videos into captioned clips with AI-assisted moment selection, visual templates, and face-aware framing.
+summary: Turn long YouTube videos into captioned clips with AI-assisted moment selection, visual templates, and face-aware framing. Visit https://aiclipper.video/.
 outcome: A complete preparation and rendering workflow produces downloadable MP4 clips and SRT captions, with repeatable channel imports.
 cover: /images/projects/aiclipper.webp
-coverAlt: Generated product visualization of AIClipper's video workspace with clip previews, timeline, and caption controls.
-coverCaption: Generated product visualization based on the verified AIClipper workflow; the live origin returned Cloudflare 522 during capture.
+coverAlt: Screenshot of AIClipper's live homepage showing its video clipping hero and navigation.
+coverCaption: Live homepage screenshot captured directly from https://aiclipper.video/.
 liveUrl: https://aiclipper.video
 sortOrder: 5
 ---
@@ -50,3 +51,7 @@ Rails 8.1 handles accounts and the creator workspace. Solid Queue runs the proce
 ## Lessons learned
 
 Validate model output before it reaches media tools, and keep each processing stage observable and recoverable. Visual face tracking is not audio speaker identification; full-frame layouts remain useful for difficult footage.
+
+## AI system implementation
+
+Gemini handles transcription and candidate clip selection through a dedicated client. Solid Queue coordinates slow processing outside HTTP requests. Model timestamps and candidate boundaries are validated before FFmpeg renders MP4 clips and SRT captions. Local face detection guides crops; it does not identify speakers from audio. Editorial scores express content potential, not predicted views.

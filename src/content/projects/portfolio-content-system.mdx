@@ -9,13 +9,14 @@ ownership:
   - Moved case studies into version-controlled MDX.
   - Set up server rendering, hosting, and accessible motion.
 type: Simpler website publishing
+category: Web App
 status: Live
 stack: [SvelteKit, mdsvex, Motion, Tailwind CSS, Vercel]
 summary: A portfolio with case studies maintained as local content alongside the application.
 outcome: Project content can be reviewed in Git and published with the site, without runtime CMS calls.
 cover: /images/projects/portfolio.webp
-coverAlt: Earlier version of the Azmi Muwahid portfolio homepage.
-coverCaption: Earlier portfolio interface before the local MDX migration.
+coverAlt: Current Azmi Muwahid portfolio homepage with Projects navigation, business-focused introduction, and portrait.
+coverCaption: Screenshot of the current local implementation; the live deployment still serves the previous version.
 liveUrl: https://azmi.web.id
 githubUrl: https://github.com/azmi2409/azmi-portofolio-sveltekit
 sortOrder: 9
@@ -39,3 +40,7 @@ The site compiles local project files with mdsvex, validates metadata, and loads
 ## Lessons learned
 
 A portfolio should make content easy to keep useful. For a developer-maintained site, local files provide a straightforward review and publishing workflow.
+
+## AI system implementation
+
+No runtime AI service is used by the portfolio content pipeline. Trusted MDX compiles during the build; server loaders validate metadata and route-split components render case studies. Project filters and motion run through ordinary application and browser APIs.

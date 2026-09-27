@@ -9,13 +9,14 @@ ownership:
   - Connected asynchronous image and video generation to a credit-based product.
   - Added account-scoped media and a versioned automation API.
 type: AI character portraits and short videos
+category: Web App
 status: MVP
 stack: [Ruby on Rails 8.1, Google GenAI, Solid Queue, Active Storage, SQLite, Tailwind CSS]
-summary: Transform an uploaded portrait into an anime-inspired character, then create a short cinematic video from the result.
+summary: Transform an uploaded portrait into an anime-inspired character, then create a short cinematic video from the result. Visit https://aotavatar.com.
 outcome: A working generation workflow combines character styles, background jobs, a personal media vault, credit accounting, and API access.
 cover: /images/projects/aotavatar.webp
-coverAlt: Generated product visualization of AotAvatar's portrait transformation workspace and military dossier interface.
-coverCaption: Generated product visualization based on the verified AotAvatar workflow; the live origin returned Cloudflare 522 during capture.
+coverAlt: Screenshot of AotAvatar's live homepage showing the portrait studio hero and navigation.
+coverCaption: Live homepage screenshot captured directly from https://aotavatar.com.
 liveUrl: https://aotavatar.com
 sortOrder: 6
 ---
@@ -49,3 +50,7 @@ Devise manages accounts, Active Storage holds source and generated media, and So
 ## Product boundaries
 
 AotAvatar is an independent anime-inspired project, not affiliated with or endorsed by the original rights holders. No adoption or conversion metrics are claimed here.
+
+## AI system implementation
+
+Google GenAI receives the uploaded portrait and selected character direction through background generation workers. A style-specific storyboard frame precedes video synthesis. Solid Queue runs slow generation, Active Storage retains source and output media, and database state tracks progress and credits. The local procedural SVG generator is a development aid, not evidence of model-generated results.

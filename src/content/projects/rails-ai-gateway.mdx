@@ -1,0 +1,36 @@
+---
+name: Rails AI Gateway
+published: true
+featured: true
+year: '2026'
+role: Open-Source Developer
+category: OS Library
+ownership:
+  - Built and published the open-source project.
+type: AI infrastructure gem
+status: Open source
+stack: [Ruby, Ruby on Rails, ActiveRecord, SSE, SQLite, PostgreSQL]
+summary: Mount one OpenAI-compatible endpoint inside Rails with ordered model fallbacks, encrypted provider keys, streaming, and built-in usage tracking.
+outcome: Provides chat completions, embeddings, model routes, and usage tracking inside the host Rails application.
+cover: /images/projects/rails-ai-gateway.webp
+coverAlt: Generated visualization of Rails AI Gateway showing model routes, fallbacks, and token metrics.
+coverCaption: Generated product visualization, not a live screenshot.
+githubUrl: https://github.com/azmi2409/rails-ai-gateway
+sortOrder: 11
+---
+
+## The solution
+
+Mount one OpenAI-compatible endpoint inside Rails with ordered model fallbacks, encrypted provider keys, streaming, and built-in usage tracking.
+
+## What changed
+
+Provides chat completions, embeddings, model routes, and usage tracking inside the host Rails application.
+
+## Source
+
+[Explore repository](https://github.com/azmi2409/rails-ai-gateway).
+
+## AI system implementation
+
+The gem is an OpenAI-compatible routing layer, not a model. Rails mounts chat completion, embedding, and model-list endpoints; ordered routes choose provider fallbacks. SSE forwards streaming responses. ActiveRecord encryption protects provider keys and metadata records status, latency, attempts, and reported token usage without storing prompts or responses. Native provider APIs and semantic caching are outside the documented scope.

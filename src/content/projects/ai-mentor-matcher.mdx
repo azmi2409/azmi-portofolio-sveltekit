@@ -9,6 +9,7 @@ ownership:
   - Built the mentor search process.
   - Added an alternative when the main search service is unavailable.
 type: Help people find relevant mentors
+category: Web App
 status: Prototype
 stack: [Next.js, OpenAI API, Prisma, PostgreSQL, pgvector]
 summary: Help mentees search by their career goals, even when a mentor describes their experience using different words.
@@ -55,3 +56,7 @@ A serverless Next.js App Router project queries PostgreSQL using Prisma. Search 
 - Vector embedding search.
 - Semantic similarity threshold controls.
 - Full-text keyword fallback queries.
+
+## AI system implementation
+
+OpenAI text-embedding-ada-002 converts search queries into vectors. PostgreSQL pgvector performs similarity search through Prisma raw SQL, with configurable thresholds and a full-text fallback when semantic search is interrupted. This is retrieval-based matching, not a conversational agent. Recommendation-quality comparisons have not been published.

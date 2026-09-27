@@ -6,24 +6,24 @@
 
 	let {
 		projects = [],
-		showArchiveLink = true
-	}: { projects?: Project[]; showArchiveLink?: boolean } = $props();
+		showArchiveLink = true,
+		compact = false
+	}: { projects?: Project[]; showArchiveLink?: boolean; compact?: boolean } = $props();
 
-	function span(index: number) {
-		return index === 0 || (projects.length % 2 === 0 && index === projects.length - 1)
-			? 'lg:col-span-12'
-			: 'lg:col-span-6';
-	}
+	let activeProject = $state(0);
+	let category = $state('All');
+	const categories = ['All', 'Web App', 'OS Library', 'API / Gateway'];
+	const visibleProjects = $derived(projects.filter(project => category === 'All' || project.category === category));
 </script>
 
-<section id="projects" class="relative px-6 py-24 sm:py-32">
+<section id="projects" class:compact class="relative px-6 py-24 sm:py-32">
 	<div
 		class="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/10 to-transparent"
 	></div>
 	<div class="mx-auto max-w-7xl">
 		<div class="mb-14 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
 			<div class="max-w-3xl">
-				<div class="eyebrow mb-5">Selected work · 01</div>
+				<div class="eyebrow mb-5">Selected projects · 01</div>
 				<h2 class="text-4xl leading-[0.98] font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
 					Practical solutions to everyday business problems.
 				</h2>
@@ -40,9 +40,32 @@
 			{/if}
 		</div>
 
-		<div class="grid gap-4 lg:grid-cols-12">
-			{#each projects as project, index}
-				<article class="project-card group {span(index)}">
+		<div class="mb-6 flex flex-wrap gap-2" aria-label="Project categories">
+			{#each categories as item}
+				<button type="button" class="button-secondary" aria-pressed={category === item}
+					onclick={() => { category = item; activeProject = 0; }}>{item}</button>
+			{/each}
+		</div>
+		{#if compact}<p class="deck-hint">Explore the stack · hover, tap, or tab to reveal a project</p>{/if}
+		<div id="project-grid" class="project-grid" class:domino-deck={compact}>
+			{#each visibleProjects as project, index (project.slug)}
+				<article class="project-card group" class:active={index === activeProject}>
+					{#if compact}
+						<button
+							class="domino-tab"
+							type="button"
+							aria-expanded={index === activeProject}
+							aria-controls={`project-panel-${project.slug}`}
+							onpointerenter={(event) => { if (event.pointerType === 'mouse') activeProject = index; }}
+							onfocus={() => activeProject = index}
+							onclick={() => activeProject = index}
+						>
+							<span class="domino-number">{String(index + 1).padStart(2, '0')}</span>
+							<span>{project.name}</span>
+							<ArrowRight class="h-4 w-4 shrink-0" />
+						</button>
+					{/if}
+					<div class="project-panel" id={`project-panel-${project.slug}`} hidden={compact && index !== activeProject}>
 					<a
 						href="/projects/{project.slug}"
 						class="project-visual"
@@ -57,46 +80,36 @@
 						/>
 					</a>
 
-					<div class="flex flex-1 flex-col p-6 sm:p-7">
-						<div
-							class="mb-4 flex items-center justify-between gap-3 font-mono text-[0.62rem] tracking-[0.14em] text-zinc-600 uppercase"
-						>
-							<span>{project.year} · {project.status}</span>
-							<span class="project-type flex items-center gap-1.5"
-								><i class="h-1.5 w-1.5 rounded-full"></i>{project.type}</span
-							>
+					<div class="project-content">
+						<div class="project-meta">
+							<span>{project.year}</span>
+							<span class="project-status">{project.status}</span>
 						</div>
-						<h3 class="text-2xl font-black tracking-[-0.035em] text-zinc-50 sm:text-3xl">
-							{project.name}
+						<p class="project-category">{project.category} · {project.type}</p>
+						<h3 class="project-title">
+							<a href="/projects/{project.slug}">{project.name}</a>
 						</h3>
-						<p class="mt-3 flex-1 text-sm leading-7 text-zinc-400">{project.summary}</p>
+						<p class="project-description">{project.summary}</p>
 
-						<div class="mt-5 border-l border-emerald-200/20 pl-4">
-							<p class="mb-1 font-mono text-[0.58rem] tracking-[0.16em] text-zinc-600 uppercase">
+						<div class="project-outcome">
+							<p class="outcome-label">
 								Outcome
 							</p>
 							<p class="text-sm leading-6 text-zinc-300">{project.outcome}</p>
 						</div>
 
-						<details class="mt-6">
-							<summary class="min-h-11 cursor-pointer py-3 text-sm text-muted-foreground"
-								>Tools behind the solution</summary
-							>
-							<div class="mt-3 flex flex-wrap gap-2">
-								{#each project.stack.slice(0, 3) as item}
-									<span class="stack-pill">{item}</span>
-								{/each}
-							</div>
-						</details>
+						<div class="project-stack" aria-label="Technology stack">
+							{#each project.stack as item}
+								<span class="stack-pill">{item}</span>
+							{/each}
+						</div>
 
-						<div
-							class="mt-6 flex items-center justify-between gap-3 border-t border-white/[0.06] pt-5"
-						>
+						<div class="project-footer">
 							<a
 								href="/projects/{project.slug}"
 								class="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-zinc-100"
 							>
-								Open case study <ArrowRight
+								Case study <ArrowRight
 									class="h-4 w-4 transition-transform group-hover:translate-x-1"
 								/>
 							</a>
@@ -109,7 +122,7 @@
 										aria-label={`${project.name} live project`}
 										class="project-action"
 									>
-										<ExternalLink class="h-4 w-4" />
+										Live site <ExternalLink class="h-3.5 w-3.5" />
 									</a>
 								{/if}
 								{#if project.githubUrl}
@@ -126,6 +139,7 @@
 							</div>
 						</div>
 					</div>
+					</div>
 				</article>
 			{/each}
 		</div>
@@ -133,113 +147,168 @@
 </section>
 
 <style>
+	.compact { padding-block: 4rem; }
+	.compact .project-visual { aspect-ratio: 16 / 9; }
+	.compact .project-outcome, .compact .project-meta { display: none; }
+	.compact .project-content { padding: 1.25rem; }
+	.project-panel { display: flex; flex: 1; flex-direction: column; min-width: 0; }
+	.project-panel[hidden] { display: none; }
+	.deck-hint { margin-bottom: 1rem; color: var(--muted-foreground); font-size: 0.8rem; }
+	button[aria-pressed='true'] { border-color: var(--signal); background: color-mix(in srgb, var(--signal) 10%, var(--card)); }
+	.domino-tab {
+		display: flex; align-items: center; gap: 0.75rem; width: 100%;
+		min-height: 3.5rem; padding: 1rem; text-align: left; cursor: pointer;
+		font-size: 0.85rem; font-weight: 600; color: var(--foreground);
+	}
+	.domino-tab > :global(svg) { margin-left: auto; }
+	.domino-number { color: var(--muted-foreground); font-family: var(--font-mono); font-size: 0.7rem; }
+	.domino-tab:focus-visible { outline: 2px solid var(--signal); outline-offset: -5px; border-radius: 1rem; }
+	@media (min-width: 1024px) {
+		.project-grid.domino-deck { display: flex; gap: 0; min-height: 39rem; padding-top: 0.75rem; }
+		.domino-deck .project-card {
+			flex: 0 0 4.5rem; border-radius: 1rem; margin-left: -0.4rem;
+			background: var(--card); box-shadow: -10px 0 24px -18px #0009;
+			transition: flex-basis 360ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+		}
+		.domino-deck .project-card:first-child { margin-left: 0; }
+		.domino-deck .project-card.active { flex: 1 1 0%; transform: translateY(-0.75rem); }
+		.domino-deck .project-card:not(.active) .domino-tab {
+			writing-mode: vertical-rl; flex: 1; justify-content: flex-start; padding: 1.25rem; gap: 1.5rem;
+		}
+		.domino-deck .project-card:not(.active) .domino-tab > :global(svg) { margin: auto 0 0; }
+		.domino-deck .project-visual { max-height: 19rem; }
+		.domino-deck .project-description { flex: none; }
+		.domino-deck .project-footer { margin-top: auto; }
+	}
+	@media (max-width: 1023px) {
+		.project-grid.domino-deck { grid-template-columns: minmax(0, 1fr); gap: 0; }
+		.domino-deck .project-card { border-radius: 1rem; margin-top: -0.25rem; }
+		.domino-deck .project-card.active { margin-block: 0.5rem; }
+	}
+	@media (prefers-reduced-motion: reduce) {
+		.domino-deck .project-card { transition: none; }
+	}
+	.project-grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 2rem;
+	}
 	.project-card {
-		position: relative;
 		display: flex;
 		min-width: 0;
 		flex-direction: column;
+		border: 1px solid var(--border);
+		border-radius: 1.5rem;
+		background: var(--card);
 		overflow: hidden;
-		border: 1px solid rgba(255, 255, 255, 0.075);
-		border-radius: 1.65rem;
-		background: linear-gradient(155deg, rgba(255, 255, 255, 0.045), rgba(10, 11, 12, 0.86) 45%);
-		box-shadow: inset 0 1px rgba(255, 255, 255, 0.025);
-		transition:
-			transform 260ms cubic-bezier(0.2, 0.8, 0.2, 1),
-			border-color 260ms ease,
-			box-shadow 260ms ease;
+		transition: border-color 180ms ease, box-shadow 180ms ease;
 	}
-
-	@media (min-width: 1024px) {
-		.project-card.lg\:col-span-12 {
-			display: grid;
-			grid-template-columns: 1.35fr 1fr;
-			align-items: stretch;
-		}
-
-		.project-card.lg\:col-span-12 .project-visual {
-			border-bottom: none;
-			border-right: 1px solid rgba(255, 255, 255, 0.065);
-			height: 100%;
-			aspect-ratio: auto;
-		}
+	.project-card:hover, .project-card:focus-within {
+		border-color: color-mix(in srgb, var(--signal) 45%, var(--border));
+		box-shadow: 0 16px 40px -28px #0008;
 	}
-
-	.project-card:hover,
-	.project-card:focus-within {
-		border-color: color-mix(in srgb, var(--signal) 40%, var(--border));
-		box-shadow: 0 24px 70px -34px rgba(0, 0, 0, 0.9);
-	}
-
-	.project-card::after {
-		content: '';
-		position: absolute;
-		inset: 0;
-		border-radius: inherit;
-		pointer-events: none;
-		background: radial-gradient(
-			480px circle at var(--pointer-x, 50%) var(--pointer-y, 0%),
-			color-mix(in srgb, var(--signal) 10%, transparent),
-			transparent 70%
-		);
-		opacity: 0;
-		transition: opacity 250ms ease;
-	}
-
-	@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
-		.project-card:hover {
-			transform: translateY(-4px);
-		}
-
-		.project-card:hover::after {
-			opacity: 1;
-		}
-	}
-
 	.project-visual {
-		position: relative;
 		display: block;
-		width: 100%;
-		aspect-ratio: 16 / 11;
+		aspect-ratio: 3 / 2;
+		margin: 0.75rem 0.75rem 0;
+		border: 1px solid var(--border);
+		border-radius: 0.9rem;
 		overflow: hidden;
-		border-bottom: 1px solid rgba(255, 255, 255, 0.065);
 	}
-
-	.project-visual:focus-visible {
-		outline-offset: -3px;
+	.project-visual:focus-visible { outline-offset: -4px; }
+	.project-content {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding: 1.75rem;
 	}
-
-	.stack-pill {
-		padding: 0.33rem 0.65rem;
-		border: 1px solid rgba(255, 255, 255, 0.07);
+	.project-meta {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		gap: 1rem;
+		color: var(--muted-foreground);
+		font-size: 0.75rem;
+	}
+	.project-status {
+		border: 1px solid var(--border);
 		border-radius: 999px;
-		background: rgba(255, 255, 255, 0.025);
-		font-family: var(--font-mono);
-		font-size: 0.58rem;
-		color: #71717a;
+		padding: 0.25rem 0.65rem;
 	}
-
+	.project-category {
+		margin-top: 1.25rem;
+		color: var(--muted-foreground);
+		font-size: 0.8rem;
+		line-height: 1.5;
+	}
+	.project-title {
+		margin-top: 0.4rem;
+		color: var(--foreground);
+		font-size: clamp(1.5rem, 2.5vw, 2rem);
+		font-weight: 800;
+		letter-spacing: -0.035em;
+		line-height: 1.15;
+	}
+	.project-description {
+		flex: 1;
+		margin-top: 0.85rem;
+		color: var(--muted-foreground);
+		font-size: 0.9rem;
+		line-height: 1.8;
+		overflow-wrap: anywhere;
+	}
+	.project-outcome {
+		margin-top: 1.25rem;
+		border-radius: 0.75rem;
+		background: color-mix(in srgb, var(--signal) 5%, var(--card));
+		padding: 1rem;
+	}
+	.outcome-label {
+		margin-bottom: 0.35rem;
+		color: var(--muted-foreground);
+		font-size: 0.7rem;
+		font-weight: 600;
+	}
+	.project-outcome :global(p:last-child) { color: var(--foreground); }
+	.project-stack {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+		margin-top: 1.25rem;
+	}
+	.stack-pill {
+		border: 1px solid var(--border);
+		border-radius: 0.4rem;
+		padding: 0.3rem 0.55rem;
+		color: var(--muted-foreground);
+		font-size: 0.7rem;
+	}
+	.project-footer {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		flex-wrap: wrap;
+		gap: 0.75rem;
+		margin-top: 1.5rem;
+		border-top: 1px solid var(--border);
+		padding-top: 1rem;
+	}
+	.project-footer :global(a) { color: var(--foreground); }
 	.project-action {
-		display: grid;
-		width: 2.75rem;
-		height: 2.75rem;
-		place-items: center;
-		border: 1px solid rgba(255, 255, 255, 0.08);
-		border-radius: 50%;
-		color: #71717a;
-		transition:
-			color 160ms ease,
-			border-color 160ms ease;
+		display: inline-flex;
+		min-height: 2.75rem;
+		min-width: 2.75rem;
+		align-items: center;
+		justify-content: center;
+		gap: 0.5rem;
+		border: 1px solid var(--border);
+		border-radius: 0.6rem;
+		padding: 0.5rem 0.75rem;
+		font-size: 0.75rem;
 	}
-
-	.project-action:hover {
-		border-color: rgba(255, 255, 255, 0.18);
-		color: #f4f4f5;
-	}
-	.project-type {
-		color: color-mix(in srgb, var(--foreground) 68%, var(--signal));
-	}
-
-	.project-type i {
-		background: color-mix(in srgb, var(--foreground) 55%, var(--signal));
+	.project-action:hover { background: var(--muted); }
+	@media (max-width: 767px) {
+		.project-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
+		.project-content { padding: 1.25rem; }
 	}
 </style>

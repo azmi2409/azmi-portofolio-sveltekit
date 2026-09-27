@@ -9,6 +9,7 @@ ownership:
   - Designed guidance that starts small and becomes more detailed when needed.
   - Created a readable history of coaching activity.
 type: Help learners get unstuck
+category: Web App
 status: Shipped MVP
 stack: [SvelteKit, TypeScript, WebSockets, Google Cloud Run, LLM tool calls]
 summary: Built a coding coach that offers small hints when learners struggle, rather than giving away the answer.
@@ -54,3 +55,7 @@ SvelteKit UI streams learner events to a Cloud Run service over WebSockets. The 
 - Friction-signal detection from typing pauses and silence.
 - Progressive hints with escalation paths.
 - Session timeline for debugging agent behavior.
+
+## AI system implementation
+
+Learner events travel over WebSockets to Cloud Run. Orchestration scores friction signals, retrieves exercise context, and invokes LLM tools before returning a coaching response. Intervention policy lives outside the UI; progressive prompts start with small hints instead of full answers. Session history exposes coaching decisions for review. No published learner-impact or latency benchmark is claimed.

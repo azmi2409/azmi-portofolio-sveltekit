@@ -3,7 +3,6 @@
 	import { portfolioMotion } from '$lib/motion';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import WorkingPrinciples from '$lib/components/sections/WorkingPrinciples.svelte';
-	import IndependentWork from '$lib/components/sections/IndependentWork.svelte';
 	import ProjectsSection from '$lib/components/sections/ProjectsSection.svelte';
 	import ContactSection from '$lib/components/sections/ContactSection.svelte';
 
@@ -70,8 +69,24 @@
 	</div>
 </section>
 <WorkingPrinciples />
-<ProjectsSection projects={data.featuredProjects} />
-<IndependentWork />
+<section id="work" class="px-6 py-12" aria-labelledby="work-heading">
+	<div class="mx-auto max-w-7xl border-y border-border py-8 sm:flex sm:items-start sm:justify-between sm:gap-12">
+		<div class="shrink-0">
+			<p class="eyebrow mb-3">Work experience</p>
+			<h2 id="work-heading" class="text-2xl font-bold tracking-tight">Currently at FutureLab.my</h2>
+			<p class="mt-2 text-sm text-muted-foreground">February 2023–present</p>
+		</div>
+		<div class="mt-6 max-w-2xl sm:mt-0">
+			<h3 class="text-xl font-bold">Senior Software Engineer</h3>
+			<p class="mt-3 leading-7 text-muted-foreground">
+				I’m currently a Senior Software Engineer at
+				<a href="https://futurelab.my" target="_blank" rel="noreferrer" class="underline underline-offset-4">FutureLab.my</a>.
+				I own cloud infrastructure and deployment pipelines, maintain the Rails platform, and build AI agents for mentoring-session transcription, summaries, and reporting.
+			</p>
+		</div>
+	</div>
+</section>
+<ProjectsSection projects={data.featuredProjects} compact />
 <section class="px-6 py-24">
 	<div class="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[0.65fr_1fr] lg:gap-20">
 		<img

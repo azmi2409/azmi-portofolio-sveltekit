@@ -23,11 +23,13 @@
 			/>
 		</div>
 		<figcaption>
-			{slug === 'futurelab-ai-workflows'
-				? 'Public company website · not the private AI workflow'
-				: liveUrl
-					? 'Public website screenshot'
-					: 'Real project image'}
+			{slug === 'portfolio-content-system'
+				? 'Current implementation preview'
+				: ['rails-ai-gateway', 'rails-mailer-sandbox', 'gopay-merchant-qris-gateway', 'rails-crypto-payment'].includes(slug)
+					? 'Generated product visualization'
+					: slug === 'futurelab-ai-workflows'
+						? 'Public company website · not the private AI workflow'
+						: liveUrl ? 'Public website screenshot' : 'Real project image'}
 		</figcaption>
 	{:else}
 		<div class="unavailable">

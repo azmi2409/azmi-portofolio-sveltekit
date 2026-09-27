@@ -7,9 +7,18 @@ Hero uses a full-size portrait with pointer-reactive tilt and a static, theme-aw
 ## Content
 
 - Project case studies: `src/content/projects/*.mdx`
-- Lab experiments: `src/lib/data/experiments.ts`
+
+AI Showdown lives in Projects. Lab route, experiment data, Agent Timeline Debugger, and Voice Latency Budget have been removed; navigation and sitemap expose Projects instead.
+
+Projects include the former Beyond client work libraries and gateways, plus Rails Crypto Payment. Required `category` frontmatter uses `Web App`, `OS Library`, or `API / Gateway`; homepage and archive filter by category and show all recorded stack tags. Case studies document AI implementation or explicitly identify deterministic, non-AI processing. The portfolio cover shows the current local implementation because the deployed site still serves the previous version.
 
 Project MDX filename becomes route slug. Frontmatter drives listing metadata; body renders on detail page. Blog source remains unpublished until its content pipeline is repaired.
+
+Home uses a compact domino project deck: hover, tap, or keyboard focus reveals one project at a time. Desktop cards overlap horizontally; mobile uses stacked headers. Motion respects reduced-motion preferences and colors follow the active theme. The project archive retains the full two-column grid (one column below 768px), including outcomes and stack tags.
+
+Employment is separate from projects: the homepage Work experience section states the current Senior Software Engineer role at FutureLab.my. The FutureLab case study is unpublished and excluded from project listings and public project routes.
+
+Project deck browser self-check: `node scripts/check-project-deck.mjs /path/to/playwright/index.mjs [base-url]`.
 
 ## Development
 

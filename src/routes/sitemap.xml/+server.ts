@@ -17,7 +17,6 @@ export async function GET() {
 		{ loc: '/', lastmod: today, changefreq: 'weekly', priority: '1.0' },
 		{ loc: '/projects', lastmod: today, changefreq: 'weekly', priority: '0.9' },
 		{ loc: '/about', lastmod: today, changefreq: 'monthly', priority: '0.8' },
-		{ loc: '/lab', lastmod: today, changefreq: 'monthly', priority: '0.6' },
 		{ loc: '/contact', lastmod: today, changefreq: 'yearly', priority: '0.5' }
 	];
 

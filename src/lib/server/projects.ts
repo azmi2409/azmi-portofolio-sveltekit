@@ -23,6 +23,7 @@ const projects: Project[] = Object.entries(files)
 			) ||
 			typeof metadata.published !== 'boolean' ||
 			typeof metadata.featured !== 'boolean' ||
+			!['Web App', 'OS Library', 'API / Gateway'].includes(metadata.category as string) ||
 			typeof metadata.sortOrder !== 'number' ||
 			!Number.isFinite(metadata.sortOrder) ||
 			['liveUrl', 'githubUrl'].some(
