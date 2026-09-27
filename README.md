@@ -2,7 +2,7 @@
 
 SvelteKit portfolio for AI, automation, and software delivery work.
 
-Hero uses a full-size portrait with pointer-reactive tilt and a static, theme-aware CSS dot matrix behind the copy. No WebGL runtime is required; portrait tilt respects `prefers-reduced-motion`.
+Hero uses a full-size portrait with pointer-reactive tilt and a static, theme-aware CSS dot matrix behind the copy. Backgrounds and imagery stay fixed within the page while scrolling. Motion handles one-shot entrances and pointer effects, with reduced-motion support and cleanup on navigation. No WebGL runtime is required.
 
 ## Content
 
@@ -21,7 +21,7 @@ yarn dev
 Quality gates:
 
 ```bash
-yarn check
+yarn run check
 yarn lint
 yarn build
 ```

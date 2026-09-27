@@ -4,7 +4,7 @@ import { inView } from 'motion';
 export function portfolioMotion(root: HTMLElement) {
 	const reduced = window.matchMedia('(prefers-reduced-motion: reduce)');
 	const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
-	const animations = new Set<ReturnType<typeof animate>>();
+	const animations = new Map<Element, ReturnType<typeof animate>>();
 	const targets = root.querySelectorAll<HTMLElement>(
 		'#hero .hero-copy > *, #hero figure, #hero dl > div, section:not(#hero) h2, section:not(#hero) article'
 	);
@@ -16,22 +16,31 @@ export function portfolioMotion(root: HTMLElement) {
 	const stopWatching = inView(
 		targets,
 		(element) => {
-			if (reduced.matches) return;
+			if (reduced.matches || element.contains(document.activeElement)) return;
 			const siblings = Array.from(element.parentElement?.children ?? []);
 			const delay = Math.min(siblings.indexOf(element), 5) * 0.065;
 			const animation = animate(
 				element,
-				{ opacity: [0, 1], transform: ['translateY(22px)', 'translateY(0)'] },
+				{ opacity: [0, 1], translate: ['0 22px', '0 0'] },
 				{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }
 			);
-			animations.add(animation);
+			animations.set(element, animation);
 			void animation.then(() => {
 				animation.cancel();
-				animations.delete(animation);
+				animations.delete(element);
 			});
 		},
 		{ margin: '0px 0px -32px 0px' }
 	);
+
+	function revealFocused(event: FocusEvent) {
+		for (const [element, animation] of animations) {
+			if (event.target instanceof Node && element.contains(event.target)) {
+				animation.cancel();
+				animations.delete(element);
+			}
+		}
+	}
 
 	function reset() {
 		cancelAnimationFrame(frame);
@@ -62,7 +71,7 @@ export function portfolioMotion(root: HTMLElement) {
 	function preferenceChanged() {
 		reset();
 		if (reduced.matches) {
-			for (const animation of animations) animation.cancel();
+			for (const animation of animations.values()) animation.cancel();
 			animations.clear();
 		}
 	}
@@ -70,7 +79,10 @@ export function portfolioMotion(root: HTMLElement) {
 	for (const card of cards) {
 		card.addEventListener('pointermove', move);
 		card.addEventListener('pointerleave', reset);
+		card.addEventListener('pointercancel', reset);
 	}
+	root.addEventListener('focusin', revealFocused);
+	window.addEventListener('blur', reset);
 	reduced.addEventListener('change', preferenceChanged);
 	finePointer.addEventListener('change', reset);
 
@@ -78,11 +90,15 @@ export function portfolioMotion(root: HTMLElement) {
 		destroy() {
 			stopWatching();
 			reset();
-			for (const animation of animations) animation.cancel();
+			for (const animation of animations.values()) animation.cancel();
+			animations.clear();
 			for (const card of cards) {
 				card.removeEventListener('pointermove', move);
 				card.removeEventListener('pointerleave', reset);
+				card.removeEventListener('pointercancel', reset);
 			}
+			root.removeEventListener('focusin', revealFocused);
+			window.removeEventListener('blur', reset);
 			reduced.removeEventListener('change', preferenceChanged);
 			finePointer.removeEventListener('change', reset);
 		}

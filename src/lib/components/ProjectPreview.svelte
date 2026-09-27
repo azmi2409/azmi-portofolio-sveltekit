@@ -14,12 +14,14 @@
 		<i></i><i></i><i></i><span>{liveUrl ?? name}</span>
 	</div>
 	{#if cover}
-		<img
-			src={cover}
-			alt={coverAlt ?? `${name} product interface`}
-			loading="lazy"
-			decoding="async"
-		/>
+		<div class="preview-image">
+			<img
+				src={cover}
+				alt={coverAlt ?? `${name} product interface`}
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
 		<figcaption>
 			{slug === 'futurelab-ai-workflows'
 				? 'Public company website · not the private AI workflow'
@@ -73,10 +75,14 @@
 		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
+	.preview-image {
+		flex: 1;
+		min-height: 0;
+		overflow: hidden;
+	}
 	img {
 		width: 100%;
 		height: 100%;
-		flex: 1;
 		display: block;
 		aspect-ratio: 144 / 100;
 		object-fit: cover;

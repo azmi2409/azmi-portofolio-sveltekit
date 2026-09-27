@@ -1,10 +1,11 @@
+<script module lang="ts">
+	type ThemePreference = 'light' | 'dark' | 'system';
+	let preference = $state<ThemePreference>('system');
+</script>
+
 <script lang="ts">
 	import { Monitor, Moon, Sun } from '@lucide/svelte';
 	import { onMount } from 'svelte';
-
-	type ThemePreference = 'light' | 'dark' | 'system';
-
-	let preference = $state<ThemePreference>('system');
 
 	function isThemePreference(value: string | null): value is ThemePreference {
 		return value === 'light' || value === 'dark' || value === 'system';
@@ -30,13 +31,21 @@
 
 	function setPreference(value: ThemePreference) {
 		preference = value;
-		localStorage.setItem('theme-preference', value);
 		applyTheme(value);
+		try {
+			localStorage.setItem('theme-preference', value);
+		} catch {
+			// Keep theme switching usable when browser storage is blocked.
+		}
 	}
 
 	onMount(() => {
-		const saved = localStorage.getItem('theme-preference');
-		if (isThemePreference(saved)) preference = saved;
+		try {
+			const saved = localStorage.getItem('theme-preference');
+			if (isThemePreference(saved)) preference = saved;
+		} catch {
+			// Use the in-memory preference when browser storage is blocked.
+		}
 		applyTheme(preference);
 
 		const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
@@ -124,6 +133,13 @@
 		background: rgba(157, 229, 213, 0.13);
 		box-shadow: inset 0 0 0 1px rgba(157, 229, 213, 0.16);
 		color: #9be5d5;
+	}
+
+	@media (pointer: coarse) {
+		button {
+			width: 2.75rem;
+			height: 2.75rem;
+		}
 	}
 
 	:global(html.light) .theme-toggle {

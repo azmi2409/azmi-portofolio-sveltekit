@@ -4,8 +4,10 @@
 	import type { Project } from '$lib/types/portfolio';
 	import ProjectPreview from '$lib/components/ProjectPreview.svelte';
 
-	let { projects = [], showArchiveLink = true }: { projects?: Project[]; showArchiveLink?: boolean } =
-		$props();
+	let {
+		projects = [],
+		showArchiveLink = true
+	}: { projects?: Project[]; showArchiveLink?: boolean } = $props();
 
 	function span(index: number) {
 		return index === 0 || (projects.length % 2 === 0 && index === projects.length - 1)
@@ -77,7 +79,7 @@
 						</div>
 
 						<details class="mt-6">
-							<summary class="cursor-pointer text-sm text-muted-foreground"
+							<summary class="min-h-11 cursor-pointer py-3 text-sm text-muted-foreground"
 								>Tools behind the solution</summary
 							>
 							<div class="mt-3 flex flex-wrap gap-2">
@@ -92,7 +94,7 @@
 						>
 							<a
 								href="/projects/{project.slug}"
-								class="inline-flex items-center gap-2 text-sm font-bold text-zinc-100"
+								class="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-zinc-100"
 							>
 								Open case study <ArrowRight
 									class="h-4 w-4 transition-transform group-hover:translate-x-1"
@@ -202,6 +204,10 @@
 		border-bottom: 1px solid rgba(255, 255, 255, 0.065);
 	}
 
+	.project-visual:focus-visible {
+		outline-offset: -3px;
+	}
+
 	.stack-pill {
 		padding: 0.33rem 0.65rem;
 		border: 1px solid rgba(255, 255, 255, 0.07);
@@ -214,8 +220,8 @@
 
 	.project-action {
 		display: grid;
-		width: 2rem;
-		height: 2rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		place-items: center;
 		border: 1px solid rgba(255, 255, 255, 0.08);
 		border-radius: 50%;
@@ -237,4 +243,3 @@
 		background: color-mix(in srgb, var(--foreground) 55%, var(--signal));
 	}
 </style>
-

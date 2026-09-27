@@ -45,6 +45,22 @@ html {
 	outline-offset: 2px;
 }
 
+.skip-link {
+	position: fixed;
+	z-index: 60;
+	top: 1rem;
+	left: 1rem;
+	transform: translateY(calc(-100% - 2rem));
+	border-radius: 0.65rem;
+	background: var(--foreground);
+	padding: 0.75rem 1rem;
+	color: var(--background);
+}
+
+.skip-link:focus {
+	transform: none;
+}
+
 @custom-variant dark (&:is(.dark *));
 
 /* ============================================================
@@ -371,15 +387,14 @@ main > section:not(:first-child) {
 }
 
 .button-primary {
-	background: #f4f4f5;
-	color: #09090b;
-	box-shadow: 0 12px 35px -14px rgba(255, 255, 255, 0.45);
+	background: var(--foreground);
+	color: var(--background);
+	box-shadow: 0 12px 35px -14px color-mix(in srgb, var(--foreground) 30%, transparent);
 }
 
 .button-primary:hover {
-	transform: translateY(-2px);
-	background: #fff;
-	box-shadow: 0 16px 40px -12px rgba(255, 255, 255, 0.52);
+	background: color-mix(in srgb, var(--foreground) 92%, var(--background));
+	box-shadow: 0 16px 40px -12px color-mix(in srgb, var(--foreground) 35%, transparent);
 }
 
 .button-secondary {
@@ -389,7 +404,6 @@ main > section:not(:first-child) {
 }
 
 .button-secondary:hover {
-	transform: translateY(-2px);
 	border-color: rgba(255, 255, 255, 0.2);
 	background: rgba(255, 255, 255, 0.055);
 }
@@ -409,9 +423,16 @@ main > section:not(:first-child) {
 }
 
 .social-button:hover {
-	transform: translateY(-2px);
 	border-color: rgba(146, 226, 208, 0.28);
 	color: var(--signal);
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+	.button-primary:hover,
+	.button-secondary:hover,
+	.social-button:hover {
+		transform: translateY(-2px);
+	}
 }
 
 /* Marquee animation */
@@ -499,4 +520,3 @@ main > section:not(:first-child) {
 		transition-duration: 0.01ms !important;
 	}
 }
-

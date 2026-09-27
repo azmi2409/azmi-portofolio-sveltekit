@@ -75,6 +75,7 @@
 </svelte:head>
 
 <GtmScript />
+<a href="#main-content" class="skip-link">Skip to content</a>
 <Navigation />
-<main class="overflow-x-hidden">{@render children?.()}</main>
+<main id="main-content" tabindex="-1" class="overflow-x-clip">{@render children?.()}</main>
 <Footer />
