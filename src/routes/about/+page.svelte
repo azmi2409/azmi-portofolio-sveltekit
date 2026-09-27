@@ -27,7 +27,8 @@
 		'@type': 'ProfilePage',
 		name: 'About Azmi Muwahid',
 		url: 'https://azmi.web.id/about',
-		description: 'Senior software engineer at FutureLab.my. Builds AI agents, manages cloud infrastructure, and helps businesses automate work.',
+		description:
+			'Senior software engineer at FutureLab.my. Builds AI agents, manages cloud infrastructure, and helps businesses automate work.',
 		mainEntity: {
 			'@type': 'Person',
 			name: 'Azmi Muwahid',
@@ -132,9 +133,9 @@
 			<ul class="space-y-4">
 				<li>
 					<strong class="text-foreground">FutureLab.my · Senior Software Engineer</strong><br
-					/>February 2023–present. Own the cloud and deployment pipeline, keep the platform
-					codebase running smoothly, and build AI agents that improve how mentoring sessions
-					are captured, reported, and turned into actionable insights.
+					/>February 2023–present. Own the cloud and deployment pipeline, keep the platform codebase
+					running smoothly, and build AI agents that improve how mentoring sessions are captured,
+					reported, and turned into actionable insights.
 				</li>
 				<li>
 					<strong class="text-foreground">Toptal · Freelance Full Stack Developer</strong><br

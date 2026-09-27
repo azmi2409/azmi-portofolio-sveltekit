@@ -14,6 +14,6 @@ export const proofMetrics: SiteMetric[] = [
 	{
 		value: 'Bogor, Indonesia · remote',
 		label: 'Working globally',
-		detail: 'Blog and project content is versioned with the application.'
+		detail: 'Project content is versioned with the application.'
 	}
 ];

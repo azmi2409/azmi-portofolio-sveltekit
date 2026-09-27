@@ -7,7 +7,6 @@
 		{ name: 'Work', href: '/projects' },
 		{ name: 'About', href: '/about' },
 		{ name: 'Lab', href: '/lab' },
-		{ name: 'Writing', href: '/blog' },
 		{ name: 'Contact', href: '/contact' }
 	];
 	let mobileOpen = $state(false);

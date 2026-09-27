@@ -2,13 +2,14 @@
 
 SvelteKit portfolio for AI, automation, and software delivery work.
 
+Hero uses a full-size portrait with pointer-reactive tilt and a static, theme-aware CSS dot matrix behind the copy. No WebGL runtime is required; portrait tilt respects `prefers-reduced-motion`.
+
 ## Content
 
-- Blog posts: `src/content/blog/*.mdx`
 - Project case studies: `src/content/projects/*.mdx`
 - Lab experiments: `src/lib/data/experiments.ts`
 
-MDX filename becomes route slug. Frontmatter drives listing metadata; body renders on detail page.
+Project MDX filename becomes route slug. Frontmatter drives listing metadata; body renders on detail page. Blog source remains unpublished until its content pipeline is repaired.
 
 ## Development
 

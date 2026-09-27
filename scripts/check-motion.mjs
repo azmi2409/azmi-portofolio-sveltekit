@@ -65,8 +65,6 @@ try {
 		document.querySelector('.hero-portrait').style.getPropertyValue('--tilt-x')
 	);
 	for (const path of [
-		'/blog',
-		'/blog/javascript-performance-optimization',
 		'/projects',
 		'/projects/codexia-live',
 		'/projects/ai-clipper-video',

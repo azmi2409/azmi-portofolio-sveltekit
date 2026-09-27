@@ -101,6 +101,22 @@
 		mask-image: linear-gradient(black 65%, transparent);
 	}
 
+	.hero-copy {
+		position: relative;
+		isolation: isolate;
+	}
+
+	.hero-copy::before {
+		content: '';
+		position: absolute;
+		z-index: -1;
+		inset: -2rem -1rem;
+		pointer-events: none;
+		background-image: radial-gradient(circle, color-mix(in srgb, var(--signal) 32%, transparent) 1px, transparent 1.5px);
+		background-size: 20px 20px;
+		mask-image: radial-gradient(ellipse at 45% 35%, black, transparent 72%);
+	}
+
 	.hero-portrait {
 		position: relative;
 		border-radius: 1rem;

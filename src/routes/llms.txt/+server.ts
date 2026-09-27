@@ -1,18 +1,14 @@
 import { getProjects } from '$lib/server/projects';
-import { getPublishedPosts } from '$lib/server/blog';
 import { isrHeaders } from '$lib/server/isr';
 
 export async function GET() {
 	const base = 'https://azmi.web.id';
-	const [projects, posts] = await Promise.all([getProjects(), getPublishedPosts()]);
+	const projects = await getProjects();
 
 	const projectList = projects
 		.map((p) => `- [${p.name}](${base}/projects/${p.slug}): ${p.summary}`)
 		.join('\n');
 
-	const blogList = posts
-		.map((p) => `- [${p.title}](${base}/blog/${p.slug}): ${p.excerpt || 'No excerpt.'}`)
-		.join('\n');
 
 	const body = `# Azmi Muwahid
 
@@ -44,16 +40,11 @@ He also works as a freelance full-stack developer through Toptal and Turing, and
 
 ${projectList || 'No projects published yet.'}
 
-## Blog
-
-${blogList || 'No posts published yet.'}
-
 ## Pages
 
 - [Home](${base})
 - [Projects](${base}/projects)
 - [About](${base}/about)
-- [Blog](${base}/blog)
 - [Lab](${base}/lab)
 - [Contact](${base}/contact)
 `;

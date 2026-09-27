@@ -6,13 +6,13 @@ year: '2026'
 role: Designer / Engineer
 ownership:
   - Designed and built the website.
-  - Moved articles and case studies into version-controlled MDX.
+  - Moved case studies into version-controlled MDX.
   - Set up server rendering, hosting, and accessible motion.
 type: Simpler website publishing
 status: Live
 stack: [SvelteKit, mdsvex, Motion, Tailwind CSS, Vercel]
-summary: A portfolio with case studies and articles maintained as local content alongside the application.
-outcome: Blog and project content can be reviewed in Git and published with the site, without runtime CMS calls.
+summary: A portfolio with case studies maintained as local content alongside the application.
+outcome: Project content can be reviewed in Git and published with the site, without runtime CMS calls.
 cover: /images/projects/portfolio.webp
 coverAlt: Earlier version of the Azmi Muwahid portfolio homepage.
 coverCaption: Earlier portfolio interface before the local MDX migration.
@@ -23,11 +23,11 @@ sortOrder: 9
 
 ## The solution
 
-Keep listing metadata in frontmatter and long-form writing in MDX. Shared Svelte layouts provide the presentation, while content files own the case studies and articles.
+Keep listing metadata in frontmatter and long-form case studies in MDX. Shared Svelte layouts provide the presentation, while content files own each case study.
 
 ## What changed
 
-The site now compiles local blog and project files with mdsvex, validates metadata, and loads article components by route. Stable slugs preserve existing links. Project and blog pages have no runtime CMS dependency.
+The site compiles local project files with mdsvex, validates metadata, and loads case-study components by route. Stable slugs preserve project links without a runtime CMS dependency.
 
 ## Technical decisions
 

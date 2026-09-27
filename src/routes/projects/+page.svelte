@@ -53,4 +53,4 @@
 	</div>
 </section>
 
-<ProjectsSection projects={data.projects} />
+<ProjectsSection projects={data.projects} showArchiveLink={false} />

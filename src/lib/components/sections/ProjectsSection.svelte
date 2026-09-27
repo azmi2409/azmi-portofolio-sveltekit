@@ -4,7 +4,8 @@
 	import type { Project } from '$lib/types/portfolio';
 	import ProjectPreview from '$lib/components/ProjectPreview.svelte';
 
-	let { projects = [] }: { projects?: Project[] } = $props();
+	let { projects = [], showArchiveLink = true }: { projects?: Project[]; showArchiveLink?: boolean } =
+		$props();
 
 	function span(index: number) {
 		return index === 0 || (projects.length % 2 === 0 && index === projects.length - 1)
@@ -29,10 +30,12 @@
 					it helps, and what changed.
 				</p>
 			</div>
-			<a href="/projects" class="button-secondary group w-fit">
-				View project archive
-				<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-			</a>
+			{#if showArchiveLink}
+				<a href="/projects" class="button-secondary group w-fit">
+					View project archive
+					<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+				</a>
+			{/if}
 		</div>
 
 		<div class="grid gap-4 lg:grid-cols-12">
@@ -57,8 +60,8 @@
 							class="mb-4 flex items-center justify-between gap-3 font-mono text-[0.62rem] tracking-[0.14em] text-zinc-600 uppercase"
 						>
 							<span>{project.year} · {project.status}</span>
-							<span class="flex items-center gap-1.5 text-emerald-200/60"
-								><i class="h-1.5 w-1.5 rounded-full bg-emerald-300/80"></i>{project.type}</span
+							<span class="project-type flex items-center gap-1.5"
+								><i class="h-1.5 w-1.5 rounded-full"></i>{project.type}</span
 							>
 						</div>
 						<h3 class="text-2xl font-black tracking-[-0.035em] text-zinc-50 sm:text-3xl">
@@ -226,4 +229,12 @@
 		border-color: rgba(255, 255, 255, 0.18);
 		color: #f4f4f5;
 	}
+	.project-type {
+		color: color-mix(in srgb, var(--foreground) 68%, var(--signal));
+	}
+
+	.project-type i {
+		background: color-mix(in srgb, var(--foreground) 55%, var(--signal));
+	}
 </style>
+

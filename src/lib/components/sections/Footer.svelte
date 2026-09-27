@@ -15,7 +15,6 @@
 		{ href: '/projects', label: 'Work' },
 		{ href: '/about', label: 'About' },
 		{ href: '/lab', label: 'Lab' },
-		{ href: '/blog', label: 'Writing' },
 		{ href: '/contact', label: 'Contact' }
 	];
 </script>
