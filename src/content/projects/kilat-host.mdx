@@ -1,0 +1,43 @@
+---
+name: Kilat.host
+published: true
+featured: true
+year: '2026'
+role: Full-Stack Engineer
+ownership: []
+type: Managed hosting for AI agents and workflows
+category: Web App
+status: Live
+stack: [Coolify, Hermes Agent, n8n, MCP, QRIS]
+summary: Deploy Hermes Agent and n8n from a browser, choose an available region, and manage hosting through one workspace with IDR wallet billing.
+outcome: Users can launch an AI agent or automation service without terminal setup, fund hosting through QRIS, and manage service status and renewals from a dashboard.
+cover: /images/projects/kilat-host.webp
+coverAlt: Live Kilat.host homepage showing managed hosting for Hermes Agent and n8n.
+coverCaption: Captured from kilat.host in October 2026.
+liveUrl: https://kilat.host
+sortOrder: 2.5
+---
+
+## The solution
+
+Kilat.host offers browser-based hosting for Hermes Agent and n8n. Users choose an app, resource plan, and region with available capacity, then manage the service from their workspace.
+
+## What changed
+
+The live service combines app deployment, service management, and IDR wallet billing. QRIS top-ups fund 30-day hosting periods, with auto-renewal controlled from the workspace. AI model usage is billed separately by the user's provider.
+
+## Behind the solution
+
+Coolify coordinates provisioning with persistent storage and HTTPS endpoints. Each workspace exposes an MCP endpoint so AI agents can deploy, restart, and monitor services without using the dashboard.
+
+### Key features
+
+- Hermes Agent and n8n hosting with Starter and Standard resource plans.
+- Region selection based on available host capacity.
+- Browser-based service status, restart, and stop controls.
+- IDR wallet top-ups through GoPay or other QRIS-compatible apps.
+- MCP access for agent-driven service management.
+
+### Constraints
+
+Starter plans target small, non-critical experiments. Available regions and startup times depend on host capacity and image downloads. Users bring their own model provider credentials and keep independent backups; automated disaster recovery is not included.

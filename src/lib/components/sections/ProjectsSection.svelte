@@ -24,9 +24,9 @@
 		<div class="mb-14 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
 			<div class="max-w-3xl">
 				<div class="eyebrow mb-5">Selected projects · 01</div>
-				<h2 class="text-4xl leading-[0.98] font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
+				<svelte:element this={showArchiveLink ? 'h2' : 'h1'} class="text-4xl leading-[0.98] font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
 					Practical solutions to everyday business problems.
-				</h2>
+				</svelte:element>
 				<p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
 					From reducing session admin to helping customers buy online. See the work I delivered, who
 					it helps, and what changed.

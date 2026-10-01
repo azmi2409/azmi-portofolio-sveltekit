@@ -38,19 +38,4 @@
 	})}<\/script>`}
 </svelte:head>
 
-<section class="px-6 pt-32 pb-4">
-	<div class="mx-auto max-w-6xl">
-		<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">
-			Project archive
-		</p>
-		<h1 class="max-w-4xl text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">
-			Less friction. More useful work.
-		</h1>
-		<p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
-			Examples of turning repetitive tasks and difficult customer journeys into practical, usable
-			solutions.
-		</p>
-	</div>
-</section>
-
 <ProjectsSection projects={data.projects} showArchiveLink={false} />
