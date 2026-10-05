@@ -37,7 +37,7 @@
 				style="background: radial-gradient(circle at 30% 40%, rgba(255,255,255,0.06), transparent 50%), linear-gradient(135deg, #18181b, #09090b);"
 			>
 				<span
-					class="text-4xl font-black text-zinc-700 select-none"
+					class="text-4xl font-semibold text-zinc-700 select-none"
 					style="font-family: var(--font-heading);"
 				>
 					{post.title.charAt(0).toUpperCase()}

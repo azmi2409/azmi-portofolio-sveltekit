@@ -37,5 +37,5 @@
 </svelte:head>
 
 <div class="pt-16">
-	<ContactSection />
+	<ContactSection standalone />
 </div>

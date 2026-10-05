@@ -5,6 +5,7 @@
 	import WorkingPrinciples from '$lib/components/sections/WorkingPrinciples.svelte';
 	import ProjectsSection from '$lib/components/sections/ProjectsSection.svelte';
 	import ContactSection from '$lib/components/sections/ContactSection.svelte';
+	import CapabilityMarquee from '$lib/components/sections/CapabilityMarquee.svelte';
 
 	let { data } = $props();
 
@@ -41,10 +42,13 @@
 <HeroSection metrics={data.proofMetrics} />
 <section class="px-6 pb-16" aria-labelledby="company-proof-heading">
 	<div class="mx-auto max-w-7xl border-t border-border pt-8">
-		<p id="company-proof-heading" class="text-center text-sm text-muted-foreground">
+		<p
+			id="company-proof-heading"
+			class="text-center font-mono text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase"
+		>
 			Experience with teams from
 		</p>
-		<div class="mx-auto mt-6 grid max-w-4xl grid-cols-2 items-center gap-6 sm:grid-cols-4">
+		<div class="logo-row mx-auto mt-6 grid max-w-4xl grid-cols-2 items-center gap-6 sm:grid-cols-4">
 			<img
 				src="/assets/futurelab-logo.webp"
 				alt="FutureLab"
@@ -69,51 +73,96 @@
 	</div>
 </section>
 <WorkingPrinciples />
+<CapabilityMarquee />
 <section id="work" class="px-6 py-12" aria-labelledby="work-heading">
-	<div class="mx-auto max-w-7xl border-y border-border py-8 sm:flex sm:items-start sm:justify-between sm:gap-12">
-		<div class="shrink-0">
-			<p class="eyebrow mb-3">Work experience</p>
-			<h2 id="work-heading" class="text-2xl font-bold tracking-tight">Currently at FutureLab.my</h2>
-			<p class="mt-2 text-sm text-muted-foreground">February 2023–present</p>
-		</div>
-		<div class="mt-6 max-w-2xl sm:mt-0">
-			<h3 class="text-xl font-bold">Senior Software Engineer</h3>
-			<p class="mt-3 leading-7 text-muted-foreground">
-				I’m currently a Senior Software Engineer at
-				<a href="https://futurelab.my" target="_blank" rel="noreferrer" class="underline underline-offset-4">FutureLab.my</a>.
-				I own cloud infrastructure and deployment pipelines, maintain the Rails platform, and build AI agents for mentoring-session transcription, summaries, and reporting.
-			</p>
+	<div class="mx-auto max-w-7xl">
+		<p class="section-index mb-8"><b>(02)</b> Work experience</p>
+		<div class="grid gap-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] sm:gap-12">
+			<div>
+				<h2 id="work-heading" class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
+					Currently at FutureLab.my
+				</h2>
+				<p class="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+					<span class="h-1.5 w-1.5 rounded-full bg-[var(--signal)]"></span>February 2023–present
+				</p>
+			</div>
+			<div class="max-w-2xl">
+				<h3 class="text-xl font-bold">Senior Software Engineer</h3>
+				<p class="mt-3 leading-7 text-muted-foreground">
+					I’m currently a Senior Software Engineer at
+					<a
+						href="https://futurelab.my"
+						target="_blank"
+						rel="noreferrer"
+						class="link-sweep text-foreground">FutureLab.my</a
+					>. I own cloud infrastructure and deployment pipelines, maintain the Rails platform, and
+					build AI agents for mentoring-session transcription, summaries, and reporting.
+				</p>
+			</div>
 		</div>
 	</div>
 </section>
 <ProjectsSection projects={data.featuredProjects} compact />
-<section class="px-6 py-24">
-	<div class="mx-auto grid max-w-7xl items-center gap-10 md:grid-cols-[0.65fr_1fr] lg:gap-20">
-		<img
-			src="/assets/profile.webp"
-			alt="Azmi Muwahid in Seattle"
-			width="819"
-			height="1024"
-			loading="lazy"
-			class="max-h-96 w-full rounded-2xl object-cover object-[center_35%]"
-		/>
-		<div>
-			<p class="eyebrow mb-5">About Azmi</p>
-			<h2 class="text-4xl font-black tracking-tight sm:text-5xl">
-				A partner who understands the problem and builds the solution.
-			</h2>
-			<p class="mt-6 text-lg leading-8 text-muted-foreground">
-				I’m Azmi, an AI and automation consultant with hands-on software delivery experience. I help
-				teams turn “there must be a better way” into practical changes they can use, from reducing
-				admin work to making online sales easier.
-			</p>
-			<p class="mt-4 text-lg leading-8 text-muted-foreground">
-				Before software, I studied fisheries. It taught me to look at how one change affects the
-				whole picture. In your business, that means considering your people, processes, budget, and
-				customers before recommending a tool.
-			</p>
-			<a href="/about" class="button-secondary mt-6">More about me</a>
+<section class="px-6 py-24 sm:py-32">
+	<div class="mx-auto max-w-7xl">
+		<p class="section-index mb-12"><b>(04)</b> About Azmi</p>
+		<div class="grid items-center gap-10 md:grid-cols-[0.65fr_1fr] lg:gap-20">
+			<div class="reveal-image about-photo overflow-hidden rounded-2xl">
+				<img
+					src="/assets/profile.webp"
+					alt="Azmi Muwahid in Seattle"
+					width="819"
+					height="1024"
+					loading="lazy"
+					class="max-h-[28rem] w-full object-cover object-[center_35%]"
+				/>
+			</div>
+			<div>
+				<h2 class="text-4xl leading-[1.02] font-semibold tracking-[-0.045em] sm:text-5xl">
+					A partner who understands the problem and <span class="accent-serif text-muted-foreground"
+						>builds the solution.</span
+					>
+				</h2>
+				<p class="mt-6 text-lg leading-8 text-muted-foreground">
+					I’m Azmi, an AI and automation consultant with hands-on software delivery experience. I
+					help teams turn “there must be a better way” into practical changes they can use, from
+					reducing admin work to making online sales easier.
+				</p>
+				<p class="mt-4 text-lg leading-8 text-muted-foreground">
+					Before software, I studied fisheries. It taught me to look at how one change affects the
+					whole picture. In your business, that means considering your people, processes, budget,
+					and customers before recommending a tool.
+				</p>
+				<a href="/about" class="button-secondary magnetic mt-8">More about me</a>
+			</div>
 		</div>
 	</div>
 </section>
 <ContactSection />
+
+<style>
+	.logo-row img {
+		filter: grayscale(1);
+		opacity: 0.7;
+		transition:
+			filter 400ms ease,
+			opacity 400ms ease,
+			scale 400ms cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	.logo-row img:hover {
+		filter: none;
+		opacity: 1;
+		scale: 1.06;
+	}
+
+	.about-photo img {
+		transition: scale 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+	}
+
+	@media (hover: hover) and (prefers-reduced-motion: no-preference) {
+		.about-photo:hover img {
+			scale: 1.04;
+		}
+	}
+</style>

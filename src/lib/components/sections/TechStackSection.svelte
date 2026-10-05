@@ -112,7 +112,7 @@
 		>
 			<div>
 				<div class="eyebrow mb-5">Working stack · 03</div>
-				<h2 class="text-4xl font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
+				<h2 class="text-4xl font-semibold tracking-[-0.045em] text-zinc-50 sm:text-6xl">
 					Tools follow the system.
 				</h2>
 			</div>

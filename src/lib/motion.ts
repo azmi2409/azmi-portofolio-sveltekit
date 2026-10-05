@@ -6,7 +6,7 @@ export function portfolioMotion(root: HTMLElement) {
 	const finePointer = window.matchMedia('(hover: hover) and (pointer: fine)');
 	const animations = new Map<Element, ReturnType<typeof animate>>();
 	const targets = root.querySelectorAll<HTMLElement>(
-		'#hero .hero-copy > *, #hero figure, #hero dl > div, section:not(#hero) h2, section:not(#hero) article'
+		'#hero .hero-reveal, #hero figure, #hero dl > div, section:not(#hero) h2, section:not(#hero) article, .reveal-image'
 	);
 	const cards = root.querySelectorAll<HTMLElement>('.project-card, .hero-portrait');
 	let frame = 0;
@@ -19,11 +19,16 @@ export function portfolioMotion(root: HTMLElement) {
 			if (reduced.matches || element.contains(document.activeElement)) return;
 			const siblings = Array.from(element.parentElement?.children ?? []);
 			const delay = Math.min(siblings.indexOf(element), 5) * 0.065;
-			const animation = animate(
-				element,
-				{ opacity: [0, 1], translate: ['0 22px', '0 0'] },
-				{ duration: 0.7, delay, ease: [0.16, 1, 0.3, 1] }
-			);
+			const keyframes = element.matches('.reveal-image')
+				? { clipPath: ['inset(18% 8% 18% 8% round 1.5rem)', 'inset(0% 0% 0% 0% round 1rem)'] }
+				: element.matches('h2')
+					? { opacity: [0, 1], translate: ['0 0.45em', '0 0'], filter: ['blur(10px)', 'blur(0px)'] }
+					: { opacity: [0, 1], translate: ['0 22px', '0 0'] };
+			const animation = animate(element, keyframes, {
+				duration: element.matches('.reveal-image') ? 1.2 : 0.8,
+				delay,
+				ease: [0.16, 1, 0.3, 1]
+			});
 			animations.set(element, animation);
 			void animation.then(() => {
 				animation.cancel();

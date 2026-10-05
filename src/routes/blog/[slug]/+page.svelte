@@ -146,7 +146,7 @@
 
 		<!-- Title -->
 		<h1
-			class="mb-5 text-4xl leading-tight font-black tracking-tight text-zinc-50 md:text-5xl"
+			class="mb-5 text-4xl leading-tight font-semibold tracking-tight text-zinc-50 md:text-5xl"
 			style="font-family: var(--font-heading); letter-spacing: -0.03em;"
 		>
 			{post.title}

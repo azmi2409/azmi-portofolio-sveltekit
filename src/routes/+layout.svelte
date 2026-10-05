@@ -5,11 +5,38 @@
 	import Footer from '$lib/components/sections/Footer.svelte';
 	import { sameAsUrls } from '$lib/config/socialLinks';
 	import { dev } from '$app/environment';
+	import { onNavigate } from '$app/navigation';
+	import { onMount } from 'svelte';
+	import { magnetic } from '$lib/magnetic';
 	import { injectAnalytics } from '@vercel/analytics/sveltekit';
 	import { injectSpeedInsights } from '@vercel/speed-insights/sveltekit';
 	injectAnalytics({ mode: dev ? 'development' : 'production' });
 	injectSpeedInsights();
 	let { children } = $props();
+	onMount(magnetic);
+	// A navigation parked inside a view transition can otherwise render after a
+	// newer one (e.g. a quick Back), so later navigations wait for its DOM update.
+	let pendingUpdate: Promise<unknown> | null = null;
+	onNavigate((navigation) => {
+		if (pendingUpdate) return pendingUpdate.then(() => undefined);
+		if (
+			!document.startViewTransition ||
+			navigation.from?.url.pathname === navigation.to?.url.pathname ||
+			matchMedia('(prefers-reduced-motion: reduce)').matches
+		)
+			return;
+		return new Promise((resolve) => {
+			const transition = document.startViewTransition(async () => {
+				resolve();
+				// A superseded navigation rejects with "navigation aborted"; that is expected.
+				await navigation.complete.catch(() => {});
+			});
+			const update = transition.updateCallbackDone.finally(() => {
+				if (pendingUpdate === update) pendingUpdate = null;
+			});
+			pendingUpdate = update;
+		});
+	});
 	const personSchema = {
 		'@context': 'https://schema.org',
 		'@type': 'Person',

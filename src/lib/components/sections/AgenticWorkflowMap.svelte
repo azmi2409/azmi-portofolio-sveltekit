@@ -45,7 +45,7 @@
 	<div class="relative mx-auto max-w-7xl">
 		<div class="mb-12 max-w-3xl">
 			<div class="eyebrow mb-5">Systems thinking · 02</div>
-			<h2 class="text-4xl font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
+			<h2 class="text-4xl font-semibold tracking-[-0.045em] text-zinc-50 sm:text-6xl">
 				An AI system is a loop.
 			</h2>
 			<p class="mt-5 text-lg leading-8 text-zinc-400">
@@ -132,7 +132,7 @@
 					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">
 						Active layer
 					</p>
-					<h3 class="mt-2 text-xl font-black text-zinc-50">{steps[active].title}</h3>
+					<h3 class="mt-2 text-xl font-semibold text-zinc-50">{steps[active].title}</h3>
 					<p class="mt-2 text-sm leading-6 text-zinc-400">{steps[active].copy}</p>
 				</div>
 			</div>

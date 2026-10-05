@@ -48,7 +48,7 @@
 	<div class="mx-auto grid max-w-6xl gap-12 lg:grid-cols-[0.9fr_1.1fr]">
 		<div>
 			<p class="eyebrow mb-4">About Azmi</p>
-			<h1 class="text-5xl font-black tracking-tight sm:text-6xl">
+			<h1 class="text-5xl font-semibold tracking-tight sm:text-6xl">
 				Technology should make your work easier.
 			</h1>
 			<figure class="mt-8">

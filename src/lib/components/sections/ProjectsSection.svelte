@@ -13,7 +13,9 @@
 	let activeProject = $state(0);
 	let category = $state('All');
 	const categories = ['All', 'Web App', 'OS Library', 'API / Gateway'];
-	const visibleProjects = $derived(projects.filter(project => category === 'All' || project.category === category));
+	const visibleProjects = $derived(
+		projects.filter((project) => category === 'All' || project.category === category)
+	);
 </script>
 
 <section id="projects" class:compact class="relative px-6 py-24 sm:py-32">
@@ -22,10 +24,17 @@
 	></div>
 	<div class="mx-auto max-w-7xl">
 		<div class="mb-14 grid gap-7 lg:grid-cols-[1fr_auto] lg:items-end">
-			<div class="max-w-3xl">
-				<div class="eyebrow mb-5">Selected projects · 01</div>
-				<svelte:element this={showArchiveLink ? 'h2' : 'h1'} class="text-4xl leading-[0.98] font-black tracking-[-0.045em] text-zinc-50 sm:text-6xl">
-					Practical solutions to everyday business problems.
+			<div class="max-w-4xl">
+				<p class="section-index mb-8">
+					{#if showArchiveLink}<b>(03)</b>{/if} Selected projects
+				</p>
+				<svelte:element
+					this={showArchiveLink ? 'h2' : 'h1'}
+					class="text-4xl leading-[0.98] font-semibold tracking-[-0.045em] text-zinc-50 sm:text-6xl"
+				>
+					Practical solutions to <span class="accent-serif text-muted-foreground"
+						>everyday business problems.</span
+					>
 				</svelte:element>
 				<p class="mt-6 max-w-2xl text-lg leading-8 text-zinc-400">
 					From reducing session admin to helping customers buy online. See the work I delivered, who
@@ -33,7 +42,7 @@
 				</p>
 			</div>
 			{#if showArchiveLink}
-				<a href="/projects" class="button-secondary group w-fit">
+				<a href="/projects" class="button-secondary magnetic group w-fit">
 					View project archive
 					<ArrowRight class="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
 				</a>
@@ -42,11 +51,20 @@
 
 		<div class="mb-6 flex flex-wrap gap-2" aria-label="Project categories">
 			{#each categories as item}
-				<button type="button" class="button-secondary" aria-pressed={category === item}
-					onclick={() => { category = item; activeProject = 0; }}>{item}</button>
+				<button
+					type="button"
+					class="button-secondary"
+					aria-pressed={category === item}
+					onclick={() => {
+						category = item;
+						activeProject = 0;
+					}}>{item}</button
+				>
 			{/each}
 		</div>
-		{#if compact}<p class="deck-hint">Explore the stack · hover, tap, or tab to reveal a project</p>{/if}
+		{#if compact}<p class="deck-hint">
+				Explore the stack · hover, tap, or tab to reveal a project
+			</p>{/if}
 		<div id="project-grid" class="project-grid" class:domino-deck={compact}>
 			{#each visibleProjects as project, index (project.slug)}
 				<article class="project-card group" class:active={index === activeProject}>
@@ -56,89 +74,93 @@
 							type="button"
 							aria-expanded={index === activeProject}
 							aria-controls={`project-panel-${project.slug}`}
-							onpointerenter={(event) => { if (event.pointerType === 'mouse') activeProject = index; }}
-							onfocus={() => activeProject = index}
-							onclick={() => activeProject = index}
+							onpointerenter={(event) => {
+								if (event.pointerType === 'mouse') activeProject = index;
+							}}
+							onfocus={() => (activeProject = index)}
+							onclick={() => (activeProject = index)}
 						>
 							<span class="domino-number">{String(index + 1).padStart(2, '0')}</span>
 							<span>{project.name}</span>
 							<ArrowRight class="h-4 w-4 shrink-0" />
 						</button>
 					{/if}
-					<div class="project-panel" id={`project-panel-${project.slug}`} hidden={compact && index !== activeProject}>
-					<a
-						href="/projects/{project.slug}"
-						class="project-visual"
-						aria-label={`Read ${project.name} case study`}
+					<div
+						class="project-panel"
+						id={`project-panel-${project.slug}`}
+						hidden={compact && index !== activeProject}
 					>
-						<ProjectPreview
-							slug={project.slug}
-							name={project.name}
-							cover={project.cover}
-							coverAlt={project.coverAlt}
-							liveUrl={project.liveUrl}
-						/>
-					</a>
+						<a
+							href="/projects/{project.slug}"
+							class="project-visual"
+							aria-label={`Read ${project.name} case study`}
+						>
+							<ProjectPreview
+								slug={project.slug}
+								name={project.name}
+								cover={project.cover}
+								coverAlt={project.coverAlt}
+								liveUrl={project.liveUrl}
+							/>
+						</a>
 
-					<div class="project-content">
-						<div class="project-meta">
-							<span>{project.year}</span>
-							<span class="project-status">{project.status}</span>
-						</div>
-						<p class="project-category">{project.category} · {project.type}</p>
-						<h3 class="project-title">
-							<a href="/projects/{project.slug}">{project.name}</a>
-						</h3>
-						<p class="project-description">{project.summary}</p>
+						<div class="project-content">
+							<div class="project-meta">
+								<span>{project.year}</span>
+								<span class="project-status">{project.status}</span>
+							</div>
+							<p class="project-category">{project.category} · {project.type}</p>
+							<h3 class="project-title">
+								<a href="/projects/{project.slug}">{project.name}</a>
+							</h3>
+							<p class="project-description">{project.summary}</p>
 
-						<div class="project-outcome">
-							<p class="outcome-label">
-								Outcome
-							</p>
-							<p class="text-sm leading-6 text-zinc-300">{project.outcome}</p>
-						</div>
+							<div class="project-outcome">
+								<p class="outcome-label">Outcome</p>
+								<p class="text-sm leading-6 text-zinc-300">{project.outcome}</p>
+							</div>
 
-						<div class="project-stack" aria-label="Technology stack">
-							{#each project.stack as item}
-								<span class="stack-pill">{item}</span>
-							{/each}
-						</div>
+							<div class="project-stack" aria-label="Technology stack">
+								{#each project.stack as item}
+									<span class="stack-pill">{item}</span>
+								{/each}
+							</div>
 
-						<div class="project-footer">
-							<a
-								href="/projects/{project.slug}"
-								class="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-zinc-100"
-							>
-								Case study <ArrowRight
-									class="h-4 w-4 transition-transform group-hover:translate-x-1"
-								/>
-							</a>
-							<div class="flex gap-2">
-								{#if project.liveUrl}
-									<a
-										href={project.liveUrl}
-										target="_blank"
-										rel="noreferrer"
-										aria-label={`${project.name} live project`}
-										class="project-action"
-									>
-										Live site <ExternalLink class="h-3.5 w-3.5" />
-									</a>
-								{/if}
-								{#if project.githubUrl}
-									<a
-										href={project.githubUrl}
-										target="_blank"
-										rel="noreferrer"
-										aria-label={`${project.name} GitHub repository`}
-										class="project-action"
-									>
-										<SocialIcon name="github" class="h-4 w-4" />
-									</a>
-								{/if}
+							<div class="project-footer">
+								<a
+									href="/projects/{project.slug}"
+									class="inline-flex min-h-11 items-center gap-2 text-sm font-bold text-zinc-100"
+								>
+									Case study <ArrowRight
+										class="h-4 w-4 transition-transform group-hover:translate-x-1"
+									/>
+								</a>
+								<div class="flex gap-2">
+									{#if project.liveUrl}
+										<a
+											href={project.liveUrl}
+											target="_blank"
+											rel="noreferrer"
+											aria-label={`${project.name} live project`}
+											class="project-action"
+										>
+											Live site <ExternalLink class="h-3.5 w-3.5" />
+										</a>
+									{/if}
+									{#if project.githubUrl}
+										<a
+											href={project.githubUrl}
+											target="_blank"
+											rel="noreferrer"
+											aria-label={`${project.name} GitHub repository`}
+											class="project-action"
+										>
+											<SocialIcon name="github" class="h-4 w-4" />
+										</a>
+									{/if}
+								</div>
 							</div>
 						</div>
-					</div>
 					</div>
 				</article>
 			{/each}
@@ -147,46 +169,124 @@
 </section>
 
 <style>
-	.compact { padding-block: 4rem; }
-	.compact .project-visual { aspect-ratio: 16 / 9; }
-	.compact .project-outcome, .compact .project-meta { display: none; }
-	.compact .project-content { padding: 1.25rem; }
-	.project-panel { display: flex; flex: 1; flex-direction: column; min-width: 0; }
-	.project-panel[hidden] { display: none; }
-	.deck-hint { margin-bottom: 1rem; color: var(--muted-foreground); font-size: 0.8rem; }
-	button[aria-pressed='true'] { border-color: var(--signal); background: color-mix(in srgb, var(--signal) 10%, var(--card)); }
-	.domino-tab {
-		display: flex; align-items: center; gap: 0.75rem; width: 100%;
-		min-height: 3.5rem; padding: 1rem; text-align: left; cursor: pointer;
-		font-size: 0.85rem; font-weight: 600; color: var(--foreground);
+	.compact {
+		padding-block: 4rem;
 	}
-	.domino-tab > :global(svg) { margin-left: auto; }
-	.domino-number { color: var(--muted-foreground); font-family: var(--font-mono); font-size: 0.7rem; }
-	.domino-tab:focus-visible { outline: 2px solid var(--signal); outline-offset: -5px; border-radius: 1rem; }
+	.compact .project-visual {
+		aspect-ratio: 16 / 9;
+	}
+	.compact .project-outcome,
+	.compact .project-meta {
+		display: none;
+	}
+	.compact .project-content {
+		padding: 1.25rem;
+	}
+	.project-panel {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		min-width: 0;
+	}
+	.project-panel[hidden] {
+		display: none;
+	}
+	.deck-hint {
+		margin-bottom: 1rem;
+		color: var(--muted-foreground);
+		font-size: 0.8rem;
+	}
+	button[aria-pressed='true'] {
+		border-color: var(--signal);
+		background: color-mix(in srgb, var(--signal) 10%, var(--card));
+	}
+	.domino-tab {
+		display: flex;
+		align-items: center;
+		gap: 0.75rem;
+		width: 100%;
+		min-height: 3.5rem;
+		padding: 1rem;
+		text-align: left;
+		cursor: pointer;
+		font-size: 0.85rem;
+		font-weight: 600;
+		color: var(--foreground);
+	}
+	.domino-tab > :global(svg) {
+		margin-left: auto;
+	}
+	.domino-number {
+		color: var(--muted-foreground);
+		font-family: var(--font-mono);
+		font-size: 0.7rem;
+	}
+	.domino-tab:focus-visible {
+		outline: 2px solid var(--signal);
+		outline-offset: -5px;
+		border-radius: 1rem;
+	}
 	@media (min-width: 1024px) {
-		.project-grid.domino-deck { display: flex; gap: 0; min-height: 39rem; padding-top: 0.75rem; }
+		.project-grid.domino-deck {
+			display: flex;
+			gap: 0;
+			min-height: 39rem;
+			padding-top: 0.75rem;
+		}
 		.domino-deck .project-card {
-			flex: 0 0 4.5rem; border-radius: 1rem; margin-left: -0.4rem;
-			background: var(--card); box-shadow: -10px 0 24px -18px #0009;
-			transition: flex-basis 360ms cubic-bezier(0.2, 0.8, 0.2, 1), transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
+			flex: 0 0 4.5rem;
+			border-radius: 1rem;
+			margin-left: -0.4rem;
+			background: var(--card);
+			box-shadow: -10px 0 24px -18px #0009;
+			transition:
+				flex-basis 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+				transform 360ms cubic-bezier(0.2, 0.8, 0.2, 1);
 		}
-		.domino-deck .project-card:first-child { margin-left: 0; }
-		.domino-deck .project-card.active { flex: 1 1 0%; transform: translateY(-0.75rem); }
+		.domino-deck .project-card:first-child {
+			margin-left: 0;
+		}
+		.domino-deck .project-card.active {
+			flex: 1 1 0%;
+			transform: translateY(-0.75rem);
+		}
 		.domino-deck .project-card:not(.active) .domino-tab {
-			writing-mode: vertical-rl; flex: 1; justify-content: flex-start; padding: 1.25rem; gap: 1.5rem;
+			writing-mode: vertical-rl;
+			flex: 1;
+			justify-content: flex-start;
+			padding: 1.25rem;
+			gap: 1.5rem;
 		}
-		.domino-deck .project-card:not(.active) .domino-tab > :global(svg) { margin: auto 0 0; }
-		.domino-deck .project-visual { max-height: 19rem; }
-		.domino-deck .project-description { flex: none; }
-		.domino-deck .project-footer { margin-top: auto; }
+		.domino-deck .project-card:not(.active) .domino-tab > :global(svg) {
+			margin: auto 0 0;
+		}
+		.domino-deck .project-visual {
+			max-height: 19rem;
+		}
+		.domino-deck .project-description {
+			flex: none;
+		}
+		.domino-deck .project-footer {
+			margin-top: auto;
+		}
 	}
 	@media (max-width: 1023px) {
-		.project-grid.domino-deck { grid-template-columns: minmax(0, 1fr); gap: 0; }
-		.domino-deck .project-card { border-radius: 1rem; margin-top: -0.25rem; }
-		.domino-deck .project-card.active { margin-block: 0.5rem; }
+		.project-grid.domino-deck {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 0;
+		}
+		.domino-deck .project-card {
+			border-radius: 1rem;
+			margin-top: -0.25rem;
+		}
+		.domino-deck .project-card.active {
+			margin-block: 0.5rem;
+		}
 	}
 	@media (prefers-reduced-motion: reduce) {
-		.domino-deck .project-card { transition: none; }
+		.domino-deck .project-card {
+			transition: none;
+		}
 	}
 	.project-grid {
 		display: grid;
@@ -201,9 +301,12 @@
 		border-radius: 1.5rem;
 		background: var(--card);
 		overflow: hidden;
-		transition: border-color 180ms ease, box-shadow 180ms ease;
+		transition:
+			border-color 180ms ease,
+			box-shadow 180ms ease;
 	}
-	.project-card:hover, .project-card:focus-within {
+	.project-card:hover,
+	.project-card:focus-within {
 		border-color: color-mix(in srgb, var(--signal) 45%, var(--border));
 		box-shadow: 0 16px 40px -28px #0008;
 	}
@@ -215,7 +318,9 @@
 		border-radius: 0.9rem;
 		overflow: hidden;
 	}
-	.project-visual:focus-visible { outline-offset: -4px; }
+	.project-visual:focus-visible {
+		outline-offset: -4px;
+	}
 	.project-content {
 		display: flex;
 		flex: 1;
@@ -245,7 +350,7 @@
 		margin-top: 0.4rem;
 		color: var(--foreground);
 		font-size: clamp(1.5rem, 2.5vw, 2rem);
-		font-weight: 800;
+		font-weight: 600;
 		letter-spacing: -0.035em;
 		line-height: 1.15;
 	}
@@ -269,7 +374,9 @@
 		font-size: 0.7rem;
 		font-weight: 600;
 	}
-	.project-outcome :global(p:last-child) { color: var(--foreground); }
+	.project-outcome :global(p:last-child) {
+		color: var(--foreground);
+	}
 	.project-stack {
 		display: flex;
 		flex-wrap: wrap;
@@ -293,7 +400,9 @@
 		border-top: 1px solid var(--border);
 		padding-top: 1rem;
 	}
-	.project-footer :global(a) { color: var(--foreground); }
+	.project-footer :global(a) {
+		color: var(--foreground);
+	}
 	.project-action {
 		display: inline-flex;
 		min-height: 2.75rem;
@@ -306,9 +415,16 @@
 		padding: 0.5rem 0.75rem;
 		font-size: 0.75rem;
 	}
-	.project-action:hover { background: var(--muted); }
+	.project-action:hover {
+		background: var(--muted);
+	}
 	@media (max-width: 767px) {
-		.project-grid { grid-template-columns: minmax(0, 1fr); gap: 1.5rem; }
-		.project-content { padding: 1.25rem; }
+		.project-grid {
+			grid-template-columns: minmax(0, 1fr);
+			gap: 1.5rem;
+		}
+		.project-content {
+			padding: 1.25rem;
+		}
 	}
 </style>

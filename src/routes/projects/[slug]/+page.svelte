@@ -72,7 +72,7 @@
 				<p class="mb-4 text-xs font-semibold tracking-[0.28em] text-zinc-500 uppercase">
 					{project.type}
 				</p>
-				<h1 class="text-5xl font-black tracking-tight text-zinc-50 sm:text-7xl">{project.name}</h1>
+				<h1 class="text-5xl font-semibold tracking-tight text-zinc-50 sm:text-7xl">{project.name}</h1>
 				<p class="mt-6 max-w-3xl text-xl leading-9 text-zinc-400">{project.summary}</p>
 			</div>
 			<aside class="rounded-[1.5rem] border border-white/[0.08] bg-white/[0.03] p-5">
@@ -135,7 +135,7 @@
 					<p class="mt-3 text-xl font-bold text-zinc-100">{project.role}</p>
 				</div>
 				<div>
-					<h2 id="ownership-heading" class="text-2xl font-black tracking-tight text-zinc-50">
+					<h2 id="ownership-heading" class="text-2xl font-semibold tracking-tight text-zinc-50">
 						How I helped
 					</h2>
 					<ul class="mt-5 grid gap-3 sm:grid-cols-2">
@@ -154,7 +154,7 @@
 			<div class="mb-5 flex flex-wrap items-end justify-between gap-3">
 				<div>
 					<p class="text-xs font-semibold tracking-[0.24em] text-zinc-500 uppercase">Product</p>
-					<h2 id="product-heading" class="mt-2 text-3xl font-black tracking-tight text-zinc-50">
+					<h2 id="product-heading" class="mt-2 text-3xl font-semibold tracking-tight text-zinc-50">
 						The workflow in context
 					</h2>
 				</div>
@@ -218,7 +218,7 @@
 	.case-study :global(h2) {
 		margin: 2.5rem 0 1rem;
 		font-size: 1.875rem;
-		font-weight: 800;
+		font-weight: 600;
 		line-height: 1.2;
 		color: var(--foreground);
 	}

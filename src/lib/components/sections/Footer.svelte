@@ -5,7 +5,8 @@
 
 <script lang="ts">
 	import { socialLinks, emailLink } from '$lib/config/socialLinks';
-	import { Mail } from '@lucide/svelte';
+	import { ArrowUp, Mail } from '@lucide/svelte';
+	import LocalTime from '$lib/components/LocalTime.svelte';
 	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
 
 	const currentYear = new Date().getFullYear();
@@ -94,7 +95,7 @@
 					{#each navLinks as link}
 						<a
 							href={link.href}
-							class="w-fit text-sm text-zinc-400 transition-colors hover:text-zinc-200"
+							class="link-sweep w-fit text-sm text-zinc-400 transition-colors hover:text-zinc-200"
 						>
 							{link.label}
 						</a>
@@ -113,7 +114,7 @@
 					</p>
 					<a
 						href="/contact"
-						class="group inline-flex w-fit items-center gap-2 rounded-full bg-zinc-50 px-5 py-2.5 text-sm font-bold text-zinc-900 shadow-[0_0_16px_rgba(255,255,255,0.1)] transition-all hover:bg-white hover:shadow-[0_0_24px_rgba(255,255,255,0.2)]"
+						class="magnetic group inline-flex w-fit items-center gap-2 rounded-full bg-zinc-50 px-5 py-2.5 text-sm font-bold text-zinc-900 shadow-[0_0_16px_rgba(255,255,255,0.1)] transition-all hover:bg-white hover:shadow-[0_0_24px_rgba(255,255,255,0.2)]"
 					>
 						Start a conversation
 						<span class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
@@ -130,16 +131,47 @@
 
 		<!-- Bottom legal strip -->
 		<div
-			class="flex flex-col items-center justify-between gap-4 border-t border-zinc-800/60 py-6 sm:flex-row"
+			class="flex flex-col items-center justify-between gap-4 border-t border-zinc-800/60 py-6 sm:flex-row sm:flex-wrap"
 		>
 			<p class="text-xs text-zinc-600">
 				© {currentYear} Azmi Muwahid. All rights reserved.
 			</p>
+			<LocalTime class="font-mono text-[0.65rem] tracking-[0.08em] text-zinc-500 uppercase" />
 			<p class="text-xs text-zinc-700">
 				Built with <span class="text-zinc-500">SvelteKit</span> ·
 				<span class="text-zinc-500">Tailwind CSS</span> ·
 				<span class="text-zinc-500">Deployed on Vercel</span>
 			</p>
+			<a
+				href="#main-content"
+				class="magnetic inline-flex min-h-11 items-center gap-2 text-xs font-semibold text-zinc-400 hover:text-zinc-200"
+				><ArrowUp class="h-3.5 w-3.5" /> Back to top</a
+			>
 		</div>
 	</div>
+
+	<p class="footer-wordmark" aria-hidden="true">Azmi <span class="accent-serif">Muwahid</span></p>
 </footer>
+
+<style>
+	.footer-wordmark {
+		margin-bottom: -0.18em;
+		overflow: hidden;
+		background: linear-gradient(
+			180deg,
+			color-mix(in srgb, var(--foreground) 14%, transparent) 20%,
+			transparent 95%
+		);
+		-webkit-background-clip: text;
+		background-clip: text;
+		color: transparent;
+		font-family: var(--font-heading);
+		font-size: clamp(3.5rem, 16vw, 18rem);
+		font-weight: 600;
+		letter-spacing: -0.06em;
+		line-height: 1;
+		text-align: center;
+		white-space: nowrap;
+		user-select: none;
+	}
+</style>

@@ -80,7 +80,7 @@
 
 			<!-- Title -->
 			<h1
-				class="mb-4 text-5xl font-black tracking-tight text-zinc-100 md:text-6xl"
+				class="mb-4 text-5xl font-semibold tracking-tight text-zinc-100 md:text-6xl"
 				style="font-family: var(--font-heading); letter-spacing: -0.03em;"
 			>
 				Writing &amp;

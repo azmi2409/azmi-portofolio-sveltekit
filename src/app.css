@@ -1,7 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-/* Google Fonts — Archivo (headings) + Space Grotesk (body) + Fira Code (mono)
+/* Google Fonts — Instrument Sans (headings) + Instrument Serif (italic accents) + Geist (body) + Geist Mono
    (Imported in app.html to avoid PostCSS sorting errors) */
 
 /* Smooth scrolling */
@@ -87,10 +87,10 @@ html {
 	--signal: #60a5fa;
 	--signal-muted: oklch(0.58 0.08 174);
 
-	--font-sans: 'Space Grotesk', sans-serif;
-	--font-heading: 'Archivo', sans-serif;
-	--font-serif: Georgia, serif;
-	--font-mono: 'Fira Code', monospace;
+	--font-sans: 'Geist', system-ui, sans-serif;
+	--font-heading: 'Instrument Sans', system-ui, sans-serif;
+	--font-serif: 'Instrument Serif', Georgia, serif;
+	--font-mono: 'Geist Mono', ui-monospace, monospace;
 	--radius: 0.75rem;
 
 	/* Portfolio custom tokens */
@@ -221,7 +221,8 @@ section[id] {
 	h5,
 	h6 {
 		font-family: var(--font-heading);
-		letter-spacing: -0.02em;
+		font-weight: 600;
+		letter-spacing: -0.025em;
 	}
 }
 
@@ -519,4 +520,158 @@ main > section:not(:first-child) {
 	* {
 		transition-duration: 0.01ms !important;
 	}
+}
+
+/* ============================================
+   CRAFT LAYER — grain, links, magnetic, reveals
+   ============================================ */
+
+/* Film grain keeps the flat zinc surfaces from feeling digital-sterile. */
+body::after {
+	content: '';
+	position: fixed;
+	z-index: 70;
+	inset: 0;
+	pointer-events: none;
+	opacity: 0.045;
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+html.light body::after {
+	opacity: 0.06;
+	mix-blend-mode: multiply;
+}
+
+/* Underline that sweeps in from the left and out to the right. */
+.link-sweep {
+	background-image: linear-gradient(currentColor, currentColor);
+	background-position: 100% 100%;
+	background-repeat: no-repeat;
+	background-size: 0% 1px;
+	transition: background-size 450ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.link-sweep:hover,
+.link-sweep:focus-visible {
+	background-position: 0 100%;
+	background-size: 100% 1px;
+}
+
+/* Magnetic elements are nudged toward the pointer by $lib/magnetic. */
+.button-primary,
+.button-secondary,
+.magnetic {
+	translate: var(--magnet-x, 0) var(--magnet-y, 0);
+	transition-property: transform, translate, background-color, border-color, box-shadow, color;
+	transition-duration: 180ms, 500ms, 180ms, 180ms, 180ms, 180ms;
+	transition-timing-function: ease, cubic-bezier(0.16, 1, 0.3, 1), ease, ease, ease, ease;
+}
+
+/* Italic serif accent for a key phrase inside a sans heading. */
+.accent-serif {
+	font-family: var(--font-serif);
+	font-style: italic;
+	font-weight: 400;
+	letter-spacing: -0.01em;
+}
+
+/* Section index label, e.g. "(02) — Services". */
+.section-index {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	color: var(--muted-foreground);
+	font-family: var(--font-mono);
+	font-size: 0.7rem;
+	letter-spacing: 0.12em;
+	text-transform: uppercase;
+}
+
+.section-index::after {
+	content: '';
+	height: 1px;
+	flex: 1;
+	background: linear-gradient(90deg, var(--border), transparent);
+}
+
+.section-index b {
+	color: var(--signal);
+	font-weight: 500;
+}
+
+/* Kinetic marquee band */
+.marquee-band {
+	display: flex;
+	width: max-content;
+}
+
+.marquee-band > div {
+	display: flex;
+	flex: none;
+	align-items: center;
+	gap: clamp(1.5rem, 3vw, 3rem);
+	padding-right: clamp(1.5rem, 3vw, 3rem);
+}
+
+.marquee-word {
+	font-family: var(--font-heading);
+	font-size: clamp(2.5rem, 7vw, 6.5rem);
+	font-weight: 600;
+	letter-spacing: -0.045em;
+	line-height: 1.1;
+	white-space: nowrap;
+}
+
+.marquee-word.stroke {
+	color: var(--muted-foreground);
+	font-family: var(--font-serif);
+	font-style: italic;
+	font-weight: 400;
+	letter-spacing: -0.02em;
+}
+
+.marquee-star {
+	width: clamp(1.25rem, 2.5vw, 2.25rem);
+	height: auto;
+	flex: none;
+	color: var(--signal);
+}
+
+@media (prefers-reduced-motion: reduce) {
+	.marquee-band {
+		flex-wrap: wrap;
+		width: auto;
+	}
+	.marquee-band > div[aria-hidden='true'] {
+		display: none;
+	}
+}
+
+/* Page transitions (see onNavigate in +layout.svelte). */
+@keyframes vt-out {
+	to {
+		opacity: 0;
+		translate: 0 -12px;
+		filter: blur(6px);
+	}
+}
+
+@keyframes vt-in {
+	from {
+		opacity: 0;
+		translate: 0 18px;
+		filter: blur(6px);
+	}
+}
+
+::view-transition-old(root) {
+	animation: vt-out 260ms cubic-bezier(0.4, 0, 1, 1) both;
+}
+
+::view-transition-new(root) {
+	animation: vt-in 520ms cubic-bezier(0.16, 1, 0.3, 1) 60ms both;
+}
+
+::view-transition-group(site-nav) {
+	animation: none;
 }
