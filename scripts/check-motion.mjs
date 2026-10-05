@@ -155,7 +155,8 @@ try {
 		'/projects/ai-clipper-video',
 		'/projects/aotavatar',
 		'/projects/diy-visa',
-		'/lab'
+		'/about',
+		'/contact'
 	]) {
 		const response = await page.goto(`${base}${path}`);
 		assert.equal(response?.status(), 200, path);
