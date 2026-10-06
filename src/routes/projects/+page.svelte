@@ -1,7 +1,14 @@
 <script lang="ts">
+	import { onMount } from 'svelte';
+	import { portfolioMotion } from '$lib/motion';
 	import ProjectsSection from '$lib/components/sections/ProjectsSection.svelte';
 
 	let { data } = $props();
+
+	onMount(() => {
+		const root = document.getElementById('projects')?.parentElement;
+		if (root) return portfolioMotion(root).destroy;
+	});
 </script>
 
 <svelte:head>
@@ -38,4 +45,6 @@
 	})}<\/script>`}
 </svelte:head>
 
-<ProjectsSection projects={data.projects} showArchiveLink={false} />
+<div class="pt-24 sm:pt-28">
+	<ProjectsSection projects={data.projects} showArchiveLink={false} />
+</div>
