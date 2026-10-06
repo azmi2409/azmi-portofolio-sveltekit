@@ -136,6 +136,74 @@ section[id] {
 	scroll-margin-top: 6rem;
 }
 
+/* ============================================================
+   PROPORTION SYSTEM
+   Spacing and type grow by the golden ratio (φ ≈ 1.618, half
+   steps by √φ ≈ 1.272). Layouts sit on one 12-column grid whose
+   divisions are 2 (6+6), 3 (4+4+4), 7 (the 7+5 golden split:
+   7/12 ≈ 0.6) and 12 (full width).
+   ============================================================ */
+:root {
+	--phi: 1.618;
+	--space-3xs: 0.236rem;
+	--space-2xs: 0.382rem;
+	--space-xs: 0.618rem;
+	--space-s: 1rem;
+	--space-m: 1.618rem;
+	--space-l: 2.618rem;
+	--space-xl: 4.236rem;
+	--space-2xl: 6.854rem;
+
+	--text-2xs: 0.618rem;
+	--text-xs: 0.786rem;
+	--text-s: 1rem;
+	--text-m: 1.272rem;
+	--text-l: 1.618rem;
+	--text-xl: 2.618rem;
+	--text-2xl: 4.236rem;
+
+	--grid-gap: var(--space-m);
+	--ratio-golden: 1.618 / 1;
+}
+
+.grid-12 {
+	display: grid;
+	grid-template-columns: repeat(12, minmax(0, 1fr));
+	column-gap: var(--grid-gap);
+	row-gap: var(--space-l);
+}
+
+.grid-12 > * {
+	grid-column: span 12;
+}
+
+@media (min-width: 768px) {
+	.grid-12 > .md\:span-6 {
+		grid-column: span 6;
+	}
+}
+
+@media (min-width: 1024px) {
+	.grid-12 > .lg\:span-3 {
+		grid-column: span 3;
+	}
+	.grid-12 > .lg\:span-4 {
+		grid-column: span 4;
+	}
+	.grid-12 > .lg\:span-5 {
+		grid-column: span 5;
+	}
+	.grid-12 > .lg\:span-6 {
+		grid-column: span 6;
+	}
+	.grid-12 > .lg\:span-7 {
+		grid-column: span 7;
+	}
+	.grid-12 > .lg\:span-12 {
+		grid-column: span 12;
+	}
+}
+
 @media (prefers-reduced-motion: reduce) {
 	*,
 	*::before,

@@ -21,6 +21,7 @@
 		"@sveltejs/vite-plugin-svelte": "^7.3.0",
 		"@tailwindcss/vite": "^4.3.3",
 		"@types/node": "^22.20.2",
+		"@types/three": "^0.186.0",
 		"bits-ui": "^2.19.2",
 		"clsx": "^2.1.1",
 		"mdsvex": "^0.12.8",
@@ -41,6 +42,7 @@
 		"@vercel/analytics": "^2.0.1",
 		"@vercel/speed-insights": "^2.0.0",
 		"date-fns": "^4.4.0",
-		"motion": "^13.4.0"
+		"motion": "^13.4.0",
+		"three": "^0.186.1"
 	}
 }

@@ -8,7 +8,8 @@ export function portfolioMotion(root: HTMLElement) {
 	const targets = root.querySelectorAll<HTMLElement>(
 		'#hero .hero-reveal, #hero figure, #hero dl > div, section:not(#hero) h2, section:not(#hero) article, .reveal-image'
 	);
-	const cards = root.querySelectorAll<HTMLElement>('.project-card, .hero-portrait');
+	// Delegated so cards added later (e.g. after filtering) also respond.
+	const cardSelector = '.project-card, .hero-portrait';
 	let frame = 0;
 	let active: HTMLElement | null = null;
 
@@ -58,7 +59,9 @@ export function portfolioMotion(root: HTMLElement) {
 
 	function move(event: PointerEvent) {
 		if (reduced.matches || !finePointer.matches || event.pointerType === 'touch') return;
-		const card = event.currentTarget as HTMLElement;
+		const card =
+			event.target instanceof Element ? event.target.closest<HTMLElement>(cardSelector) : null;
+		if (!card || !root.contains(card)) return reset();
 		if (active !== card) reset();
 		active = card;
 		cancelAnimationFrame(frame);
@@ -81,11 +84,9 @@ export function portfolioMotion(root: HTMLElement) {
 		}
 	}
 
-	for (const card of cards) {
-		card.addEventListener('pointermove', move);
-		card.addEventListener('pointerleave', reset);
-		card.addEventListener('pointercancel', reset);
-	}
+	root.addEventListener('pointermove', move);
+	root.addEventListener('pointerleave', reset);
+	root.addEventListener('pointercancel', reset);
 	root.addEventListener('focusin', revealFocused);
 	window.addEventListener('blur', reset);
 	reduced.addEventListener('change', preferenceChanged);
@@ -97,11 +98,9 @@ export function portfolioMotion(root: HTMLElement) {
 			reset();
 			for (const animation of animations.values()) animation.cancel();
 			animations.clear();
-			for (const card of cards) {
-				card.removeEventListener('pointermove', move);
-				card.removeEventListener('pointerleave', reset);
-				card.removeEventListener('pointercancel', reset);
-			}
+			root.removeEventListener('pointermove', move);
+			root.removeEventListener('pointerleave', reset);
+			root.removeEventListener('pointercancel', reset);
 			root.removeEventListener('focusin', revealFocused);
 			window.removeEventListener('blur', reset);
 			reduced.removeEventListener('change', preferenceChanged);
