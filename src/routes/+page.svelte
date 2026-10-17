@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { Star } from '@lucide/svelte';
 	import { portfolioMotion } from '$lib/motion';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import WorkingPrinciples from '$lib/components/sections/WorkingPrinciples.svelte';
@@ -11,30 +10,17 @@
 	let { data } = $props();
 
 	const ossLibraries = [
-		{ name: 'pocketbase-ruby', url: 'https://github.com/azmi2409/pocketbase-ruby', stars: 0 },
+		{ name: 'pocketbase-ruby', url: 'https://github.com/azmi2409/pocketbase-ruby' },
 		{
 			name: 'gopay-merchant-qris-gateway',
-			url: 'https://github.com/azmi2409/gopay-merchant-qris-gateway',
-			stars: 7
+			url: 'https://github.com/azmi2409/gopay-merchant-qris-gateway'
 		},
-		{ name: 'rails-ai-gateway', url: 'https://github.com/azmi2409/rails-ai-gateway', stars: 1 },
-		{
-			name: 'rails-crypto-payment',
-			url: 'https://github.com/azmi2409/rails-crypto-payment',
-			stars: 1
-		},
-		{
-			name: 'rails-gopay-unofficial',
-			url: 'https://github.com/azmi2409/rails-gopay-unofficial',
-			stars: 1
-		},
-		{
-			name: 'rails-mailer-sandbox',
-			url: 'https://github.com/azmi2409/rails-mailer-sandbox',
-			stars: 1
-		},
-		{ name: 'jamboard', url: 'https://github.com/azmi2409/jamboard', stars: 1 },
-		{ name: 'rails-shopee-qris', url: 'https://github.com/azmi2409/rails-shopee-qris', stars: 0 }
+		{ name: 'rails-ai-gateway', url: 'https://github.com/azmi2409/rails-ai-gateway' },
+		{ name: 'rails-crypto-payment', url: 'https://github.com/azmi2409/rails-crypto-payment' },
+		{ name: 'rails-gopay-unofficial', url: 'https://github.com/azmi2409/rails-gopay-unofficial' },
+		{ name: 'rails-mailer-sandbox', url: 'https://github.com/azmi2409/rails-mailer-sandbox' },
+		{ name: 'jamboard', url: 'https://github.com/azmi2409/jamboard' },
+		{ name: 'rails-shopee-qris', url: 'https://github.com/azmi2409/rails-shopee-qris' }
 	];
 
 	onMount(() => {
@@ -168,16 +154,13 @@
 				<div class="mt-4 border-t border-border/60 pt-4">
 					<ul class="space-y-2">
 						{#each ossLibraries as lib}
-							<li class="flex items-baseline justify-between gap-4 text-sm">
+							<li class="text-sm">
 								<a
 									href={lib.url}
 									target="_blank"
 									rel="noreferrer"
 									class="link-sweep text-foreground">{lib.name}</a
 								>
-								<span class="inline-flex shrink-0 items-center gap-1 text-xs text-muted-foreground">
-									<Star class="h-3 w-3" />{lib.stars}
-								</span>
 							</li>
 						{/each}
 					</ul>
