@@ -1,5 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
+	import { Star } from '@lucide/svelte';
 	import { portfolioMotion } from '$lib/motion';
 	import HeroSection from '$lib/components/sections/HeroSection.svelte';
 	import WorkingPrinciples from '$lib/components/sections/WorkingPrinciples.svelte';
@@ -8,6 +9,33 @@
 	import CapabilityMarquee from '$lib/components/sections/CapabilityMarquee.svelte';
 
 	let { data } = $props();
+
+	const ossLibraries = [
+		{ name: 'pocketbase-ruby', url: 'https://github.com/azmi2409/pocketbase-ruby', stars: 0 },
+		{
+			name: 'gopay-merchant-qris-gateway',
+			url: 'https://github.com/azmi2409/gopay-merchant-qris-gateway',
+			stars: 7
+		},
+		{ name: 'rails-ai-gateway', url: 'https://github.com/azmi2409/rails-ai-gateway', stars: 1 },
+		{
+			name: 'rails-crypto-payment',
+			url: 'https://github.com/azmi2409/rails-crypto-payment',
+			stars: 1
+		},
+		{
+			name: 'rails-gopay-unofficial',
+			url: 'https://github.com/azmi2409/rails-gopay-unofficial',
+			stars: 1
+		},
+		{
+			name: 'rails-mailer-sandbox',
+			url: 'https://github.com/azmi2409/rails-mailer-sandbox',
+			stars: 1
+		},
+		{ name: 'jamboard', url: 'https://github.com/azmi2409/jamboard', stars: 1 },
+		{ name: 'rails-shopee-qris', url: 'https://github.com/azmi2409/rails-shopee-qris', stars: 0 }
+	];
 
 	onMount(() => {
 		const root = document.getElementById('hero')?.parentElement;
@@ -133,6 +161,35 @@
 					whole picture. In your business, that means considering your people, processes, budget,
 					and customers before recommending a tool.
 				</p>
+				<p class="mt-4 text-sm leading-7 text-muted-foreground/70">
+					I also contribute to open source in my spare time — upstream fixes across Rails, Devise
+					and Sentient, plus a few libraries I maintain:
+				</p>
+				<div class="mt-4 border-t border-border/60 pt-4">
+					<ul class="space-y-2">
+						{#each ossLibraries as lib}
+							<li class="flex items-baseline justify-between gap-4 text-sm">
+								<a
+									href={lib.url}
+									target="_blank"
+									rel="noreferrer"
+									class="link-sweep text-foreground">{lib.name}</a
+								>
+								<span class="inline-flex shrink-0 items-center gap-1 text-xs text-muted-foreground">
+									<Star class="h-3 w-3" />{lib.stars}
+								</span>
+							</li>
+						{/each}
+					</ul>
+					<p class="mt-3 text-xs text-muted-foreground/70">
+						<a
+							href="https://github.com/azmi2409"
+							target="_blank"
+							rel="noreferrer"
+							class="link-sweep text-foreground">More on GitHub</a
+						>
+					</p>
+				</div>
 				<a href="/about" class="button-secondary magnetic mt-8">More about me</a>
 			</div>
 		</div>
