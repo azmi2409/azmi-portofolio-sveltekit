@@ -3,7 +3,7 @@
 	import Navigation from '$lib/components/Navigation.svelte';
 	import GtmScript from '$lib/components/GtmScript.svelte';
 	import Footer from '$lib/components/sections/Footer.svelte';
-	import { sameAsUrls } from '$lib/config/socialLinks';
+	import { personalEmail, sameAsUrls, workEmail } from '$lib/config/socialLinks';
 	import { dev } from '$app/environment';
 	import { onNavigate } from '$app/navigation';
 	import { onMount } from 'svelte';
@@ -43,16 +43,24 @@
 		name: 'Azmi Muwahid',
 		url: 'https://azmi.web.id',
 		image: 'https://azmi.web.id/assets/profile.webp',
-		jobTitle: 'Senior Software Engineer',
+		jobTitle: 'Senior Software Engineer at FutureLab and founder of KilatBot',
 		description:
-			'Senior software engineer and AI consultant based in Indonesia. Builds AI agents, manages cloud infrastructure, and helps businesses automate repetitive work with practical software.',
-		email: 'azmimuwahid@gmail.com',
+			'Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot (also known as KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas. Full-stack engineer based in Indonesia.',
+		email: [workEmail, personalEmail],
 		sameAs: sameAsUrls,
-		worksFor: {
-			'@type': 'Organization',
-			name: 'FutureLab',
-			url: 'https://futurelab.my'
-		},
+		worksFor: [
+			{
+				'@type': 'Organization',
+				name: 'FutureLab',
+				url: 'https://futurelab.my'
+			},
+			{
+				'@type': 'Organization',
+				name: 'PT Kilat Inovasi Cerdas',
+				alternateName: ['KilatBot', 'KilatHost'],
+				url: 'https://kilatbot.com'
+			}
+		],
 		address: {
 			'@type': 'PostalAddress',
 			addressLocality: 'Bogor',
@@ -83,9 +91,40 @@
 		name: 'Azmi Muwahid',
 		url: 'https://azmi.web.id',
 		description:
-			'Portfolio and case studies by Azmi Muwahid, senior software engineer and AI consultant.',
+			'Portfolio of Azmi Muwahid, Senior Software Engineer at FutureLab and founder of KilatBot.',
 		author: { '@type': 'Person', name: 'Azmi Muwahid', url: 'https://azmi.web.id' },
 		inLanguage: 'en'
+	};
+	const organizationSchema = {
+		'@context': 'https://schema.org',
+		'@type': 'Organization',
+		name: 'PT Kilat Inovasi Cerdas',
+		alternateName: ['KilatBot', 'KilatHost'],
+		url: 'https://kilatbot.com',
+		email: 'support@kilat.host',
+		telephone: '+62-812-9770-8306',
+		foundingDate: '2026',
+		description:
+			'Indonesian PT Perseorangan based in Bogor. Operates KilatBot, also known as KilatHost: AI agents for small business owners.',
+		founder: {
+			'@type': 'Person',
+			name: 'Azmi Muwahid',
+			url: 'https://azmi.web.id',
+			email: workEmail
+		},
+		address: {
+			'@type': 'PostalAddress',
+			streetAddress: 'JL H. Abdullah RT 001/RW 001, Kel. Kayumanis, Kec. Tanah Sareal',
+			addressLocality: 'Kota Bogor',
+			addressRegion: 'Jawa Barat',
+			postalCode: '16169',
+			addressCountry: 'ID'
+		},
+		identifier: [
+			{ '@type': 'PropertyValue', name: 'NIB', value: '1910260001491' },
+			{ '@type': 'PropertyValue', name: 'PSE (PB UMKU)', value: '191026000149100000001' }
+		],
+		sameAs: ['https://kilat.host', 'https://kilatbot.com', 'https://x.com/kilatbot']
 	};
 </script>
 
@@ -95,9 +134,11 @@
 	<meta name="theme-color" content="#09090b" />
 	<meta name="author" content="Azmi Muwahid" />
 	<meta name="robots" content="index, follow" />
-	<meta property="og:site_name" content="Azmi Muwahid — AI & Automation Consultant" />
+	<meta property="og:site_name" content="Azmi Muwahid" />
 	<meta property="og:locale" content="en_US" />
+	<meta name="twitter:creator" content="@azmikaze" />
 	{@html `<script type="application/ld+json">${JSON.stringify(personSchema)}<\/script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(organizationSchema)}<\/script>`}
 	{@html `<script type="application/ld+json">${JSON.stringify(websiteSchema)}<\/script>`}
 </svelte:head>
 

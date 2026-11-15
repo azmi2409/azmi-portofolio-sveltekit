@@ -5,10 +5,12 @@
 	import { ArrowUpRight } from '@lucide/svelte';
 	import ThemeToggle from './ThemeToggle.svelte';
 	import LocalTime from './LocalTime.svelte';
+	import { workEmailLink } from '$lib/config/socialLinks';
 
 	const navItems = [
 		{ name: 'Projects', href: '/projects' },
 		{ name: 'About', href: '/about' },
+		{ name: 'Questions', href: '/faq' },
 		{ name: 'Contact', href: '/contact' }
 	];
 	let mobileOpen = $state(false);
@@ -118,7 +120,7 @@
 		<div class="nav-actions flex items-center gap-2">
 			<span class="availability hidden xl:inline-flex"><i></i> Available for projects</span>
 			<div class="hidden sm:block"><ThemeToggle /></div>
-			<a href="mailto:azmimuwahid@gmail.com" class="nav-cta magnetic hidden sm:inline-flex"
+			<a href={workEmailLink.href} class="nav-cta magnetic hidden sm:inline-flex"
 				>Let’s talk <span class="nav-cta-icon"><ArrowUpRight class="h-3.5 w-3.5" /></span></a
 			>
 			<button
@@ -156,7 +158,7 @@
 					class="font-mono text-[0.65rem] tracking-[0.08em] text-muted-foreground uppercase"
 				/>
 				<div class="flex items-center justify-between gap-3">
-					<ThemeToggle /><a href="mailto:azmimuwahid@gmail.com" class="nav-cta"
+					<ThemeToggle /><a href={workEmailLink.href} class="nav-cta"
 						>Let’s talk <span class="nav-cta-icon"><ArrowUpRight class="h-3.5 w-3.5" /></span></a
 					>
 				</div>

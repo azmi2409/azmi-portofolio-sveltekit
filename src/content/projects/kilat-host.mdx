@@ -1,43 +1,50 @@
 ---
-name: Kilat.host
+name: KilatBot
 published: true
 featured: true
 year: '2026'
-role: Full-Stack Engineer
-ownership: []
-type: Managed hosting for AI agents and workflows
+role: Founder & Full-Stack Engineer
+ownership:
+  - Founded KilatBot in 2026 and leads its development through PT Kilat Inovasi Cerdas.
+  - Wrote the open-source QRIS and USDT payment libraries the platform uses.
+type: AI agents for small business
 category: Web App
 status: Live
-stack: [Coolify, Hermes Agent, n8n, MCP, QRIS]
-summary: Deploy Hermes Agent and n8n from a browser, choose an available region, and manage hosting through one workspace with IDR wallet billing.
-outcome: Users can launch an AI agent or automation service without terminal setup, fund hosting through QRIS, and manage service status and renewals from a dashboard.
+stack: [Kilat AI, Telegram, MCP, QRIS]
+summary: KilatBot, also known as KilatHost, gives small business owners AI agents they can shape for reports, content, code, or everyday help, and chat with on the web or Telegram.
+outcome: Owners get a managed agent they can direct from the browser or Telegram, without running servers or bringing a model key to start.
 cover: /images/projects/kilat-host.webp
-coverAlt: Live Kilat.host homepage showing managed hosting for Hermes Agent and n8n.
-coverCaption: Captured from kilat.host in October 2026.
+coverAlt: KilatBot homepage with the headline "AI agents shaped to your business" and a sample sales report in the agent panel.
+coverCaption: Captured from kilatbot.com in November 2026. The panel is labeled sample data.
 liveUrl: https://kilat.host
 sortOrder: 2.5
 ---
 
 ## The solution
 
-Kilat.host offers browser-based hosting for Hermes Agent and n8n. Users choose an app, resource plan, and region with available capacity, then manage the service from their workspace.
+[KilatBot](https://kilatbot.com), also known as [KilatHost](https://kilat.host), is a managed service for AI agents shaped to a business. An owner starts from a template — Social Media Planner, Operations Reporter, General Assistant, or Coder — and can change the agent's role, skills, schedules, and tools later. Chat happens in the browser or on Telegram. Pictures, files, and voice notes can be sent from the browser. The service is operated by PT Kilat Inovasi Cerdas, an Indonesian PT Perseorangan based in Bogor.
 
 ## What changed
 
-The live service combines app deployment, service management, and IDR wallet billing. QRIS top-ups fund 30-day hosting periods, with auto-renewal controlled from the workspace. AI model usage is billed separately by the user's provider.
+kilatbot.com and kilat.host now present KilatBot, not a one-click host whose homepage offered Hermes Agent and n8n deployment. Agents remember the work, run on a schedule, and ask before risky actions. The terms of service, effective 18 October 2026, still describe the agents as built on the open-source Hermes Agent by Nous Research, keep PocketBase backends for existing customers, and keep existing n8n services running. n8n is closed to new deployments.
 
 ## Behind the solution
 
-Coolify coordinates provisioning with persistent storage and HTTPS endpoints. Each workspace exposes an MCP endpoint so AI agents can deploy, restart, and monitor services without using the dashboard.
+Agents start on Kilat AI, KilatBot's own model service, so a separate API key is not required at the start. An owner can add a provider key in the agent's settings instead. A connected assistant can use the workspace through the MCP endpoint at https://kilat.host/mcp. Risky commands, purchases, and making a shared page public ask first. The live browser can be watched and taken over for a sign-in or a payment.
+
+Azmi Muwahid founded KilatBot in 2026 and leads its development. KilatBot's about page also says he wrote the open-source QRIS and USDT payment libraries the platform uses.
 
 ### Key features
 
-- Hermes Agent and n8n hosting with Starter and Standard resource plans.
-- Region selection based on available host capacity.
-- Browser-based service status, restart, and stop controls.
-- IDR wallet top-ups through GoPay or other QRIS-compatible apps.
-- MCP access for agent-driven service management.
+- Templates for reports, content, and everyday help. Coder needs Plus or higher and builds and publishes sites.
+- Browser chat, plus Telegram, with memory and schedules between chats.
+- A live browser the owner can watch and take over.
+- Kilat AI included with the plan, or a provider key the owner adds.
+- The homepage invites people to join the waitlist. The pricing page says payments are not open yet.
 
 ### Constraints
 
-Starter plans target small, non-critical experiments. Available regions and startup times depend on host capacity and image downloads. Users bring their own model provider credentials and keep independent backups; automated disaster recovery is not included.
+- There is no self-hosted edition.
+- Agents need a plan. Business is US$9 a month, or US$86 a year (save 20%), with 3 agents and up to 5 people. The FAQ last checked 13 November 2026 said payments were not open yet, and that invited people can use a code for Business free for a set time.
+- Agents sleep when idle. The service is best effort and does not promise an uptime guarantee.
+- KilatBot is not affiliated with CloudKilat or PT Infinys System Indonesia.

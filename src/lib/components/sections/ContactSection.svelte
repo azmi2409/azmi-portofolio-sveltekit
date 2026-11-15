@@ -1,9 +1,10 @@
 <script lang="ts">
 	import { ArrowUpRight, Check, Copy, Mail } from '@lucide/svelte';
+	import { personalEmail, workEmail } from '$lib/config/socialLinks';
 
 	// Standalone /contact page renders the heading as its h1 and drops the home-page index.
 	let { standalone = false }: { standalone?: boolean } = $props();
-	const email = 'azmimuwahid@gmail.com';
+	const email = workEmail;
 	let copied = $state(false);
 	let timer: ReturnType<typeof setTimeout>;
 
@@ -53,6 +54,10 @@
 					</button>
 				</div>
 				<div class="mt-6 flex flex-wrap gap-x-6 text-sm font-semibold">
+					<a class="inline-flex min-h-11 items-center gap-2" href="mailto:{personalEmail}">
+						<span class="font-normal text-muted-foreground">Personal</span>
+						<span class="link-sweep">{personalEmail}</span>
+					</a>
 					<a
 						class="inline-flex min-h-11 items-center gap-2"
 						href="https://linkedin.com/in/azmimuwahid"
@@ -62,27 +67,40 @@
 					>
 					<a
 						class="inline-flex min-h-11 items-center"
-						href="mailto:{email}?subject=R%C3%A9sum%C3%A9%20request"
+						href="mailto:{personalEmail}?subject=R%C3%A9sum%C3%A9%20request"
 						><span class="link-sweep">Request résumé</span></a
 					>
 				</div>
 			</div>
 		</div>
+		<p
+			class="work-email-label font-mono text-[0.65rem] tracking-[0.14em] text-muted-foreground uppercase"
+		>
+			Work email
+		</p>
 		<a class="big-email group" href="mailto:{email}">
 			<span class="big-email-text select-all">{email}</span>
 			<span class="big-email-arrow" aria-hidden="true"><ArrowUpRight /></span>
 		</a>
+		<p class="mt-4 text-sm text-muted-foreground">
+			Personal:
+			<a class="link-sweep text-foreground" href="mailto:{personalEmail}">{personalEmail}</a>
+		</p>
 	</div>
 </section>
 
 <style>
+	.work-email-label {
+		margin-top: clamp(3rem, 8vw, 6rem);
+	}
+
 	.big-email {
 		position: relative;
 		display: flex;
 		align-items: center;
 		justify-content: space-between;
 		gap: 1.5rem;
-		margin-top: clamp(3rem, 8vw, 6rem);
+		margin-top: 0.75rem;
 		padding-bottom: 1.25rem;
 		border-bottom: 1px solid var(--border);
 	}

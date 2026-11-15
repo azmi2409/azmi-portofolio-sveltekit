@@ -3,8 +3,25 @@ import { isrHeaders } from '$lib/server/isr';
 
 export async function GET() {
 	const base = 'https://azmi.web.id';
-	const today = new Date().toISOString().split('T')[0];
 	const projects = await getProjects();
+	// Last content change, not the request date. Pages edited in this update use 2026-11-15.
+	// Other project dates are the last commit that changed that case study.
+	const projectLastmod: Record<string, string> = {
+		'ai-clipper-video': '2026-09-27',
+		'ai-mentor-matcher': '2026-09-27',
+		'ai-showdown': '2026-09-27',
+		aotavatar: '2026-09-27',
+		'codexia-live': '2026-09-27',
+		'diy-visa': '2026-09-27',
+		'gopay-merchant-qris-gateway': '2026-09-27',
+		'iscylla-store': '2026-09-27',
+		'kilat-host': '2026-11-15',
+		'kilat-store': '2026-11-15',
+		'portfolio-content-system': '2026-10-06',
+		'rails-ai-gateway': '2026-09-27',
+		'rails-crypto-payment': '2026-09-27',
+		'rails-mailer-sandbox': '2026-09-27'
+	};
 
 	interface SitemapEntry {
 		loc: string;
@@ -14,19 +31,23 @@ export async function GET() {
 	}
 
 	const staticPages: SitemapEntry[] = [
-		{ loc: '/', lastmod: today, changefreq: 'weekly', priority: '1.0' },
-		{ loc: '/projects', lastmod: today, changefreq: 'weekly', priority: '0.9' },
-		{ loc: '/about', lastmod: today, changefreq: 'monthly', priority: '0.8' },
-		{ loc: '/contact', lastmod: today, changefreq: 'yearly', priority: '0.5' }
+		{ loc: '/', lastmod: '2026-11-15', changefreq: 'weekly', priority: '1.0' },
+		{ loc: '/projects', lastmod: '2026-11-15', changefreq: 'weekly', priority: '0.9' },
+		{ loc: '/about', lastmod: '2026-11-15', changefreq: 'monthly', priority: '0.8' },
+		{ loc: '/faq', lastmod: '2026-11-15', changefreq: 'monthly', priority: '0.7' },
+		{ loc: '/contact', lastmod: '2026-11-15', changefreq: 'yearly', priority: '0.5' }
 	];
 
-	const projectPages: SitemapEntry[] = projects.map((p) => ({
-		loc: `/projects/${p.slug}`,
-		lastmod: today,
-		changefreq: 'monthly',
-		priority: '0.7'
-	}));
-
+	const projectPages: SitemapEntry[] = projects.map((p) => {
+		const lastmod = projectLastmod[p.slug];
+		if (!lastmod) throw new Error(`Missing sitemap lastmod for project: ${p.slug}`);
+		return {
+			loc: `/projects/${p.slug}`,
+			lastmod,
+			changefreq: 'monthly',
+			priority: '0.7'
+		};
+	});
 
 	const allEntries = [...staticPages, ...projectPages];
 

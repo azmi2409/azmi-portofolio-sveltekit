@@ -30,25 +30,25 @@
 </script>
 
 <svelte:head>
-	<title>Azmi Muwahid — AI & Automation Consultant</title>
+	<title>Azmi Muwahid — FutureLab & KilatBot</title>
 	<meta
 		name="description"
-		content="I help businesses automate repetitive work, control operating costs, and improve customer service with practical AI and software. Consulting through delivery."
+		content="Azmi Muwahid is a Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot (KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas."
 	/>
 	<link rel="canonical" href="https://azmi.web.id" />
-	<meta property="og:title" content="Azmi Muwahid — AI & Automation Consultant" />
+	<meta property="og:title" content="Azmi Muwahid — FutureLab & KilatBot" />
 	<meta
 		property="og:description"
-		content="Less busywork. More room to grow your business. Practical AI and automation consulting, from finding the opportunity to delivering the solution."
+		content="Senior Software Engineer at FutureLab and founder of KilatBot, also known as KilatHost. Based in Indonesia. Work email azmi@kilat.host."
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://azmi.web.id" />
 	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Azmi Muwahid — AI & Automation Consultant" />
+	<meta name="twitter:title" content="Azmi Muwahid — FutureLab & KilatBot" />
 	<meta
 		name="twitter:description"
-		content="Less busywork. More room to grow your business. Practical AI and automation consulting, from finding the opportunity to delivering the solution."
+		content="Senior Software Engineer at FutureLab and founder of KilatBot, also known as KilatHost. Based in Indonesia. Work email azmi@kilat.host."
 	/>
 	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 </svelte:head>
@@ -92,17 +92,22 @@
 	<div class="mx-auto max-w-7xl">
 		<p class="section-index mb-8"><b>(02)</b> Work experience</p>
 		<div class="grid gap-6 sm:grid-cols-[minmax(0,1fr)_minmax(0,1.3fr)] sm:gap-12">
-			<div>
-				<h2 id="work-heading" class="text-3xl font-semibold tracking-[-0.04em] sm:text-4xl">
-					Currently at FutureLab.my
+			<div class="sm:col-span-2">
+				<h2
+					id="work-heading"
+					class="max-w-3xl text-3xl font-semibold tracking-[-0.04em] sm:text-4xl"
+				>
+					FutureLab and KilatBot
 				</h2>
+			</div>
+			<div>
+				<h3 class="text-xl font-bold">Senior Software Engineer, FutureLab.my</h3>
 				<p class="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
 					<span class="h-1.5 w-1.5 rounded-full bg-[var(--signal)]"></span>February 2023–present
 				</p>
 			</div>
 			<div class="max-w-2xl">
-				<h3 class="text-xl font-bold">Senior Software Engineer</h3>
-				<p class="mt-3 leading-7 text-muted-foreground">
+				<p class="leading-7 text-muted-foreground">
 					I’m currently a Senior Software Engineer at
 					<a
 						href="https://futurelab.my"
@@ -111,6 +116,32 @@
 						class="link-sweep text-foreground">FutureLab.my</a
 					>. I own cloud infrastructure and deployment pipelines, maintain the Rails platform, and
 					build AI agents for mentoring-session transcription, summaries, and reporting.
+				</p>
+			</div>
+			<div class="border-t border-border sm:col-span-2" aria-hidden="true"></div>
+			<div>
+				<h3 class="text-xl font-bold">Founder, PT Kilat Inovasi Cerdas</h3>
+				<p class="mt-3 flex items-center gap-2 text-sm text-muted-foreground">
+					<span class="h-1.5 w-1.5 rounded-full bg-[var(--signal)]"></span>2026–present
+				</p>
+			</div>
+			<div class="max-w-2xl">
+				<p class="leading-7 text-muted-foreground">
+					I build
+					<a
+						href="https://kilatbot.com"
+						target="_blank"
+						rel="noreferrer"
+						class="link-sweep text-foreground">KilatBot</a
+					>, also known as
+					<a
+						href="https://kilat.host"
+						target="_blank"
+						rel="noreferrer"
+						class="link-sweep text-foreground">KilatHost</a
+					>: AI agents for small business owners. The company is an Indonesian PT Perseorangan based
+					in Bogor. Agents start from a template, chat on the web or Telegram, and ask before risky
+					steps.
 				</p>
 			</div>
 		</div>
@@ -138,9 +169,22 @@
 					>
 				</h2>
 				<p class="mt-6 text-lg leading-8 text-muted-foreground">
-					I’m Azmi, an AI and automation consultant with hands-on software delivery experience. I
-					help teams turn “there must be a better way” into practical changes they can use, from
-					reducing admin work to making online sales easier.
+					I’m Azmi, a Senior Software Engineer at
+					<a
+						href="https://futurelab.my"
+						target="_blank"
+						rel="noreferrer"
+						class="link-sweep text-foreground">FutureLab</a
+					>
+					and founder of
+					<a
+						href="https://kilatbot.com"
+						target="_blank"
+						rel="noreferrer"
+						class="link-sweep text-foreground">KilatBot</a
+					>, also known as KilatHost, through PT Kilat Inovasi Cerdas. KilatBot is AI agents for
+					small business owners. I help teams turn “there must be a better way” into practical
+					changes they can use, from reducing admin work to making online sales easier.
 				</p>
 				<p class="mt-4 text-lg leading-8 text-muted-foreground">
 					Before software, I studied fisheries. It taught me to look at how one change affects the
