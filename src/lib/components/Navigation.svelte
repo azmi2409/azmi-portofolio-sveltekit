@@ -10,6 +10,7 @@
 	const navItems = [
 		{ name: 'Projects', href: '/projects' },
 		{ name: 'About', href: '/about' },
+		{ name: 'Questions', href: '/faq' },
 		{ name: 'Contact', href: '/contact' }
 	];
 	let mobileOpen = $state(false);

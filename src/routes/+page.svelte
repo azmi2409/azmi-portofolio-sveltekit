@@ -5,7 +5,6 @@
 	import WorkingPrinciples from '$lib/components/sections/WorkingPrinciples.svelte';
 	import ProjectsSection from '$lib/components/sections/ProjectsSection.svelte';
 	import ContactSection from '$lib/components/sections/ContactSection.svelte';
-	import FaqSection from '$lib/components/sections/FaqSection.svelte';
 	import CapabilityMarquee from '$lib/components/sections/CapabilityMarquee.svelte';
 
 	let { data } = $props();
@@ -223,7 +222,6 @@
 		</div>
 	</div>
 </section>
-<FaqSection />
 <ContactSection />
 
 <style>

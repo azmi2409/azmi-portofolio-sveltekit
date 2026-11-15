@@ -21,8 +21,8 @@
 		{ href: '/', label: 'Home' },
 		{ href: '/projects', label: 'Projects' },
 		{ href: '/about', label: 'About' },
-		{ href: '/contact', label: 'Contact' },
-		{ href: '/#faq', label: 'Questions' }
+		{ href: '/faq', label: 'Questions' },
+		{ href: '/contact', label: 'Contact' }
 	];
 </script>
 

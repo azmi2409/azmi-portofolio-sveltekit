@@ -1,20 +1,20 @@
 <script lang="ts">
-	import { faqItems, faqPageSchema } from '$lib/data/faq';
+	import { faqItems } from '$lib/data/faq';
+
+	// The dedicated /faq page uses this as its h1. The questions and answers stay the same.
+	let { standalone = false }: { standalone?: boolean } = $props();
 </script>
 
-<svelte:head>
-	{@html `<script type="application/ld+json">${JSON.stringify(faqPageSchema())}<\/script>`}
-</svelte:head>
-
-<section id="faq" class="border-t border-border px-6 py-24 sm:py-32" aria-labelledby="faq-heading">
+<section id="faq" class="px-6 py-24 sm:py-32" aria-labelledby="faq-heading">
 	<div class="mx-auto max-w-7xl">
-		<p class="section-index mb-8"><b>(05)</b> Questions</p>
-		<h2
+		<p class="section-index mb-8">Questions</p>
+		<svelte:element
+			this={standalone ? 'h1' : 'h2'}
 			id="faq-heading"
 			class="max-w-3xl text-4xl leading-[1.02] font-semibold tracking-[-0.045em] sm:text-6xl"
 		>
 			Answers, in <span class="accent-serif text-muted-foreground">plain language.</span>
-		</h2>
+		</svelte:element>
 		<p class="mt-6 max-w-2xl text-lg leading-8 text-muted-foreground">
 			Who Azmi is, what KilatBot is, who it is for, and how to get in touch.
 		</p>

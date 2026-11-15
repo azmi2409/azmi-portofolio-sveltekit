@@ -23,7 +23,7 @@
 <section id="contact" class="contact border-t border-border px-6 py-24 sm:py-32">
 	<div class="mx-auto max-w-7xl">
 		<p class="section-index mb-10">
-			{#if !standalone}<b>(06)</b>{/if} Let’s talk
+			{#if !standalone}<b>(05)</b>{/if} Let’s talk
 		</p>
 		<div class="grid gap-12 lg:grid-cols-[1.4fr_1fr] lg:items-end">
 			<div>
