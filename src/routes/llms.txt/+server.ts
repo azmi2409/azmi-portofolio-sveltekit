@@ -11,13 +11,11 @@ export async function GET() {
 
 	const body = `# Azmi Muwahid
 
-> Full-stack engineer based in Indonesia. Builds KilatBot (also known as KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas.
+> Senior Software Engineer at FutureLab.my (February 2023–present) and founder of KilatBot (also known as KilatHost), through PT Kilat Inovasi Cerdas.
 
 ## About
 
-Azmi Muwahid is a full-stack engineer based in Indonesia. He founded KilatBot in 2026 and leads its development through PT Kilat Inovasi Cerdas, an Indonesian PT Perseorangan based in Bogor. KilatBot, also published as KilatHost at kilat.host, gives small business owners AI agents they can shape for reports, content, code, or everyday help. Agents chat on the web or on Telegram, remember the work, run schedules, and ask before risky steps.
-
-He is also a Senior Software Engineer at FutureLab.my (February 2023–present), where he manages AWS infrastructure, keeps the Rails platform stable, and ships AI agents for session transcription, summarization, and reporting.
+Azmi Muwahid is a full-stack engineer based in Indonesia. He currently holds two roles. He is a Senior Software Engineer at FutureLab.my (February 2023–present), where he manages AWS infrastructure, keeps the Rails platform stable, and ships AI agents for session transcription, summarization, and reporting. He is founder of KilatBot and leads its development through PT Kilat Inovasi Cerdas, an Indonesian PT Perseorangan based in Bogor. KilatBot, also published as KilatHost at kilat.host, gives small business owners AI agents they can shape for reports, content, code, or everyday help. Agents chat on the web or on Telegram, remember the work, run schedules, and ask before risky steps.
 
 He also works as a freelance full-stack developer through Toptal and Turing, and previously built the main application interface at Automa8e (Singapore). He has 6+ years of remote experience working with companies in Malaysia, Singapore, and beyond.
 

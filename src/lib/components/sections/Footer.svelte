@@ -53,8 +53,8 @@
 				</a>
 
 				<p class="max-w-xs text-sm leading-7 text-zinc-500">
-					Full-stack engineer in Indonesia. I build KilatBot, AI agents for small business owners,
-					and help teams automate repetitive work. Working globally.
+					Senior Software Engineer at FutureLab and founder of KilatBot, AI agents for small
+					business owners. Based in Indonesia, working globally.
 				</p>
 
 				<!-- Availability badge -->

@@ -39,7 +39,7 @@
 <section id="hero" bind:this={hero} class="px-6 pt-32 pb-12 sm:pt-40 sm:pb-16">
 	<div class="hero-copy mx-auto max-w-7xl">
 		<div class="hero-reveal flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-			<p class="eyebrow">Azmi Muwahid · Full-stack engineer, Indonesia</p>
+			<p class="eyebrow">Azmi Muwahid · FutureLab · KilatBot</p>
 			<LocalTime
 				class="font-mono text-[0.65rem] tracking-[0.08em] text-muted-foreground uppercase"
 			/>
@@ -59,15 +59,21 @@
 		>
 			<div class="hero-reveal">
 				<p class="max-w-xl text-lg leading-8 text-muted-foreground">
-					I build
+					I’m a Senior Software Engineer at
+					<a
+						href="https://futurelab.my"
+						target="_blank"
+						rel="noreferrer"
+						class="link-sweep text-foreground">FutureLab</a
+					>
+					and founder of
 					<a
 						href="https://kilatbot.com"
 						target="_blank"
 						rel="noreferrer"
 						class="link-sweep text-foreground">KilatBot</a
-					>, also known as KilatHost: AI agents for small business owners. I also help teams use
-					practical software to automate repetitive work, reduce operating costs, and serve
-					customers better.
+					>, also known as KilatHost, through PT Kilat Inovasi Cerdas. KilatBot is AI agents for
+					small business owners. I help teams automate repetitive work and serve customers better.
 				</p>
 				<div class="mt-8 flex flex-wrap gap-3">
 					<a class="button-primary" href="#projects"

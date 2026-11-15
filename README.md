@@ -22,7 +22,7 @@ Home uses a compact domino project deck: hover, tap, or keyboard focus reveals o
 
 KilatBot (also KilatHost) is a featured project. The case study follows the live product on kilatbot.com and kilat.host, and the cover is a November 2026 capture of the KilatBot homepage. The project archive uses one heading, shared with its project section; it renders as `h1` on the archive and `h2` on the homepage.
 
-Employment is separate from projects: the homepage Work experience section lists founder of KilatBot through PT Kilat Inovasi Cerdas (2026–present) and the Senior Software Engineer role at FutureLab.my (February 2023–present). The FutureLab case study is unpublished and excluded from project listings and public project routes.
+Employment is separate from projects: the homepage Work experience section lists the current Senior Software Engineer role at FutureLab.my (February 2023–present) and founder of KilatBot through PT Kilat Inovasi Cerdas (2026–present). Both are current. The FutureLab case study is unpublished and excluded from project listings and public project routes.
 
 Project deck browser self-check: `node scripts/check-project-deck.mjs /path/to/playwright/index.mjs [base-url]`.
 

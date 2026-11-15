@@ -18,7 +18,7 @@ export const faqItems: FaqItem[] = [
 		question: 'Who is Azmi Muwahid?',
 		answer: [
 			{
-				text: 'Azmi Muwahid is a full-stack engineer based in Indonesia. He builds KilatBot, AI agents for small business owners, and helps businesses automate repetitive work with practical software. KilatBot is also known as KilatHost.'
+				text: 'Azmi Muwahid is a full-stack engineer based in Indonesia. He is a Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot, AI agents for small business owners, through PT Kilat Inovasi Cerdas. KilatBot is also known as KilatHost.'
 			}
 		]
 	},
@@ -32,7 +32,7 @@ export const faqItems: FaqItem[] = [
 			},
 			{ text: 'kilat.host', href: 'https://kilat.host' },
 			{
-				text: '. A business starts from a template for reports, content, code, or everyday help, then changes the agent’s role, skills, schedules, and tools. People chat with the agent in the browser or on Telegram.'
+				text: '. A business starts from a template for reports, content, code, or everyday help, then changes the agent’s role, skills, schedules, and tools. People chat with the agent in the browser or on Telegram. He is a Senior Software Engineer at FutureLab, where he owns cloud infrastructure and deployment pipelines, maintains the Rails platform, and builds AI agents for mentoring-session transcription, summaries, and reporting.'
 			}
 		]
 	},

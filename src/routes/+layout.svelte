@@ -43,22 +43,22 @@
 		name: 'Azmi Muwahid',
 		url: 'https://azmi.web.id',
 		image: 'https://azmi.web.id/assets/profile.webp',
-		jobTitle: 'Full-stack engineer',
+		jobTitle: 'Senior Software Engineer at FutureLab and founder of KilatBot',
 		description:
-			'Full-stack engineer based in Indonesia. Builds KilatBot (also known as KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas, and helps businesses automate repetitive work with practical software.',
+			'Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot (also known as KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas. Full-stack engineer based in Indonesia.',
 		email: [workEmail, personalEmail],
 		sameAs: sameAsUrls,
 		worksFor: [
 			{
 				'@type': 'Organization',
-				name: 'PT Kilat Inovasi Cerdas',
-				alternateName: ['KilatBot', 'KilatHost'],
-				url: 'https://kilatbot.com'
+				name: 'FutureLab',
+				url: 'https://futurelab.my'
 			},
 			{
 				'@type': 'Organization',
-				name: 'FutureLab',
-				url: 'https://futurelab.my'
+				name: 'PT Kilat Inovasi Cerdas',
+				alternateName: ['KilatBot', 'KilatHost'],
+				url: 'https://kilatbot.com'
 			}
 		],
 		address: {
@@ -91,7 +91,7 @@
 		name: 'Azmi Muwahid',
 		url: 'https://azmi.web.id',
 		description:
-			'Portfolio of Azmi Muwahid, a full-stack engineer in Indonesia and founder of KilatBot.',
+			'Portfolio of Azmi Muwahid, Senior Software Engineer at FutureLab and founder of KilatBot.',
 		author: { '@type': 'Person', name: 'Azmi Muwahid', url: 'https://azmi.web.id' },
 		inLanguage: 'en'
 	};
