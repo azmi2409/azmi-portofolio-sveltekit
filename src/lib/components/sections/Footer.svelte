@@ -4,7 +4,13 @@
 -->
 
 <script lang="ts">
-	import { socialLinks, emailLink } from '$lib/config/socialLinks';
+	import {
+		socialLinks,
+		emailLink,
+		personalEmail,
+		workEmail,
+		workEmailLink
+	} from '$lib/config/socialLinks';
 	import { ArrowUp, Mail } from '@lucide/svelte';
 	import LocalTime from '$lib/components/LocalTime.svelte';
 	import SocialIcon from '$lib/components/icons/SocialIcon.svelte';
@@ -15,7 +21,8 @@
 		{ href: '/', label: 'Home' },
 		{ href: '/projects', label: 'Projects' },
 		{ href: '/about', label: 'About' },
-		{ href: '/contact', label: 'Contact' }
+		{ href: '/contact', label: 'Contact' },
+		{ href: '/#faq', label: 'Questions' }
 	];
 </script>
 
@@ -46,8 +53,8 @@
 				</a>
 
 				<p class="max-w-xs text-sm leading-7 text-zinc-500">
-					I help businesses automate repetitive work, control costs, and make life easier for
-					customers. AI and automation consulting, from advice to delivery. Working globally.
+					Full-stack engineer in Indonesia. I build KilatBot, AI agents for small business owners,
+					and help teams automate repetitive work. Working globally.
 				</p>
 
 				<!-- Availability badge -->
@@ -77,8 +84,8 @@
 						</a>
 					{/each}
 					<a
-						href={emailLink.href}
-						aria-label="Email"
+						href={workEmailLink.href}
+						aria-label="Work email"
 						class="flex h-9 w-9 items-center justify-center rounded-full border border-zinc-800 bg-zinc-900 text-zinc-500 transition-all duration-200 hover:scale-110 hover:border-transparent hover:bg-zinc-50 hover:text-zinc-900"
 					>
 						<Mail class="h-4 w-4" />
@@ -120,10 +127,18 @@
 						<span class="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
 					</a>
 					<a
+						href={workEmailLink.href}
+						class="text-sm text-zinc-500 transition-colors hover:text-zinc-300"
+					>
+						{workEmail}
+						<span class="text-zinc-600"> · Work</span>
+					</a>
+					<a
 						href={emailLink.href}
 						class="text-sm text-zinc-500 transition-colors hover:text-zinc-300"
 					>
-						azmimuwahid@gmail.com
+						{personalEmail}
+						<span class="text-zinc-600"> · Personal</span>
 					</a>
 				</div>
 			</div>

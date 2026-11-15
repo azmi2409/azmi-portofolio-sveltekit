@@ -1,23 +1,23 @@
 <svelte:head>
-	<title>About Azmi — AI & Automation Consultant</title>
+	<title>About Azmi — Full-Stack Engineer & KilatBot Founder</title>
 	<meta
 		name="description"
-		content="Meet Azmi Muwahid: an AI and automation consultant helping businesses replace repetitive work with practical solutions, from advice to hands-on delivery."
+		content="Azmi Muwahid is a full-stack engineer in Indonesia. He founded KilatBot (KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/about" />
-	<meta property="og:title" content="About Azmi — AI & Automation Consultant" />
+	<meta property="og:title" content="About Azmi — Full-Stack Engineer & KilatBot Founder" />
 	<meta
 		property="og:description"
-		content="A business-first partner with the experience to build, launch, and improve the solution."
+		content="Full-stack engineer in Indonesia and founder of KilatBot, AI agents for small business owners."
 	/>
 	<meta property="og:url" content="https://azmi.web.id/about" />
 	<meta property="og:type" content="profile" />
 	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="About Azmi — AI & Automation Consultant" />
+	<meta name="twitter:title" content="About Azmi — Full-Stack Engineer & KilatBot Founder" />
 	<meta
 		name="twitter:description"
-		content="A business-first partner with the experience to build, launch, and improve the solution."
+		content="Full-stack engineer in Indonesia and founder of KilatBot, AI agents for small business owners."
 	/>
 	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 
@@ -28,7 +28,7 @@
 		name: 'About Azmi Muwahid',
 		url: 'https://azmi.web.id/about',
 		description:
-			'Senior software engineer at FutureLab.my. Builds AI agents, manages cloud infrastructure, and helps businesses automate work.',
+			'Full-stack engineer in Indonesia. Founded KilatBot in 2026 and leads it through PT Kilat Inovasi Cerdas. Also a senior software engineer at FutureLab.my.',
 		mainEntity: {
 			'@type': 'Person',
 			name: 'Azmi Muwahid',
@@ -66,6 +66,24 @@
 			<p>
 				I help businesses apply AI and software where it makes a practical difference: less manual
 				admin, clearer customer journeys, and better control over day-to-day costs.
+			</p>
+			<p>
+				I founded
+				<a
+					href="https://kilatbot.com"
+					target="_blank"
+					rel="noreferrer"
+					class="link-sweep text-foreground">KilatBot</a
+				>
+				in 2026 and lead its development through PT Kilat Inovasi Cerdas, an Indonesian PT Perseorangan
+				based in Bogor. KilatBot, also known as
+				<a
+					href="https://kilat.host"
+					target="_blank"
+					rel="noreferrer"
+					class="link-sweep text-foreground">KilatHost</a
+				>, gives small business owners AI agents they can shape to their own work, on the web or
+				Telegram, without running the servers themselves.
 			</p>
 			<p>
 				My background is in senior software engineering. That means I can help you choose what to
@@ -131,6 +149,11 @@
 				>
 			</div>
 			<ul class="space-y-4">
+				<li>
+					<strong class="text-foreground">PT Kilat Inovasi Cerdas · Founder</strong><br
+					/>2026–present. Building KilatBot, also known as KilatHost: AI agents for small business
+					owners. The company is an Indonesian PT Perseorangan based in Bogor.
+				</li>
 				<li>
 					<strong class="text-foreground">FutureLab.my · Senior Software Engineer</strong><br
 					/>February 2023–present. Own the cloud and deployment pipeline, keep the platform codebase

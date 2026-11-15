@@ -22,6 +22,13 @@ export const socialLinks: SocialLink[] = [
 		brandHex: '#fafafa'
 	},
 	{
+		icon: 'x',
+		label: 'X',
+		href: 'https://x.com/azmikaze',
+		hoverColor: 'hover:bg-white hover:text-zinc-900',
+		brandHex: '#000000'
+	},
+	{
 		icon: 'linkedin',
 		label: 'LinkedIn',
 		href: 'https://linkedin.com/in/azmimuwahid',
@@ -58,10 +65,19 @@ export const socialLinks: SocialLink[] = [
 	}
 ];
 
-/** Email link — kept separate since it's not a social platform */
+/** Work and personal email. Work is the address to use for Kilat and new projects. */
+export const workEmail = 'azmi@kilat.host';
+export const personalEmail = 'azmimuwahid@gmail.com';
+
+export const workEmailLink = {
+	label: 'Work email',
+	href: `mailto:${workEmail}`
+};
+
+/** Personal email — kept for résumé requests and existing contacts. */
 export const emailLink = {
 	label: 'Email',
-	href: 'mailto:azmimuwahid@gmail.com'
+	href: `mailto:${personalEmail}`
 };
 
 /** URLs for JSON-LD sameAs (SEO structured data) */

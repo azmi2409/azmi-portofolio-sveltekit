@@ -27,7 +27,6 @@ export async function GET() {
 		priority: '0.7'
 	}));
 
-
 	const allEntries = [...staticPages, ...projectPages];
 
 	return new Response(

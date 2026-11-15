@@ -6,13 +6,13 @@
 	<title>Contact — Azmi Muwahid</title>
 	<meta
 		name="description"
-		content="Discuss how to reduce manual work, control costs, and improve customer service with AI and automation consultant Azmi Muwahid."
+		content="Contact Azmi Muwahid, full-stack engineer and founder of KilatBot. Work email azmi@kilat.host, or azmimuwahid@gmail.com."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/contact" />
 	<meta property="og:title" content="Contact — Azmi Muwahid" />
 	<meta
 		property="og:description"
-		content="Discuss how to reduce manual work, control costs, and improve customer service with AI and automation consultant Azmi Muwahid."
+		content="Contact Azmi Muwahid, full-stack engineer and founder of KilatBot. Work email azmi@kilat.host, or azmimuwahid@gmail.com."
 	/>
 	<meta property="og:url" content="https://azmi.web.id/contact" />
 	<meta property="og:type" content="website" />
@@ -21,7 +21,7 @@
 	<meta name="twitter:title" content="Contact — Azmi Muwahid" />
 	<meta
 		name="twitter:description"
-		content="Discuss how to reduce manual work, control costs, and improve customer service with AI and automation consultant Azmi Muwahid."
+		content="Contact Azmi Muwahid, full-stack engineer and founder of KilatBot. Work email azmi@kilat.host, or azmimuwahid@gmail.com."
 	/>
 	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 

@@ -20,9 +20,9 @@ Project MDX filename becomes route slug. Frontmatter drives listing metadata; bo
 
 Home uses a compact domino project deck: hover, tap, or keyboard focus reveals one project at a time. Desktop cards overlap horizontally; mobile uses stacked headers. Motion respects reduced-motion preferences and colors follow the active theme. The project archive opens with a 7/5 spotlight of the first project, then a three-column grid (two from 768px, one below), including outcomes and stack tags. A leftover row closes as 6 + 6 or one full-width 7/5 card. Case studies add a section outline and previous/next project links.
 
-Kilat.host is featured with a real homepage screenshot captured in October 2026. The project archive uses one heading, shared with its project section; it renders as `h1` on the archive and `h2` on the homepage.
+KilatBot (also KilatHost) is a featured project. The case study follows the live product on kilatbot.com and kilat.host, and the cover is a November 2026 capture of the KilatBot homepage. The project archive uses one heading, shared with its project section; it renders as `h1` on the archive and `h2` on the homepage.
 
-Employment is separate from projects: the homepage Work experience section states the current Senior Software Engineer role at FutureLab.my. The FutureLab case study is unpublished and excluded from project listings and public project routes.
+Employment is separate from projects: the homepage Work experience section lists founder of KilatBot through PT Kilat Inovasi Cerdas (2026–present) and the Senior Software Engineer role at FutureLab.my (February 2023–present). The FutureLab case study is unpublished and excluded from project listings and public project routes.
 
 Project deck browser self-check: `node scripts/check-project-deck.mjs /path/to/playwright/index.mjs [base-url]`.
 

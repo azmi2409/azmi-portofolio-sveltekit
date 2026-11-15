@@ -9,18 +9,28 @@ export async function GET() {
 		.map((p) => `- [${p.name}](${base}/projects/${p.slug}): ${p.summary}`)
 		.join('\n');
 
-
 	const body = `# Azmi Muwahid
 
-> Senior Software Engineer at FutureLab.my and AI consultant based in Bogor, Indonesia.
+> Full-stack engineer based in Indonesia. Builds KilatBot (also known as KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas.
 
 ## About
 
-Azmi Muwahid is a senior software engineer who owns cloud infrastructure and deployments, maintains production codebases, and builds AI agents that enhance mentoring sessions, automated reporting, and operational insights. He has 6+ years of remote experience working with companies in Malaysia, Singapore, and beyond.
+Azmi Muwahid is a full-stack engineer based in Indonesia. He founded KilatBot in 2026 and leads its development through PT Kilat Inovasi Cerdas, an Indonesian PT Perseorangan based in Bogor. KilatBot, also published as KilatHost at kilat.host, gives small business owners AI agents they can shape for reports, content, code, or everyday help. Agents chat on the web or on Telegram, remember the work, run schedules, and ask before risky steps.
 
-Currently working at FutureLab.my, where he manages AWS infrastructure, keeps the Rails platform stable, and ships AI agents for session transcription, summarization, and reporting.
+He is also a Senior Software Engineer at FutureLab.my (February 2023–present), where he manages AWS infrastructure, keeps the Rails platform stable, and ships AI agents for session transcription, summarization, and reporting.
 
-He also works as a freelance full-stack developer through Toptal and Turing, and previously built the main application interface at Automa8e (Singapore).
+He also works as a freelance full-stack developer through Toptal and Turing, and previously built the main application interface at Automa8e (Singapore). He has 6+ years of remote experience working with companies in Malaysia, Singapore, and beyond.
+
+## KilatBot
+
+- Product: https://kilatbot.com
+- Also known as KilatHost: https://kilat.host
+- Company: PT Kilat Inovasi Cerdas (PT Perseorangan, Bogor, Indonesia)
+- Founded: 2026
+- NIB: 1910260001491
+- Business plan: US$9 a month, or US$86 a year (save 20%), with 3 agents and up to 5 people. Payments were not open yet as of the KilatBot FAQ checked 13 November 2026.
+- Brand on X: https://x.com/kilatbot
+- Support: support@kilat.host
 
 ## Skills
 
@@ -34,6 +44,8 @@ He also works as a freelance full-stack developer through Toptal and Turing, and
 - Website: ${base}
 - LinkedIn: https://linkedin.com/in/azmimuwahid
 - GitHub: https://github.com/azmi2409
+- X: https://x.com/azmikaze
+- Work email: azmi@kilat.host
 - Email: azmimuwahid@gmail.com
 
 ## Projects
