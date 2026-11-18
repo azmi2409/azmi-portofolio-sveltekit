@@ -30,25 +30,25 @@
 </script>
 
 <svelte:head>
-	<title>Azmi Muwahid — FutureLab & KilatBot</title>
+	<title>Azmi Muwahid — AI & Automation Consultant in Jakarta</title>
 	<meta
 		name="description"
-		content="Azmi Muwahid is a Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot (KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas."
+		content="AI and automation consultant in Jakarta. Azmi Muwahid is a Senior Software Engineer at FutureLab and founder of KilatBot (kilat.host), AI agents that take busywork off small business owners."
 	/>
 	<link rel="canonical" href="https://azmi.web.id" />
-	<meta property="og:title" content="Azmi Muwahid — FutureLab & KilatBot" />
+	<meta property="og:title" content="Azmi Muwahid — AI & Automation Consultant in Jakarta" />
 	<meta
 		property="og:description"
-		content="Senior Software Engineer at FutureLab and founder of KilatBot, also known as KilatHost. Based in Indonesia. Work email azmi@kilat.host."
+		content="AI and automation consultant in Jakarta. Senior Software Engineer at FutureLab and founder of KilatBot (kilat.host), AI agents for small business owners."
 	/>
 	<meta property="og:type" content="website" />
 	<meta property="og:url" content="https://azmi.web.id" />
 	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Azmi Muwahid — FutureLab & KilatBot" />
+	<meta name="twitter:title" content="Azmi Muwahid — AI & Automation Consultant in Jakarta" />
 	<meta
 		name="twitter:description"
-		content="Senior Software Engineer at FutureLab and founder of KilatBot, also known as KilatHost. Based in Indonesia. Work email azmi@kilat.host."
+		content="AI and automation consultant in Jakarta. Senior Software Engineer at FutureLab and founder of KilatBot (kilat.host), AI agents for small business owners."
 	/>
 	<meta name="twitter:image" content="https://azmi.web.id/assets/profile.webp" />
 </svelte:head>

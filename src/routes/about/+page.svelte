@@ -1,11 +1,11 @@
 <svelte:head>
-	<title>About Azmi — FutureLab & KilatBot</title>
+	<title>About Azmi Muwahid — AI & Automation Consultant</title>
 	<meta
 		name="description"
 		content="Azmi Muwahid is a Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot (KilatHost) through PT Kilat Inovasi Cerdas."
 	/>
 	<link rel="canonical" href="https://azmi.web.id/about" />
-	<meta property="og:title" content="About Azmi — FutureLab & KilatBot" />
+	<meta property="og:title" content="About Azmi Muwahid — AI & Automation Consultant" />
 	<meta
 		property="og:description"
 		content="Senior Software Engineer at FutureLab and founder of KilatBot, AI agents for small business owners."
@@ -14,7 +14,7 @@
 	<meta property="og:type" content="profile" />
 	<meta property="og:image" content="https://azmi.web.id/assets/profile.webp" />
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="About Azmi — FutureLab & KilatBot" />
+	<meta name="twitter:title" content="About Azmi Muwahid — AI & Automation Consultant" />
 	<meta
 		name="twitter:description"
 		content="Senior Software Engineer at FutureLab and founder of KilatBot, AI agents for small business owners."

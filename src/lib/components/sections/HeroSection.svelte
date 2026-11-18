@@ -39,20 +39,20 @@
 <section id="hero" bind:this={hero} class="px-6 pt-32 pb-12 sm:pt-40 sm:pb-16">
 	<div class="hero-copy mx-auto max-w-7xl">
 		<div class="hero-reveal flex flex-wrap items-center justify-between gap-x-4 gap-y-2">
-			<p class="eyebrow">Azmi Muwahid · FutureLab · KilatBot</p>
+			<h1 class="eyebrow">Azmi Muwahid · AI & automation consultant in Jakarta</h1>
 			<LocalTime
 				class="font-mono text-[0.65rem] tracking-[0.08em] text-muted-foreground uppercase"
 			/>
 		</div>
-		<h1
-			class="hero-title mt-8 text-[clamp(2.6rem,12.5vw,10.5rem)] leading-[0.95] font-semibold tracking-[-0.05em] sm:mt-10"
+		<p
+			class="hero-title mt-8 [font-family:var(--font-heading)] text-[clamp(2.6rem,12.5vw,10.5rem)] leading-[0.95] font-semibold tracking-[-0.05em] sm:mt-10"
 		>
 			<span class="line" style="--i: 0"><span>Less busywork.</span></span>
 			<span class="line" style="--i: 1"><span>More room to</span></span>
 			<span class="line accent-serif text-[var(--signal)]" style="--i: 2"
 				><span>grow your business.</span></span
 			>
-		</h1>
+		</p>
 
 		<div
 			class="mt-10 grid items-start gap-12 sm:mt-14 lg:grid-cols-[minmax(0,1fr)_minmax(0,21rem)] lg:gap-20"

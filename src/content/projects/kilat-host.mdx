@@ -28,6 +28,10 @@ sortOrder: 2.5
 
 kilatbot.com and kilat.host now present KilatBot, not a one-click host whose homepage offered Hermes Agent and n8n deployment. Agents remember the work, run on a schedule, and ask before risky actions. The terms of service, effective 18 October 2026, still describe the agents as built on the open-source Hermes Agent by Nous Research, keep PocketBase backends for existing customers, and keep existing n8n services running. n8n is closed to new deployments.
 
+## Before KilatBot: kilat.store
+
+[kilat.store](https://kilat.store) now returns HTTP 301 to [kilat.host](https://kilat.host). In 2024–2025 it was a food-business website generator: AI drafted a menu site from the business type, menu, location, and style, owners edited it visually in a Puck-based editor, and it published straight to a kill.lat subdomain with WhatsApp ordering. Rails background jobs handled generation, and a ready-made food template stood in whenever AI was slow or unavailable. The lesson carried into KilatBot: a focused service that gets a business working is worth more than a long feature list owners have to figure out.
+
 ## Behind the solution
 
 Agents start on Kilat AI, KilatBot's own model service, so a separate API key is not required at the start. An owner can add a provider key in the agent's settings instead. A connected assistant can use the workspace through the MCP endpoint at https://kilat.host/mcp. Risky commands, purchases, and making a shared page public ask first. The live browser can be watched and taken over for a sign-in or a payment.
