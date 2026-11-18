@@ -16,7 +16,6 @@ export async function GET() {
 		'gopay-merchant-qris-gateway': '2026-09-27',
 		'iscylla-store': '2026-09-27',
 		'kilat-host': '2026-11-15',
-		'kilat-store': '2026-11-15',
 		'portfolio-content-system': '2026-10-06',
 		'rails-ai-gateway': '2026-09-27',
 		'rails-crypto-payment': '2026-09-27',

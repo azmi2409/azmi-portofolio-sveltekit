@@ -7,7 +7,8 @@
 		minute: '2-digit',
 		timeZone: 'Asia/Jakarta'
 	});
-	// Rendered client-side only so server and client markup always agree.
+	// Client-side only: pages are cached, so a server-rendered time would be stale.
+	// Until it mounts, the label reads "Bogor, ID · GMT+7" with no placeholder.
 	let time = $state('');
 
 	onMount(() => {
@@ -20,5 +21,5 @@
 
 <span class={className}>
 	Bogor, ID <span aria-hidden="true">·</span>
-	<time class="tabular-nums">{time || '--:--'}</time> GMT+7
+	{#if time}<time class="tabular-nums">{time}</time>{/if} GMT+7
 </span>
