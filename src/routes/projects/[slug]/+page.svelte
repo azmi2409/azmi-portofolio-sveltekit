@@ -8,6 +8,62 @@
 	let { data } = $props();
 	const { project, Content, previous, next } = $derived(data);
 
+	// Live products are SoftwareApplication, open-source libraries are SoftwareSourceCode,
+	// and everything else (retired or private work) stays a CreativeWork.
+	const projectUrl = $derived(`https://azmi.web.id/projects/${project.slug}`);
+	const projectSchema = $derived.by(() => {
+		const author = {
+			'@type': 'Person',
+			'@id': 'https://azmi.web.id/#person',
+			name: 'Azmi Muwahid',
+			url: 'https://azmi.web.id'
+		};
+		const base = {
+			'@context': 'https://schema.org',
+			name: project.name,
+			description: project.summary,
+			url: projectUrl,
+			mainEntityOfPage: projectUrl,
+			image: new URL(project.cover ?? '/assets/profile.webp', 'https://azmi.web.id').href,
+			author,
+			creator: author,
+			dateCreated: project.year,
+			keywords: project.stack.join(', ')
+		};
+		const sameAs = [project.liveUrl, project.githubUrl].filter(Boolean);
+		if (
+			(project.category === 'OS Library' || project.status === 'Open source') &&
+			project.githubUrl
+		)
+			return {
+				...base,
+				'@type': 'SoftwareSourceCode',
+				codeRepository: project.githubUrl,
+				programmingLanguage: project.stack,
+				sameAs
+			};
+		if (project.liveUrl && ['Live', 'Production'].includes(project.status))
+			return {
+				...base,
+				'@type': 'SoftwareApplication',
+				applicationCategory:
+					project.category === 'API / Gateway' ? 'DeveloperApplication' : 'BusinessApplication',
+				operatingSystem: 'Web',
+				sameAs,
+				...(project.githubUrl ? { codeRepository: project.githubUrl } : {})
+			};
+		return { ...base, '@type': 'CreativeWork', ...(sameAs.length ? { sameAs } : {}) };
+	});
+	const breadcrumbSchema = $derived({
+		'@context': 'https://schema.org',
+		'@type': 'BreadcrumbList',
+		itemListElement: [
+			{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
+			{ '@type': 'ListItem', position: 2, name: 'Projects', item: 'https://azmi.web.id/projects' },
+			{ '@type': 'ListItem', position: 3, name: project.name, item: projectUrl }
+		]
+	});
+
 	let study: HTMLDivElement;
 	let toc = $state<{ id: string; label: string }[]>([]);
 
@@ -47,36 +103,9 @@
 	/>
 	<link rel="canonical" href={`https://azmi.web.id/projects/${project.slug}`} />
 
-	<!-- JSON-LD: CreativeWork + BreadcrumbList -->
-	{@html `<script type="application/ld+json">${JSON.stringify({
-		'@context': 'https://schema.org',
-		'@type': 'CreativeWork',
-		name: project.name,
-		description: project.summary,
-		url: `https://azmi.web.id/projects/${project.slug}`,
-		image: new URL(project.cover ?? '/assets/profile.webp', 'https://azmi.web.id').href,
-		author: { '@type': 'Person', name: 'Azmi Muwahid', url: 'https://azmi.web.id' },
-		dateCreated: project.year,
-		keywords: project.stack.join(', '),
-		breadcrumb: {
-			'@type': 'BreadcrumbList',
-			itemListElement: [
-				{ '@type': 'ListItem', position: 1, name: 'Home', item: 'https://azmi.web.id' },
-				{
-					'@type': 'ListItem',
-					position: 2,
-					name: 'Projects',
-					item: 'https://azmi.web.id/projects'
-				},
-				{
-					'@type': 'ListItem',
-					position: 3,
-					name: project.name,
-					item: `https://azmi.web.id/projects/${project.slug}`
-				}
-			]
-		}
-	})}<\/script>`}
+	<!-- JSON-LD: project (SoftwareApplication / SoftwareSourceCode / CreativeWork) + BreadcrumbList -->
+	{@html `<script type="application/ld+json">${JSON.stringify(projectSchema)}<\/script>`}
+	{@html `<script type="application/ld+json">${JSON.stringify(breadcrumbSchema)}<\/script>`}
 </svelte:head>
 
 <article class="case">

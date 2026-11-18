@@ -11,7 +11,7 @@ export async function GET() {
 
 	const body = `# Azmi Muwahid
 
-> Senior Software Engineer at FutureLab.my (February 2023–present) and founder of KilatBot (also known as KilatHost), through PT Kilat Inovasi Cerdas.
+> AI & automation consultant in Jakarta. Senior Software Engineer at FutureLab.my (February 2023–present) and founder of KilatBot (also known as KilatHost), through PT Kilat Inovasi Cerdas.
 
 ## About
 

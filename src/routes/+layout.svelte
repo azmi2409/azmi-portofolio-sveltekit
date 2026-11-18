@@ -40,10 +40,15 @@
 	const personSchema = {
 		'@context': 'https://schema.org',
 		'@type': 'Person',
+		'@id': 'https://azmi.web.id/#person',
 		name: 'Azmi Muwahid',
 		url: 'https://azmi.web.id',
 		image: 'https://azmi.web.id/assets/profile.webp',
-		jobTitle: 'Senior Software Engineer at FutureLab and founder of KilatBot',
+		jobTitle: [
+			'AI & Automation Consultant',
+			'Senior Software Engineer at FutureLab',
+			'Founder of KilatBot'
+		],
 		description:
 			'Senior Software Engineer at FutureLab (February 2023–present) and founder of KilatBot (also known as KilatHost), AI agents for small business owners, through PT Kilat Inovasi Cerdas. Full-stack engineer based in Indonesia.',
 		email: [workEmail, personalEmail],
@@ -71,8 +76,13 @@
 			'@type': 'EducationalOrganization',
 			name: 'Institut Pertanian Bogor (IPB)'
 		},
+		areaServed: [
+			{ '@type': 'City', name: 'Jakarta' },
+			{ '@type': 'Country', name: 'Indonesia' }
+		],
 		knowsAbout: [
 			'AI agents',
+			'AI automation consulting',
 			'Cloud infrastructure',
 			'AWS',
 			'Business process automation',
